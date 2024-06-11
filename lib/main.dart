@@ -395,7 +395,7 @@ class LoggingInWidget extends StatelessWidget {
           return MainAppScreen(setHomeWidget: setHomeWidget);
         }
         return Container(
-          decoration: BoxDecoration(color: Theme.of(context).colorScheme.background),
+          decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface),
           child: const Center(
             child: CircularProgressIndicator(),
           ),

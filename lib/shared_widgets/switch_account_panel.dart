@@ -166,7 +166,7 @@ class _SwitchAccountPanelState extends State<SwitchAccountPanel> {
           icon: Icon(
             Icons.logout,
             size: 30,
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           onPressed: () async {
             // popup asking the user if they are sure they want to logout

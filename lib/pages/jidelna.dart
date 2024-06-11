@@ -268,12 +268,12 @@ class MainAppScreenState extends State<MainAppScreen> {
                     highlightColor: Colors.transparent,
                     minWidth: 0,
                     height: 27.5,
-                    textColor: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                    textColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
                     padding: const EdgeInsets.symmetric(horizontal: 7.5),
                     shape: ContinuousRectangleBorder(
                       borderRadius: BorderRadius.circular(12.5),
                       side: BorderSide(
-                        color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
                         width: 1.75,
                       ),
                     ),

@@ -56,7 +56,7 @@ class MainAccountDrawer extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 10.0),
                         child: TextButton(
                           style: Theme.of(context).textButtonTheme.style?.copyWith(
-                                textStyle: const MaterialStatePropertyAll(
+                                textStyle: const WidgetStatePropertyAll(
                                   TextStyle(
                                     inherit: true,
                                     fontSize: 20,
@@ -232,13 +232,13 @@ class MainAccountDrawer extends StatelessWidget {
   Widget locationPicker(BuildContext context) {
     return TextButton(
       style: Theme.of(context).textButtonTheme.style!.copyWith(
-            foregroundColor: MaterialStateProperty.resolveWith((states) {
-              if (states.contains(MaterialState.disabled)) {
-                return Theme.of(context).colorScheme.onBackground;
+            foregroundColor: WidgetStateProperty.resolveWith((states) {
+              if (states.contains(WidgetState.disabled)) {
+                return Theme.of(context).colorScheme.onSurface;
               }
               return Theme.of(context).colorScheme.primary;
             }),
-            padding: const MaterialStatePropertyAll(EdgeInsets.all(0)),
+            padding: const WidgetStatePropertyAll(EdgeInsets.all(0)),
           ),
       onPressed: locations.length < 2
           ? null

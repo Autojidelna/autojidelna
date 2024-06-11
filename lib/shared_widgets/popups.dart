@@ -51,13 +51,13 @@ void newUpdateDialog(BuildContext context, {int? tries}) {
                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: Text(
                       Texts.popupNewUpdateInfo.i18n(),
-                      style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 7.5, 0, 0),
                     child: HtmlWidget(
-                      textStyle: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                      textStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                       md.markdownToHtml(releaseInfo!.changelog ?? Texts.popupChangeLogNotAvailable.i18n()),
                     ),
                   ),
@@ -156,7 +156,7 @@ Widget logoutDialog(BuildContext context) {
         onPressed: () {
           Navigator.of(context).pop(false);
         },
-        style: Theme.of(context).textButtonTheme.style!.copyWith(foregroundColor: MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),
+        style: Theme.of(context).textButtonTheme.style!.copyWith(foregroundColor: WidgetStatePropertyAll(Theme.of(context).colorScheme.primary)),
         child: Text(Texts.logoutCancel.i18n()),
       ),
     ],
