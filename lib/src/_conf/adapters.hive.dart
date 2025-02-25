@@ -34,3 +34,19 @@ class DateFormatOptionsAdapter extends TypeAdapter<DateFormatOptions> {
   @override
   void write(BinaryWriter writer, DateFormatOptions obj) => writer.writeInt(obj.index);
 }
+
+class LocaleAdapter extends TypeAdapter<Locale> {
+  @override
+  final int typeId = 3; // Put an ID you didn't use yet.
+
+  @override
+  Locale read(BinaryReader reader) {
+    List<String> data = reader.readStringList(2);
+    return Locale(data.first, data.last);
+  }
+
+  @override
+  void write(BinaryWriter writer, Locale obj) {
+    writer.writeStringList([obj.languageCode, obj.countryCode ?? '']);
+  }
+}
