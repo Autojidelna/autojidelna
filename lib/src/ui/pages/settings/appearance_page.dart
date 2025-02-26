@@ -39,7 +39,7 @@ class AppearancePage extends StatelessWidget {
               onChanged: isBright ? null : amoledMode.set,
             ),
           ),
-          SectionTitle(lang.view),
+          SectionTitle(lang.display),
           const DateFormatPickerListTile(),
         ],
       ),

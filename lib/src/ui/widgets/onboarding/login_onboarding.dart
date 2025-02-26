@@ -52,7 +52,7 @@ class LoginOnboarding extends StatelessWidget implements OnboardingStep {
                       textInputAction: TextInputAction.done,
                       autofillHints: const [AutofillHints.password],
                       decoration: InputDecoration(
-                        labelText: lang.loginPasswordFieldLabel,
+                        labelText: lang.password,
                         errorText: provider.passwordError,
                         suffixIcon: IconButton(
                           onPressed: provider.changePasswordVisibility,

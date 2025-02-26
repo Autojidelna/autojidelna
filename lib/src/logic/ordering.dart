@@ -199,7 +199,7 @@ String getObedText(BuildContext context, Jidlo dish, StavJidla stavJidla) {
       }
       Uzivatel uzivatel = context.read<UserProvider>().user!.data;
       if (uzivatel.kredit < dish.cena! && !date.isBefore(DateTime.now())) {
-        return lang.nedostatekKreditu;
+        return lang.errorsInsufficientCredit;
       } else {
         return lang.nelzeObjednat;
       }

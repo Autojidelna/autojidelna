@@ -17,29 +17,6 @@ class NotificationIds {
   static String get onlyObjednatButton => 'objednat_';
 }
 
-// Strings shown to the user
-class NotificationsTexts {
-  /// initAwesome and notifications in general have a problem with the localization package so we just force czech
-  static String notificationsFor(String user) => 'Notifikace pro $user';
-  static String get jidloChannelName => 'Dnešní jídlo';
-  static String jidloChannelDescription(String user) => 'Notifikace každý den o tom jaké je dnes jídlo pro $user';
-  static String get dochazejiciKreditChannelName => 'Docházející kredit';
-  static String dochazejiciKreditChannelDescription(String user) => 'Notifikace o tom, zda vám dochází kredit týden dopředu pro $user';
-  static String get objednanoChannelName => 'Objednáno?';
-  static String objednanoChannelDescription(String user) => 'Notifikace každý den o tom jaké je dnes jídlo pro $user';
-  static String get notificationOther => 'Ostatní';
-  static String get notificationOtherDescription => 'Ostatní notifikace, např. chybové hlášky...';
-  static String get gettingDataNotifications => 'Získávám data pro notifikace';
-  static String get notificationDochaziVamKredit => 'Dochází vám kredit!';
-  static String notificationKreditPro(String jmeno, String prijmeni, int kredit) => 'Kredit pro $jmeno $prijmeni: $kredit Kč';
-  static String get notificationZtlumit => 'Ztlumit na týden';
-  static String get notificationObjednejteSi => 'Objednejte si na příští týden';
-  static String notificationObjednejteSiDetail(String jmeno, String prijmeni) => 'Uživatel $jmeno $prijmeni si stále ještě neobjenal na příští týden';
-  static String get objednatAction => 'Objednat náhodně';
-  static String get notificationNoFood => 'Žádná jídla pro tento den';
-  static String get nastalaChyba => 'Nastala chyba';
-}
-
 class Links {
   static String get autojidelna => 'https://autojidelna.cz';
   static String get repo => 'https://github.com/App-Elevate/Autojidelna';

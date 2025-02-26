@@ -99,12 +99,6 @@ abstract class Texts {
   /// **'O aplikaci'**
   String get about;
 
-  /// No description provided for @aboutCopyRight.
-  ///
-  /// In cs, this message translates to:
-  /// **'© 2023 - {time} Tomáš Protiva, Matěj Verhaegen a kolaborátoři\nZveřejněno pod licencí GNU GPLv3'**
-  String aboutCopyRight(DateTime time);
-
   /// No description provided for @account.
   ///
   /// In cs, this message translates to:
@@ -129,12 +123,6 @@ abstract class Texts {
   /// **'Alergeny'**
   String get allergens;
 
-  /// No description provided for @allowPermission.
-  ///
-  /// In cs, this message translates to:
-  /// **'Udělit oprávnění'**
-  String get allowPermission;
-
   /// No description provided for @amoledMode.
   ///
   /// In cs, this message translates to:
@@ -146,12 +134,6 @@ abstract class Texts {
   /// In cs, this message translates to:
   /// **'Přidej se k temné straně síly!'**
   String get amoledModeSubtitle;
-
-  /// No description provided for @amoledSubtitle.
-  ///
-  /// In cs, this message translates to:
-  /// **'Přidej se k temné straně síly!'**
-  String get amoledSubtitle;
 
   /// No description provided for @analytics.
   ///
@@ -188,12 +170,6 @@ abstract class Texts {
   /// In cs, this message translates to:
   /// **'Vzhled'**
   String get appearance;
-
-  /// No description provided for @appearence.
-  ///
-  /// In cs, this message translates to:
-  /// **'Vzhled'**
-  String get appearence;
 
   /// No description provided for @burzaAlertDialogContent.
   ///
@@ -237,54 +213,6 @@ abstract class Texts {
   /// **'Kredit: {ammount} Kč'**
   String credit(double ammount);
 
-  /// No description provided for @currency.
-  ///
-  /// In cs, this message translates to:
-  /// **'Kč'**
-  String get currency;
-
-  /// No description provided for @darkThemeMode.
-  ///
-  /// In cs, this message translates to:
-  /// **'Tmavý'**
-  String get darkThemeMode;
-
-  /// No description provided for @dataCollection.
-  ///
-  /// In cs, this message translates to:
-  /// **'Shromažďování údajů'**
-  String get dataCollection;
-
-  /// No description provided for @dataCollectionAgreement.
-  ///
-  /// In cs, this message translates to:
-  /// **'Používáním aplikace souhlasíte se zasíláním anonymních dat. '**
-  String get dataCollectionAgreement;
-
-  /// No description provided for @dataCollectionDescription_1.
-  ///
-  /// In cs, this message translates to:
-  /// **'Informace shromažďujeme výhradně za účelem oprav chyb v aplikaci a udržování základních statistických údajů. Nemůžeme vyzkoušet autojídelnu u jídelen, kde nemáme přístup, jsme na těchto informacích závislí. Podrobnější informace naleznete ve '**
-  String get dataCollectionDescription_1;
-
-  /// No description provided for @dataCollectionDescription_2.
-  ///
-  /// In cs, this message translates to:
-  /// **'Zdrojovém kódu'**
-  String get dataCollectionDescription_2;
-
-  /// No description provided for @dataCollectionDescription_3.
-  ///
-  /// In cs, this message translates to:
-  /// **' nebo v '**
-  String get dataCollectionDescription_3;
-
-  /// No description provided for @dataCollectionDescription_4.
-  ///
-  /// In cs, this message translates to:
-  /// **'Zásadách ochrany osobních údajů.'**
-  String get dataCollectionDescription_4;
-
   /// No description provided for @dateFormat.
   ///
   /// In cs, this message translates to:
@@ -302,18 +230,6 @@ abstract class Texts {
   /// In cs, this message translates to:
   /// **'Zobrazení'**
   String get display;
-
-  /// No description provided for @dochazejiciKreditChannelDescription.
-  ///
-  /// In cs, this message translates to:
-  /// **'Oznámení o tom, zda vám dochází kredit týden dopředu pro {username}'**
-  String dochazejiciKreditChannelDescription(String username);
-
-  /// No description provided for @dochazejiciKreditChannelName.
-  ///
-  /// In cs, this message translates to:
-  /// **'Docházející kredit'**
-  String get dochazejiciKreditChannelName;
 
   /// No description provided for @dontShowAgain.
   ///
@@ -525,18 +441,6 @@ abstract class Texts {
   /// **'Získávám data pro oznámení'**
   String get gettingDataNotifications;
 
-  /// No description provided for @jidloChannelDescription.
-  ///
-  /// In cs, this message translates to:
-  /// **'Oznámení každý den o tom jaké je dnes jídlo pro {username}'**
-  String jidloChannelDescription(String username);
-
-  /// No description provided for @jidloChannelName.
-  ///
-  /// In cs, this message translates to:
-  /// **'Dnešní jídlo'**
-  String get jidloChannelName;
-
   /// No description provided for @language.
   ///
   /// In cs, this message translates to:
@@ -560,12 +464,6 @@ abstract class Texts {
   /// In cs, this message translates to:
   /// **'Licence'**
   String get licenses;
-
-  /// No description provided for @lightThemeMode.
-  ///
-  /// In cs, this message translates to:
-  /// **'Světlý'**
-  String get lightThemeMode;
 
   /// No description provided for @listUi.
   ///
@@ -602,12 +500,6 @@ abstract class Texts {
   /// In cs, this message translates to:
   /// **'Zadejte heslo'**
   String get loginPasswordFieldHint;
-
-  /// No description provided for @loginPasswordFieldLabel.
-  ///
-  /// In cs, this message translates to:
-  /// **'Heslo'**
-  String get loginPasswordFieldLabel;
 
   /// No description provided for @loginSuccess.
   ///
@@ -693,12 +585,6 @@ abstract class Texts {
   /// **'Menu'**
   String get navigationRailExpantionButtonTitle;
 
-  /// No description provided for @nedostatekKreditu.
-  ///
-  /// In cs, this message translates to:
-  /// **'Nedostatek kreditu'**
-  String get nedostatekKreditu;
-
   /// No description provided for @nelzeObjednat.
   ///
   /// In cs, this message translates to:
@@ -723,35 +609,11 @@ abstract class Texts {
   /// **'Ne, děkuji'**
   String get noThankYou;
 
-  /// No description provided for @notificationDochaziVamKredit.
-  ///
-  /// In cs, this message translates to:
-  /// **'Dochází vám kredit!'**
-  String get notificationDochaziVamKredit;
-
-  /// No description provided for @notificationKreditPro.
+  /// TODO
   ///
   /// In cs, this message translates to:
   /// **'Kredit pro {username}: {ammount} Kč'**
   String notificationKreditPro(String username, String ammount);
-
-  /// No description provided for @notificationObjednejteSi.
-  ///
-  /// In cs, this message translates to:
-  /// **'Objednejte si na příští týden'**
-  String get notificationObjednejteSi;
-
-  /// No description provided for @notificationObjednejteSiDetail.
-  ///
-  /// In cs, this message translates to:
-  /// **'Uživatel {username} si stále ještě neobjenal na příští týden'**
-  String notificationObjednejteSiDetail(String username);
-
-  /// No description provided for @notificationZtlumit.
-  ///
-  /// In cs, this message translates to:
-  /// **'Ztlumit na týden'**
-  String get notificationZtlumit;
 
   /// No description provided for @notifications.
   ///
@@ -764,18 +626,6 @@ abstract class Texts {
   /// In cs, this message translates to:
   /// **'Oznámení pro {username}'**
   String notificationsFor(String username);
-
-  /// No description provided for @objednanoChannelDescription.
-  ///
-  /// In cs, this message translates to:
-  /// **'Oznámení týden dopředu o tom, zda jste si objednal jídlo na příští týden pro {username}'**
-  String objednanoChannelDescription(String username);
-
-  /// No description provided for @objednanoChannelName.
-  ///
-  /// In cs, this message translates to:
-  /// **'Objednáno?'**
-  String get objednanoChannelName;
 
   /// No description provided for @objednat.
   ///
@@ -873,18 +723,6 @@ abstract class Texts {
   /// **'Nastavení'**
   String get settings;
 
-  /// No description provided for @settingsNemateObjednano.
-  ///
-  /// In cs, this message translates to:
-  /// **'Nemáte objednáno na příští týden'**
-  String get settingsNemateObjednano;
-
-  /// No description provided for @settingsNotificationFor.
-  ///
-  /// In cs, this message translates to:
-  /// **'Oznámení pro {username}'**
-  String settingsNotificationFor(String username);
-
   /// No description provided for @settingsRelativeTimestamps.
   ///
   /// In cs, this message translates to:
@@ -897,35 +735,17 @@ abstract class Texts {
   /// **'„Dnes“ místo „{date}“'**
   String settingsRelativeTimestampsSub(String date);
 
-  /// No description provided for @settingsSkipWeekends.
-  ///
-  /// In cs, this message translates to:
-  /// **'Přeskakovat víkendy'**
-  String get settingsSkipWeekends;
-
   /// No description provided for @settingsStopDataCollection.
   ///
   /// In cs, this message translates to:
   /// **'Zastavit sledování analytických služeb'**
   String get settingsStopDataCollection;
 
-  /// No description provided for @settingsTheme.
-  ///
-  /// In cs, this message translates to:
-  /// **'Schéma'**
-  String get settingsTheme;
-
   /// No description provided for @settingsTitleCredit.
   ///
   /// In cs, this message translates to:
   /// **'Nízký credit'**
   String get settingsTitleCredit;
-
-  /// No description provided for @settingsTitleTodaysFood.
-  ///
-  /// In cs, this message translates to:
-  /// **'Dnešní jídlo'**
-  String get settingsTitleTodaysFood;
 
   /// No description provided for @shareApp.
   ///
@@ -944,12 +764,6 @@ abstract class Texts {
   /// In cs, this message translates to:
   /// **'Přílohy'**
   String get sideDish;
-
-  /// No description provided for @signOut.
-  ///
-  /// In cs, this message translates to:
-  /// **'Odhlásit se'**
-  String get signOut;
 
   /// No description provided for @skipWeekends.
   ///
@@ -1004,12 +818,6 @@ abstract class Texts {
   /// In cs, this message translates to:
   /// **'Odesílejte anonymizované crash logy vývojářům'**
   String get sendCrashLogsSubtitle;
-
-  /// No description provided for @systemThemeMode.
-  ///
-  /// In cs, this message translates to:
-  /// **'Systém'**
-  String get systemThemeMode;
 
   /// No description provided for @tabletUi.
   ///
@@ -1077,12 +885,6 @@ abstract class Texts {
   /// **'{arg, select, true{Debug} other{Stable}} {version}'**
   String versionSubtitle(String arg, String version);
 
-  /// No description provided for @view.
-  ///
-  /// In cs, this message translates to:
-  /// **'Zobrazení'**
-  String get view;
-
   /// No description provided for @vlozitNaBurzu.
   ///
   /// In cs, this message translates to:
@@ -1136,6 +938,90 @@ abstract class Texts {
   /// In cs, this message translates to:
   /// **'Přihlaste se a můžeme začít. Užijte si všechny funkce aplikace!'**
   String get loginSubtitle;
+
+  /// No description provided for @channelNameDish.
+  ///
+  /// In cs, this message translates to:
+  /// **'Dnešní jídlo'**
+  String get channelNameDish;
+
+  /// No description provided for @channelDescriptionDish.
+  ///
+  /// In cs, this message translates to:
+  /// **'Oznámení každý den o tom jaké je dnes jídlo pro {username}'**
+  String channelDescriptionDish(String username);
+
+  /// No description provided for @channelNameLowCredit.
+  ///
+  /// In cs, this message translates to:
+  /// **'Docházející kredit'**
+  String get channelNameLowCredit;
+
+  /// No description provided for @channelDescriptionLowCredit.
+  ///
+  /// In cs, this message translates to:
+  /// **'Oznámení o tom, zda vám dochází kredit týden dopředu pro {username}'**
+  String channelDescriptionLowCredit(String username);
+
+  /// No description provided for @channelNameOrdered.
+  ///
+  /// In cs, this message translates to:
+  /// **'Máte příští týden objednáno?'**
+  String get channelNameOrdered;
+
+  /// No description provided for @channelDescriptionOrdered.
+  ///
+  /// In cs, this message translates to:
+  /// **'Zda má {username} příští týden objednáno'**
+  String channelDescriptionOrdered(String username);
+
+  /// No description provided for @notificationOther.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ostatní'**
+  String get notificationOther;
+
+  /// No description provided for @notificationOtherDescription.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ostatní Oznámení (např. chybové hlášky)'**
+  String get notificationOtherDescription;
+
+  /// No description provided for @notificationLowCredit.
+  ///
+  /// In cs, this message translates to:
+  /// **'Dochází vám kredit!'**
+  String get notificationLowCredit;
+
+  /// No description provided for @notificationDoNotDisturb.
+  ///
+  /// In cs, this message translates to:
+  /// **'Ztlumit na týden'**
+  String get notificationDoNotDisturb;
+
+  /// No description provided for @notificationDontForgetToOrder.
+  ///
+  /// In cs, this message translates to:
+  /// **'Objednejte si na příští týden'**
+  String get notificationDontForgetToOrder;
+
+  /// No description provided for @notificationDontForgetToOrderDetail.
+  ///
+  /// In cs, this message translates to:
+  /// **'Uživatel {username} si stále ještě neobjenal na příští týden'**
+  String notificationDontForgetToOrderDetail(String username);
+
+  /// No description provided for @notificationNoFood.
+  ///
+  /// In cs, this message translates to:
+  /// **'Žádná jídla pro tento den'**
+  String get notificationNoFood;
+
+  /// No description provided for @nastalaChyba.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nastala chyba'**
+  String get nastalaChyba;
 }
 
 class _TextsDelegate extends LocalizationsDelegate<Texts> {

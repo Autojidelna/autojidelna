@@ -2,15 +2,6 @@
   "@@locale": "cs",
   "about": "O aplikaci",
   "@about": {},
-  "aboutCopyRight": "© 2023 - {time} Tomáš Protiva, Matěj Verhaegen a kolaborátoři\nZveřejněno pod licencí GNU GPLv3",
-  "@aboutCopyRight": {
-    "placeholders": {
-      "time": {
-        "type": "DateTime",
-        "format": "y"
-      }
-    }
-  },
   "account": "Účet",
   "@account": {},
   "accounts": "Účty",
@@ -19,14 +10,10 @@
   "@addAccount": {},
   "allergens": "Alergeny",
   "@allergens": {},
-  "allowPermission": "Udělit oprávnění",
-  "@allowPermission": {},
   "amoledMode": "AMOLED mód",
   "@amoledMode": {},
   "amoledModeSubtitle": "Přidej se k temné straně síly!",
   "@amoledModeSubtitle": {},
-  "amoledSubtitle": "Přidej se k temné straně síly!",
-  "@amoledSubtitle": {},
   "analytics": "Shromažďování údajů",
   "@analytics": {},
   "analyticsMoreInfo": "Informace shromažďujeme výhradně za účelem identifikace a opravy chyb v aplikaci, zlepšení výkonu a udržování základních statistických údajů.\n\nVšechna data jsou odesílána anonymně.",
@@ -47,8 +34,6 @@
   "@appName": {},
   "appearance": "Vzhled",
   "@appearance": {},
-  "appearence": "Vzhled",
-  "@appearence": {},
   "burzaAlertDialogContent": "Přidáváte jídlo na burzu. Peníze se Vám vrátí pouze v případě, že si jídlo objedná někdo jiný.",
   "@burzaAlertDialogContent": {},
   "calendarBigMarkers": "Velké ukazatele v kalendáři",
@@ -70,38 +55,12 @@
       }
     }
   },
-  "currency": "Kč",
-  "@currency": {},
-  "darkThemeMode": "Tmavý",
-  "@darkThemeMode": {},
-  "dataCollection": "Shromažďování údajů",
-  "@dataCollection": {},
-  "dataCollectionAgreement": "Používáním aplikace souhlasíte se zasíláním anonymních dat. ",
-  "@dataCollectionAgreement": {},
-  "dataCollectionDescription_1": "Informace shromažďujeme výhradně za účelem oprav chyb v aplikaci a udržování základních statistických údajů. Nemůžeme vyzkoušet autojídelnu u jídelen, kde nemáme přístup, jsme na těchto informacích závislí. Podrobnější informace naleznete ve ",
-  "@dataCollectionDescription_1": {},
-  "dataCollectionDescription_2": "Zdrojovém kódu",
-  "@dataCollectionDescription_2": {},
-  "dataCollectionDescription_3": " nebo v ",
-  "@dataCollectionDescription_3": {},
-  "dataCollectionDescription_4": "Zásadách ochrany osobních údajů.",
-  "@dataCollectionDescription_4": {},
   "dateFormat": "Formát dat",
   "@dateFormat": {},
   "debug": "Debug",
   "@debug": {},
   "display": "Zobrazení",
   "@display": {},
-  "dochazejiciKreditChannelDescription": "Oznámení o tom, zda vám dochází kredit týden dopředu pro {username}",
-  "@dochazejiciKreditChannelDescription": {
-    "placeholders": {
-      "username": {
-        "type": "String"
-      }
-    }
-  },
-  "dochazejiciKreditChannelName": "Docházející kredit",
-  "@dochazejiciKreditChannelName": {},
   "dontShowAgain": "Příště nezobrazovat",
   "@dontShowAgain": {},
   "drinks": "Pití",
@@ -172,16 +131,6 @@
   "@experimental": {},
   "gettingDataNotifications": "Získávám data pro oznámení",
   "@gettingDataNotifications": {},
-  "jidloChannelDescription": "Oznámení každý den o tom jaké je dnes jídlo pro {username}",
-  "@jidloChannelDescription": {
-    "placeholders": {
-      "username": {
-        "type": "String"
-      }
-    }
-  },
-  "jidloChannelName": "Dnešní jídlo",
-  "@jidloChannelName": {},
   "language": "Jazyk",
   "@language": {},
   "languageCzech": "Čeština",
@@ -190,8 +139,6 @@
   "@languageEnglish": {},
   "licenses": "Licence",
   "@licenses": {},
-  "lightThemeMode": "Světlý",
-  "@lightThemeMode": {},
   "listUi": "Seznamové zobrazení",
   "@listUi": {},
   "listUiSubtitle": "Zobrazit jednotlivé dny ve vertikálním seznamu.",
@@ -204,8 +151,6 @@
   "@login": {},
   "loginPasswordFieldHint": "Zadejte heslo",
   "@loginPasswordFieldHint": {},
-  "loginPasswordFieldLabel": "Heslo",
-  "@loginPasswordFieldLabel": {},
   "loginSuccess": "Přihlášení úspěšné!",
   "@loginSuccess": {},
   "loginSuccessSubtitle": "Vítejte zpět, {username}!",
@@ -240,8 +185,6 @@
   "@name": {},
   "navigationRailExpantionButtonTitle": "Menu",
   "@navigationRailExpantionButtonTitle": {},
-  "nedostatekKreditu": "Nedostatek kreditu",
-  "@nedostatekKreditu": {},
   "nelzeObjednat": "Nelze objednat",
   "@nelzeObjednat": {},
   "nelzeZrusit": "Nelze zrušit",
@@ -250,10 +193,9 @@
   "@noFood": {},
   "noThankYou": "Ne, děkuji",
   "@noThankYou": {},
-  "notificationDochaziVamKredit": "Dochází vám kredit!",
-  "@notificationDochaziVamKredit": {},
   "notificationKreditPro": "Kredit pro {username}: {ammount} Kč",
   "@notificationKreditPro": {
+    "description": "TODO",
     "placeholders": {
       "username": {
         "type": "String"
@@ -263,18 +205,6 @@
       }
     }
   },
-  "notificationObjednejteSi": "Objednejte si na příští týden",
-  "@notificationObjednejteSi": {},
-  "notificationObjednejteSiDetail": "Uživatel {username} si stále ještě neobjenal na příští týden",
-  "@notificationObjednejteSiDetail": {
-    "placeholders": {
-      "username": {
-        "type": "String"
-      }
-    }
-  },
-  "notificationZtlumit": "Ztlumit na týden",
-  "@notificationZtlumit": {},
   "notifications": "Oznámení",
   "@notifications": {},
   "notificationsFor": "Oznámení pro {username}",
@@ -285,16 +215,6 @@
       }
     }
   },
-  "objednanoChannelDescription": "Oznámení týden dopředu o tom, zda jste si objednal jídlo na příští týden pro {username}",
-  "@objednanoChannelDescription": {
-    "placeholders": {
-      "username": {
-        "type": "String"
-      }
-    }
-  },
-  "objednanoChannelName": "Objednáno?",
-  "@objednanoChannelName": {},
   "objednat": "Objednat",
   "@objednat": {},
   "objednatAction": "Objednat náhodně",
@@ -327,16 +247,6 @@
   "@requestNotificationPermission": {},
   "settings": "Nastavení",
   "@settings": {},
-  "settingsNemateObjednano": "Nemáte objednáno na příští týden",
-  "@settingsNemateObjednano": {},
-  "settingsNotificationFor": "Oznámení pro {username}",
-  "@settingsNotificationFor": {
-    "placeholders": {
-      "username": {
-        "type": "String"
-      }
-    }
-  },
   "settingsRelativeTimestamps": "Relativní časové značky",
   "@settingsRelativeTimestamps": {},
   "settingsRelativeTimestampsSub": "„Dnes“ místo „{date}“",
@@ -347,24 +257,16 @@
       }
     }
   },
-  "settingsSkipWeekends": "Přeskakovat víkendy",
-  "@settingsSkipWeekends": {},
   "settingsStopDataCollection": "Zastavit sledování analytických služeb",
   "@settingsStopDataCollection": {},
-  "settingsTheme": "Schéma",
-  "@settingsTheme": {},
   "settingsTitleCredit": "Nízký credit",
   "@settingsTitleCredit": {},
-  "settingsTitleTodaysFood": "Dnešní jídlo",
-  "@settingsTitleTodaysFood": {},
   "shareApp": "Sdílet aplikaci",
   "@shareApp": {},
   "shareDescription": "Autojídelna (aplikace na objednávání jídla)",
   "@shareDescription": {},
   "sideDish": "Přílohy",
   "@sideDish": {},
-  "signOut": "Odhlásit se",
-  "@signOut": {},
   "skipWeekends": "Přeskakovat víkendy",
   "@skipWeekends": {},
   "soup": "Polévka",
@@ -383,8 +285,6 @@
   "@sendCrashLogs": {},
   "sendCrashLogsSubtitle": "Odesílejte anonymizované crash logy vývojářům",
   "@sendCrashLogsSubtitle": {},
-  "systemThemeMode": "Systém",
-  "@systemThemeMode": {},
   "tabletUi": "Tablet UI",
   "@tabletUi": {},
   "tabletUiOptions": "{arg, select, other{error} auto{Automaticky} always{Vždy} landscape{Na šířku} never{Nikdy}}",
@@ -426,8 +326,6 @@
       }
     }
   },
-  "view": "Zobrazení",
-  "@view": {},
   "vlozitNaBurzu": "Vložit na burzu",
   "@vlozitNaBurzu": {},
   "welcome": "Vítejte!",
@@ -445,5 +343,57 @@
   "getStarted": "Začínáme",
   "@getStarted": {},
   "loginSubtitle": "Přihlaste se a můžeme začít. Užijte si všechny funkce aplikace!",
-  "@loginSubtitle": {}
+  "@loginSubtitle": {},
+  "channelNameDish": "Dnešní jídlo",
+  "@channelNameDish": {},
+  "channelDescriptionDish": "Oznámení každý den o tom jaké je dnes jídlo pro {username}",
+  "@channelDescriptionDish": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "channelNameLowCredit": "Docházející kredit",
+  "@channelNameLowCredit": {},
+  "channelDescriptionLowCredit": "Oznámení o tom, zda vám dochází kredit týden dopředu pro {username}",
+  "@channelDescriptionLowCredit": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "channelNameOrdered": "Máte příští týden objednáno?",
+  "@channelNameOrdered": {},
+  "channelDescriptionOrdered": "Zda má {username} příští týden objednáno",
+  "@channelDescriptionOrdered": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationOther": "Ostatní",
+  "@notificationOther": {},
+  "notificationOtherDescription": "Ostatní Oznámení (např. chybové hlášky)",
+  "@notificationOtherDescription": {},
+  "notificationLowCredit": "Dochází vám kredit!",
+  "@notificationLowCredit": {},
+  "notificationDoNotDisturb": "Ztlumit na týden",
+  "@notificationDoNotDisturb": {},
+  "notificationDontForgetToOrder": "Objednejte si na příští týden",
+  "@notificationDontForgetToOrder": {},
+  "notificationDontForgetToOrderDetail": "Uživatel {username} si stále ještě neobjenal na příští týden",
+  "@notificationDontForgetToOrderDetail": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationNoFood": "Žádná jídla pro tento den",
+  "@notificationNoFood": {},
+  "nastalaChyba": "Nastala chyba",
+  "@nastalaChyba": {}
 }

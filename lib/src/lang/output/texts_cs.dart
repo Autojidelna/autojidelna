@@ -12,14 +12,6 @@ class TextsCs extends Texts {
   String get about => 'O aplikaci';
 
   @override
-  String aboutCopyRight(DateTime time) {
-    final intl.DateFormat timeDateFormat = intl.DateFormat.y(localeName);
-    final String timeString = timeDateFormat.format(time);
-
-    return '© 2023 - $timeString Tomáš Protiva, Matěj Verhaegen a kolaborátoři\nZveřejněno pod licencí GNU GPLv3';
-  }
-
-  @override
   String get account => 'Účet';
 
   @override
@@ -32,16 +24,10 @@ class TextsCs extends Texts {
   String get allergens => 'Alergeny';
 
   @override
-  String get allowPermission => 'Udělit oprávnění';
-
-  @override
   String get amoledMode => 'AMOLED mód';
 
   @override
   String get amoledModeSubtitle => 'Přidej se k temné straně síly!';
-
-  @override
-  String get amoledSubtitle => 'Přidej se k temné straně síly!';
 
   @override
   String get analytics => 'Shromažďování údajů';
@@ -67,9 +53,6 @@ class TextsCs extends Texts {
 
   @override
   String get appearance => 'Vzhled';
-
-  @override
-  String get appearence => 'Vzhled';
 
   @override
   String get burzaAlertDialogContent =>
@@ -100,32 +83,6 @@ class TextsCs extends Texts {
   }
 
   @override
-  String get currency => 'Kč';
-
-  @override
-  String get darkThemeMode => 'Tmavý';
-
-  @override
-  String get dataCollection => 'Shromažďování údajů';
-
-  @override
-  String get dataCollectionAgreement =>
-      'Používáním aplikace souhlasíte se zasíláním anonymních dat. ';
-
-  @override
-  String get dataCollectionDescription_1 =>
-      'Informace shromažďujeme výhradně za účelem oprav chyb v aplikaci a udržování základních statistických údajů. Nemůžeme vyzkoušet autojídelnu u jídelen, kde nemáme přístup, jsme na těchto informacích závislí. Podrobnější informace naleznete ve ';
-
-  @override
-  String get dataCollectionDescription_2 => 'Zdrojovém kódu';
-
-  @override
-  String get dataCollectionDescription_3 => ' nebo v ';
-
-  @override
-  String get dataCollectionDescription_4 => 'Zásadách ochrany osobních údajů.';
-
-  @override
   String get dateFormat => 'Formát dat';
 
   @override
@@ -133,14 +90,6 @@ class TextsCs extends Texts {
 
   @override
   String get display => 'Zobrazení';
-
-  @override
-  String dochazejiciKreditChannelDescription(String username) {
-    return 'Oznámení o tom, zda vám dochází kredit týden dopředu pro $username';
-  }
-
-  @override
-  String get dochazejiciKreditChannelName => 'Docházející kredit';
 
   @override
   String get dontShowAgain => 'Příště nezobrazovat';
@@ -262,14 +211,6 @@ class TextsCs extends Texts {
   String get gettingDataNotifications => 'Získávám data pro oznámení';
 
   @override
-  String jidloChannelDescription(String username) {
-    return 'Oznámení každý den o tom jaké je dnes jídlo pro $username';
-  }
-
-  @override
-  String get jidloChannelName => 'Dnešní jídlo';
-
-  @override
   String get language => 'Jazyk';
 
   @override
@@ -280,9 +221,6 @@ class TextsCs extends Texts {
 
   @override
   String get licenses => 'Licence';
-
-  @override
-  String get lightThemeMode => 'Světlý';
 
   @override
   String get listUi => 'Seznamové zobrazení';
@@ -302,9 +240,6 @@ class TextsCs extends Texts {
 
   @override
   String get loginPasswordFieldHint => 'Zadejte heslo';
-
-  @override
-  String get loginPasswordFieldLabel => 'Heslo';
 
   @override
   String get loginSuccess => 'Přihlášení úspěšné!';
@@ -351,9 +286,6 @@ class TextsCs extends Texts {
   String get navigationRailExpantionButtonTitle => 'Menu';
 
   @override
-  String get nedostatekKreditu => 'Nedostatek kreditu';
-
-  @override
   String get nelzeObjednat => 'Nelze objednat';
 
   @override
@@ -366,23 +298,9 @@ class TextsCs extends Texts {
   String get noThankYou => 'Ne, děkuji';
 
   @override
-  String get notificationDochaziVamKredit => 'Dochází vám kredit!';
-
-  @override
   String notificationKreditPro(String username, String ammount) {
     return 'Kredit pro $username: $ammount Kč';
   }
-
-  @override
-  String get notificationObjednejteSi => 'Objednejte si na příští týden';
-
-  @override
-  String notificationObjednejteSiDetail(String username) {
-    return 'Uživatel $username si stále ještě neobjenal na příští týden';
-  }
-
-  @override
-  String get notificationZtlumit => 'Ztlumit na týden';
 
   @override
   String get notifications => 'Oznámení';
@@ -391,14 +309,6 @@ class TextsCs extends Texts {
   String notificationsFor(String username) {
     return 'Oznámení pro $username';
   }
-
-  @override
-  String objednanoChannelDescription(String username) {
-    return 'Oznámení týden dopředu o tom, zda jste si objednal jídlo na příští týden pro $username';
-  }
-
-  @override
-  String get objednanoChannelName => 'Objednáno?';
 
   @override
   String get objednat => 'Objednat';
@@ -449,14 +359,6 @@ class TextsCs extends Texts {
   String get settings => 'Nastavení';
 
   @override
-  String get settingsNemateObjednano => 'Nemáte objednáno na příští týden';
-
-  @override
-  String settingsNotificationFor(String username) {
-    return 'Oznámení pro $username';
-  }
-
-  @override
   String get settingsRelativeTimestamps => 'Relativní časové značky';
 
   @override
@@ -465,20 +367,11 @@ class TextsCs extends Texts {
   }
 
   @override
-  String get settingsSkipWeekends => 'Přeskakovat víkendy';
-
-  @override
   String get settingsStopDataCollection =>
       'Zastavit sledování analytických služeb';
 
   @override
-  String get settingsTheme => 'Schéma';
-
-  @override
   String get settingsTitleCredit => 'Nízký credit';
-
-  @override
-  String get settingsTitleTodaysFood => 'Dnešní jídlo';
 
   @override
   String get shareApp => 'Sdílet aplikaci';
@@ -488,9 +381,6 @@ class TextsCs extends Texts {
 
   @override
   String get sideDish => 'Přílohy';
-
-  @override
-  String get signOut => 'Odhlásit se';
 
   @override
   String get skipWeekends => 'Přeskakovat víkendy';
@@ -520,9 +410,6 @@ class TextsCs extends Texts {
   @override
   String get sendCrashLogsSubtitle =>
       'Odesílejte anonymizované crash logy vývojářům';
-
-  @override
-  String get systemThemeMode => 'Systém';
 
   @override
   String get tabletUi => 'Tablet UI';
@@ -579,9 +466,6 @@ class TextsCs extends Texts {
   }
 
   @override
-  String get view => 'Zobrazení';
-
-  @override
   String get vlozitNaBurzu => 'Vložit na burzu';
 
   @override
@@ -610,4 +494,55 @@ class TextsCs extends Texts {
   @override
   String get loginSubtitle =>
       'Přihlaste se a můžeme začít. Užijte si všechny funkce aplikace!';
+
+  @override
+  String get channelNameDish => 'Dnešní jídlo';
+
+  @override
+  String channelDescriptionDish(String username) {
+    return 'Oznámení každý den o tom jaké je dnes jídlo pro $username';
+  }
+
+  @override
+  String get channelNameLowCredit => 'Docházející kredit';
+
+  @override
+  String channelDescriptionLowCredit(String username) {
+    return 'Oznámení o tom, zda vám dochází kredit týden dopředu pro $username';
+  }
+
+  @override
+  String get channelNameOrdered => 'Máte příští týden objednáno?';
+
+  @override
+  String channelDescriptionOrdered(String username) {
+    return 'Zda má $username příští týden objednáno';
+  }
+
+  @override
+  String get notificationOther => 'Ostatní';
+
+  @override
+  String get notificationOtherDescription =>
+      'Ostatní Oznámení (např. chybové hlášky)';
+
+  @override
+  String get notificationLowCredit => 'Dochází vám kredit!';
+
+  @override
+  String get notificationDoNotDisturb => 'Ztlumit na týden';
+
+  @override
+  String get notificationDontForgetToOrder => 'Objednejte si na příští týden';
+
+  @override
+  String notificationDontForgetToOrderDetail(String username) {
+    return 'Uživatel $username si stále ještě neobjenal na příští týden';
+  }
+
+  @override
+  String get notificationNoFood => 'Žádná jídla pro tento den';
+
+  @override
+  String get nastalaChyba => 'Nastala chyba';
 }
