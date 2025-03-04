@@ -2,22 +2,16 @@ import 'dart:async';
 
 import 'package:autojidelna/src/_conf/hive.dart';
 import 'package:autojidelna/src/_global/app.dart';
-import 'package:autojidelna/src/_global/providers/account.provider.dart';
-import 'package:autojidelna/src/_global/providers/analytics.provider.dart';
-import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/_global/providers/settings.provider.dart';
 import 'package:autojidelna/src/_global/providers/theme.provider.dart';
 import 'package:autojidelna/src/_sentry/sentry.dart';
 import 'package:autojidelna/src/lang/l10n_context_extension.dart';
 import 'package:autojidelna/src/_routing/app_router.dart';
-import 'package:autojidelna/src/logic/services/auth_service.dart';
 import 'package:autojidelna/src/logic/deep_link_transformer_logic.dart';
-import 'package:autojidelna/src/logic/services/canteen_service.dart';
 import 'package:autojidelna/src/types/app_context.dart';
 import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 class MyApp extends StatefulWidget {
@@ -89,17 +83,5 @@ class MyAppWrapper extends StatelessWidget {
   const MyAppWrapper({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(value: App.remoteConfigProvider),
-        ChangeNotifierProvider(create: (_) => UserProvider(AuthService())),
-        ChangeNotifierProvider(create: (_) => CanteenProvider(CanteenService())),
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => AnalyticsProvider()),
-        ChangeNotifierProvider(create: (_) => Settings()),
-      ],
-      child: const MyApp(),
-    );
-  }
+  Widget build(BuildContext context) => const ProviderScope(child: MyApp());
 }
