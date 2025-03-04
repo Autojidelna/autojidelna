@@ -1,4 +1,6 @@
 import 'package:autojidelna/src/_conf/notifications.dart';
+import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/src/lang/supported_locales.dart';
 import 'package:autojidelna/src/logic/services/auth_service.dart';
 import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -7,6 +9,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class NotificationService {
+  final Texts _lang = lookupTexts(Locales.cs);
+
   void removeNotifications(SafeAccount account) async {
     final AwesomeNotifications notifs = AwesomeNotifications();
     notifs.removeChannel(NotificationIds.dnesniJidloChannel(account));
@@ -57,7 +61,7 @@ class NotificationService {
       ...limitedAccounts.expand((account) => _createNotificationChannelGroups(account)),
       NotificationChannelGroup(
         channelGroupKey: NotificationIds.channelGroupElse,
-        channelGroupName: NotificationsTexts.notificationOther,
+        channelGroupName: _lang.notificationOther,
       ),
     ];
 
@@ -67,8 +71,8 @@ class NotificationService {
       NotificationChannel(
         channelGroupKey: NotificationIds.channelGroupElse,
         channelKey: NotificationIds.channelElse,
-        channelName: NotificationsTexts.notificationOther,
-        channelDescription: NotificationsTexts.notificationOtherDescription,
+        channelName: _lang.notificationOther,
+        channelDescription: _lang.notificationOtherDescription,
         importance: NotificationImportance.Min,
         playSound: false,
       ),
@@ -83,7 +87,7 @@ class NotificationService {
   }
 
   List<NotificationChannelGroup> _createNotificationChannelGroups(SafeAccount account) {
-    return [_createChannelGroup(NotificationIds.channelGroup(account), NotificationsTexts.notificationsFor(account.username))];
+    return [_createChannelGroup(NotificationIds.channelGroup(account), _lang.notificationsFor(account.username))];
   }
 
   List<NotificationChannel> _createNotificationChannels(SafeAccount account) {
@@ -91,20 +95,20 @@ class NotificationService {
       _createChannel(
         NotificationIds.channelGroup(account),
         NotificationIds.dnesniJidloChannel(account),
-        NotificationsTexts.jidloChannelName,
-        NotificationsTexts.jidloChannelDescription(account.username),
+        _lang.channelNameDish,
+        _lang.channelDescriptionDish(account.username),
       ),
       _createChannel(
         NotificationIds.channelGroup(account),
         NotificationIds.kreditChannel(account),
-        NotificationsTexts.dochazejiciKreditChannelName,
-        NotificationsTexts.dochazejiciKreditChannelDescription(account.username),
+        _lang.channelNameLowCredit,
+        _lang.channelDescriptionLowCredit(account.username),
       ),
       _createChannel(
         NotificationIds.channelGroup(account),
         NotificationIds.objednanoChannel(account),
-        NotificationsTexts.objednanoChannelName,
-        NotificationsTexts.objednanoChannelDescription(account.username),
+        _lang.channelNameOrdered,
+        _lang.channelDescriptionOrdered(account.username),
       ),
     ];
   }
