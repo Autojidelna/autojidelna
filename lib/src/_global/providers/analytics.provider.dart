@@ -2,7 +2,10 @@ import 'dart:async';
 
 import 'package:autojidelna/src/_conf/hive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+
+final analyticsProvider = ChangeNotifierProvider<AnalyticsProvider>((ref) => AnalyticsProvider());
 
 // TODO
 class AnalyticsProvider extends ChangeNotifier {

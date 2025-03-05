@@ -4,7 +4,10 @@ import 'package:autojidelna/src/_conf/hive.dart';
 import 'package:autojidelna/src/types/theme.dart';
 import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+
+final themeProvider = ChangeNotifierProvider<ThemeProvider>((ref) => ThemeProvider());
 
 class ThemeProvider extends ChangeNotifier {
   static Box box = Hive.box(Boxes.settings);

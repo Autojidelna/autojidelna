@@ -11,6 +11,9 @@ import 'package:autojidelna/src/types/errors.dart';
 import 'package:autojidelna/src/types/freezed/account/account.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:autojidelna/src/logic/show_snack_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
+
+final loginProvider = riverpod.ChangeNotifierProvider<LoginProvider>((ref) => LoginProvider());
 
 class LoginProvider extends ChangeNotifier {
   final TextEditingController usernameController = TextEditingController();

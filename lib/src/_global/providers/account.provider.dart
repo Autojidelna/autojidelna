@@ -3,6 +3,9 @@ import 'package:autojidelna/src/types/freezed/account/account.dart';
 import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/src/types/freezed/user/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final userProvider = ChangeNotifierProvider<UserProvider>((ref) => UserProvider(AuthService()));
 
 class UserProvider extends ChangeNotifier {
   UserProvider(this._authService);

@@ -5,6 +5,10 @@ import 'package:autojidelna/src/types/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final settings = ChangeNotifierProvider<Settings>((ref) => Settings());
+
 class Settings with ChangeNotifier {
   static Box box = Hive.box(Boxes.settings);
 
