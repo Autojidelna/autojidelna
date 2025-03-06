@@ -60,4 +60,7 @@ class ThemeNotifier extends _$ThemeNotifier {
       scrim: state.amoledMode ? Colors.black87 : Colors.black54,
     );
   }
+
+  bool isBright(Brightness platformBrightness) =>
+      (state.themeMode == ThemeMode.system && platformBrightness == Brightness.light) || state.themeMode == ThemeMode.light;
 }

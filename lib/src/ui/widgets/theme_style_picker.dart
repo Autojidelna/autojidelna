@@ -22,7 +22,7 @@ class ThemeStylePicker extends ConsumerWidget {
         itemCount: ThemeStyle.values.length,
         itemBuilder: (context, index) {
           ThemeStyle themeStyle = ThemeStyle.values[index];
-          final bool isBright = MediaQuery.platformBrightnessOf(context) == Brightness.light || provider.themeMode == ThemeMode.light;
+          final bool isBright = notifier.isBright(MediaQuery.platformBrightnessOf(context));
 
           ThemeData theme = AppThemes.theme(
             isBright ? notifier.colorSchemeLight(themeStyle) : notifier.colorSchemeDark(themeStyle),
