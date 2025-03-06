@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:autojidelna/src/_global/providers/theme.provider.dart';
 import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/src/ui/widgets/amoled_mode_switch.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/date_format_picker.dart';
 import 'package:autojidelna/src/ui/widgets/scroll_view_column.dart';
@@ -8,7 +8,6 @@ import 'package:autojidelna/src/ui/widgets/section_title.dart';
 import 'package:autojidelna/src/ui/widgets/theme_mode_picker.dart';
 import 'package:autojidelna/src/ui/widgets/theme_style_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 @RoutePage()
 class AppearancePage extends StatelessWidget {
@@ -17,8 +16,6 @@ class AppearancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Texts lang = context.l10n;
-    final bool isLightMode = context.select<ThemeProvider, ThemeMode>((value) => value.themeMode) == ThemeMode.light;
-    final bool isBright = MediaQuery.platformBrightnessOf(context) == Brightness.light || isLightMode;
 
     return Scaffold(
       appBar: AppBar(title: Text(lang.appearance)),
@@ -30,15 +27,7 @@ class AppearancePage extends StatelessWidget {
           const CustomDivider(height: 38),
           const ThemeStylePicker(),
           const CustomDivider(height: 30),
-          Selector<ThemeProvider, ({bool read, Function(bool) set})>(
-            selector: (_, p1) => (read: p1.amoledMode, set: p1.setAmoledMode),
-            builder: (context, amoledMode, child) => SwitchListTile(
-              title: Text(lang.amoledMode),
-              subtitle: Text(lang.amoledModeSubtitle),
-              value: amoledMode.read,
-              onChanged: isBright ? null : amoledMode.set,
-            ),
-          ),
+          const AmoledModeSwitch(),
           SectionTitle(lang.display),
           const DateFormatPickerListTile(),
         ],

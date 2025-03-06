@@ -6,12 +6,13 @@ import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/analytics.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/_global/providers/settings.provider.dart';
-import 'package:autojidelna/src/_global/providers/theme.provider.dart';
+import 'package:autojidelna/src/_global/riverpod/theme/theme.riverpod.dart';
 import 'package:autojidelna/src/_sentry/sentry.dart';
 import 'package:autojidelna/src/lang/l10n_context_extension.dart';
 import 'package:autojidelna/src/_routing/app_router.dart';
 import 'package:autojidelna/src/logic/deep_link_transformer_logic.dart';
 import 'package:autojidelna/src/types/app_context.dart';
+import 'package:autojidelna/src/types/freezed/theme_state/theme_state.dart';
 import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
@@ -59,13 +60,17 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final appRouter = App.getIt<AppRouter>();
-    return Consumer<ThemeProvider>(
-      builder: (context, theme, ___) {
+
+    return riverpod.Consumer(
+      builder: (context, ref, child) {
+        final ThemeNotifier themeNotifier = ref.read(themeNotifierProvider.notifier);
+        final ThemeState themeProvider = ref.watch(themeNotifierProvider);
+
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
-          themeMode: theme.themeMode,
-          theme: AppThemes.theme(theme.colorSchemeLight(theme.themeStyle)),
-          darkTheme: AppThemes.theme(theme.colorSchemeDark(theme.themeStyle), amoledMode: theme.amoledMode),
+          themeMode: themeProvider.themeMode,
+          theme: AppThemes.theme(themeNotifier.colorSchemeLight()),
+          darkTheme: AppThemes.theme(themeNotifier.colorSchemeDark(), amoledMode: themeProvider.amoledMode),
           locale: _locale,
           supportedLocales: Texts.supportedLocales,
           localizationsDelegates: Texts.localizationsDelegates,
@@ -75,11 +80,12 @@ class _MyAppState extends State<MyApp> {
             deepLinkTransformer: (uri) async => deepLinkTransformer(uri),
             placeholder: (context) {
               App.getIt<AppContext>().setContext(context);
-              return const Scaffold(body: Center(child: CircularProgressIndicator()));
+              return child!;
             },
           ),
         );
       },
+      child: const Scaffold(body: Center(child: CircularProgressIndicator())),
     );
   }
 }
@@ -93,7 +99,6 @@ class MyAppWrapper extends riverpod.ConsumerWidget {
           ChangeNotifierProvider.value(value: App.remoteConfigProvider),
           ChangeNotifierProvider.value(value: ref.watch(userProvider.notifier)),
           ChangeNotifierProvider.value(value: ref.watch(canteenProvider.notifier)),
-          ChangeNotifierProvider.value(value: ref.watch(themeProvider.notifier)),
           ChangeNotifierProvider.value(value: ref.watch(analyticsProvider.notifier)),
           ChangeNotifierProvider.value(value: ref.watch(settings.notifier)),
         ],
