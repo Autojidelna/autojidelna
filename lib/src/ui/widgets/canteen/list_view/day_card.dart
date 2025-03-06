@@ -1,13 +1,13 @@
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/_global/providers/settings.provider.dart';
+import 'package:autojidelna/src/_global/riverpod/settings/settings.riverpod.dart';
 import 'package:autojidelna/src/logic/get_correct_date_string.dart';
 import 'package:autojidelna/src/logic/string_extension.dart';
-import 'package:autojidelna/src/types/theme.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/list_view/food_section_list_tile.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -68,23 +68,19 @@ Map<String, List<Jidlo>> mapDishesByVarianta(List<Jidlo> dishes) {
   return mappedDishes;
 }
 
-class DayCardheader extends StatelessWidget {
+class DayCardheader extends ConsumerWidget {
   const DayCardheader({required this.date, super.key});
   final DateTime date;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    String day = DateFormat('EEEE', Localizations.localeOf(context).toLanguageTag()).format(date).capitalize();
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Selector<Settings, DateFormatOptions>(
-        selector: (p0, p1) => p1.dateFormat,
-        builder: (context, format, ___) {
-          String day = DateFormat('EEEE', Localizations.localeOf(context).toLanguageTag()).format(date).capitalize();
-          return Text(
-            '$day - ${getCorrectDateString(format, date: date)}',
-            style: Theme.of(context).textTheme.titleMedium,
-          );
-        },
+      child: Text(
+        '$day - ${getCorrectDateString(ref.watch(dateFormatOptionsNotifierProvider), date: date)}',
+        style: Theme.of(context).textTheme.titleMedium,
       ),
     );
   }

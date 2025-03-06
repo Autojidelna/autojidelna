@@ -8,7 +8,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-// Necessary for code-generation to work
 part 'theme.riverpod.g.dart';
 
 @riverpod

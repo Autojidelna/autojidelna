@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/src/_conf/dates.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/_global/providers/settings.provider.dart';
+import 'package:autojidelna/src/_global/riverpod/settings/settings.riverpod.dart';
 import 'package:autojidelna/src/lang/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/change_date.dart';
 import 'package:autojidelna/src/logic/ordering.dart';
@@ -14,21 +14,22 @@ import 'package:autojidelna/src/ui/widgets/dialogs/configured_dialog.dart';
 import 'package:canteenlib/canteenlib.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as prov;
 
 import 'package:table_calendar/table_calendar.dart';
 
 showCustomDatePicker(BuildContext context) => configuredDialog(context, builder: (_) => const _CustomDatePicker());
 
-class _CustomDatePicker extends StatefulWidget {
-  const _CustomDatePicker({super.key});
+class _CustomDatePicker extends ConsumerStatefulWidget {
+  const _CustomDatePicker();
 
   @override
-  State<_CustomDatePicker> createState() => __CustomDatePickerState();
+  ConsumerState<_CustomDatePicker> createState() => __CustomDatePickerState();
 }
 
-class __CustomDatePickerState extends State<_CustomDatePicker> {
+class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
   late String locale;
 
   late bool bigMarkersEnabled;
@@ -92,7 +93,7 @@ class __CustomDatePickerState extends State<_CustomDatePicker> {
   @override
   void initState() {
     super.initState();
-    bigMarkersEnabled = context.read<Settings>().bigCalendarMarkers;
+    bigMarkersEnabled = ref.read(bigCalendarMarkersNotifierProvider);
     selectedDate = context.read<CanteenProvider>().selectedDate;
 
     defaultTextStyle = AppThemes.textTheme.titleMedium!;

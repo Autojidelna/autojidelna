@@ -5,7 +5,6 @@ import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/analytics.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/_global/providers/settings.provider.dart';
 import 'package:autojidelna/src/_global/riverpod/theme/theme.riverpod.dart';
 import 'package:autojidelna/src/_sentry/sentry.dart';
 import 'package:autojidelna/src/lang/l10n_context_extension.dart';
@@ -100,7 +99,6 @@ class MyAppWrapper extends riverpod.ConsumerWidget {
           ChangeNotifierProvider.value(value: ref.watch(userProvider.notifier)),
           ChangeNotifierProvider.value(value: ref.watch(canteenProvider.notifier)),
           ChangeNotifierProvider.value(value: ref.watch(analyticsProvider.notifier)),
-          ChangeNotifierProvider.value(value: ref.watch(settings.notifier)),
         ],
         child: const MyApp(),
       );
