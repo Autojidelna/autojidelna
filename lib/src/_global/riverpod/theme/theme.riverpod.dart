@@ -4,6 +4,7 @@ import 'package:autojidelna/src/_conf/hive.dart';
 import 'package:autojidelna/src/types/freezed/theme_state/theme_state.dart';
 import 'package:autojidelna/src/types/theme.dart';
 import 'package:autojidelna/src/ui/theme/app_themes.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -59,7 +60,10 @@ class ThemeNotifier extends _$ThemeNotifier {
       scrim: state.amoledMode ? Colors.black87 : Colors.black54,
     );
   }
+}
 
-  bool isBright(Brightness platformBrightness) =>
-      (state.themeMode == ThemeMode.system && platformBrightness == Brightness.light) || state.themeMode == ThemeMode.light;
+@riverpod
+bool isBright(Ref ref, Brightness brightness) {
+  final ThemeMode themeMode = ref.watch(themeNotifierProvider.select((data) => data.themeMode));
+  return (themeMode == ThemeMode.system && brightness == Brightness.light) || themeMode == ThemeMode.light;
 }

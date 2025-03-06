@@ -14,7 +14,7 @@ class AmoledModeSwitch extends ConsumerWidget {
     final ThemeNotifier themeNotifier = ref.read(themeNotifierProvider.notifier);
     final ThemeState themeProvider = ref.watch(themeNotifierProvider);
 
-    final bool isBright = themeNotifier.isBright(MediaQuery.platformBrightnessOf(context));
+    final bool isBright = ref.watch(isBrightProvider(MediaQuery.platformBrightnessOf(context)));
 
     return SwitchListTile(
       title: Text(lang.amoledMode),
