@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:autojidelna/src/_conf/hive.dart';
 import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
-import 'package:autojidelna/src/_global/providers/analytics.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/_global/riverpod/theme/theme.riverpod.dart';
 import 'package:autojidelna/src/_sentry/sentry.dart';
@@ -98,7 +97,6 @@ class MyAppWrapper extends riverpod.ConsumerWidget {
           ChangeNotifierProvider.value(value: App.remoteConfigProvider),
           ChangeNotifierProvider.value(value: ref.watch(userProvider.notifier)),
           ChangeNotifierProvider.value(value: ref.watch(canteenProvider.notifier)),
-          ChangeNotifierProvider.value(value: ref.watch(analyticsProvider.notifier)),
         ],
         child: const MyApp(),
       );
