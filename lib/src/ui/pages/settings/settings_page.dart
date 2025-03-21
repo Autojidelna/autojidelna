@@ -4,7 +4,6 @@ import 'package:autojidelna/src/lang/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/buttons/about_app_button_widget.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/scroll_view_column.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +37,7 @@ class SettingsPage extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.edit_notifications_outlined),
             title: Text(lang.notifications),
-            onTap: () async => AwesomeNotifications().showNotificationConfigPage(),
+            //onTap: () async => AwesomeNotifications().showNotificationConfigPage(),
           ),
           ListTile(
             leading: const Icon(Icons.cookie_outlined),

@@ -203,8 +203,6 @@ String getObedText(BuildContext context, Jidlo dish, StavJidla stavJidla) {
       } else {
         return lang.nelzeObjednat;
       }
-    default:
-      return '';
   }
 }
 

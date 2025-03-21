@@ -1,22 +1,16 @@
-import 'package:autojidelna/src/_conf/notifications.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
-import 'package:autojidelna/src/lang/supported_locales.dart';
-import 'package:autojidelna/src/logic/services/auth_service.dart';
-import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
+// import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:background_fetch/background_fetch.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 class NotificationService {
-  final Texts _lang = lookupTexts(Locales.cs);
+  //final Texts _lang = lookupTexts(Locales.cs);
 
-  void removeNotifications(SafeAccount account) async {
+  /*void removeNotifications(SafeAccount account) async {
     final AwesomeNotifications notifs = AwesomeNotifications();
     notifs.removeChannel(NotificationIds.dnesniJidloChannel(account));
     notifs.removeChannel(NotificationIds.objednanoChannel(account));
     notifs.removeChannel(NotificationIds.kreditChannel(account));
-  }
+  }*/
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
@@ -53,7 +47,7 @@ class NotificationService {
     // setState to update our non-existent appearance.
   }
 
-  Future<bool> initAwesome() async {
+  /*Future<bool> initAwesome() async {
     List<SafeAccount> limitedAccounts = await AuthService().getLimitedAccounts();
 
     // Generate notification channel groups
@@ -127,5 +121,5 @@ class NotificationService {
       defaultColor: const Color(0xFF9D50DD),
       ledColor: Colors.white,
     );
-  }
+  }*/
 }

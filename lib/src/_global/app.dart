@@ -1,12 +1,7 @@
 import 'package:autojidelna/src/_conf/adapters.hive.dart';
 import 'package:autojidelna/src/_conf/hive.dart';
-import 'package:autojidelna/src/_conf/notifications.dart';
 import 'package:autojidelna/src/_global/providers/remote_config.dart';
 import 'package:autojidelna/src/lang/supported_locales.dart';
-import 'package:autojidelna/src/logic/services/auth_service.dart';
-import 'package:autojidelna/src/logic/services/notification_service.dart';
-import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
@@ -63,7 +58,7 @@ class App {
   static Future<void> initNotifications() async {
     assert(_initNotificationsExecuted == false, 'App.initNotifications() must be called only once');
     if (_initNotificationsExecuted) return;
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    /*PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String version = packageInfo.version;
     String? lastVersion = Hive.box(Boxes.appState).get(HiveKeys.appState.lastVersion);
 
@@ -86,7 +81,7 @@ class App {
     }
 
     // Initialize the notifications
-    NotificationService().initAwesome();
+    NotificationService().initAwesome();*/
 
     // Setting listeners for when the app is running and notification button is clicked
     /* TODO: AwesomeNotifications().setListeners(
