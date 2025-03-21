@@ -88,7 +88,7 @@ class _LocationPickerCardState extends State<LocationPickerCard> {
         margin: AppThemes.horizontalMargin,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: Theme.of(context).colorScheme.onInverseSurface.withOpacity(.9),
+          color: Theme.of(context).colorScheme.onInverseSurface.withValues(alpha: .9),
           border: Border.all(color: Theme.of(context).dividerTheme.color!),
         ),
         alignment: Alignment.center,

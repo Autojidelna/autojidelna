@@ -198,7 +198,7 @@ class AppThemes {
       listTileTheme: ListTileThemeData(
         dense: false,
         selectedColor: colorScheme.primary,
-        iconColor: colorScheme.primary.withOpacity(.75),
+        iconColor: colorScheme.primary.withValues(alpha: .75),
         titleTextStyle: textTheme.titleMedium!.copyWith(color: colorScheme.onSurface),
         subtitleTextStyle: textTheme.bodyMedium!.copyWith(color: colorScheme.onSurfaceVariant),
         visualDensity: VisualDensity.comfortable,
