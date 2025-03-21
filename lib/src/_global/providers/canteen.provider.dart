@@ -14,8 +14,27 @@ import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
-class CanteenProvider with ChangeNotifier {
-  CanteenProvider(this._canteenService);
+class CanteenProvider extends ChangeNotifier {
+  CanteenProvider(this._canteenService) {
+    BuildContext? ctx = App.getIt<AppContext>().context;
+    if (ctx == null) return;
+
+    _userListener = () {
+      if (ctx.read<UserProvider>().user == null) _clear();
+    };
+    ctx.read<UserProvider>().addListener(_userListener!);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    BuildContext? ctx = App.getIt<AppContext>().context;
+    if (ctx != null && _userListener != null) {
+      ctx.read<UserProvider>().removeListener(_userListener!);
+    }
+  }
+
+  VoidCallback? _userListener;
 
   final CanteenService _canteenService;
 
@@ -211,5 +230,15 @@ class CanteenProvider with ChangeNotifier {
         ordering = false;
       default:
     }
+  }
+
+  void _clear() {
+    _ordering = false;
+    _menus = Map.from({});
+    _numberOfDishes = Map.from({});
+    _dishMarketplace = List.from([]);
+    _selectedDate = DateTime.now().normalize;
+    _locationId = 1;
+    notifyListeners();
   }
 }
