@@ -1,4 +1,6 @@
-import 'package:autojidelna/src/_conf/notifications.dart';
+// TODO: fix notifications
+
+/*import 'package:autojidelna/src/_conf/notifications.dart';
 import 'package:autojidelna/src/lang/l10n_context_extension.dart';
 import 'package:autojidelna/src/lang/supported_locales.dart';
 import 'package:autojidelna/src/logic/services/auth_service.dart';
@@ -128,4 +130,4 @@ class NotificationService {
       ledColor: Colors.white,
     );
   }
-}
+}*/

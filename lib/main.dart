@@ -23,7 +23,7 @@ void main() async {
         // The sampling rate for profiling is relative to tracesSampleRate
         // Setting to 1.0 will profile 100% of sampled transactions:
         options.profilesSampleRate = 1.0;
-        options.enableMetrics = true;
+        // options.enableMetrics = true;
         options.reportPackages = true;
         options.attachThreads = true;
         options.enableWindowMetricBreadcrumbs = true;

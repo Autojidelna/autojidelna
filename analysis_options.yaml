@@ -47,7 +47,7 @@ linter:
     use_key_in_widget_constructors: true
     avoid_web_libraries_in_flutter: true
     cancel_subscriptions: true
-    unsafe_html: true
+    # unsafe_html: true
     prefer_void_to_null: true
     avoid_type_to_string: true
     discarded_futures: true

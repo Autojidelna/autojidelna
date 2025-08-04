@@ -6,7 +6,7 @@ import 'package:autojidelna/src/lang/supported_locales.dart';
 import 'package:autojidelna/src/logic/services/auth_service.dart';
 import 'package:autojidelna/src/logic/services/notification_service.dart';
 import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
+//import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
@@ -66,7 +66,7 @@ class App {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String version = packageInfo.version;
     String? lastVersion = Hive.box(Boxes.appState).get(HiveKeys.appState.lastVersion);
-
+    /*
     // Removing the already set notifications if we updated versions
     if (lastVersion != version) {
       // Set the new version
@@ -84,10 +84,10 @@ class App {
       }
       await AwesomeNotifications().dispose();
     }
-
+    
     // Initialize the notifications
     NotificationService().initAwesome();
-
+    */
     // Setting listeners for when the app is running and notification button is clicked
     /* TODO: AwesomeNotifications().setListeners(
       onActionReceivedMethod: NotificationController.onActionReceivedMethod,
