@@ -1,6 +1,5 @@
 import 'package:autojidelna/src/_conf/adapters.hive.dart';
 import 'package:autojidelna/src/_conf/hive.dart';
-import 'package:autojidelna/src/_conf/notifications.dart';
 import 'package:autojidelna/src/_global/providers/remote_config.dart';
 import 'package:autojidelna/src/lang/supported_locales.dart';
 import 'package:autojidelna/src/logic/services/auth_service.dart';
@@ -63,7 +62,7 @@ class App {
   static Future<void> initNotifications() async {
     assert(_initNotificationsExecuted == false, 'App.initNotifications() must be called only once');
     if (_initNotificationsExecuted) return;
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    /*PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String version = packageInfo.version;
     String? lastVersion = Hive.box(Boxes.appState).get(HiveKeys.appState.lastVersion);
     /*

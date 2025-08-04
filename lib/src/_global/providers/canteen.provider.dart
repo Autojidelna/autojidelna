@@ -215,4 +215,14 @@ class CanteenProvider with ChangeNotifier {
       default:
     }
   }
+
+  void clear() {
+    _ordering = false;
+    _menus = Map.from({});
+    _numberOfDishes = Map.from({});
+    _dishMarketplace = List.from([]);
+    _selectedDate = DateTime.now().normalize;
+    _locationId = 1;
+    notifyListeners();
+  }
 }

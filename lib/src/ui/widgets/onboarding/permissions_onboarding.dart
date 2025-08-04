@@ -28,8 +28,10 @@ class _PermissionsOnboardingState extends State<PermissionsOnboarding> {
 
   void checkNotificationPermissions() async {
     /*final bool permissions = await AwesomeNotifications().isNotificationAllowed();
+    /*final bool permissions = await AwesomeNotifications().isNotificationAllowed();
     setState(() {
       notificationsEnabled = permissions;
+    });*/
     });*/
   }
 
@@ -58,6 +60,7 @@ class _PermissionsOnboardingState extends State<PermissionsOnboarding> {
                       /* bool value = await AwesomeNotifications().requestPermissionToSendNotifications();
                       setState(() {
                         notificationsEnabled = value;
+                      });*/
                       });*/
                     },
               child: notificationsEnabled ? const Icon(Icons.check) : Text(lang.grant),

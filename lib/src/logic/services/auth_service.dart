@@ -5,7 +5,6 @@ import 'package:autojidelna/src/_conf/secure_storage.dart';
 import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/init_app.dart';
 import 'package:autojidelna/src/logic/canteenwrapper.dart';
-import 'package:autojidelna/src/logic/services/notification_service.dart';
 import 'package:autojidelna/src/logic/url.dart';
 import 'package:autojidelna/src/types/errors.dart';
 import 'package:autojidelna/src/types/freezed/account/account.dart';
@@ -148,6 +147,7 @@ class AuthService {
     throwIf(account == null, AuthErrors.accountNotFound);
 
     await _removeAccountFromStorage(account!);
+    //NotificationService().removeNotifications(SafeAccount.fromAccount(account));
     //NotificationService().removeNotifications(SafeAccount.fromAccount(account));
 
     // TODO: move to analytics service or something

@@ -1,4 +1,7 @@
+import 'package:autojidelna/src/_global/app.dart';
+import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/logic/services/auth_service.dart';
+import 'package:autojidelna/src/types/app_context.dart';
 import 'package:autojidelna/src/types/freezed/account/account.dart';
 import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/src/types/freezed/user/user.dart';
@@ -30,13 +33,17 @@ class UserProvider extends ChangeNotifier {
     if (user == null) return;
     await _authService.logout(safeAccount);
     _loggedSafeAccounts = List.from(_loggedSafeAccounts)..remove(safeAccount);
-    if (_user!.accountData.username == safeAccount.username) _user = null;
+    if (_user!.accountData.username == safeAccount.username) {
+      _user = null;
+      App.getIt<AppContext>().context!.read<CanteenProvider>().clear();
+    }
     notifyListeners();
   }
 
   Future<void> logoutEveryone() async {
     await _authService.logoutEveryone();
     _user = null;
+    App.getIt<AppContext>().context!.read<CanteenProvider>().clear();
     _loggedSafeAccounts = [];
     notifyListeners();
   }
@@ -52,11 +59,13 @@ class UserProvider extends ChangeNotifier {
   Future<void> unloadUser() async {
     await _authService.ghostLogout();
     _user = null;
+    App.getIt<AppContext>().context!.read<CanteenProvider>().clear();
     notifyListeners();
   }
 
   Future<void> changeUser(SafeAccount safeAccount) async {
     _user = null;
+    App.getIt<AppContext>().context!.read<CanteenProvider>().clear();
     await _authService.changeAccount(safeAccount);
     notifyListeners();
   }
