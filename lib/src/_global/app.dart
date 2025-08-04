@@ -103,6 +103,8 @@ class App {
     // TODO: BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
     _initNotificationsExecuted = true;
   }
+  */
+  }
 
   static Future<void> initPlatform() async {
     assert(_initPlatformExecuted == false, 'App.initPlatform() must be called only once');

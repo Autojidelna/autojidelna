@@ -7,6 +7,7 @@ import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dar
 import 'package:autojidelna/src/types/freezed/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart' as prov;
 
 final userProvider = ChangeNotifierProvider<UserProvider>((ref) => UserProvider(AuthService()));
 

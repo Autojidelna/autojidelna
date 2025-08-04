@@ -54,7 +54,7 @@ class NotificationService {
     // setState to update our non-existent appearance.
   }
 
-  /*Future<bool> initAwesome() async {
+  Future<bool> initAwesome() async {
     List<SafeAccount> limitedAccounts = await AuthService().getLimitedAccounts();
 
     // Generate notification channel groups
@@ -129,4 +129,5 @@ class NotificationService {
       ledColor: Colors.white,
     );
   }
-}*/
+}
+*/

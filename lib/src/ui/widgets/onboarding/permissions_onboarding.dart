@@ -61,7 +61,6 @@ class _PermissionsOnboardingState extends State<PermissionsOnboarding> {
                       setState(() {
                         notificationsEnabled = value;
                       });*/
-                      });*/
                     },
               child: notificationsEnabled ? const Icon(Icons.check) : Text(lang.grant),
             ),
