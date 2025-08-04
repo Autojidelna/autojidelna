@@ -1,7 +1,10 @@
+// TODO: notifications
+
 import 'package:autojidelna/src/lang/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/buttons/analytics_switches.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/types/onboarding_step.dart';
+//import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 
 class PermissionsOnboarding extends StatefulWidget implements OnboardingStep {
@@ -25,8 +28,10 @@ class _PermissionsOnboardingState extends State<PermissionsOnboarding> {
 
   void checkNotificationPermissions() async {
     /*final bool permissions = await AwesomeNotifications().isNotificationAllowed();
+    /*final bool permissions = await AwesomeNotifications().isNotificationAllowed();
     setState(() {
       notificationsEnabled = permissions;
+    });*/
     });*/
   }
 
@@ -52,9 +57,10 @@ class _PermissionsOnboardingState extends State<PermissionsOnboarding> {
               onPressed: notificationsEnabled
                   ? null
                   : () async {
-                      /*bool value = await AwesomeNotifications().requestPermissionToSendNotifications();
+                      /* bool value = await AwesomeNotifications().requestPermissionToSendNotifications();
                       setState(() {
                         notificationsEnabled = value;
+                      });*/
                       });*/
                     },
               child: notificationsEnabled ? const Icon(Icons.check) : Text(lang.grant),

@@ -133,7 +133,7 @@ class AppThemes {
         color: amoledMode ? Colors.transparent : null,
         elevation: amoledMode ? 0 : 4,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: amoledMode ? .5 : 2,
         clipBehavior: Clip.hardEdge,
         color: amoledMode ? colorScheme.onInverseSurface : null,
@@ -167,7 +167,7 @@ class AppThemes {
         ),
       ),
 
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         backgroundColor: colorScheme.surface,
         elevation: amoledMode ? .5 : 2,
         surfaceTintColor: colorScheme.surfaceTint,

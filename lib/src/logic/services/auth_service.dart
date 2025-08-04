@@ -148,6 +148,7 @@ class AuthService {
 
     await _removeAccountFromStorage(account!);
     //NotificationService().removeNotifications(SafeAccount.fromAccount(account));
+    //NotificationService().removeNotifications(SafeAccount.fromAccount(account));
 
     // TODO: move to analytics service or something
     if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logout);
@@ -155,11 +156,11 @@ class AuthService {
 
   // Logs out every logged in user
   Future<void> logoutEveryone() async {
-    /*LoggedAccounts loginData = await _getDataFromStorage();
+    LoggedAccounts loginData = await _getDataFromStorage();
 
     for (Account account in loginData.accounts) {
-      NotificationService().removeNotifications(SafeAccount.fromAccount(account));
-    } */
+      // NotificationService().removeNotifications(SafeAccount.fromAccount(account));
+    }
 
     await _saveDataToStorage(LoggedAccounts());
 

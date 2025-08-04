@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 void main() async {
@@ -22,7 +23,7 @@ void main() async {
         // The sampling rate for profiling is relative to tracesSampleRate
         // Setting to 1.0 will profile 100% of sampled transactions:
         options.profilesSampleRate = 1.0;
-        options.enableMetrics = true;
+        // options.enableMetrics = true;
         options.reportPackages = true;
         options.attachThreads = true;
         options.enableWindowMetricBreadcrumbs = true;
@@ -82,14 +83,16 @@ void runMyApp() async {
 
   if (!kDebugMode) {
     runApp(
-      SentryWidget(
-        child: DefaultAssetBundle(
-          bundle: SentryAssetBundle(),
-          child: const MyAppWrapper(),
+      ProviderScope(
+        child: SentryWidget(
+          child: DefaultAssetBundle(
+            bundle: SentryAssetBundle(),
+            child: const MyAppWrapper(),
+          ),
         ),
       ),
     );
   } else {
-    runApp(const MyAppWrapper());
+    runApp(const ProviderScope(child: MyAppWrapper()));
   }
 }

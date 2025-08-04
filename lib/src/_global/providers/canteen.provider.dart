@@ -11,10 +11,13 @@ import 'package:autojidelna/src/types/errors.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
-class CanteenProvider extends ChangeNotifier {
+final canteenProvider = riverpod.ChangeNotifierProvider<CanteenProvider>((ref) => CanteenProvider(CanteenService()));
+
+class CanteenProvider with ChangeNotifier {
   CanteenProvider(this._canteenService);
 
   final CanteenService _canteenService;

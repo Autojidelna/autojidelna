@@ -1,5 +1,6 @@
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
 import 'package:autojidelna/src/logic/url.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,7 @@ class CanteenUrlPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     final LoginProvider provider = context.read<LoginProvider>();
     Map<String, String> urls = provider.urls;
+    if (kDebugMode) urls.addAll({'Testing API': 'api.autojidelna.cz'});
     return ValueListenableBuilder<TextEditingValue>(
       valueListenable: provider.urlController,
       builder: (_, urlController, ___) {

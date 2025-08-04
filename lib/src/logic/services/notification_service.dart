@@ -1,4 +1,11 @@
-// import 'package:awesome_notifications/awesome_notifications.dart';
+// TODO: fix notifications
+
+/*import 'package:autojidelna/src/_conf/notifications.dart';
+import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/src/lang/supported_locales.dart';
+import 'package:autojidelna/src/logic/services/auth_service.dart';
+import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:background_fetch/background_fetch.dart';
 import 'package:flutter/foundation.dart';
 
@@ -121,5 +128,5 @@ class NotificationService {
       defaultColor: const Color(0xFF9D50DD),
       ledColor: Colors.white,
     );
-  }*/
-}
+  }
+}*/

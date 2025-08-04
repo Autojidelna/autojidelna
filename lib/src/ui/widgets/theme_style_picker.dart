@@ -1,16 +1,18 @@
-import 'package:autojidelna/src/_global/providers/theme.provider.dart';
+import 'package:autojidelna/src/_global/riverpod/theme/theme.riverpod.dart';
+import 'package:autojidelna/src/types/freezed/theme_state/theme_state.dart';
 import 'package:autojidelna/src/types/theme.dart';
 import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ThemeStylePicker extends StatelessWidget {
+class ThemeStylePicker extends ConsumerWidget {
   const ThemeStylePicker({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final ThemeProvider prov = context.watch<ThemeProvider>();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ThemeNotifier notifier = ref.read(themeNotifierProvider.notifier);
+    final ThemeState provider = ref.watch(themeNotifierProvider);
 
     return SizedBox(
       height: 225,
@@ -20,11 +22,11 @@ class ThemeStylePicker extends StatelessWidget {
         itemCount: ThemeStyle.values.length,
         itemBuilder: (context, index) {
           ThemeStyle themeStyle = ThemeStyle.values[index];
-          final bool isBright = MediaQuery.platformBrightnessOf(context) == Brightness.light || prov.themeMode == ThemeMode.light;
+          final bool isBright = ref.watch(isBrightProvider(MediaQuery.platformBrightnessOf(context)));
 
           ThemeData theme = AppThemes.theme(
-            isBright ? prov.colorSchemeLight(themeStyle) : prov.colorSchemeDark(themeStyle),
-            amoledMode: prov.amoledMode,
+            isBright ? notifier.colorSchemeLight(themeStyle) : notifier.colorSchemeDark(themeStyle),
+            amoledMode: provider.amoledMode,
           );
 
           BorderRadius radius = BorderRadius.circular(16);
@@ -37,7 +39,7 @@ class ThemeStylePicker extends StatelessWidget {
             side: BorderSide(
               width: 3,
               strokeAlign: BorderSide.strokeAlignInside,
-              color: ThemeStyle.values[index] == prov.themeStyle ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant,
+              color: ThemeStyle.values[index] == provider.themeStyle ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant,
             ),
           );
 
@@ -48,7 +50,7 @@ class ThemeStylePicker extends StatelessWidget {
               child: OutlinedButton(
                 style: style,
                 clipBehavior: Clip.hardEdge,
-                onPressed: () => prov.setThemeStyle(ThemeStyle.values[index]),
+                onPressed: () => notifier.setThemeStyle(ThemeStyle.values[index]),
                 child: Column(
                   children: [
                     SizedBox(height: 35, child: AppBar(automaticallyImplyLeading: false)),
@@ -68,14 +70,11 @@ class ThemeStylePicker extends StatelessWidget {
   }
 
   SizedBox fakeNavigationBar(ThemeData theme) {
-    final Icon icon = Icon(
-      Icons.circle,
-      size: 4,
-      color: theme.colorScheme.onPrimary,
-    );
+    final Icon icon = Icon(Icons.circle, size: 4, color: theme.colorScheme.onPrimary);
     return SizedBox(
       height: 35,
       child: NavigationBar(
+        onDestinationSelected: null,
         destinations: [
           const SizedBox(),
           Container(
@@ -92,7 +91,6 @@ class ThemeStylePicker extends StatelessWidget {
             (int i) => SizedBox(child: i == 2 ? Padding(padding: const EdgeInsets.only(bottom: 4), child: icon) : const SizedBox()),
           ),
         ],
-        onDestinationSelected: null,
       ),
     );
   }
@@ -100,9 +98,7 @@ class ThemeStylePicker extends StatelessWidget {
   Widget foodTileColorSchemePreview(ThemeData theme, Color buttonColor) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      shape: (theme.cardTheme.shape as RoundedRectangleBorder).copyWith(
-        borderRadius: BorderRadius.circular(8),
-      ),
+      shape: (theme.cardTheme.shape as RoundedRectangleBorder).copyWith(borderRadius: BorderRadius.circular(8)),
       child: Column(
         children: [
           const CustomDivider(isTransparent: false),
