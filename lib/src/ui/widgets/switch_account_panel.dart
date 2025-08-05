@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_routing/app_router.gr.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
@@ -17,7 +17,7 @@ class SwitchAccountPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Texts lang = context.l10n;
+    final L10n lang = context.l10n;
 
     return Column(
       children: [
@@ -47,7 +47,7 @@ class SwitchAccountPanel extends StatelessWidget {
   }
 
   Widget addAccountButton(BuildContext context) {
-    final Texts lang = context.l10n;
+    final L10n lang = context.l10n;
     return ListTile(
       leading: const Icon(Icons.add),
       title: Text(lang.addAccount),

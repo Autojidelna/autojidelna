@@ -1,5 +1,5 @@
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:flutter/material.dart';
 
 import 'package:material_symbols_icons/symbols.dart';

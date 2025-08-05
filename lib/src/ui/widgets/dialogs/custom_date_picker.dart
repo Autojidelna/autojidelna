@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/src/_conf/dates.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/_global/riverpod/settings/settings.riverpod.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/change_date.dart';
 import 'package:autojidelna/src/logic/ordering.dart';
 import 'package:autojidelna/src/logic/string_extension.dart';
@@ -242,7 +242,7 @@ Widget? _markerTemplate(BuildContext context, Jidlo dish) {
 }
 
 Row _actionButtons(BuildContext context, void Function() onConfirm) {
-  final Texts lang = context.l10n;
+  final L10n lang = context.l10n;
 
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,

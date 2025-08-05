@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/amoled_mode_switch.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/date_format_picker.dart';
@@ -15,7 +15,7 @@ class AppearancePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Texts lang = context.l10n;
+    final L10n lang = context.l10n;
 
     return Scaffold(
       appBar: AppBar(title: Text(lang.appearance)),

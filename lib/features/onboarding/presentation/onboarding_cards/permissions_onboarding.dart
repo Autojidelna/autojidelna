@@ -2,7 +2,7 @@
 
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/buttons/analytics_switches.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 //import 'package:awesome_notifications/awesome_notifications.dart';
@@ -45,7 +45,7 @@ class _PermissionsOnboardingState extends State<PermissionsOnboarding> {
 
   @override
   Widget build(BuildContext context) {
-    final Texts lang = context.l10n;
+    final L10n lang = context.l10n;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

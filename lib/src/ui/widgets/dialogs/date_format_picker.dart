@@ -1,5 +1,5 @@
 import 'package:autojidelna/src/_global/riverpod/settings/settings.riverpod.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/get_correct_date_string.dart';
 import 'package:autojidelna/src/types/theme.dart';
 import 'package:autojidelna/src/ui/theme/app_themes.dart';
@@ -25,7 +25,7 @@ class DateFormatPicker extends ConsumerWidget {
   const DateFormatPicker({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Texts lang = context.l10n;
+    final L10n lang = context.l10n;
     final notifier = ref.read(dateFormatOptionsNotifierProvider.notifier);
     final provider = ref.watch(dateFormatOptionsNotifierProvider);
 

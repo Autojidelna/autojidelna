@@ -1,6 +1,6 @@
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +10,7 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Texts lang = context.l10n;
+    final L10n lang = context.l10n;
     final provider = ref.watch(loginProvider);
 
     final MapEntry<String, String> url = provider.urls.entries.firstWhere(

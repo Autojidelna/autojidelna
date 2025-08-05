@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_routing/app_router.gr.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/show_snack_bar.dart';
 import 'package:autojidelna/src/ui/widgets/appbars/menu_appbar.dart';
 import 'package:autojidelna/src/ui/widgets/appbars/more_appbar.dart';

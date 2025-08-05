@@ -1,5 +1,5 @@
 import 'package:autojidelna/src/_conf/errors.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';

@@ -4,7 +4,7 @@ import 'package:autojidelna/src/_conf/errors.dart';
 import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/canteenwrapper.dart';
 import 'package:autojidelna/src/logic/show_snack_bar.dart';
 import 'package:autojidelna/src/logic/services/analytics_service.dart';
@@ -20,7 +20,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
   final CanteenProvider prov = context.read<CanteenProvider>();
   final Uzivatel uzivatel = context.read<UserProvider>().user!.data;
   final Canteen canteen = App.getIt<Canteen>();
-  final Texts lang = context.l10n;
+  final L10n lang = context.l10n;
   final DateTime date = dish.den;
 
   if (prov.ordering) return;

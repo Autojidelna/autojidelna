@@ -1,12 +1,12 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-import 'texts.dart';
+import 'l10n.dart';
 
 // ignore_for_file: type=lint
 
 /// The translations for Czech (`cs`).
-class TextsCs extends Texts {
-  TextsCs([String locale = 'cs']) : super(locale);
+class L10nCs extends L10n {
+  L10nCs([String locale = 'cs']) : super(locale);
 
   @override
   String get about => 'O aplikaci';

@@ -10,7 +10,7 @@ import 'package:background_fetch/background_fetch.dart';
 import 'package:flutter/foundation.dart';
 
 class NotificationService {
-  //final Texts _lang = lookupTexts(Locales.cs);
+  //final L10n _lang = lookupL10n(Locales.cs);
 
   /*void removeNotifications(SafeAccount account) async {
     final AwesomeNotifications notifs = AwesomeNotifications();

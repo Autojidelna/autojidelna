@@ -5,7 +5,7 @@ import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/_routing/app_router.gr.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/show_snack_bar.dart';
 import 'package:autojidelna/src/types/app_context.dart';
 import 'package:autojidelna/src/types/errors.dart';
@@ -19,7 +19,7 @@ class AuthGuard extends AutoRouteGuard {
     BuildContext? ctx = App.getIt<AppContext>().context;
     if (ctx == null) return;
     final UserProvider userProvider = ctx.read<UserProvider>();
-    final Texts lang = ctx.l10n;
+    final L10n lang = ctx.l10n;
 
     if (userProvider.user != null) {
       try {

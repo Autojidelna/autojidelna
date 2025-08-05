@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/buttons/analytics_switches.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_alert_dialog.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_dialog.dart';
@@ -13,7 +13,7 @@ class AnalyticsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Texts lang = context.l10n;
+    final L10n lang = context.l10n;
 
     return Scaffold(
       appBar: AppBar(title: Text(lang.analytics)),
@@ -26,7 +26,7 @@ class AnalyticsPage extends StatelessWidget {
     );
   }
 
-  void moreInfo(BuildContext context, Texts lang) => configuredDialog(
+  void moreInfo(BuildContext context, L10n lang) => configuredDialog(
         context,
         builder: (context) => ConfiguredAlertDialog(
           title: lang.moreInfo,

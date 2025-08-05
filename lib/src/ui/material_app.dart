@@ -6,7 +6,7 @@ import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/_global/riverpod/theme/theme.riverpod.dart';
 import 'package:autojidelna/src/_sentry/sentry.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/_routing/app_router.dart';
 import 'package:autojidelna/src/logic/deep_link_transformer_logic.dart';
 import 'package:autojidelna/src/types/app_context.dart';
@@ -35,7 +35,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   }
 
   void initLocale() {
-    if (Texts.supportedLocales.contains(App.currentLocale)) {
+    if (L10n.supportedLocales.contains(App.currentLocale)) {
       if (_locale == null) unawaited(Hive.box(Boxes.appState).put(HiveKeys.appState.locale, App.currentLocale.languageCode));
       _locale ??= App.currentLocale;
     } else {
@@ -67,8 +67,8 @@ class _MyAppState extends ConsumerState<MyApp> {
       theme: AppThemes.theme(themeNotifier.colorSchemeLight()),
       darkTheme: AppThemes.theme(themeNotifier.colorSchemeDark(), amoledMode: themeProvider.amoledMode),
       locale: _locale,
-      supportedLocales: Texts.supportedLocales,
-      localizationsDelegates: Texts.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
+      localizationsDelegates: L10n.localizationsDelegates,
       routerConfig: appRouter.config(
         includePrefixMatches: true,
         navigatorObservers: () => [SentryNavigatorObserver(), SentryTabObserver()],

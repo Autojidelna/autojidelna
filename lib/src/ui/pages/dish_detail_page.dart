@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/order_dish_button.dart';
 import 'package:autojidelna/src/ui/widgets/section_title.dart';
 import 'package:canteenlib/canteenlib.dart';
@@ -12,7 +12,7 @@ class DishDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Texts lang = context.l10n;
+    final L10n lang = context.l10n;
     JidloKategorizovano courses = dish.kategorizovano!;
 
     return Scaffold(

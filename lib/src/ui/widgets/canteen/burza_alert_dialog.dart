@@ -1,7 +1,7 @@
 import 'package:autojidelna/src/_conf/hive.dart';
 import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_routing/app_router.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/ordering.dart';
 import 'package:autojidelna/src/types/all.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_alert_dialog.dart';
@@ -16,7 +16,7 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish, StavJidla stav) {
     return;
   }
 
-  final Texts lang = context.l10n;
+  final L10n lang = context.l10n;
   ValueNotifier<bool> checkbox = ValueNotifier<bool>(false);
 
   return configuredDialog(

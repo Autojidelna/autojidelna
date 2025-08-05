@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/section_title.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class ConfiguredAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Texts lang = context.l10n;
+    final L10n lang = context.l10n;
     return AlertDialog(
       titlePadding: const EdgeInsets.only(top: 4),
       contentPadding: EdgeInsets.zero,

@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/src/_conf/assets.dart';
 import 'package:autojidelna/src/_conf/notifications.dart';
 import 'package:autojidelna/src/_global/app.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/scroll_view_column.dart';
 import 'package:flutter/foundation.dart';
@@ -19,7 +19,7 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Texts lang = context.l10n;
+    final L10n lang = context.l10n;
 
     String appVersion = lang.versionSubtitle(kDebugMode.toString(), App.packageInfo.version);
 

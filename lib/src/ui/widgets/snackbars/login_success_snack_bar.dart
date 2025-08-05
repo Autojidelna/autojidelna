@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/info_snack_bar.dart';
 import 'package:flutter/material.dart';
 

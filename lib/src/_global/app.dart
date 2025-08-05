@@ -1,10 +1,7 @@
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/_conf/adapters.hive.dart';
 import 'package:autojidelna/src/_conf/hive.dart';
 import 'package:autojidelna/src/_global/providers/remote_config.dart';
-import 'package:autojidelna/src/lang/supported_locales.dart';
-import 'package:autojidelna/src/logic/services/auth_service.dart';
-import 'package:autojidelna/src/logic/services/notification_service.dart';
-import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
 //import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -182,7 +179,7 @@ class App {
   static final remoteConfigProvider = Rmc();
   static final GetIt getIt = GetIt.instance;
 
-  static final defaultLocale = Locales.cs;
+  static final defaultLocale = L10n.supportedLocales.firstWhere((l) => l.toLanguageTag() == const Locale('cs').toLanguageTag());
 
   static const defaultRotations = [
     DeviceOrientation.portraitUp,

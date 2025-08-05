@@ -1,7 +1,7 @@
 import 'package:autojidelna/src/_conf/hive.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/lang/l10n_context_extension.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/types/freezed/user/user.dart';
 import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_alert_dialog.dart';
@@ -22,7 +22,7 @@ class LocationPickerCard extends StatefulWidget {
 class _LocationPickerCardState extends State<LocationPickerCard> {
   @override
   Widget build(BuildContext context) {
-    final Texts lang = context.l10n;
+    final L10n lang = context.l10n;
     return Selector<UserProvider, User?>(
       selector: (_, p1) => p1.user,
       builder: (context, user, ___) {
@@ -49,7 +49,7 @@ class _LocationPickerCardState extends State<LocationPickerCard> {
   }
 
   void pickerDialog(BuildContext context, Map<int, String> locations) {
-    final Texts lang = context.l10n;
+    final L10n lang = context.l10n;
     final CanteenProvider provider = context.read<CanteenProvider>();
     configuredDialog(
       context,
