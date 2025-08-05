@@ -15,18 +15,18 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 class AppInit {
-  static bool _initHiveExecuted = false;
-  static bool _initRemoteConfigExecuted = false;
-  static bool _initLocalizationExecuted = false;
-  static bool _initSecureStorageExecuted = false;
-  static bool _initPlatformExecuted = false;
-  static bool _initRotationExecuted = false;
-  static bool _initCodePushExecuted = false;
+  static bool _hiveExecuted = false;
+  static bool _remoteConfigExecuted = false;
+  static bool _localizationExecuted = false;
+  static bool _secureStorageExecuted = false;
+  static bool _packageInfoExecuted = false;
+  static bool _rotationExecuted = false;
+  static bool _codePushExecuted = false;
   //static bool _initNotificationsExecuted = false;
 
-  static Future<void> initHive() async {
-    assert(_initHiveExecuted == false, 'AppInit.initHive() must be called only once');
-    if (_initHiveExecuted) return;
+  static Future<void> hive() async {
+    assert(_hiveExecuted == false, 'AppInit.hive() must be called only once');
+    if (_hiveExecuted) return;
 
     await Hive.initFlutter();
     Hive.registerAdapter(ThemeModeAdapter());
@@ -37,62 +37,62 @@ class AppInit {
     await Hive.openBox(Boxes.analytics);
     await Hive.openBox(Boxes.notifications);
 
-    _initHiveExecuted = true;
+    _hiveExecuted = true;
   }
 
-  static Future<void> initRemoteConfig() async {
-    assert(_initRemoteConfigExecuted == false, 'AppInit.initRemoteConfig() must be called only once');
-    if (_initRemoteConfigExecuted) return;
+  static Future<void> removeConfig() async {
+    assert(_remoteConfigExecuted == false, 'AppInit.remoteConfig() must be called only once');
+    if (_remoteConfigExecuted) return;
 
     //TODO: make initRemoteConfig work
     //await remoteConfigProvider.init();
     App.initProviderOverrides.add(remoteConfigProvider.overrideWithValue(Rmc()));
 
-    _initRemoteConfigExecuted = true;
+    _remoteConfigExecuted = true;
   }
 
-  static Future<void> initLocalization() async {
-    assert(_initLocalizationExecuted == false, 'AppInit.initLocalization() must be called only once');
-    if (_initLocalizationExecuted) return;
+  static Future<void> localization() async {
+    assert(_localizationExecuted == false, 'AppInit.localization() must be called only once');
+    if (_localizationExecuted) return;
 
     final Box box = Hive.box(Boxes.appState);
     String locale = box.get(HiveKeys.appState.locale, defaultValue: const Locale('cs'));
     box.put(HiveKeys.appState.locale, locale);
 
-    _initLocalizationExecuted = true;
+    _localizationExecuted = true;
   }
 
-  static Future<void> initSecureStorage() async {
-    assert(_initSecureStorageExecuted == false, 'AppInit.initSecureStorage() must be called only once');
-    if (_initSecureStorageExecuted) return;
+  static Future<void> secureStorage() async {
+    assert(_secureStorageExecuted == false, 'AppInit.secureStorage() must be called only once');
+    if (_secureStorageExecuted) return;
 
     AndroidOptions android = const AndroidOptions(encryptedSharedPreferences: true);
     FlutterSecureStorage secureStorage = FlutterSecureStorage(aOptions: android);
 
     App.initProviderOverrides.add(secureStorageProvider.overrideWithValue(secureStorage));
-    _initSecureStorageExecuted = true;
+    _secureStorageExecuted = true;
   }
 
-  static Future<void> initPlatform() async {
-    assert(_initPlatformExecuted == false, 'AppInit.initPlatform() must be called only once');
-    if (_initPlatformExecuted) return;
+  static Future<void> packageInfo() async {
+    assert(_packageInfoExecuted == false, 'AppInit.packageInfo() must be called only once');
+    if (_packageInfoExecuted) return;
 
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     App.initProviderOverrides.add(packageInfoProvider.overrideWithValue(packageInfo));
-    _initPlatformExecuted = true;
+    _packageInfoExecuted = true;
   }
 
-  static Future<void> initRotation() async {
-    assert(_initRotationExecuted == false, 'AppInit.initRemoteConfig() must be called only once');
-    if (_initRotationExecuted) return;
+  static Future<void> rotation() async {
+    assert(_rotationExecuted == false, 'AppInit.rotation() must be called only once');
+    if (_rotationExecuted) return;
 
     SystemChrome.setPreferredOrientations(App.defaultRotations);
-    _initRotationExecuted = true;
+    _rotationExecuted = true;
   }
 
-  static Future<void> initCodePush() async {
-    assert(_initCodePushExecuted == false, 'AppInit.initCodePush() must be called only once');
-    if (_initCodePushExecuted) return;
+  static Future<void> codePush() async {
+    assert(_codePushExecuted == false, 'AppInit.codePush() must be called only once');
+    if (_codePushExecuted) return;
 
     int? currentPatchNumber = await ShorebirdCodePush().currentPatchNumber();
     if (!kDebugMode) {
@@ -107,6 +107,6 @@ class AppInit {
       );
     }
     App.initProviderOverrides.add(currentPatchNumberProvider.overrideWithValue(currentPatchNumber));
-    _initCodePushExecuted = true;
+    _codePushExecuted = true;
   }
 }

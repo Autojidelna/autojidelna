@@ -17,14 +17,14 @@ class App {
 
     // We're using Future.wait to run multiple Futures in parallel
     // These Futures must take less than 200 ms to run
-    await AppInit.initHive();
-    await AppInit.initRemoteConfig();
+    await AppInit.hive();
+    await AppInit.removeConfig();
     await Future.wait([
-      AppInit.initLocalization(),
-      AppInit.initSecureStorage(),
-      AppInit.initPlatform(),
-      AppInit.initRotation(),
-      AppInit.initCodePush(),
+      AppInit.localization(),
+      AppInit.secureStorage(),
+      AppInit.packageInfo(),
+      AppInit.rotation(),
+      AppInit.codePush(),
       // TODO: App.initNotifications(),
     ]);
     // Stop the stopwatch
