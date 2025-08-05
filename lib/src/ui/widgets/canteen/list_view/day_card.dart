@@ -1,5 +1,5 @@
+import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/_global/riverpod/settings/settings.riverpod.dart';
 import 'package:autojidelna/src/logic/get_correct_date_string.dart';
 import 'package:autojidelna/src/logic/string_extension.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/list_view/food_section_list_tile.dart';
@@ -79,7 +79,7 @@ class DayCardheader extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Text(
-        '$day - ${getCorrectDateString(ref.watch(dateFormatOptionsNotifierProvider), date: date)}',
+        '$day - ${getCorrectDateString(ref.watch(dateFormatOptionProvider), date: date)}',
         style: Theme.of(context).textTheme.titleMedium,
       ),
     );

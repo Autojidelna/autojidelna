@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/_global/riverpod/settings/settings.riverpod.dart';
+import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/get_correct_date_string.dart';
 import 'package:autojidelna/src/types/theme.dart';
@@ -15,7 +15,7 @@ class DateFormatPickerListTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
       title: Text(context.l10n.dateFormat),
-      subtitle: Text(getCorrectDateString(ref.watch(dateFormatOptionsNotifierProvider), inSettings: true)),
+      subtitle: Text(getCorrectDateString(ref.watch(dateFormatOptionProvider), inSettings: true)),
       onTap: () => configuredDialog(context, builder: (context) => const DateFormatPicker()),
     );
   }
@@ -26,8 +26,8 @@ class DateFormatPicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final L10n lang = context.l10n;
-    final notifier = ref.read(dateFormatOptionsNotifierProvider.notifier);
-    final provider = ref.watch(dateFormatOptionsNotifierProvider);
+    final notifier = ref.read(dateFormatOptionProvider.notifier);
+    final provider = ref.watch(dateFormatOptionProvider);
 
     return ConfiguredAlertDialog(
       title: lang.dateFormat,

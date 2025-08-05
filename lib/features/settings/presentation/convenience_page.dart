@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:autojidelna/src/_global/riverpod/settings/settings.riverpod.dart';
+import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/scroll_view_column.dart';
 import 'package:autojidelna/src/ui/widgets/section_title.dart';
@@ -14,12 +14,12 @@ class ConveniencePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final L10n lang = context.l10n;
 
-    final skipWeekends = ref.watch(skipWeekendsNotifierProvider);
-    final skipWeekendsNotifier = ref.read(skipWeekendsNotifierProvider.notifier);
-    final bigCalendarMarkers = ref.watch(bigCalendarMarkersNotifierProvider);
-    final bigCalendarMarkersNotifier = ref.read(bigCalendarMarkersNotifierProvider.notifier);
-    final listUi = ref.watch(listUiNotifierProvider);
-    final listUiNotifier = ref.read(listUiNotifierProvider.notifier);
+    final skipWeekends = ref.watch(skipWeekendsProvider);
+    final skipWeekendsNotifier = ref.read(skipWeekendsProvider.notifier);
+    final bigCalendarMarkers = ref.watch(bigCalendarMarkersProvider);
+    final bigCalendarMarkersNotifier = ref.read(bigCalendarMarkersProvider.notifier);
+    final listUi = ref.watch(listUiProvider);
+    final listUiNotifier = ref.read(listUiProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: Text(lang.convenience)),

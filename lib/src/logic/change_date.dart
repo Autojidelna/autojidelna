@@ -1,6 +1,6 @@
+import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
 import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/_global/riverpod/settings/settings.riverpod.dart';
 import 'package:autojidelna/src/logic/datetime_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +11,7 @@ changeDate(BuildContext context, DateTime newDate, {bool animate = true}) async 
 
   context.read<CanteenProvider>().setSelectedDate(newDate);
   final int dayIndex = convertDateTimeToIndex(newDate);
-  bool listUi = ProviderScope.containerOf(context).read(listUiNotifierProvider);
+  bool listUi = ProviderScope.containerOf(context).read(listUiProvider);
 
   if (!animate) {
     listUi ? App.listController.sliverController.jumpToIndex(dayIndex) : App.pageController.jumpToPage(dayIndex);

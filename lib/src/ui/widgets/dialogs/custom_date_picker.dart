@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
 import 'package:autojidelna/src/_conf/dates.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/_global/riverpod/settings/settings.riverpod.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/change_date.dart';
 import 'package:autojidelna/src/logic/ordering.dart';
@@ -93,7 +93,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
   @override
   void initState() {
     super.initState();
-    bigMarkersEnabled = ref.read(bigCalendarMarkersNotifierProvider);
+    bigMarkersEnabled = ref.read(bigCalendarMarkersProvider);
     selectedDate = context.read<CanteenProvider>().selectedDate;
 
     defaultTextStyle = AppThemes.textTheme.titleMedium!;

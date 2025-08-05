@@ -5,12 +5,12 @@ import 'package:autojidelna/src/types/theme.dart';
 import 'package:hive/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'settings.riverpod.g.dart';
+part 'settings_notifiers.g.dart';
 
 final _box = Hive.box(Boxes.settings);
 
 @riverpod
-class ListUiNotifier extends _$ListUiNotifier {
+class ListUi extends _$ListUi {
   @override
   bool build() => _box.get(HiveKeys.settings.listUi, defaultValue: false);
 
@@ -21,7 +21,7 @@ class ListUiNotifier extends _$ListUiNotifier {
 }
 
 @riverpod
-class BigCalendarMarkersNotifier extends _$BigCalendarMarkersNotifier {
+class BigCalendarMarkers extends _$BigCalendarMarkers {
   @override
   bool build() => _box.get(HiveKeys.settings.bigCalendarMarkers, defaultValue: false);
 
@@ -32,7 +32,7 @@ class BigCalendarMarkersNotifier extends _$BigCalendarMarkersNotifier {
 }
 
 @riverpod
-class SkipWeekendsNotifier extends _$SkipWeekendsNotifier {
+class SkipWeekends extends _$SkipWeekends {
   @override
   bool build() => _box.get(HiveKeys.settings.skipWeekends, defaultValue: false);
 
@@ -43,7 +43,7 @@ class SkipWeekendsNotifier extends _$SkipWeekendsNotifier {
 }
 
 @riverpod
-class RelativeTimeStampsNotifier extends _$RelativeTimeStampsNotifier {
+class RelativeTimeStamps extends _$RelativeTimeStamps {
   @override
   bool build() => _box.get(HiveKeys.settings.relTimeStamps, defaultValue: false);
 
@@ -54,7 +54,7 @@ class RelativeTimeStampsNotifier extends _$RelativeTimeStampsNotifier {
 }
 
 @riverpod
-class DateFormatOptionsNotifier extends _$DateFormatOptionsNotifier {
+class DateFormatOption extends _$DateFormatOption {
   @override
   DateFormatOptions build() => _box.get(HiveKeys.settings.dateFormat, defaultValue: DateFormatOptions.dMy);
 
