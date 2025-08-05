@@ -25,7 +25,6 @@ class App {
     await AppInit.removeConfig();
     await Future.wait([
       AppInit.firebaseAnalytics(),
-      AppInit.localization(),
       AppInit.secureStorage(),
       AppInit.packageInfo(),
       AppInit.rotation(),

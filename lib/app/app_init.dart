@@ -1,7 +1,9 @@
-import 'dart:ui';
+import 'dart:async';
 
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/app/app_providers.dart';
+import 'package:autojidelna/core/analytics/analytics_service.dart';
+import 'package:autojidelna/core/crashlytics/crashlytics_service.dart';
 import 'package:autojidelna/shared/config/adapters.hive.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/src/_global/providers/remote_config.dart';
@@ -19,7 +21,6 @@ class AppInit {
   static bool _firebaseCrashlyticsExecuted = false;
   static bool _firebaseAnalyticsExecuted = false;
   static bool _remoteConfigExecuted = false;
-  static bool _localizationExecuted = false;
   static bool _secureStorageExecuted = false;
   static bool _packageInfoExecuted = false;
   static bool _rotationExecuted = false;
@@ -97,17 +98,6 @@ class AppInit {
     App.initProviderOverrides.add(remoteConfigProvider.overrideWithValue(Rmc()));
 
     _remoteConfigExecuted = true;
-  }
-
-  static Future<void> localization() async {
-    assert(_localizationExecuted == false, 'AppInit.localization() must be called only once');
-    if (_localizationExecuted) return;
-
-    final Box box = Hive.box(Boxes.appState);
-    String locale = box.get(HiveKeys.appState.locale, defaultValue: const Locale('cs'));
-    box.put(HiveKeys.appState.locale, locale);
-
-    _localizationExecuted = true;
   }
 
   static Future<void> secureStorage() async {

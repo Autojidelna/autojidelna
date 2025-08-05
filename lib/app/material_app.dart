@@ -1,6 +1,6 @@
 import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/app/routing/app_router.dart';
+import 'package:autojidelna/shared/localization/current_locale.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
 import 'package:autojidelna/shared/theme/domain/theme_state.dart';

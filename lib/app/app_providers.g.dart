@@ -73,20 +73,5 @@ final currentPatchNumberProvider = Provider<int?>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CurrentPatchNumberRef = ProviderRef<int?>;
-String _$currentLocaleHash() => r'120ca239c7c960b2ff84acd3e60a95f4ea0b5127';
-
-/// See also [CurrentLocale].
-@ProviderFor(CurrentLocale)
-final currentLocaleProvider = NotifierProvider<CurrentLocale, Locale>.internal(
-  CurrentLocale.new,
-  name: r'currentLocaleProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentLocaleHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$CurrentLocale = Notifier<Locale>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
