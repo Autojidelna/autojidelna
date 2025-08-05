@@ -53,6 +53,7 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish, StavJidla stav) {
             padding: const EdgeInsets.only(right: 16),
           ),
           onPressed: () {
+            // TODO: replace with Riverpod
             BuildContext? ctx = App.getIt<AppRouter>().navigatorKey.currentContext;
             if (ctx != null) pressed(context, updatedDish, stav);
             Navigator.pop(context);

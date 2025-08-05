@@ -12,7 +12,6 @@ import 'package:autojidelna/src/ui/widgets/login/custom_url_field.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
 
 class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
   const CanteenUrlOnboarding({super.key});
@@ -24,9 +23,9 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
       child: Column(
         children: [
           const CustomUrlField(),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
-            child: DividerWithText(text: 'nebo'),
+            child: DividerWithText(text: context.l10n.or),
           ),
           ConstrainedBox(constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * .4), child: const CanteenUrlPicker()),
         ],
@@ -36,20 +35,22 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
 
   @override
   Future<bool> onNextPage(BuildContext context, {WidgetRef? ref}) async {
-    if (!context.read<LoginProvider>().urlForm.currentState!.validate()) {
-      context.read<LoginProvider>().loggingIn = false;
+    final loginProv = ref!.read(loginProvider);
+
+    if (!loginProv.urlForm.currentState!.validate()) {
+      loginProv.loggingIn = false;
       return false;
     }
-    context.read<LoginProvider>().setErrors(null, false, null);
-    context.read<LoginProvider>().loggingIn = true;
+    loginProv.setErrors(null, false, null);
+    loginProv.loggingIn = true;
     bool value = true;
     try {
-      await context.read<UserProvider>().login(Account(username: '', password: '', url: context.read<LoginProvider>().urlController.text));
+      await ref.read(userProvider).login(Account(username: '', password: '', url: loginProv.urlController.text));
     } catch (e) {
       switch (e) {
         case AuthErrors.wrongUrl:
           if (context.mounted) {
-            context.read<LoginProvider>().setErrors(null, false, context.l10n.errorsWrongUrl);
+            loginProv.setErrors(null, false, context.l10n.errorsWrongUrl);
             value = false;
           }
           break;
@@ -64,9 +65,9 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
       }
     }
     if (context.mounted) {
-      context.read<LoginProvider>().loggingIn = false;
-      context.read<LoginProvider>().usernameController.clear();
-      context.read<LoginProvider>().passwordController.clear();
+      loginProv.loggingIn = false;
+      loginProv.usernameController.clear();
+      loginProv.passwordController.clear();
     }
 
     return value;

@@ -395,5 +395,7 @@
   "notificationNoFood": "Žádná jídla pro tento den",
   "@notificationNoFood": {},
   "nastalaChyba": "Nastala chyba",
-  "@nastalaChyba": {}
+  "@nastalaChyba": {},
+  "or": "nebo",
+  "@or": {}
 }

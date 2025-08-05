@@ -1,5 +1,4 @@
 import 'package:autojidelna/src/_global/app.dart';
-import 'package:autojidelna/src/_routing/app_router.dart';
 import 'package:autojidelna/src/types/app_context.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ class InitApp {
     // These Futures must take less than 200 ms to run
     await App.initHive();
     await App.initRemoteConfig();
-    App.getIt.registerSingleton<AppRouter>(AppRouter());
     App.getIt.registerSingleton<AppContext>(AppContext());
     await Future.wait([
       App.initLocalization(),

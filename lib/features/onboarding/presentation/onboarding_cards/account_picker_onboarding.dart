@@ -9,16 +9,16 @@ import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dar
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
 
-class AccountPickerOnboarding extends StatelessWidget implements OnboardingStep {
+class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
   const AccountPickerOnboarding({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    List<SafeAccount> accounts = context.read<UserProvider>().loggedInAccounts;
+  Widget build(BuildContext context, WidgetRef ref) {
+    List<SafeAccount> accounts = ref.read(userProvider).loggedInAccounts;
+    final loginProv = ref.read(loginProvider);
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => context.read<LoginProvider>().setPickedAccount(accounts.first));
+    WidgetsBinding.instance.addPostFrameCallback((_) => loginProv.setPickedAccount(accounts.first));
 
     return Padding(
       padding: const EdgeInsets.all(8),
@@ -35,8 +35,8 @@ class AccountPickerOnboarding extends StatelessWidget implements OnboardingStep 
                 return ListTile(
                   title: Text(account.username),
                   subtitle: Text(account.url),
-                  trailing: context.watch<LoginProvider>().pickedAccount == account ? const Icon(Icons.check) : null,
-                  onTap: context.read<LoginProvider>().loggingIn ? null : () => context.read<LoginProvider>().setPickedAccount(account),
+                  trailing: ref.watch(loginProvider).pickedAccount == account ? const Icon(Icons.check) : null,
+                  onTap: loginProv.loggingIn ? null : () => loginProv.setPickedAccount(account),
                 );
               },
             ),
@@ -48,12 +48,15 @@ class AccountPickerOnboarding extends StatelessWidget implements OnboardingStep 
 
   @override
   Future<bool> onNextPage(BuildContext context, {WidgetRef? ref}) async {
-    if (context.read<LoginProvider>().pickedAccount == null) return false;
-    context.read<LoginProvider>().loggingIn = true;
+    final loginProv = ref!.read(loginProvider);
+    final userProv = ref.read(userProvider);
+
+    if (loginProv.pickedAccount == null) return false;
+    loginProv.loggingIn = true;
 
     try {
-      await context.read<UserProvider>().changeUser(context.read<LoginProvider>().pickedAccount!);
-      if (context.mounted) await context.read<UserProvider>().loadUser();
+      await userProv.changeUser(loginProv.pickedAccount!);
+      if (context.mounted) await userProv.loadUser();
     } catch (e) {
       if (!context.mounted) return false;
       final Texts lang = context.l10n;
@@ -75,10 +78,10 @@ class AccountPickerOnboarding extends StatelessWidget implements OnboardingStep 
           break;
         default:
       }
-      if (context.mounted) context.read<LoginProvider>().loggingIn = false;
+      if (context.mounted) loginProv.loggingIn = false;
       return false;
     }
-    if (context.mounted) context.read<LoginProvider>().loggingIn = false;
+    if (context.mounted) loginProv.loggingIn = false;
 
     return true;
   }

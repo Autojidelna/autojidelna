@@ -13,19 +13,19 @@ import 'package:autojidelna/src/types/app_context.dart';
 import 'package:autojidelna/src/types/freezed/theme_state/theme_state.dart';
 import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as prov;
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-class MyApp extends StatefulWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  ConsumerState<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends ConsumerState<MyApp> {
   Locale? _locale;
 
   @override
@@ -57,46 +57,40 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final appRouter = App.getIt<AppRouter>();
+    final appRouter = ref.read(appRouterProvider);
+    final ThemeNotifier themeNotifier = ref.read(themeNotifierProvider.notifier);
+    final ThemeState themeProvider = ref.watch(themeNotifierProvider);
 
-    return riverpod.Consumer(
-      builder: (context, ref, child) {
-        final ThemeNotifier themeNotifier = ref.read(themeNotifierProvider.notifier);
-        final ThemeState themeProvider = ref.watch(themeNotifierProvider);
-
-        return MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          themeMode: themeProvider.themeMode,
-          theme: AppThemes.theme(themeNotifier.colorSchemeLight()),
-          darkTheme: AppThemes.theme(themeNotifier.colorSchemeDark(), amoledMode: themeProvider.amoledMode),
-          locale: _locale,
-          supportedLocales: Texts.supportedLocales,
-          localizationsDelegates: Texts.localizationsDelegates,
-          routerConfig: appRouter.config(
-            includePrefixMatches: true,
-            navigatorObservers: () => [SentryNavigatorObserver(), SentryTabObserver()],
-            deepLinkTransformer: (uri) async => deepLinkTransformer(uri),
-            placeholder: (context) {
-              App.getIt<AppContext>().setContext(context);
-              return child!;
-            },
-          ),
-        );
-      },
-      child: const Scaffold(body: Center(child: CircularProgressIndicator())),
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      themeMode: themeProvider.themeMode,
+      theme: AppThemes.theme(themeNotifier.colorSchemeLight()),
+      darkTheme: AppThemes.theme(themeNotifier.colorSchemeDark(), amoledMode: themeProvider.amoledMode),
+      locale: _locale,
+      supportedLocales: Texts.supportedLocales,
+      localizationsDelegates: Texts.localizationsDelegates,
+      routerConfig: appRouter.config(
+        includePrefixMatches: true,
+        navigatorObservers: () => [SentryNavigatorObserver(), SentryTabObserver()],
+        deepLinkTransformer: (uri) async => deepLinkTransformer(uri),
+        placeholder: (context) {
+          App.getIt<AppContext>().setContext(context);
+          return const Scaffold(body: Center(child: CircularProgressIndicator()));
+        },
+      ),
     );
   }
 }
 
-class MyAppWrapper extends riverpod.ConsumerWidget {
+class MyAppWrapper extends ConsumerWidget {
   const MyAppWrapper({super.key});
 
   @override
-  Widget build(BuildContext context, riverpod.WidgetRef ref) => MultiProvider(
+  Widget build(BuildContext context, WidgetRef ref) => prov.MultiProvider(
         providers: [
-          ChangeNotifierProvider.value(value: App.remoteConfigProvider),
-          ChangeNotifierProvider.value(value: ref.watch(userProvider.notifier)),
-          ChangeNotifierProvider.value(value: ref.watch(canteenProvider.notifier)),
+          prov.ChangeNotifierProvider.value(value: App.remoteConfigProvider),
+          prov.ChangeNotifierProvider.value(value: ref.watch(userProvider.notifier)),
+          prov.ChangeNotifierProvider.value(value: ref.watch(canteenProvider.notifier)),
         ],
         child: const MyApp(),
       );
