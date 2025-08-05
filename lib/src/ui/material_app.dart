@@ -6,7 +6,7 @@ import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
 import 'package:autojidelna/shared/theme/domain/theme_state.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/_sentry/sentry.dart';
+import 'package:autojidelna/shared/monitoring/sentry_tab_observer.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/deep_link_transformer_logic.dart';
 import 'package:autojidelna/src/types/app_context.dart';
