@@ -1,4 +1,4 @@
-import 'package:autojidelna/shared/analytics/domain/statistic_type.dart';
+import 'package:autojidelna/core/analytics/statistic_type.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/src/logic/canteenwrapper.dart';
 import 'package:hive/hive.dart';
