@@ -75,10 +75,10 @@ class AboutPage extends StatelessWidget {
                 onPressed: () => unawaited(launchUrl(Uri.parse(Links.repo))),
                 icon: const Icon(OctIcons.mark_github_24),
               ),
-              IconButton(
+              /*IconButton(
                 onPressed: () => unawaited(launchUrl(Uri(scheme: 'mailto', path: Links.email))),
                 icon: const Icon(Icons.email_outlined),
-              ),
+              ),*/
             ],
           ),
         ],
