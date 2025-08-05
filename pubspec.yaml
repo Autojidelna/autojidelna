@@ -41,8 +41,6 @@ dependencies:
   flutter_riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
 
-  sentry_flutter: ^8.7.0
-
   firebase_core: ^3.1.0
   firebase_crashlytics: ^4.0.4
   firebase_analytics: ^11.0.1

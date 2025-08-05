@@ -1,16 +1,15 @@
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/shared/localization/current_locale.dart';
+import 'package:autojidelna/shared/monitoring/firebase_tab_observer.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
 import 'package:autojidelna/shared/theme/domain/theme_state.dart';
-import 'package:autojidelna/shared/monitoring/sentry_tab_observer.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/deep_link_transformer_logic.dart';
 import 'package:autojidelna/src/types/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
@@ -31,7 +30,7 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: L10n.localizationsDelegates,
       routerConfig: appRouter.config(
         includePrefixMatches: true,
-        navigatorObservers: () => [SentryNavigatorObserver(), SentryTabObserver()],
+        navigatorObservers: () => [FirebaseTabObserver()],
         deepLinkTransformer: (uri) async => deepLinkTransformer(uri),
         placeholder: (context) {
           App.getIt<AppContext>().setContext(context);

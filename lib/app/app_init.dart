@@ -13,7 +13,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 class AppInit {
@@ -53,22 +52,14 @@ class AppInit {
     box.put(HiveKeys.analytics.sendCrashLogs, sendCrashLogs);
 
     // We don't want to send crash reports while in development. Web is not supported yet by Crashlytics.
-    if (!kDebugMode && !kProfileMode && !kIsWeb && sendCrashLogs) {
+    if (!kIsWeb && kReleaseMode && sendCrashLogs) {
       // Flutter error handling
-      Function(FlutterErrorDetails)? originalOnError = FlutterError.onError;
-
       FlutterError.onError = (errorDetails) async {
-        // Ensuring We don't mess with Sentry:
-        originalOnError?.call(errorDetails);
-
         FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
       };
-      Function(Object, StackTrace)? onAsyncError = PlatformDispatcher.instance.onError;
+
       // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
       PlatformDispatcher.instance.onError = (error, stack) {
-        // Ensuring We don't mess with Sentry:
-        onAsyncError?.call(error, stack);
-
         unawaited(FirebaseCrashlytics.instance.recordError(error, stack, fatal: true));
         return true;
       };
@@ -133,12 +124,7 @@ class AppInit {
     if (_codePushExecuted) return;
 
     int? currentPatchNumber = await ShorebirdCodePush().currentPatchNumber();
-    if (!kDebugMode) {
-      Sentry.configureScope((scope) async {
-        scope.setTag('shorebird_patch_number', '$currentPatchNumber');
-      });
-    }
-    if (!kDebugMode && !kProfileMode && !kIsWeb) {
+    if (!kIsWeb && kReleaseMode) {
       FirebaseCrashlytics.instance.setCustomKey(
         'shorebird_patch_number',
         '$currentPatchNumber',
