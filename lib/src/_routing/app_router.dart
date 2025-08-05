@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/features/onboarding/application/onboarding_guard.dart';
 import 'package:autojidelna/src/_routing/app_router.gr.dart';
 import 'package:autojidelna/src/_routing/guards/auth_guard.dart';
-import 'package:autojidelna/src/_routing/guards/onboarding_guard.dart';
 import 'package:flutter/material.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
@@ -26,10 +26,8 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: MorePage.page, path: 'more'),
       ],
     ),
-    AutoRoute(page: OnboardingPage.page, path: '/onboarding'),
-    AutoRoute(page: AccountPickerPage.page, path: '/accounts'),
+    AutoRoute(page: OnboardingPage.page, path: '/welcome'),
     AutoRoute(page: DishDetailPage.page, path: '/detail'),
-    AutoRoute(page: LoginPage.page, path: '/login'),
     AutoRoute(page: AccountPage.page, path: '/account'),
     AutoRoute(page: StatisticsPage.page, path: '/statistics'),
     AutoRoute(page: SettingsPage.page, path: '/settings'),

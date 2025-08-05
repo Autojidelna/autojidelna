@@ -1,3 +1,4 @@
+import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/src/_conf/errors.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
@@ -8,9 +9,9 @@ import 'package:autojidelna/src/types/freezed/account/account.dart';
 import 'package:autojidelna/src/ui/widgets/divider_with_text.dart';
 import 'package:autojidelna/src/ui/widgets/login/canteen_url_picker.dart';
 import 'package:autojidelna/src/ui/widgets/login/custom_url_field.dart';
-import 'package:autojidelna/src/types/onboarding_step.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
 
 class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
@@ -34,7 +35,7 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
   }
 
   @override
-  Future<bool> onNextPage(BuildContext context) async {
+  Future<bool> onNextPage(BuildContext context, {WidgetRef? ref}) async {
     if (!context.read<LoginProvider>().urlForm.currentState!.validate()) {
       context.read<LoginProvider>().loggingIn = false;
       return false;

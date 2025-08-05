@@ -1,11 +1,13 @@
 // TODO: notifications
 
+import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
+import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 import 'package:autojidelna/src/lang/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/buttons/analytics_switches.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
-import 'package:autojidelna/src/types/onboarding_step.dart';
 //import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PermissionsOnboarding extends StatefulWidget implements OnboardingStep {
   const PermissionsOnboarding({super.key});
@@ -14,10 +16,10 @@ class PermissionsOnboarding extends StatefulWidget implements OnboardingStep {
   State<PermissionsOnboarding> createState() => _PermissionsOnboardingState();
 
   @override
-  Future<bool> onNextPage(BuildContext context) async => true;
+  Future<bool> onNextPage(BuildContext context, {WidgetRef? ref}) async => true;
 
   @override
-  String buttonText(BuildContext context) => context.l10n.next;
+  String buttonText(BuildContext context) => StepFlowController.instance.isLastPage ? context.l10n.getStarted : context.l10n.next;
 
   @override
   String description(BuildContext context) => context.l10n.onboardingSubtitle;

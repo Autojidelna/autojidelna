@@ -1,9 +1,10 @@
+import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/src/lang/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
-import 'package:autojidelna/src/types/onboarding_step.dart';
 import 'package:autojidelna/src/ui/widgets/theme_mode_picker.dart';
 import 'package:autojidelna/src/ui/widgets/theme_style_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ThemeOnboarding extends StatelessWidget implements OnboardingStep {
   const ThemeOnboarding({super.key});
@@ -25,7 +26,7 @@ class ThemeOnboarding extends StatelessWidget implements OnboardingStep {
   }
 
   @override
-  Future<bool> onNextPage(BuildContext context) async => true;
+  Future<bool> onNextPage(BuildContext context, {WidgetRef? ref}) async => true;
 
   @override
   String buttonText(BuildContext context) => context.l10n.next;

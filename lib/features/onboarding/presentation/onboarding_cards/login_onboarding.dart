@@ -1,8 +1,9 @@
+import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
 import 'package:autojidelna/src/lang/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
-import 'package:autojidelna/src/types/onboarding_step.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' show WidgetRef;
 import 'package:provider/provider.dart';
 
 class LoginOnboarding extends StatelessWidget implements OnboardingStep {
@@ -74,7 +75,7 @@ class LoginOnboarding extends StatelessWidget implements OnboardingStep {
   }
 
   @override
-  Future<bool> onNextPage(BuildContext context) async => await context.read<LoginProvider>().login(context);
+  Future<bool> onNextPage(BuildContext context, {WidgetRef? ref}) async => await context.read<LoginProvider>().login(context);
 
   @override
   String buttonText(BuildContext context) => context.l10n.login;

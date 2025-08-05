@@ -1,3 +1,4 @@
+import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/src/_conf/errors.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
@@ -5,9 +6,9 @@ import 'package:autojidelna/src/lang/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/show_snack_bar.dart';
 import 'package:autojidelna/src/types/errors.dart';
 import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
-import 'package:autojidelna/src/types/onboarding_step.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
 
 class AccountPickerOnboarding extends StatelessWidget implements OnboardingStep {
@@ -46,7 +47,7 @@ class AccountPickerOnboarding extends StatelessWidget implements OnboardingStep 
   }
 
   @override
-  Future<bool> onNextPage(BuildContext context) async {
+  Future<bool> onNextPage(BuildContext context, {WidgetRef? ref}) async {
     if (context.read<LoginProvider>().pickedAccount == null) return false;
     context.read<LoginProvider>().loggingIn = true;
 

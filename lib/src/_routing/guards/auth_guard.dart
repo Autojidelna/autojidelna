@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 import 'package:autojidelna/src/_conf/errors.dart';
 import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
@@ -57,10 +58,12 @@ class AuthGuard extends AutoRouteGuard {
       }
       if (ctx.mounted) await userProvider.updateLoggedSafeAccounts();
       if (userProvider.loggedInAccounts.isNotEmpty) {
-        resolver.redirect(AccountPickerPage(onCompletedCallback: (_) => onNavigation(resolver, router)), replace: true);
+        StepFlowController.instance.setAccountPickerFlow();
+        resolver.redirect(OnboardingPage(onCompletedCallback: (_) => onNavigation(resolver, router)), replace: true);
         return;
       }
-      resolver.redirect(LoginPage(onCompletedCallback: resolver.next), replace: true);
+      StepFlowController.instance.setLoginFlow();
+      resolver.redirect(OnboardingPage(onCompletedCallback: resolver.next), replace: true);
     }
   }
 }
