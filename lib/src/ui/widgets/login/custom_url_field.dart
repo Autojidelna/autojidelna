@@ -1,6 +1,5 @@
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +30,7 @@ class _CustomUrlFieldState extends State<CustomUrlField> {
             border: InputBorder.none,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             labelText: lang.loginUrlFieldLabel,
-            errorStyle: AppThemes.textTheme.bodySmall!.copyWith(color: theme.colorScheme.error, height: .04),
+            errorStyle: Theme.of(context).textTheme.bodySmall!.copyWith(color: theme.colorScheme.error, height: .04),
             errorText: provider.urlError,
             suffixIcon: const Icon(Icons.edit_rounded),
           ),

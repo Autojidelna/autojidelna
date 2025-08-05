@@ -7,8 +7,6 @@ import 'package:autojidelna/src/logic/change_date.dart';
 import 'package:autojidelna/src/logic/ordering.dart';
 import 'package:autojidelna/src/logic/string_extension.dart';
 import 'package:autojidelna/src/types/all.dart';
-import 'package:autojidelna/src/types/theme.dart';
-import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_dialog.dart';
 import 'package:canteenlib/canteenlib.dart';
@@ -96,7 +94,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
     bigMarkersEnabled = ref.read(bigCalendarMarkersProvider);
     selectedDate = context.read<CanteenProvider>().selectedDate;
 
-    defaultTextStyle = AppThemes.textTheme.titleMedium!;
+    defaultTextStyle = Theme.of(context).textTheme.titleMedium!;
     defaultDecoration = const BoxDecoration(shape: BoxShape.circle);
 
     appFocusedDate = selectedDate;
@@ -125,7 +123,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
               formatButtonVisible: false,
               leftChevronVisible: visibleMonth != Dates.minimalDate.month,
               rightChevronVisible: visibleMonth != Dates.maximalDate.month,
-              titleTextStyle: AppThemes.textTheme.headlineSmall!,
+              titleTextStyle: Theme.of(context).textTheme.headlineSmall!,
               decoration: BoxDecoration(color: colorScheme.surfaceContainerHighest.withAlpha(16)),
             ),
             calendarStyle: CalendarStyle(
@@ -175,14 +173,14 @@ Center _headerTitle(String locale, DateTime day, BuildContext context) {
   return Center(
     child: Text(
       DateFormat(DateFormat.YEAR_MONTH, locale).format(day).capitalize(),
-      style: AppThemes.textTheme.headlineSmall!,
+      style: Theme.of(context).textTheme.headlineSmall!,
     ),
   );
 }
 
 Center _cellTemplate(BuildContext context, DateTime date, {CellState? state}) {
   final ColorScheme colorScheme = Theme.of(context).colorScheme;
-  final TextStyle textStyle = AppThemes.textTheme.titleMedium!;
+  final TextStyle textStyle = Theme.of(context).textTheme.titleMedium!;
   double size = 40;
   Color color = Colors.transparent;
   Color textColor = colorScheme.onInverseSurface;
@@ -258,4 +256,12 @@ Row _actionButtons(BuildContext context, void Function() onConfirm) {
       const SizedBox(width: 10),
     ],
   );
+}
+
+/// Used by custom date picker to decide how to render a cell
+enum CellState {
+  today,
+  selected,
+  ordered,
+  available,
 }

@@ -5,7 +5,6 @@ import 'package:autojidelna/features/onboarding/application/step_flow_controller
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +82,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                 child: Icon(Icons.rocket_launch_outlined, size: 55, color: theme.colorScheme.primary),
               ),
               ListTile(
-                title: Text(lang.welcome, style: AppThemes.textTheme.displaySmall),
+                title: Text(lang.welcome, style: theme.textTheme.displaySmall),
                 subtitle: Text(_stepFlow.currentPage.description(context), style: theme.textTheme.titleMedium),
               ),
               const CustomDivider(height: 32),

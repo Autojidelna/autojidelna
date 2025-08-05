@@ -1,9 +1,9 @@
+import 'package:autojidelna/app/theme/app_themes.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/types/freezed/user/user.dart';
-import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_alert_dialog.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_dialog.dart';
 import 'package:autojidelna/src/ui/widgets/lined_card.dart';

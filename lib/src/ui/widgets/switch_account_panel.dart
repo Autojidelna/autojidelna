@@ -4,7 +4,6 @@ import 'package:autojidelna/features/onboarding/application/step_flow_controller
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
-import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_dialog.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/logout_dialog.dart';
@@ -66,7 +65,7 @@ class SwitchAccountPanel extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(safeAccount.username, style: currentAccount ? AppThemes.textTheme.titleMedium : null),
+          Text(safeAccount.username, style: currentAccount ? Theme.of(context).textTheme.titleMedium : null),
           if (currentAccount) const Icon(Icons.check, size: 30),
         ],
       ),

@@ -1,15 +1,15 @@
 import 'dart:async';
 
+import 'package:autojidelna/app/theme/app_themes.dart';
+import 'package:autojidelna/app/theme/domain/color_style.dart';
+import 'package:autojidelna/app/theme/domain/theme_state.dart';
 import 'package:autojidelna/shared/config/hive.dart';
-import 'package:autojidelna/src/types/freezed/theme_state/theme_state.dart';
-import 'package:autojidelna/src/types/theme.dart';
-import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-part 'theme.riverpod.g.dart';
+part 'theme_notifier.g.dart';
 
 @riverpod
 class ThemeNotifier extends _$ThemeNotifier {

@@ -1,7 +1,7 @@
-import 'package:autojidelna/src/_global/riverpod/theme/theme.riverpod.dart';
-import 'package:autojidelna/src/types/freezed/theme_state/theme_state.dart';
-import 'package:autojidelna/src/types/theme.dart';
-import 'package:autojidelna/src/ui/theme/app_themes.dart';
+import 'package:autojidelna/app/theme/app_themes.dart';
+import 'package:autojidelna/app/theme/domain/color_style.dart';
+import 'package:autojidelna/app/theme/domain/theme_state.dart';
+import 'package:autojidelna/app/theme/application/theme_notifier.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

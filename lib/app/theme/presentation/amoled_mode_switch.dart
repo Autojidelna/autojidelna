@@ -1,6 +1,6 @@
-import 'package:autojidelna/src/_global/riverpod/theme/theme.riverpod.dart';
+import 'package:autojidelna/app/theme/application/theme_notifier.dart';
+import 'package:autojidelna/app/theme/domain/theme_state.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/types/freezed/theme_state/theme_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

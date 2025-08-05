@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i14;
+import 'package:autojidelna/dev/presentation/debug_page.dart' as _i6;
 import 'package:autojidelna/features/about/about_page.dart' as _i1;
 import 'package:autojidelna/features/onboarding/presentation/onboarding_page.dart'
     as _i10;
@@ -20,7 +21,6 @@ import 'package:autojidelna/features/settings/presentation/convenience_page.dart
     as _i5;
 import 'package:autojidelna/features/settings/presentation/settings_page.dart'
     as _i12;
-import 'package:autojidelna/src/ui/pages/dev/debug_page.dart' as _i6;
 import 'package:autojidelna/src/ui/pages/dish_detail_page.dart' as _i7;
 import 'package:autojidelna/src/ui/pages/menu_page.dart' as _i8;
 import 'package:autojidelna/src/ui/pages/more/account_page.dart' as _i2;

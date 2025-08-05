@@ -1,4 +1,3 @@
-import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +8,7 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -18,13 +18,13 @@ class SectionTitle extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: AppThemes.textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.primary)),
+              Text(title, style: theme.textTheme.titleMedium!.copyWith(color: theme.colorScheme.primary)),
               if (moreInfo != null)
                 GestureDetector(
                   onTap: moreInfo,
                   child: Icon(
                     Icons.info_outline_rounded,
-                    size: AppThemes.textTheme.titleMedium!.fontSize! + 7,
+                    size: theme.textTheme.titleMedium!.fontSize! + 7,
                     color: Theme.of(context).dividerColor,
                   ),
                 ),

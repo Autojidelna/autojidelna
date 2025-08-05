@@ -1,6 +1,5 @@
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:autojidelna/src/ui/widgets/configured_bottom_sheet.dart';
 import 'package:autojidelna/src/ui/widgets/lined_card.dart';
 import 'package:autojidelna/src/ui/widgets/switch_account_panel.dart';
@@ -31,7 +30,7 @@ class AccountOverviewCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(lang.credit(user?.kredit ?? 0), style: AppThemes.textTheme.titleMedium),
+                  Text(lang.credit(user?.kredit ?? 0), style: Theme.of(context).textTheme.titleMedium),
                   if (user != null && user.kategorie != null) Text(user.kategorie!),
                 ],
               ),

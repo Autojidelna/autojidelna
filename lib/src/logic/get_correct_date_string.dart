@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/types/theme.dart';
+import 'package:autojidelna/shared/config/date_format_options.dart';
 import 'package:intl/intl.dart';
 
 /// Returns correctly formated date string
