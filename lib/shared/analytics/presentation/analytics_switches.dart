@@ -1,5 +1,5 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/shared/analytics/application/analytics.riverpod.dart';
+import 'package:autojidelna/shared/analytics/application/analytics_notifiers.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,10 +11,10 @@ class AnalyticsSwitches extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final L10n lang = context.l10n;
 
-    final allowAnalytics = ref.watch(allowAnalyticsNotifierProvider);
-    final allowAnalyticsNotifier = ref.read(allowAnalyticsNotifierProvider.notifier);
-    final sendCrashLogs = ref.watch(sendCrashLogsNotifierProvider);
-    final sendCrashLogsNotifier = ref.read(sendCrashLogsNotifierProvider.notifier);
+    final allowAnalytics = ref.watch(allowAnalyticsProvider);
+    final allowAnalyticsNotifier = ref.read(allowAnalyticsProvider.notifier);
+    final sendCrashLogs = ref.watch(sendCrashLogsProvider);
+    final sendCrashLogsNotifier = ref.read(sendCrashLogsProvider.notifier);
 
     return Column(
       mainAxisSize: MainAxisSize.min,

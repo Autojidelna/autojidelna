@@ -52,32 +52,6 @@ void main() async {
 void runMyApp() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  // We don't want to send crash reports while in development. Web is not supported yet by Crashlytics.
-  if (!kDebugMode && !kProfileMode && !kIsWeb && !kReleaseMode) {
-    // TODO: Enable Crashlytics if data collection is allowed
-    // Flutter error handling
-
-    Function(FlutterErrorDetails)? originalOnError = FlutterError.onError;
-
-    FlutterError.onError = (errorDetails) {
-      // Ensuring We don't mess with Sentry:
-      originalOnError?.call(errorDetails);
-
-      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-    };
-    Function(Object, StackTrace)? onAsyncError = PlatformDispatcher.instance.onError;
-    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
-    PlatformDispatcher.instance.onError = (error, stack) {
-      // Ensuring We don't mess with Sentry:
-      onAsyncError?.call(error, stack);
-
-      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-      return true;
-    };
-  }
-
   await App.init();
   await MigrationManager.runMigrations();
 

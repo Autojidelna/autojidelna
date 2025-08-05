@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/shared/config/analytics.dart';
 import 'package:autojidelna/shared/config/secure_storage.dart';
-import 'package:autojidelna/src/logic/canteenwrapper.dart';
 import 'package:autojidelna/src/logic/url.dart';
 import 'package:autojidelna/src/types/errors.dart';
 import 'package:autojidelna/src/types/freezed/account/account.dart';
@@ -151,7 +149,7 @@ class AuthService {
     //NotificationService().removeNotifications(SafeAccount.fromAccount(account));
 
     // TODO: move to analytics service or something
-    if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logout);
+    // if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logout);
   }
 
   // Logs out every logged in user
@@ -165,7 +163,7 @@ class AuthService {
     await _saveDataToStorage(LoggedAccounts());
 
     // TODO: move to analytics service or something
-    if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logoutEveryone);
+    // if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logoutEveryone);
   }
 
   /// Checks for duplicates in logged accounts.

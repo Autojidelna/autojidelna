@@ -16,6 +16,8 @@ import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 class AppInit {
   static bool _hiveExecuted = false;
+  static bool _firebaseCrashlyticsExecuted = false;
+  static bool _firebaseAnalyticsExecuted = false;
   static bool _remoteConfigExecuted = false;
   static bool _localizationExecuted = false;
   static bool _secureStorageExecuted = false;
@@ -38,6 +40,52 @@ class AppInit {
     await Hive.openBox(Boxes.notifications);
 
     _hiveExecuted = true;
+  }
+
+  static Future<void> firebaseCrashlytics() async {
+    assert(_firebaseCrashlyticsExecuted == false, 'AppInit.firebaseCrashlytics() must be called only once');
+    if (_firebaseCrashlyticsExecuted) return;
+
+    final box = Hive.box(Boxes.analytics);
+    bool sendCrashLogs = box.get(HiveKeys.analytics.sendCrashLogs, defaultValue: false);
+    CrashlyticsService.enabled(sendCrashLogs);
+    box.put(HiveKeys.analytics.sendCrashLogs, sendCrashLogs);
+
+    // We don't want to send crash reports while in development. Web is not supported yet by Crashlytics.
+    if (!kDebugMode && !kProfileMode && !kIsWeb && sendCrashLogs) {
+      // Flutter error handling
+      Function(FlutterErrorDetails)? originalOnError = FlutterError.onError;
+
+      FlutterError.onError = (errorDetails) async {
+        // Ensuring We don't mess with Sentry:
+        originalOnError?.call(errorDetails);
+
+        FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+      };
+      Function(Object, StackTrace)? onAsyncError = PlatformDispatcher.instance.onError;
+      // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+      PlatformDispatcher.instance.onError = (error, stack) {
+        // Ensuring We don't mess with Sentry:
+        onAsyncError?.call(error, stack);
+
+        unawaited(FirebaseCrashlytics.instance.recordError(error, stack, fatal: true));
+        return true;
+      };
+    }
+
+    _firebaseCrashlyticsExecuted = true;
+  }
+
+  static Future<void> firebaseAnalytics() async {
+    assert(_firebaseAnalyticsExecuted == false, 'AppInit.firebaseCrashlytics() must be called only once');
+    if (_firebaseAnalyticsExecuted) return;
+
+    final box = Hive.box(Boxes.analytics);
+    bool allowAnalytics = box.get(HiveKeys.analytics.allowAnalytics, defaultValue: false);
+    AnalyticsService.enabled(allowAnalytics);
+    box.put(HiveKeys.analytics.allowAnalytics, allowAnalytics);
+
+    _firebaseAnalyticsExecuted = true;
   }
 
   static Future<void> removeConfig() async {
