@@ -32,14 +32,14 @@ import 'package:flutter/material.dart' as _i15;
 
 /// generated route for
 /// [_i1.AboutPage]
-class AboutPage extends _i14.PageRouteInfo<void> {
-  const AboutPage({List<_i14.PageRouteInfo>? children})
+class AboutRoute extends _i14.PageRouteInfo<void> {
+  const AboutRoute({List<_i14.PageRouteInfo>? children})
       : super(
-          AboutPage.name,
+          AboutRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'AboutPage';
+  static const String name = 'AboutRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,
@@ -51,14 +51,14 @@ class AboutPage extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.AccountPage]
-class AccountPage extends _i14.PageRouteInfo<void> {
-  const AccountPage({List<_i14.PageRouteInfo>? children})
+class AccountRoute extends _i14.PageRouteInfo<void> {
+  const AccountRoute({List<_i14.PageRouteInfo>? children})
       : super(
-          AccountPage.name,
+          AccountRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'AccountPage';
+  static const String name = 'AccountRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,
@@ -70,14 +70,14 @@ class AccountPage extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.AnalyticsPage]
-class AnalyticsPage extends _i14.PageRouteInfo<void> {
-  const AnalyticsPage({List<_i14.PageRouteInfo>? children})
+class AnalyticsRoute extends _i14.PageRouteInfo<void> {
+  const AnalyticsRoute({List<_i14.PageRouteInfo>? children})
       : super(
-          AnalyticsPage.name,
+          AnalyticsRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'AnalyticsPage';
+  static const String name = 'AnalyticsRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,
@@ -89,14 +89,14 @@ class AnalyticsPage extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.AppearancePage]
-class AppearancePage extends _i14.PageRouteInfo<void> {
-  const AppearancePage({List<_i14.PageRouteInfo>? children})
+class AppearanceRoute extends _i14.PageRouteInfo<void> {
+  const AppearanceRoute({List<_i14.PageRouteInfo>? children})
       : super(
-          AppearancePage.name,
+          AppearanceRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'AppearancePage';
+  static const String name = 'AppearanceRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,
@@ -108,14 +108,14 @@ class AppearancePage extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.ConveniencePage]
-class ConveniencePage extends _i14.PageRouteInfo<void> {
-  const ConveniencePage({List<_i14.PageRouteInfo>? children})
+class ConvenienceRoute extends _i14.PageRouteInfo<void> {
+  const ConvenienceRoute({List<_i14.PageRouteInfo>? children})
       : super(
-          ConveniencePage.name,
+          ConvenienceRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'ConveniencePage';
+  static const String name = 'ConvenienceRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,
@@ -127,14 +127,14 @@ class ConveniencePage extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.DebugPage]
-class DebugPage extends _i14.PageRouteInfo<void> {
-  const DebugPage({List<_i14.PageRouteInfo>? children})
+class DebugRoute extends _i14.PageRouteInfo<void> {
+  const DebugRoute({List<_i14.PageRouteInfo>? children})
       : super(
-          DebugPage.name,
+          DebugRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'DebugPage';
+  static const String name = 'DebugRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,
@@ -146,26 +146,26 @@ class DebugPage extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.DishDetailPage]
-class DishDetailPage extends _i14.PageRouteInfo<DishDetailPageArgs> {
-  DishDetailPage({
+class DishDetailRoute extends _i14.PageRouteInfo<DishDetailRouteArgs> {
+  DishDetailRoute({
     _i15.Key? key,
     required _i16.Jidlo dish,
     List<_i14.PageRouteInfo>? children,
   }) : super(
-          DishDetailPage.name,
-          args: DishDetailPageArgs(
+          DishDetailRoute.name,
+          args: DishDetailRouteArgs(
             key: key,
             dish: dish,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'DishDetailPage';
+  static const String name = 'DishDetailRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<DishDetailPageArgs>();
+      final args = data.argsAs<DishDetailRouteArgs>();
       return _i7.DishDetailPage(
         key: args.key,
         dish: args.dish,
@@ -174,8 +174,8 @@ class DishDetailPage extends _i14.PageRouteInfo<DishDetailPageArgs> {
   );
 }
 
-class DishDetailPageArgs {
-  const DishDetailPageArgs({
+class DishDetailRouteArgs {
+  const DishDetailRouteArgs({
     this.key,
     required this.dish,
   });
@@ -186,20 +186,20 @@ class DishDetailPageArgs {
 
   @override
   String toString() {
-    return 'DishDetailPageArgs{key: $key, dish: $dish}';
+    return 'DishDetailRouteArgs{key: $key, dish: $dish}';
   }
 }
 
 /// generated route for
 /// [_i8.MenuPage]
-class MenuPage extends _i14.PageRouteInfo<void> {
-  const MenuPage({List<_i14.PageRouteInfo>? children})
+class MenuRoute extends _i14.PageRouteInfo<void> {
+  const MenuRoute({List<_i14.PageRouteInfo>? children})
       : super(
-          MenuPage.name,
+          MenuRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'MenuPage';
+  static const String name = 'MenuRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,
@@ -211,14 +211,14 @@ class MenuPage extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.MorePage]
-class MorePage extends _i14.PageRouteInfo<void> {
-  const MorePage({List<_i14.PageRouteInfo>? children})
+class MoreRoute extends _i14.PageRouteInfo<void> {
+  const MoreRoute({List<_i14.PageRouteInfo>? children})
       : super(
-          MorePage.name,
+          MoreRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'MorePage';
+  static const String name = 'MoreRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,
@@ -230,27 +230,27 @@ class MorePage extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.OnboardingPage]
-class OnboardingPage extends _i14.PageRouteInfo<OnboardingPageArgs> {
-  OnboardingPage({
+class OnboardingRoute extends _i14.PageRouteInfo<OnboardingRouteArgs> {
+  OnboardingRoute({
     _i15.Key? key,
     void Function(bool)? onCompletedCallback,
     List<_i14.PageRouteInfo>? children,
   }) : super(
-          OnboardingPage.name,
-          args: OnboardingPageArgs(
+          OnboardingRoute.name,
+          args: OnboardingRouteArgs(
             key: key,
             onCompletedCallback: onCompletedCallback,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'OnboardingPage';
+  static const String name = 'OnboardingRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<OnboardingPageArgs>(
-          orElse: () => const OnboardingPageArgs());
+      final args = data.argsAs<OnboardingRouteArgs>(
+          orElse: () => const OnboardingRouteArgs());
       return _i10.OnboardingPage(
         key: args.key,
         onCompletedCallback: args.onCompletedCallback,
@@ -259,8 +259,8 @@ class OnboardingPage extends _i14.PageRouteInfo<OnboardingPageArgs> {
   );
 }
 
-class OnboardingPageArgs {
-  const OnboardingPageArgs({
+class OnboardingRouteArgs {
+  const OnboardingRouteArgs({
     this.key,
     this.onCompletedCallback,
   });
@@ -271,20 +271,20 @@ class OnboardingPageArgs {
 
   @override
   String toString() {
-    return 'OnboardingPageArgs{key: $key, onCompletedCallback: $onCompletedCallback}';
+    return 'OnboardingRouteArgs{key: $key, onCompletedCallback: $onCompletedCallback}';
   }
 }
 
 /// generated route for
 /// [_i11.RouterPage]
-class RouterPage extends _i14.PageRouteInfo<void> {
-  const RouterPage({List<_i14.PageRouteInfo>? children})
+class RouterRoute extends _i14.PageRouteInfo<void> {
+  const RouterRoute({List<_i14.PageRouteInfo>? children})
       : super(
-          RouterPage.name,
+          RouterRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'RouterPage';
+  static const String name = 'RouterRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,
@@ -296,14 +296,14 @@ class RouterPage extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.SettingsPage]
-class SettingsPage extends _i14.PageRouteInfo<void> {
-  const SettingsPage({List<_i14.PageRouteInfo>? children})
+class SettingsRoute extends _i14.PageRouteInfo<void> {
+  const SettingsRoute({List<_i14.PageRouteInfo>? children})
       : super(
-          SettingsPage.name,
+          SettingsRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'SettingsPage';
+  static const String name = 'SettingsRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,
@@ -315,14 +315,14 @@ class SettingsPage extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i13.StatisticsPage]
-class StatisticsPage extends _i14.PageRouteInfo<void> {
-  const StatisticsPage({List<_i14.PageRouteInfo>? children})
+class StatisticsRoute extends _i14.PageRouteInfo<void> {
+  const StatisticsRoute({List<_i14.PageRouteInfo>? children})
       : super(
-          StatisticsPage.name,
+          StatisticsRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'StatisticsPage';
+  static const String name = 'StatisticsRoute';
 
   static _i14.PageInfo page = _i14.PageInfo(
     name,

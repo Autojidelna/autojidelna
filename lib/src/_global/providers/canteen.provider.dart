@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
-import 'package:autojidelna/src/_routing/app_router.gr.dart';
 import 'package:autojidelna/src/logic/datetime_wrapper.dart';
 import 'package:autojidelna/src/logic/services/canteen_service.dart';
 import 'package:autojidelna/src/types/app_context.dart';
@@ -205,7 +205,7 @@ class CanteenProvider with ChangeNotifier {
           await App.getIt<AppContext>().context!.read<UserProvider>().loadUser();
         } catch (e) {
           await App.getIt<AppContext>().context!.read<UserProvider>().unloadUser();
-          App.getIt<AppContext>().context!.router.replaceAll([const RouterPage()], updateExistingRoutes: false);
+          App.getIt<AppContext>().context!.router.replaceAll([const RouterRoute()], updateExistingRoutes: false);
         }
         break;
       case CanteenErrors.noInternetConnection:

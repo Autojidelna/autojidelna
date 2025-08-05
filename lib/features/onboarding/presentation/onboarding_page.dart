@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/account_picker_onboarding.dart';
 import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
-import 'package:autojidelna/src/_routing/app_router.gr.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/theme/app_themes.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
@@ -36,7 +36,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     if (!mounted) return;
     _stepFlow.reset();
     if (widget.onCompletedCallback == null) {
-      context.router.replaceAll([const RouterPage()]);
+      context.router.replaceAll([const RouterRoute()]);
       return;
     }
     widget.onCompletedCallback!(true);

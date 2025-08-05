@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:autojidelna/src/_routing/app_router.gr.dart';
+import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/buttons/about_app_button_widget.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
@@ -28,27 +28,27 @@ class SettingsPage extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.palette_outlined),
             title: Text(lang.appearance),
-            onTap: () async => router.navigate(const AppearancePage()),
+            onTap: () async => router.navigate(const AppearanceRoute()),
           ),
           ListTile(
             leading: const Icon(Icons.tune_outlined),
             title: Text(lang.convenience),
-            onTap: () async => router.navigate(const ConveniencePage()),
+            onTap: () async => router.navigate(const ConvenienceRoute()),
           ),
           /*ListTile(
             leading: const Icon(Icons.edit_notifications_outlined),
             title: Text(lang.notifications),
-            onTap: () async => AwesomeNotifications().showNotificationConfigPage(),
+            onTap: () async => AwesomeNotifications().showNotificationConfigRoute(),
           ),*/
           ListTile(
             leading: const Icon(Icons.cookie_outlined),
             title: Text(lang.analytics),
-            onTap: () async => router.navigate(const AnalyticsPage()),
+            onTap: () async => router.navigate(const AnalyticsRoute()),
           ),
           ListTile(
             leading: const Icon(Icons.info_outline),
             title: Text(lang.about),
-            onTap: () async => router.navigate(const AboutPage()),
+            onTap: () async => router.navigate(const AboutRoute()),
           ),
         ],
       ),

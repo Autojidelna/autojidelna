@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/src/_conf/notifications.dart';
-import 'package:autojidelna/src/_routing/app_router.gr.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/more/account_overview_card.dart';
@@ -28,7 +28,7 @@ class MorePage extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.person_outline),
           title: Text(lang.account),
-          onTap: () async => router.push(const AccountPage()),
+          onTap: () async => router.push(const AccountRoute()),
         ),
         /* TODO: make the page
         ListTile(
@@ -40,12 +40,12 @@ class MorePage extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.settings_outlined),
           title: Text(lang.settings),
-          onTap: () async => router.push(const SettingsPage()),
+          onTap: () async => router.push(const SettingsRoute()),
         ),
         ListTile(
           leading: const Icon(Icons.info_outline),
           title: Text(lang.about),
-          onTap: () async => router.push(const AboutPage()),
+          onTap: () async => router.push(const AboutRoute()),
         ),
         ListTile(
           leading: const Icon(Icons.share_outlined),

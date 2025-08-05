@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 import 'package:autojidelna/src/_conf/hive.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
-import 'package:autojidelna/src/_routing/app_router.gr.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
@@ -27,7 +27,7 @@ class OnboardingGuard extends AutoRouteGuard {
       }
 
       resolver.redirect(
-        OnboardingPage(
+        OnboardingRoute(
           onCompletedCallback: (onSuccess) async {
             Hive.box(Boxes.appState).put(HiveKeys.appState.firstTime, !onSuccess);
             resolver.next(onSuccess);

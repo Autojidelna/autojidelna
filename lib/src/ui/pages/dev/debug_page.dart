@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/src/_conf/errors.dart';
-import 'package:autojidelna/src/_routing/app_router.gr.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/crash_logic.dart';
 import 'package:autojidelna/src/logic/show_snack_bar.dart';
@@ -35,7 +35,7 @@ class DebugPage extends StatelessWidget {
           ),
           ListTile(
             title: const Text('Onboarding guide'),
-            onTap: () async => context.router.push(OnboardingPage()),
+            onTap: () async => context.router.push(OnboardingRoute()),
           ),
           const NotificationActionButton(),
         ],

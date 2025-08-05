@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
-import 'package:autojidelna/src/_routing/app_router.gr.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/src/ui/theme/app_themes.dart';
@@ -53,7 +53,7 @@ class SwitchAccountPanel extends StatelessWidget {
       title: Text(lang.addAccount),
       onTap: () async {
         StepFlowController.instance.setLoginFlow();
-        context.router.navigate(OnboardingPage());
+        context.router.navigate(OnboardingRoute());
       },
     );
   }
@@ -88,7 +88,7 @@ class SwitchAccountPanel extends StatelessWidget {
       onTap: () async {
         if (currentAccount) return;
         await prov.changeUser(safeAccount);
-        if (context.mounted) context.router.replaceAll([const RouterPage()], updateExistingRoutes: false);
+        if (context.mounted) context.router.replaceAll([const RouterRoute()], updateExistingRoutes: false);
       },
     );
   }

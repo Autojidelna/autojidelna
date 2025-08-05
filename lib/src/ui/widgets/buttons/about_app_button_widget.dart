@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/src/_conf/assets.dart';
 import 'package:autojidelna/src/_global/app.dart';
-import 'package:autojidelna/src/_routing/app_router.gr.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/about_app_button_logic.dart';
 import 'package:flutter/foundation.dart';
@@ -32,7 +32,7 @@ class AboutAppButton extends StatelessWidget {
           GestureDetector(
             onTap: appElevateClick,
             onLongPress: () async {
-              context.router.push(const DebugPage());
+              context.router.push(const DebugRoute());
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 27.01),

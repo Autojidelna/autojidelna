@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:autojidelna/src/_routing/app_router.gr.dart';
+import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/order_dish_button.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/lined_card.dart';
@@ -18,7 +18,7 @@ class PageViewFoodCard extends StatelessWidget {
         smallButton: false,
         transparentFooterDivider: true,
         title: dish.varianta,
-        onPressed: () async => context.router.navigate(DishDetailPage(dish: dish)),
+        onPressed: () async => context.router.navigate(DishDetailRoute(dish: dish)),
         child: Column(
           children: [
             ListTile(

@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 import 'package:autojidelna/src/_conf/errors.dart';
 import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/_routing/app_router.gr.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/show_snack_bar.dart';
 import 'package:autojidelna/src/types/app_context.dart';
@@ -59,11 +59,11 @@ class AuthGuard extends AutoRouteGuard {
       if (ctx.mounted) await userProvider.updateLoggedSafeAccounts();
       if (userProvider.loggedInAccounts.isNotEmpty) {
         StepFlowController.instance.setAccountPickerFlow();
-        resolver.redirect(OnboardingPage(onCompletedCallback: (_) => onNavigation(resolver, router)), replace: true);
+        resolver.redirect(OnboardingRoute(onCompletedCallback: (_) => onNavigation(resolver, router)), replace: true);
         return;
       }
       StepFlowController.instance.setLoginFlow();
-      resolver.redirect(OnboardingPage(onCompletedCallback: resolver.next), replace: true);
+      resolver.redirect(OnboardingRoute(onCompletedCallback: resolver.next), replace: true);
     }
   }
 }

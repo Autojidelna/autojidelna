@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/src/_conf/hive.dart';
 import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
@@ -7,7 +8,6 @@ import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/_global/riverpod/theme/theme.riverpod.dart';
 import 'package:autojidelna/src/_sentry/sentry.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/_routing/app_router.dart';
 import 'package:autojidelna/src/logic/deep_link_transformer_logic.dart';
 import 'package:autojidelna/src/types/app_context.dart';
 import 'package:autojidelna/src/types/freezed/theme_state/theme_state.dart';
