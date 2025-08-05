@@ -1,13 +1,14 @@
 import 'dart:async';
 
 import 'package:autojidelna/app/app.dart';
+import 'package:autojidelna/shared/analytics/domain/statistic_type.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/canteenwrapper.dart';
 import 'package:autojidelna/src/logic/show_snack_bar.dart';
-import 'package:autojidelna/src/logic/services/analytics_service.dart';
+import 'package:autojidelna/shared/analytics/domain/analytics_service.dart';
 import 'package:autojidelna/src/types/all.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:canteenlib/canteenlib.dart';

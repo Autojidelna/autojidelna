@@ -1,5 +1,5 @@
-import 'package:autojidelna/src/_global/riverpod/analytics/analytics.riverpod.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/shared/analytics/application/analytics.riverpod.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
