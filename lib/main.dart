@@ -1,5 +1,5 @@
 import 'package:autojidelna/firebase_options.dart';
-import 'package:autojidelna/src/_conf/tokens.dart';
+import 'package:autojidelna/shared/config/tokens.dart';
 import 'package:autojidelna/src/_global/init_app.dart';
 import 'package:autojidelna/src/logic/migration/migration_manager.dart';
 import 'package:autojidelna/src/ui/material_app.dart';

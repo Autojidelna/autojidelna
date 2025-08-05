@@ -1,6 +1,6 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/_conf/adapters.hive.dart';
-import 'package:autojidelna/src/_conf/hive.dart';
+import 'package:autojidelna/shared/config/adapters.hive.dart';
+import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/src/_global/providers/remote_config.dart';
 //import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';

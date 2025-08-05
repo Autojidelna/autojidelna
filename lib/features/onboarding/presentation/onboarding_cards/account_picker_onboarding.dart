@@ -1,5 +1,5 @@
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
-import 'package:autojidelna/src/_conf/errors.dart';
+import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';

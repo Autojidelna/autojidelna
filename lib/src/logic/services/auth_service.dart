@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:autojidelna/src/_conf/analytics.dart';
-import 'package:autojidelna/src/_conf/secure_storage.dart';
+import 'package:autojidelna/shared/config/analytics.dart';
+import 'package:autojidelna/shared/config/secure_storage.dart';
 import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/init_app.dart';
 import 'package:autojidelna/src/logic/canteenwrapper.dart';

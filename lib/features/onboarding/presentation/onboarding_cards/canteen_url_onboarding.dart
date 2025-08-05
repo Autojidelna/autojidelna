@@ -1,5 +1,5 @@
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
-import 'package:autojidelna/src/_conf/errors.dart';
+import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
@@ -24,7 +24,7 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
         children: [
           const CustomUrlField(),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: DividerWithText(text: context.l10n.or),
           ),
           ConstrainedBox(constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * .4), child: const CanteenUrlPicker()),

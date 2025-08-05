@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
-import 'package:autojidelna/src/_conf/errors.dart';
+import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';

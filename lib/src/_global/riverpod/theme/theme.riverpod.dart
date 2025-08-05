@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:autojidelna/src/_conf/hive.dart';
+import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/src/types/freezed/theme_state/theme_state.dart';
 import 'package:autojidelna/src/types/theme.dart';
 import 'package:autojidelna/src/ui/theme/app_themes.dart';

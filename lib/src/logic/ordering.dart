@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:autojidelna/src/_conf/errors.dart';
+import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';

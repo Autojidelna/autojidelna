@@ -19,7 +19,7 @@ class NotificationIds {
 
 class Links {
   static String get autojidelna => 'https://autojidelna.cz';
-  static String get repo => 'https://github.com/App-Elevate/Autojidelna';
+  static String get repo => 'https://github.com/Autojidelna/autojidelna';
   static String get currentVersionCode => '$repo/blob/v${App.packageInfo.version}';
 
   static String get privacyPolicy => '$autojidelna/cs/privacy-policy/';
