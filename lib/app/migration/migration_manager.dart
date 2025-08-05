@@ -1,16 +1,16 @@
 import 'dart:async';
 
 import 'package:autojidelna/shared/config/hive.dart';
-import 'package:autojidelna/src/_global/app.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class MigrationManager {
   static Future<void> runMigrations() async {
     Stopwatch stopwatch = Stopwatch();
     stopwatch.start();
 
-    final String currentVersion = App.packageInfo.version;
+    final String currentVersion = (await PackageInfo.fromPlatform()).version;
     final String? lastKnownVersion = Hive.box(Boxes.appState).get(HiveKeys.appState.lastVersion, defaultValue: '1.0.0');
 
     if (lastKnownVersion == null || _isNewerVersion(lastKnownVersion, currentVersion)) {

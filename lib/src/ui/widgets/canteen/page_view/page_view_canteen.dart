@@ -1,5 +1,5 @@
+import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/shared/config/dates.dart';
-import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/logic/datetime_wrapper.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/page_view/menu_of_the_day.dart';

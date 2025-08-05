@@ -1,7 +1,8 @@
 // Purpose: stores constants used throughout the app.
 
-import 'package:autojidelna/src/_global/app.dart';
+import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NotificationIds {
   static String kreditChannel(SafeAccount account) => 'kredit_channel_${account.username}_${account.url}';
@@ -20,7 +21,7 @@ class NotificationIds {
 class Links {
   static String get autojidelna => 'https://autojidelna.cz';
   static String get repo => 'https://github.com/Autojidelna/autojidelna';
-  static String get currentVersionCode => '$repo/blob/v${App.packageInfo.version}';
+  static String currentVersionCode(WidgetRef ref) => '$repo/blob/v${ref.read(packageInfoProvider)!.version}';
 
   static String get privacyPolicy => '$autojidelna/cs/privacy-policy/';
   static String get email => 'info@appelevate.cz';

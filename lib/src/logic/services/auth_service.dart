@@ -1,9 +1,8 @@
 import 'dart:convert';
 
+import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/shared/config/analytics.dart';
 import 'package:autojidelna/shared/config/secure_storage.dart';
-import 'package:autojidelna/src/_global/app.dart';
-import 'package:autojidelna/src/_global/init_app.dart';
 import 'package:autojidelna/src/logic/canteenwrapper.dart';
 import 'package:autojidelna/src/logic/url.dart';
 import 'package:autojidelna/src/types/errors.dart';
@@ -12,6 +11,7 @@ import 'package:autojidelna/src/types/freezed/logged_accounts/logged_accounts.da
 import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/src/types/freezed/user/user.dart';
 import 'package:canteenlib/canteenlib.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -65,7 +65,7 @@ class AuthService {
       }
     }
 
-    InitApp().registerCanteen(instance);
+    App().registerCanteen(instance);
 
     try {
       user = User(
@@ -156,11 +156,11 @@ class AuthService {
 
   // Logs out every logged in user
   Future<void> logoutEveryone() async {
-    LoggedAccounts loginData = await _getDataFromStorage();
+    //LoggedAccounts loginData = await _getDataFromStorage();
 
-    for (Account account in loginData.accounts) {
+    /*for (Account account in loginData.accounts) {
       // NotificationService().removeNotifications(SafeAccount.fromAccount(account));
-    }
+    }*/
 
     await _saveDataToStorage(LoggedAccounts());
 
@@ -190,14 +190,16 @@ class AuthService {
 
   /// Reads [LoggedAccounts] from Secure storage.
   Future<LoggedAccounts> _getDataFromStorage() async {
-    String? value = await App.secureStorage.read(key: SecureStorage.loginData);
+    // TODO: Replace FlutterSecureStorage with secureStorageProvider
+    String? value = await const FlutterSecureStorage().read(key: SecureStorage.loginData);
     if (value == null || value.trim().isEmpty) return LoggedAccounts();
     return LoggedAccounts.fromJson(jsonDecode(value));
   }
 
   /// Saves [LoggedAccounts] to Secure storage.
   Future<void> _saveDataToStorage(LoggedAccounts loginData) async {
-    await App.secureStorage.write(key: SecureStorage.loginData, value: jsonEncode(loginData.toJson()));
+    // TODO: Replace FlutterSecureStorage with secureStorageProvider
+    await const FlutterSecureStorage().write(key: SecureStorage.loginData, value: jsonEncode(loginData.toJson()));
   }
 
   /// Saves an [Account] to Secure storage.

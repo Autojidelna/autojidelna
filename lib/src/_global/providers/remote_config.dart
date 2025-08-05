@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:autojidelna/shared/config/hive.dart';
-import 'package:autojidelna/src/_global/app.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -92,10 +91,10 @@ class Rmc extends ChangeNotifier {
   Rmc() {
     _values = values;
     if (!kIsWeb) {
-      _subscription ??= App.remoteConfig.onConfigUpdated.listen(
+      _subscription ??= FirebaseRemoteConfig.instance.onConfigUpdated.listen(
         (_) async {
-          await App.remoteConfig.activate();
-          value = parseRemoteConfigValues(App.remoteConfig.getAll());
+          await FirebaseRemoteConfig.instance.activate();
+          value = parseRemoteConfigValues(FirebaseRemoteConfig.instance.getAll());
         },
         cancelOnError: false,
         onError: (Object error, StackTrace stackTrace) => null,
@@ -107,8 +106,8 @@ class Rmc extends ChangeNotifier {
     final values = Hive.box(Boxes.appState).get(HiveKeys.appState.remoteConfigValues, defaultValue: defaultValues);
     value = Map.from(values);
     try {
-      await App.remoteConfig.fetchAndActivate();
-      value = parseRemoteConfigValues(App.remoteConfig.getAll());
+      await FirebaseRemoteConfig.instance.fetchAndActivate();
+      value = parseRemoteConfigValues(FirebaseRemoteConfig.instance.getAll());
     } catch (e) {
       // ignore it will be caught by the subscription
     }

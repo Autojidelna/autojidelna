@@ -1,27 +1,28 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/shared/config/assets.dart';
 import 'package:autojidelna/shared/config/notifications.dart';
-import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/scroll_view_column.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
-class AboutPage extends StatelessWidget {
+class AboutPage extends ConsumerWidget {
   const AboutPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final L10n lang = context.l10n;
 
-    String appVersion = lang.versionSubtitle(kDebugMode.toString(), App.packageInfo.version);
+    String appVersion = lang.versionSubtitle(kDebugMode.toString(), ref.read(packageInfoProvider)!.version);
 
     Widget logo = SvgPicture.asset(
       Assets.logo,

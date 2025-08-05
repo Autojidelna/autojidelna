@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/src/_global/app.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/logic/datetime_wrapper.dart';
 import 'package:autojidelna/src/logic/services/canteen_service.dart';

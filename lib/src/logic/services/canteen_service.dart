@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/_global/app.dart';
+import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/src/logic/datetime_wrapper.dart';
 import 'package:autojidelna/src/types/errors.dart';
 import 'package:canteenlib/canteenlib.dart';

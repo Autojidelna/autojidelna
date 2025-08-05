@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:autojidelna/src/_global/app.dart';
+import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/types/app_context.dart';
 import 'package:flutter/material.dart';

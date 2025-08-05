@@ -1,6 +1,6 @@
+import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/firebase_options.dart';
 import 'package:autojidelna/shared/config/tokens.dart';
-import 'package:autojidelna/src/_global/init_app.dart';
 import 'package:autojidelna/app/migration/migration_manager.dart';
 import 'package:autojidelna/src/ui/material_app.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -78,12 +78,13 @@ void runMyApp() async {
     };
   }
 
-  await InitApp.init();
+  await App.init();
   await MigrationManager.runMigrations();
 
   if (!kDebugMode) {
     runApp(
       ProviderScope(
+        overrides: App.initProviderOverrides,
         child: SentryWidget(
           child: DefaultAssetBundle(
             bundle: SentryAssetBundle(),

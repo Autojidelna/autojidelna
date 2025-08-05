@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/_global/app.dart';
+import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/logic/services/auth_service.dart';
 import 'package:autojidelna/src/types/app_context.dart';
