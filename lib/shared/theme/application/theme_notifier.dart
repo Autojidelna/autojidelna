@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:autojidelna/app/theme/app_themes.dart';
-import 'package:autojidelna/app/theme/domain/color_style.dart';
-import 'package:autojidelna/app/theme/domain/theme_state.dart';
+import 'package:autojidelna/shared/theme/app_themes.dart';
+import 'package:autojidelna/shared/theme/domain/color_style.dart';
+import 'package:autojidelna/shared/theme/domain/theme_state.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

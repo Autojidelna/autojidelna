@@ -1,8 +1,8 @@
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
-import 'package:autojidelna/app/theme/presentation/theme_mode_picker.dart';
-import 'package:autojidelna/app/theme/presentation/theme_style_picker.dart';
+import 'package:autojidelna/shared/theme/presentation/theme_mode_picker.dart';
+import 'package:autojidelna/shared/theme/presentation/theme_style_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

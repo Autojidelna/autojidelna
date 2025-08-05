@@ -1,9 +1,9 @@
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/app/routing/app_router.dart';
-import 'package:autojidelna/app/theme/app_themes.dart';
-import 'package:autojidelna/app/theme/application/theme_notifier.dart';
-import 'package:autojidelna/app/theme/domain/theme_state.dart';
+import 'package:autojidelna/shared/theme/app_themes.dart';
+import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
+import 'package:autojidelna/shared/theme/domain/theme_state.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/_sentry/sentry.dart';

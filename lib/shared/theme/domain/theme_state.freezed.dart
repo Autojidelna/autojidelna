@@ -51,12 +51,12 @@ class _$ThemeStateCopyWithImpl<$Res, $Val extends ThemeState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? themeStyle = null,
+    Object? themeStyle = freezed,
     Object? themeMode = null,
     Object? amoledMode = null,
   }) {
     return _then(_value.copyWith(
-      themeStyle: null == themeStyle
+      themeStyle: freezed == themeStyle
           ? _value.themeStyle
           : themeStyle // ignore: cast_nullable_to_non_nullable
               as ThemeStyle,
@@ -96,12 +96,12 @@ class __$$ThemeStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? themeStyle = null,
+    Object? themeStyle = freezed,
     Object? themeMode = null,
     Object? amoledMode = null,
   }) {
     return _then(_$ThemeStateImpl(
-      themeStyle: null == themeStyle
+      themeStyle: freezed == themeStyle
           ? _value.themeStyle
           : themeStyle // ignore: cast_nullable_to_non_nullable
               as ThemeStyle,
@@ -143,8 +143,8 @@ class _$ThemeStateImpl extends _ThemeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ThemeStateImpl &&
-            (identical(other.themeStyle, themeStyle) ||
-                other.themeStyle == themeStyle) &&
+            const DeepCollectionEquality()
+                .equals(other.themeStyle, themeStyle) &&
             (identical(other.themeMode, themeMode) ||
                 other.themeMode == themeMode) &&
             (identical(other.amoledMode, amoledMode) ||
@@ -152,8 +152,8 @@ class _$ThemeStateImpl extends _ThemeState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, themeStyle, themeMode, amoledMode);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(themeStyle), themeMode, amoledMode);
 
   /// Create a copy of ThemeState
   /// with the given fields replaced by the non-null parameter values.

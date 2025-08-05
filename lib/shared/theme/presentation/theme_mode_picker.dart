@@ -1,4 +1,4 @@
-import 'package:autojidelna/app/theme/application/theme_notifier.dart';
+import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
