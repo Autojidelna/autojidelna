@@ -2,7 +2,7 @@ import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/firebase_options.dart';
 import 'package:autojidelna/shared/config/tokens.dart';
 import 'package:autojidelna/app/migration/migration_manager.dart';
-import 'package:autojidelna/src/ui/material_app.dart';
+import 'package:autojidelna/app/material_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -88,12 +88,12 @@ void runMyApp() async {
         child: SentryWidget(
           child: DefaultAssetBundle(
             bundle: SentryAssetBundle(),
-            child: const MyAppWrapper(),
+            child: const MyApp(),
           ),
         ),
       ),
     );
   } else {
-    runApp(const ProviderScope(child: MyAppWrapper()));
+    runApp(const ProviderScope(child: MyApp()));
   }
 }

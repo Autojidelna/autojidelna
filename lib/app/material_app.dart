@@ -4,15 +4,12 @@ import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
 import 'package:autojidelna/shared/theme/domain/theme_state.dart';
-import 'package:autojidelna/src/_global/providers/account.provider.dart';
-import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/shared/monitoring/sentry_tab_observer.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/deep_link_transformer_logic.dart';
 import 'package:autojidelna/src/types/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart' as prov;
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 class MyApp extends ConsumerWidget {
@@ -43,17 +40,4 @@ class MyApp extends ConsumerWidget {
       ),
     );
   }
-}
-
-class MyAppWrapper extends ConsumerWidget {
-  const MyAppWrapper({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) => prov.MultiProvider(
-        providers: [
-          prov.ChangeNotifierProvider.value(value: ref.watch(userProvider.notifier)),
-          prov.ChangeNotifierProvider.value(value: ref.watch(canteenProvider.notifier)),
-        ],
-        child: const MyApp(),
-      );
 }
