@@ -11,16 +11,16 @@ import 'package:autojidelna/src/ui/widgets/section_title.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class AccountPage extends StatelessWidget {
+class AccountPage extends ConsumerWidget {
   const AccountPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final L10n lang = context.l10n;
-    final User provUser = context.read<UserProvider>().user!;
+    final User provUser = ref.read(userProvider).user!;
     final Uzivatel user = provUser.data;
 
     bool firstName = user.jmeno != null && user.jmeno!.trim().isNotEmpty;

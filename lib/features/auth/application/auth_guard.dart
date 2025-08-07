@@ -12,7 +12,6 @@ import 'package:autojidelna/src/types/errors.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
 
 class AuthGuard extends AutoRouteGuard {
   AuthGuard(this.ref);
@@ -27,7 +26,7 @@ class AuthGuard extends AutoRouteGuard {
 
     if (provider.user != null) {
       try {
-        if (ctx.mounted) await ctx.read<CanteenProvider>().preIndexMenus();
+        if (ctx.mounted) await ref.read(canteenProvider).preIndexMenus();
       } catch (_) {} // Just QoL
       return resolver.next(true); // if logged in during onboarding
     }
@@ -35,7 +34,7 @@ class AuthGuard extends AutoRouteGuard {
     try {
       await provider.loadUser();
       try {
-        if (ctx.mounted) await ctx.read<CanteenProvider>().preIndexMenus();
+        if (ctx.mounted) await ref.read(canteenProvider).preIndexMenus();
       } catch (_) {} // Just QoL
       resolver.next(true); // Allow navigation
     } catch (e) {

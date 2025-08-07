@@ -8,53 +8,48 @@ import 'package:autojidelna/src/ui/widgets/dialogs/configured_alert_dialog.dart'
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_dialog.dart';
 import 'package:autojidelna/src/ui/widgets/lined_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:provider/provider.dart';
 
 // TODO: Needs to be tested
-class LocationPickerCard extends StatefulWidget {
+class LocationPickerCard extends ConsumerStatefulWidget {
   const LocationPickerCard({super.key});
 
   @override
-  State<LocationPickerCard> createState() => _LocationPickerCardState();
+  ConsumerState<LocationPickerCard> createState() => _LocationPickerCardState();
 }
 
-class _LocationPickerCardState extends State<LocationPickerCard> {
+class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
   @override
   Widget build(BuildContext context) {
     final L10n lang = context.l10n;
-    return Selector<UserProvider, User?>(
-      selector: (_, p1) => p1.user,
-      builder: (context, user, ___) {
-        final Map<int, String> locations = user?.canteenLocations ?? {};
-        return Stack(
-          alignment: AlignmentDirectional.center,
-          children: [
-            LinedCard(
-              title: lang.location,
-              footer: locations.length > 1 ? lang.pickLocation : null,
-              footerTextAlign: TextAlign.end,
-              onPressed: locations.length < 2 ? null : () => pickerDialog(context, locations),
-              child: ListTile(
-                contentPadding: EdgeInsets.zero,
-                visualDensity: const VisualDensity(vertical: -4),
-                title: Text(locations[context.read<CanteenProvider>().locationId + 1] ?? locations[1] ?? lang.locationsUnknown),
-              ),
-            ),
-            if (locations.isEmpty) lockedCover(context),
-          ],
-        );
-      },
+    User? user = ref.watch(userProvider.select((it) => (it.user)));
+    final Map<int, String> locations = user?.canteenLocations ?? {};
+    return Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+        LinedCard(
+          title: lang.location,
+          footer: locations.length > 1 ? lang.pickLocation : null,
+          footerTextAlign: TextAlign.end,
+          onPressed: locations.length < 2 ? null : () => pickerDialog(ref, locations),
+          child: ListTile(
+            contentPadding: EdgeInsets.zero,
+            visualDensity: const VisualDensity(vertical: -4),
+            title: Text(locations[ref.read(canteenProvider).locationId + 1] ?? locations[1] ?? lang.locationsUnknown),
+          ),
+        ),
+        if (locations.isEmpty) lockedCover(context),
+      ],
     );
   }
 
-  void pickerDialog(BuildContext context, Map<int, String> locations) {
-    final L10n lang = context.l10n;
-    final CanteenProvider provider = context.read<CanteenProvider>();
+  void pickerDialog(WidgetRef ref, Map<int, String> locations) {
+    final CanteenProvider provider = ref.read(canteenProvider);
     configuredDialog(
       context,
       builder: (context) => ConfiguredAlertDialog(
-        title: lang.pickLocation,
+        title: context.l10n.pickLocation,
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: List.generate(
@@ -72,7 +67,7 @@ class _LocationPickerCardState extends State<LocationPickerCard> {
                 provider.preIndexMenus();
 
                 Navigator.of(context).popUntil((route) => route.isFirst);
-                User user = context.read<UserProvider>().user!;
+                User user = ref.read(userProvider).user!;
                 Hive.box(Boxes.appState).put(HiveKeys.account.location(user.accountData), i);
               },
             ),

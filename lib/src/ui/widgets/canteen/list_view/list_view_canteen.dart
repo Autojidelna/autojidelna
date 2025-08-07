@@ -6,17 +6,17 @@ import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/logic/datetime_wrapper.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/list_view/day_card.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_list_view/flutter_list_view.dart';
 
-class ListViewCanteen extends StatefulWidget {
+class ListViewCanteen extends ConsumerStatefulWidget {
   const ListViewCanteen({super.key});
 
   @override
-  State<ListViewCanteen> createState() => _ListViewCanteenState();
+  ConsumerState<ListViewCanteen> createState() => _ListViewCanteenState();
 }
 
-class _ListViewCanteenState extends State<ListViewCanteen> {
+class _ListViewCanteenState extends ConsumerState<ListViewCanteen> {
   Timer? _debounceTimer;
 
   void _updateVisibleItem() {
@@ -27,9 +27,9 @@ class _ListViewCanteenState extends State<ListViewCanteen> {
 
     _debounceTimer?.cancel();
     _debounceTimer = Timer(Durations.medium1, () {
-      final canteenProvider = context.read<CanteenProvider>();
-      if (canteenProvider.selectedDate != visibleDate) {
-        canteenProvider.setSelectedDate(visibleDate);
+      final canteen = ref.read(canteenProvider);
+      if (canteen.selectedDate != visibleDate) {
+        canteen.setSelectedDate(visibleDate);
       }
     });
   }
@@ -50,7 +50,7 @@ class _ListViewCanteenState extends State<ListViewCanteen> {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: context.read<CanteenProvider>().refreshList,
+      onRefresh: ref.read(canteenProvider).refreshList,
       triggerMode: RefreshIndicatorTriggerMode.anywhere,
       child: FlutterListView(
         controller: App.listController,

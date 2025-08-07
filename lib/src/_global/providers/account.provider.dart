@@ -7,7 +7,6 @@ import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dar
 import 'package:autojidelna/src/types/freezed/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart' as prov;
 
 final userProvider = ChangeNotifierProvider<UserProvider>((ref) => UserProvider(AuthService()));
 
@@ -15,6 +14,7 @@ class UserProvider extends ChangeNotifier {
   UserProvider(this._authService);
 
   final AuthService _authService;
+  final ProviderContainer container = ProviderScope.containerOf(App.getIt<AppContext>().context!);
 
   User? _user;
   List<SafeAccount> _loggedSafeAccounts = [];
@@ -36,7 +36,7 @@ class UserProvider extends ChangeNotifier {
     _loggedSafeAccounts = List.from(_loggedSafeAccounts)..remove(safeAccount);
     if (_user!.accountData.username == safeAccount.username) {
       _user = null;
-      App.getIt<AppContext>().context!.read<CanteenProvider>().clear();
+      container.read(canteenProvider).clear();
     }
     notifyListeners();
   }
@@ -44,7 +44,7 @@ class UserProvider extends ChangeNotifier {
   Future<void> logoutEveryone() async {
     await _authService.logoutEveryone();
     _user = null;
-    App.getIt<AppContext>().context!.read<CanteenProvider>().clear();
+    container.read(canteenProvider).clear();
     _loggedSafeAccounts = [];
     notifyListeners();
   }
@@ -60,13 +60,13 @@ class UserProvider extends ChangeNotifier {
   Future<void> unloadUser() async {
     await _authService.ghostLogout();
     _user = null;
-    App.getIt<AppContext>().context!.read<CanteenProvider>().clear();
+    container.read(canteenProvider).clear();
     notifyListeners();
   }
 
   Future<void> changeUser(SafeAccount safeAccount) async {
     _user = null;
-    App.getIt<AppContext>().context!.read<CanteenProvider>().clear();
+    container.read(canteenProvider).clear();
     await _authService.changeAccount(safeAccount);
     notifyListeners();
   }

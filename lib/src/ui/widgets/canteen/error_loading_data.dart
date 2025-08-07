@@ -1,18 +1,18 @@
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:material_symbols_icons/symbols.dart';
-import 'package:provider/provider.dart';
 
-class ErrorLoadingData extends StatelessWidget {
+class ErrorLoadingData extends ConsumerWidget {
   const ErrorLoadingData({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final lang = context.l10n;
     return RefreshIndicator(
-      onRefresh: context.read<CanteenProvider>().refreshCurrentPage,
+      onRefresh: ref.read(canteenProvider).refreshCurrentPage,
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Center(

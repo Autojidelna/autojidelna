@@ -5,7 +5,6 @@ import 'package:autojidelna/src/ui/widgets/dialogs/custom_date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart' as prov;
 
 class CalendarButton extends StatelessWidget {
   const CalendarButton({super.key});
@@ -29,7 +28,7 @@ class CalendarButton extends StatelessWidget {
             const SizedBox(width: 8),
             Consumer(
               builder: (context, ref, _) {
-                final DateTime selectedDate = context.select<CanteenProvider, DateTime>((prov) => prov.selectedDate);
+                final DateTime selectedDate = ref.watch(canteenProvider.select((it) => it.selectedDate));
                 String day = DateFormat(DateFormat.ABBR_WEEKDAY, Localizations.localeOf(context).toLanguageTag()).format(selectedDate);
                 String date = getCorrectDateString(ref.watch(dateFormatOptionProvider), date: selectedDate);
                 return Text('$day - $date');

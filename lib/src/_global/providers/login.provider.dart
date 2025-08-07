@@ -3,7 +3,6 @@ import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
@@ -80,9 +79,11 @@ class LoginProvider extends ChangeNotifier {
     );
 
     try {
-      await context.read<UserProvider>().login(account);
+      final riverpod.ProviderContainer container = riverpod.ProviderScope.containerOf(context);
+
+      await container.read(userProvider).login(account);
       Hive.box(Boxes.appState).put(HiveKeys.appState.url, urlController.text);
-      if (context.mounted) await context.read<CanteenProvider>().preIndexMenus();
+      if (context.mounted) await container.read(canteenProvider).preIndexMenus();
       value = true;
     } catch (e) {
       if (context.mounted) handleAuthError(context, e);

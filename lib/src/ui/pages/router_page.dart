@@ -8,17 +8,17 @@ import 'package:autojidelna/src/ui/widgets/appbars/more_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class RouterPage extends StatefulWidget {
+class RouterPage extends ConsumerStatefulWidget {
   const RouterPage({super.key});
 
   @override
-  State<RouterPage> createState() => _RouterPageState();
+  ConsumerState<RouterPage> createState() => _RouterPageState();
 }
 
-class _RouterPageState extends State<RouterPage> {
+class _RouterPageState extends ConsumerState<RouterPage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   bool isExtended = false;
@@ -42,7 +42,7 @@ class _RouterPageState extends State<RouterPage> {
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((_) => showLoginSuccessSnackBar(context.read<UserProvider>().user!.accountData.username));
+    SchedulerBinding.instance.addPostFrameCallback((_) => showLoginSuccessSnackBar(ref.read(userProvider).user!.accountData.username));
   }
 
   @override

@@ -14,7 +14,6 @@ import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart' as prov;
 
 import 'package:table_calendar/table_calendar.dart';
 
@@ -45,7 +44,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
   List<DateTime> availableFoodDays = [];
 
   List<dynamic> eventLoader(DateTime day) {
-    Jidelnicek? menu = context.read<CanteenProvider>().getCachedMenu(day);
+    Jidelnicek? menu = ref.read(canteenProvider).getCachedMenu(day);
 
     if (menu == null) return [];
     if (!bigMarkersEnabled) return menu.jidla;
@@ -92,7 +91,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
   void initState() {
     super.initState();
     bigMarkersEnabled = ref.read(bigCalendarMarkersProvider);
-    selectedDate = context.read<CanteenProvider>().selectedDate;
+    selectedDate = ref.read(canteenProvider).selectedDate;
 
     defaultTextStyle = Theme.of(context).textTheme.titleMedium!;
     defaultDecoration = const BoxDecoration(shape: BoxShape.circle);

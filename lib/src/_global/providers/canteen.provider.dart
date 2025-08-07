@@ -13,7 +13,6 @@ import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:provider/provider.dart';
 
 final canteenProvider = riverpod.ChangeNotifierProvider<CanteenProvider>((ref) => CanteenProvider(CanteenService()));
 
@@ -201,10 +200,11 @@ class CanteenProvider with ChangeNotifier {
   Future<void> handleErrors(dynamic e) async {
     switch (e) {
       case CanteenErrors.needToLogin:
+        final riverpod.ProviderContainer container = riverpod.ProviderScope.containerOf(App.getIt<AppContext>().context!);
         try {
-          await App.getIt<AppContext>().context!.read<UserProvider>().loadUser();
+          await container.read(userProvider).loadUser();
         } catch (e) {
-          await App.getIt<AppContext>().context!.read<UserProvider>().unloadUser();
+          await container.read(userProvider).unloadUser();
           App.getIt<AppContext>().context!.router.replaceAll([const RouterRoute()], updateExistingRoutes: false);
         }
         break;

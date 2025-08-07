@@ -9,7 +9,7 @@ import 'package:autojidelna/src/ui/widgets/dialogs/configured_dialog.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/logout_dialog.dart';
 import 'package:autojidelna/src/ui/widgets/section_title.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SwitchAccountPanel extends StatelessWidget {
   const SwitchAccountPanel({super.key});
@@ -21,14 +21,15 @@ class SwitchAccountPanel extends StatelessWidget {
     return Column(
       children: [
         SectionTitle(lang.accounts),
-        Consumer<UserProvider>(
-          builder: (context, prov, ___) {
-            if (prov.user == null) return const Flexible(child: SizedBox());
+        Consumer(
+          builder: (context, ref, ___) {
+            final UserProvider user = ref.watch(userProvider);
+            if (user.user == null) return const Flexible(child: SizedBox());
 
             List<Widget> accounts = [];
 
-            for (int i = 0; i < prov.loggedInAccounts.length; i++) {
-              accounts.add(accountRow(context, prov.loggedInAccounts[i]));
+            for (int i = 0; i < user.loggedInAccounts.length; i++) {
+              accounts.add(accountRow(context, ref, user.loggedInAccounts[i]));
             }
 
             return Flexible(
@@ -57,8 +58,8 @@ class SwitchAccountPanel extends StatelessWidget {
     );
   }
 
-  Widget accountRow(BuildContext context, SafeAccount safeAccount) {
-    UserProvider prov = context.read<UserProvider>();
+  Widget accountRow(BuildContext context, WidgetRef ref, SafeAccount safeAccount) {
+    UserProvider prov = ref.read(userProvider);
     bool currentAccount = safeAccount == prov.user!.accountData;
 
     return ListTile(

@@ -4,16 +4,16 @@ import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/logic/datetime_wrapper.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/page_view/menu_of_the_day.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PageViewCanteen extends StatefulWidget {
+class PageViewCanteen extends ConsumerStatefulWidget {
   const PageViewCanteen({super.key});
 
   @override
-  State<PageViewCanteen> createState() => _PageViewCanteenState();
+  ConsumerState<PageViewCanteen> createState() => _PageViewCanteenState();
 }
 
-class _PageViewCanteenState extends State<PageViewCanteen> {
+class _PageViewCanteenState extends ConsumerState<PageViewCanteen> {
   @override
   void initState() {
     super.initState();
@@ -25,13 +25,14 @@ class _PageViewCanteenState extends State<PageViewCanteen> {
 
   @override
   Widget build(BuildContext context) {
+    final CanteenProvider canteen = ref.read(canteenProvider);
     return RefreshIndicator(
-      onRefresh: context.read<CanteenProvider>().refreshCurrentPage,
+      onRefresh: canteen.refreshCurrentPage,
       child: PageView.builder(
         controller: App.pageController,
         scrollDirection: Axis.horizontal,
         itemCount: Dates.maximalDate.difference(Dates.minimalDate).inDays,
-        onPageChanged: context.read<CanteenProvider>().setDayIndex,
+        onPageChanged: canteen.setDayIndex,
         itemBuilder: (_, index) => MenuOfTheDay(convertIndexToDatetime(index)),
       ),
     );

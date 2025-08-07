@@ -9,41 +9,37 @@ import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
-class DayCard extends StatelessWidget {
+class DayCard extends ConsumerWidget {
   const DayCard(this.date, {super.key});
   final DateTime date;
 
   @override
-  Widget build(BuildContext context) {
-    return Selector<CanteenProvider, Jidelnicek?>(
-      selector: (_, p1) => p1.getCachedMenu(date),
-      builder: (_, menu, ___) {
-        Map<String, List<Jidlo>> sortedDishes = {};
-        if (menu == null) {
-          try {
-            // ignore: discarded_futures
-            context.read<CanteenProvider>().getMenu(date);
-          } catch (e) {
-            // ignore: discarded_futures
-            showInternetConnectionSnackBar();
-          }
-        } else {
-          sortedDishes = mapDishesByVarianta(menu.jidla);
-        }
+  Widget build(BuildContext context, WidgetRef ref) {
+    Jidelnicek? menu = ref.watch(canteenProvider).getCachedMenu(date);
 
-        return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Column(
-            children: [
-              DayCardheader(date: date),
-              if (menu != null && menu.jidla.isNotEmpty) ...[const CustomDivider(isTransparent: false, height: 0), const SizedBox(height: 8)],
-              ...sortedDishes.entries.map((e) => FoodSectionListTile(title: e.key.toUpperCase(), selection: e.value)),
-            ],
-          ),
-        );
-      },
+    Map<String, List<Jidlo>> sortedDishes = {};
+    if (menu == null) {
+      try {
+        // ignore: discarded_futures
+        ref.read(canteenProvider).getMenu(date);
+      } catch (e) {
+        // ignore: discarded_futures
+        showInternetConnectionSnackBar();
+      }
+    } else {
+      sortedDishes = mapDishesByVarianta(menu.jidla);
+    }
+
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: Column(
+        children: [
+          DayCardheader(date: date),
+          if (menu != null && menu.jidla.isNotEmpty) ...[const CustomDivider(isTransparent: false, height: 0), const SizedBox(height: 8)],
+          ...sortedDishes.entries.map((e) => FoodSectionListTile(title: e.key.toUpperCase(), selection: e.value)),
+        ],
+      ),
     );
   }
 }

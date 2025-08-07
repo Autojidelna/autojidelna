@@ -5,39 +5,35 @@ import 'package:autojidelna/src/ui/widgets/lined_card.dart';
 import 'package:autojidelna/src/ui/widgets/switch_account_panel.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AccountOverviewCard extends StatelessWidget {
+class AccountOverviewCard extends ConsumerWidget {
   const AccountOverviewCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final L10n lang = context.l10n;
+    Uzivatel? user = ref.watch(userProvider.select((it) => it.user?.data));
 
-    return Selector<UserProvider, Uzivatel?>(
-      selector: (_, p1) => p1.user?.data,
-      builder: (context, user, ___) {
-        return LinedCard(
-          title: user?.uzivatelskeJmeno ?? '',
-          footer: lang.changeAccount,
-          onPressed: () => configuredBottomSheet(context, builder: (context) => const SwitchAccountPanel()),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return LinedCard(
+      title: user?.uzivatelskeJmeno ?? '',
+      footer: lang.changeAccount,
+      onPressed: () => configuredBottomSheet(context, builder: (context) => const SwitchAccountPanel()),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Icon(Icons.account_circle, size: 75),
+          const VerticalDivider(color: Colors.transparent),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Icon(Icons.account_circle, size: 75),
-              const VerticalDivider(color: Colors.transparent),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(lang.credit(user?.kredit ?? 0), style: Theme.of(context).textTheme.titleMedium),
-                  if (user != null && user.kategorie != null) Text(user.kategorie!),
-                ],
-              ),
+              Text(lang.credit(user?.kredit ?? 0), style: Theme.of(context).textTheme.titleMedium),
+              if (user != null && user.kategorie != null) Text(user.kategorie!),
             ],
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

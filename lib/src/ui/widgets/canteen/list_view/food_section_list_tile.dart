@@ -6,8 +6,8 @@ import 'package:autojidelna/src/types/all.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/burza_alert_dialog.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 class FoodSectionListTile extends StatelessWidget {
   const FoodSectionListTile({super.key, required this.title, required this.selection});
@@ -36,42 +36,38 @@ class FoodSectionListTile extends StatelessWidget {
   Text timeOfDayFoodTitle(BuildContext context, String text) => Text(text.toUpperCase(), style: Theme.of(context).textTheme.titleSmall);
 }
 
-class _DishListTile extends StatelessWidget {
+class _DishListTile extends ConsumerWidget {
   const _DishListTile({required this.dish, required this.title});
   final Jidlo dish;
   final String title;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     ThemeData theme = Theme.of(context);
+    bool ordering = ref.watch(canteenProvider.select((it) => it.ordering));
 
-    return Selector<CanteenProvider, bool>(
-      selector: (_, p1) => p1.ordering,
-      builder: (context, ordering, ___) {
-        final StavJidla stav = getStavJidla(context, dish);
-        final bool enabled = ordering || !isButtonEnabled(stav);
-        final bool selected = getPrimaryState(stav);
-        const onTap = burzaAlertDialog;
+    final StavJidla stav = getStavJidla(context, dish);
+    final bool enabled = ordering || !isButtonEnabled(stav);
+    final bool selected = getPrimaryState(stav);
+    const onTap = burzaAlertDialog;
 
-        return ListTile(
-          enabled: !enabled,
-          selected: selected,
-          contentPadding: EdgeInsets.zero,
-          selectedColor: theme.colorScheme.primary,
-          titleTextStyle: theme.textTheme.bodyMedium,
-          onTap: enabled ? null : () => onTap(context, dish, stav),
-          leading: Radio<bool>(
-            toggleable: true,
-            groupValue: true,
-            value: selected,
-            onChanged: enabled ? null : (_) => onTap(context, dish, stav),
-            activeColor: theme.colorScheme.primary,
-          ),
-          title: Text(title),
-          subtitle: _subtitle(context, dish.cena),
-          trailing: _detailButton(context),
-        );
-      },
+    return ListTile(
+      enabled: !enabled,
+      selected: selected,
+      contentPadding: EdgeInsets.zero,
+      selectedColor: theme.colorScheme.primary,
+      titleTextStyle: theme.textTheme.bodyMedium,
+      onTap: enabled ? null : () => onTap(context, dish, stav),
+      leading: Radio<bool>(
+        toggleable: true,
+        groupValue: true,
+        value: selected,
+        onChanged: enabled ? null : (_) => onTap(context, dish, stav),
+        activeColor: theme.colorScheme.primary,
+      ),
+      title: Text(title),
+      subtitle: _subtitle(context, dish.cena),
+      trailing: _detailButton(context),
     );
   }
 
