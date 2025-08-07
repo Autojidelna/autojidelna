@@ -43,9 +43,9 @@
   "parameterGroups": {
     "links": {
       "parameters": {
-        "appelevate_link": {
+        "autojidelna_link": {
           "defaultValue": {
-            "value": "https://appelevate.cz/"
+            "value": "https://autojidelna.cz/"
           },
           "valueType": "STRING"
         }

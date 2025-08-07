@@ -124,7 +124,7 @@ class Rmc extends ChangeNotifier {
   static const String json = 'json';
   static const String integer = 'integer';
   static const String doubleNum = 'double_num';
-  static const String appelevateLink = 'appelevate_link';
+  static const String autojidelnaLink = 'autojidelna_link';
 
   /// Default values for Remote Config
   /// Every value has to be included to be parsed correctly.
@@ -135,6 +135,6 @@ class Rmc extends ChangeNotifier {
     json: {'key': 'value'},
     integer: 42,
     doubleNum: 42.5,
-    appelevateLink: 'https://appelevate.com/',
+    autojidelnaLink: 'https://autojidelna.cz/',
   };
 }

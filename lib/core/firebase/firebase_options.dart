@@ -24,7 +24,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macOS - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -71,15 +74,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'autojidelna.appspot.com',
     iosBundleId: 'cz.appelevate.autojidelna',
   );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAEdu5514F6Wveeh0hHnfiDgf6AV4YYVoI',
-    appId: '1:108088693003:ios:3ee0dec76b21a50596d20e',
-    messagingSenderId: '108088693003',
-    projectId: 'autojidelna',
-    databaseURL: 'https://autojidelna-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'autojidelna.appspot.com',
-    iosBundleId: 'cz.appelevate.autojidelna',
-  );
-
 }

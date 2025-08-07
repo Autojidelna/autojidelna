@@ -2,6 +2,7 @@
 
 import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/src/_global/providers/remote_config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NotificationIds {
@@ -19,10 +20,10 @@ class NotificationIds {
 }
 
 class Links {
-  static String get autojidelna => 'https://autojidelna.cz';
-  static String get repo => 'https://github.com/Autojidelna/autojidelna';
+  static final String autojidelna = Rmc.values[Rmc.autojidelnaLink];
+  static const String repo = 'https://github.com/Autojidelna/autojidelna';
   static String currentVersionCode(WidgetRef ref) => '$repo/blob/v${ref.read(packageInfoProvider)!.version}';
 
-  static String get privacyPolicy => '$autojidelna/cs/privacy-policy/';
-  static String get email => 'info@appelevate.cz';
+  static final String privacyPolicy = '$autojidelna/cs/privacy-policy/';
+  static const String email = 'info@appelevate.cz';
 }

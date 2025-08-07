@@ -1,11 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/ui/widgets/buttons/about_app_button_widget.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/scroll_view_column.dart';
 // import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -20,7 +18,6 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(lang.settings),
-        actions: kDebugMode ? const [AboutAppButton()] : null,
       ),
       body: ScrollViewColumn(
         children: [
