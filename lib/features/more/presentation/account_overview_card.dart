@@ -11,12 +11,12 @@ class AccountOverviewCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
     Uzivatel? user = ref.watch(moreServiceProvider).user?.data;
 
     return LinedCard(
       title: user?.uzivatelskeJmeno ?? '',
-      footer: lang.changeAccount,
+      footer: l10n.changeAccount,
       onPressed: () => ref.read(moreServiceProvider).openSwitchAccountPannel(context),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,7 +27,7 @@ class AccountOverviewCard extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(lang.credit(user?.kredit ?? 0), style: Theme.of(context).textTheme.titleMedium),
+              Text(l10n.credit(user?.kredit ?? 0), style: Theme.of(context).textTheme.titleMedium),
               if (user != null && user.kategorie != null) Text(user.kategorie!),
             ],
           ),

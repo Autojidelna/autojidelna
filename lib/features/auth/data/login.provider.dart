@@ -94,20 +94,20 @@ class LoginProvider extends ChangeNotifier {
   }
 
   void handleAuthError(BuildContext context, dynamic e) async {
-    final lang = context.l10n;
+    final l10n = context.l10n;
     switch (e) {
       case AuthErrors.noInternetConnection:
         bool retry = await showInternetConnectionSnackBar();
         if (retry && context.mounted) login(context);
         break;
       case AuthErrors.wrongCredentials:
-        setErrors(lang.errorsWrongCredentialsTextField, true, null);
+        setErrors(l10n.errorsWrongCredentialsTextField, true, null);
         break;
       case AuthErrors.wrongUrl:
-        setErrors(null, null, lang.errorsWrongUrl);
+        setErrors(null, null, l10n.errorsWrongUrl);
         break;
       default:
-        showErrorSnackBar(SnackBarAuthErrors.connectionFailed(lang));
+        showErrorSnackBar(SnackBarAuthErrors.connectionFailed(l10n));
     }
   }
 

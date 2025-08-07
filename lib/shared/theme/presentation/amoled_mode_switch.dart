@@ -9,7 +9,7 @@ class AmoledModeSwitch extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
 
     final ThemeNotifier themeNotifier = ref.read(themeNotifierProvider.notifier);
     final ThemeState themeProvider = ref.watch(themeNotifierProvider);
@@ -17,8 +17,8 @@ class AmoledModeSwitch extends ConsumerWidget {
     final bool isBright = ref.watch(isBrightProvider(MediaQuery.platformBrightnessOf(context)));
 
     return SwitchListTile(
-      title: Text(lang.amoledMode),
-      subtitle: Text(lang.amoledModeSubtitle),
+      title: Text(l10n.amoledMode),
+      subtitle: Text(l10n.amoledModeSubtitle),
       value: themeProvider.amoledMode,
       onChanged: isBright ? null : themeNotifier.setAmoledMode,
     );

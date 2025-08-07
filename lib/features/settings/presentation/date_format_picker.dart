@@ -24,12 +24,12 @@ class DateFormatPicker extends ConsumerWidget {
   const DateFormatPicker({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
     final notifier = ref.read(dateFormatOptionProvider.notifier);
     final provider = ref.watch(dateFormatOptionProvider);
 
     return ConfiguredAlertDialog(
-      title: lang.dateFormat,
+      title: l10n.dateFormat,
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

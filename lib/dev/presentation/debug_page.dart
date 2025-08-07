@@ -13,16 +13,18 @@ class DebugPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lang = context.l10n;
+    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(title: const Text('Debug')),
       body: ListView(
         children: <Widget>[
-          TextField(
-            onChanged: (value) async => value == 'crash' ? crashTestFunction() : null,
-            decoration: InputDecoration(
-              labelText: lang.typeCrash,
-              border: const OutlineInputBorder(),
+          ListTile(
+            title: TextField(
+              onChanged: (value) async => value == 'crash' ? crashTestFunction() : null,
+              decoration: InputDecoration(
+                labelText: l10n.typeCrash,
+                border: const OutlineInputBorder(),
+              ),
             ),
           ),
           ListTile(
@@ -31,7 +33,7 @@ class DebugPage extends StatelessWidget {
           ),
           ListTile(
             title: const Text('Show info Snack Bar'),
-            onTap: () => showInfoSnackBar(Icons.wifi_off_rounded, lang.appName, lang.appDescription),
+            onTap: () => showInfoSnackBar(Icons.wifi_off_rounded, l10n.appName, l10n.appDescription),
           ),
           ListTile(
             title: const Text('Onboarding guide'),

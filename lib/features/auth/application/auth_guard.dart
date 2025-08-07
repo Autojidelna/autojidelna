@@ -22,7 +22,7 @@ class AuthGuard extends AutoRouteGuard {
     BuildContext? ctx = App.getIt<AppContext>().context;
     if (ctx == null) return;
     final UserProvider provider = ref.read(userProvider);
-    final L10n lang = ctx.l10n;
+    final L10n l10n = ctx.l10n;
 
     if (provider.user != null) {
       try {
@@ -40,10 +40,10 @@ class AuthGuard extends AutoRouteGuard {
     } catch (e) {
       switch (e) {
         case AuthErrors.accountNotSelected:
-          showErrorSnackBar(SnackBarAuthErrors.accountNotFound(lang));
+          showErrorSnackBar(SnackBarAuthErrors.accountNotFound(l10n));
           break;
         case AuthErrors.connectionFailed:
-          showErrorSnackBar(SnackBarAuthErrors.connectionFailed(lang));
+          showErrorSnackBar(SnackBarAuthErrors.connectionFailed(l10n));
           break;
         case AuthErrors.noInternetConnection:
           if (await showInternetConnectionSnackBar()) {
@@ -52,10 +52,10 @@ class AuthGuard extends AutoRouteGuard {
           }
           break;
         case AuthErrors.wrongCredentials:
-          showErrorSnackBar(SnackBarAuthErrors.wrongCredentials(lang));
+          showErrorSnackBar(SnackBarAuthErrors.wrongCredentials(l10n));
           break;
         case AuthErrors.wrongUrl:
-          showErrorSnackBar(SnackBarAuthErrors.wrongUrl(lang));
+          showErrorSnackBar(SnackBarAuthErrors.wrongUrl(l10n));
           break;
         default:
       }

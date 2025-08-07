@@ -20,7 +20,7 @@ class AccountPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
     final User provUser = ref.read(userProvider).user!;
     final Uzivatel user = provUser.data;
 
@@ -33,7 +33,7 @@ class AccountPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(lang.account),
+        title: Text(l10n.account),
         actions: [_appBarLogoutButton(context, provUser.accountData)],
       ),
       body: ListView(
@@ -41,34 +41,34 @@ class AccountPage extends ConsumerWidget {
           const CustomDivider(height: 30),
           const AccountOverviewCard(),
           const CustomDivider(height: 38),
-          if ((firstName && lastName) || category) SectionTitle(lang.personalInfo),
+          if ((firstName && lastName) || category) SectionTitle(l10n.personalInfo),
           if (firstName && lastName)
             ListTile(
               title: Text('${user.jmeno!} ${user.prijmeni!}'),
-              subtitle: Text(lang.name),
+              subtitle: Text(l10n.name),
             ),
           if (lastName)
             ListTile(
               title: Text(user.kategorie!),
-              subtitle: Text(lang.category),
+              subtitle: Text(l10n.category),
             ),
-          if (bankAccount || varSymbol || specSymbol) SectionTitle(lang.paymentInfo),
+          if (bankAccount || varSymbol || specSymbol) SectionTitle(l10n.paymentInfo),
           if (bankAccount)
             ListTile(
               title: Text(user.ucetProPlatby!),
-              subtitle: Text(lang.paymentAccountNumber),
+              subtitle: Text(l10n.paymentAccountNumber),
               onLongPress: () => _copyToClipboard(user.ucetProPlatby!),
             ),
           if (varSymbol)
             ListTile(
               title: Text(user.varSymbol!),
-              subtitle: Text(lang.variableSymbol),
+              subtitle: Text(l10n.variableSymbol),
               onLongPress: () => _copyToClipboard(user.varSymbol!),
             ),
           if (specSymbol)
             ListTile(
               title: Text(user.specSymbol!),
-              subtitle: Text(lang.specificSymbol),
+              subtitle: Text(l10n.specificSymbol),
               onLongPress: () => _copyToClipboard(user.specSymbol!),
             ),
         ],

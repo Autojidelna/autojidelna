@@ -45,7 +45,7 @@ class _PermissionsOnboardingState extends State<PermissionsOnboarding> {
 
   @override
   Widget build(BuildContext context) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -53,8 +53,8 @@ class _PermissionsOnboardingState extends State<PermissionsOnboarding> {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            title: Text(lang.allowNotifications),
-            subtitle: Text(lang.allowNotifcitaionsReasons),
+            title: Text(l10n.allowNotifications),
+            subtitle: Text(l10n.allowNotifcitaionsReasons),
             trailing: OutlinedButton(
               onPressed: notificationsEnabled
                   ? null
@@ -64,7 +64,7 @@ class _PermissionsOnboardingState extends State<PermissionsOnboarding> {
                         notificationsEnabled = value;
                       });*/
                     },
-              child: notificationsEnabled ? const Icon(Icons.check) : Text(lang.grant),
+              child: notificationsEnabled ? const Icon(Icons.check) : Text(l10n.grant),
             ),
           ),
           const CustomDivider(isTransparent: false),

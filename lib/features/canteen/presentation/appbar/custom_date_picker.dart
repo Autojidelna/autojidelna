@@ -74,7 +74,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
 
   void onConfirm() {
     Navigator.of(context).pop();
-    changeDate(context, userFocusedDate);
+    changeDate(ref, userFocusedDate);
   }
 
   void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
@@ -93,7 +93,6 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
     bigMarkersEnabled = ref.read(bigCalendarMarkersProvider);
     selectedDate = ref.read(canteenProvider).selectedDate;
 
-    defaultTextStyle = Theme.of(context).textTheme.titleMedium!;
     defaultDecoration = const BoxDecoration(shape: BoxShape.circle);
 
     appFocusedDate = selectedDate;
@@ -106,6 +105,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
     super.didChangeDependencies();
     locale = Localizations.localeOf(context).toLanguageTag();
     colorScheme = Theme.of(context).colorScheme;
+    defaultTextStyle = Theme.of(context).textTheme.titleMedium!;
   }
 
   @override
@@ -239,18 +239,18 @@ Widget? _markerTemplate(BuildContext context, Jidlo dish) {
 }
 
 Row _actionButtons(BuildContext context, void Function() onConfirm) {
-  final L10n lang = context.l10n;
+  final L10n l10n = context.l10n;
 
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
     children: [
       TextButton(
         onPressed: () => context.router.popUntil((route) => route.isFirst),
-        child: Text(lang.cancel),
+        child: Text(l10n.cancel),
       ),
       TextButton(
         onPressed: onConfirm,
-        child: Text(lang.ok),
+        child: Text(l10n.ok),
       ),
       const SizedBox(width: 10),
     ],

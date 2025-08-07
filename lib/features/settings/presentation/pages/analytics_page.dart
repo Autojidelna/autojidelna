@@ -13,25 +13,25 @@ class AnalyticsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
 
     return Scaffold(
-      appBar: AppBar(title: Text(lang.analytics)),
+      appBar: AppBar(title: Text(l10n.analytics)),
       body: ScrollViewColumn(
         children: [
-          SectionTitle(lang.analytics, moreInfo: () => moreInfo(context, lang)),
+          SectionTitle(l10n.analytics, moreInfo: () => moreInfo(context, l10n)),
           const AnalyticsSwitches(),
         ],
       ),
     );
   }
 
-  void moreInfo(BuildContext context, L10n lang) => configuredDialog(
+  void moreInfo(BuildContext context, L10n l10n) => configuredDialog(
         context,
         builder: (context) => ConfiguredAlertDialog(
-          title: lang.moreInfo,
-          content: Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: Text(lang.analyticsMoreInfo)),
-          customCancelText: lang.ok,
+          title: l10n.moreInfo,
+          content: Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: Text(l10n.analyticsMoreInfo)),
+          customCancelText: l10n.ok,
         ),
       );
 }

@@ -5,21 +5,23 @@ import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-changeDate(BuildContext context, DateTime newDate, {bool animate = true}) async {
+changeDate(WidgetRef ref, DateTime newDate) async {
   if (!App.pageController.hasClients && !App.listController.hasClients) return;
 
-  ProviderContainer container = ProviderScope.containerOf(context);
+  bool animate = true;
+  if (ref.read(canteenProvider).selectedDate.difference(newDate).inDays.abs() > 6) animate = false;
 
-  container.read(canteenProvider).setSelectedDate(newDate);
+  ref.read(canteenProvider).setSelectedDate(newDate);
   final int dayIndex = newDate.toIndex();
-  bool listUi = container.read(listUiProvider);
+  bool listUi = ref.read(listUiProvider);
 
   if (!animate) {
-    listUi ? App.listController.sliverController.jumpToIndex(dayIndex) : App.pageController.jumpToPage(dayIndex);
+    // Offset to show the correct date on date picker button
+    listUi ? App.listController.sliverController.jumpToIndex(dayIndex, offset: -.1) : App.pageController.jumpToPage(dayIndex);
     return;
   }
 
   listUi
-      ? App.listController.sliverController.animateToIndex(dayIndex, duration: Durations.medium1, curve: Curves.easeInOut)
+      ? App.listController.sliverController.animateToIndex(dayIndex, offset: -.1, duration: Durations.medium1, curve: Curves.easeInOut)
       : App.pageController.animateToPage(dayIndex, duration: Durations.medium1, curve: Curves.easeInOut);
 }

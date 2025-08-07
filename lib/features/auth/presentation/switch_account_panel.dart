@@ -21,11 +21,11 @@ class SwitchAccountPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
 
     return Column(
       children: [
-        SectionTitle(lang.accounts),
+        SectionTitle(l10n.accounts),
         Consumer(
           builder: (context, ref, ___) {
             final UserProvider user = ref.watch(userProvider);
@@ -52,10 +52,10 @@ class SwitchAccountPanel extends StatelessWidget {
   }
 
   Widget addAccountButton(BuildContext context) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
     return ListTile(
       leading: const Icon(Icons.add),
-      title: Text(lang.addAccount),
+      title: Text(l10n.addAccount),
       onTap: () async {
         StepFlowController.instance.setLoginFlow();
         context.router.navigate(OnboardingRoute());

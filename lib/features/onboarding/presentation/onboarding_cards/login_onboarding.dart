@@ -10,7 +10,7 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
     final provider = ref.watch(loginProvider);
 
     final MapEntry<String, String> url = provider.urls.entries.firstWhere(
@@ -34,11 +34,11 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
                   textInputAction: TextInputAction.next,
                   autofillHints: const [AutofillHints.username],
                   decoration: InputDecoration(
-                    labelText: lang.loginUserFieldLabel,
+                    labelText: l10n.loginUserFieldLabel,
                     errorText: provider.usernameError ? '' : null,
                   ),
                   onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
-                  validator: (value) => (value?.isEmpty ?? true) ? lang.loginUserFieldHint : null,
+                  validator: (value) => (value?.isEmpty ?? true) ? l10n.loginUserFieldHint : null,
                 ),
               ),
               const CustomDivider(),
@@ -51,7 +51,7 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
                   textInputAction: TextInputAction.done,
                   autofillHints: const [AutofillHints.password],
                   decoration: InputDecoration(
-                    labelText: lang.password,
+                    labelText: l10n.password,
                     errorText: provider.passwordError,
                     suffixIcon: IconButton(
                       onPressed: provider.changePasswordVisibility,
@@ -59,7 +59,7 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
                     ),
                   ),
                   onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
-                  validator: (value) => (value?.isEmpty ?? true) ? lang.loginPasswordFieldHint : null,
+                  validator: (value) => (value?.isEmpty ?? true) ? l10n.loginPasswordFieldHint : null,
                 ),
               ),
               const CustomDivider(),

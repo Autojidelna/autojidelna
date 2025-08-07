@@ -3,77 +3,77 @@ import 'package:autojidelna/core/types/freezed/snack_bar_error_data/snack_bar_da
 import 'package:flutter/material.dart';
 
 class SnackBarAuthErrors {
-  static SnackBarData accountNotFound(L10n lang) => SnackBarData(
+  static SnackBarData accountNotFound(L10n l10n) => SnackBarData(
         iconData: Icons.person_off_outlined,
-        title: lang.errorsAccountNotFound,
-        subtitle: lang.errorsAccountNotFoundSubtitle,
+        title: l10n.errorsAccountNotFound,
+        subtitle: l10n.errorsAccountNotFoundSubtitle,
       );
-  static SnackBarData connectionFailed(L10n lang) => SnackBarData(
+  static SnackBarData connectionFailed(L10n l10n) => SnackBarData(
         iconData: Icons.cloud_off_rounded,
-        title: lang.errorsConnectionFailed,
-        subtitle: lang.errorsConnectionFailedSubtitle,
+        title: l10n.errorsConnectionFailed,
+        subtitle: l10n.errorsConnectionFailedSubtitle,
       );
-  static SnackBarData gotInternetConnection(L10n lang) => SnackBarData(
+  static SnackBarData gotInternetConnection(L10n l10n) => SnackBarData(
         iconData: Icons.wifi_rounded,
-        title: lang.errorsGotInternetConnection,
-        subtitle: lang.errorsGotInternetConnectionSubtitle,
+        title: l10n.errorsGotInternetConnection,
+        subtitle: l10n.errorsGotInternetConnectionSubtitle,
       );
-  static SnackBarData noInternetConnection(L10n lang) => SnackBarData(
+  static SnackBarData noInternetConnection(L10n l10n) => SnackBarData(
         iconData: Icons.wifi_off_rounded,
-        title: lang.errorsNoInternetConnection,
-        subtitle: lang.errorsNoInternetConnectionSubtitle,
+        title: l10n.errorsNoInternetConnection,
+        subtitle: l10n.errorsNoInternetConnectionSubtitle,
       );
-  static SnackBarData wrongCredentials(L10n lang) => SnackBarData(
+  static SnackBarData wrongCredentials(L10n l10n) => SnackBarData(
         iconData: Icons.lock_outline_rounded,
-        title: lang.errorsWrongCredentials,
-        subtitle: lang.errorsWrongCredentialsSubtitle,
+        title: l10n.errorsWrongCredentials,
+        subtitle: l10n.errorsWrongCredentialsSubtitle,
       );
-  static SnackBarData wrongUrl(L10n lang) => SnackBarData(
+  static SnackBarData wrongUrl(L10n l10n) => SnackBarData(
         iconData: Icons.link_off_rounded,
-        title: lang.errorsWrongUrl,
-        subtitle: lang.errorsWrongUrlSubtitle,
+        title: l10n.errorsWrongUrl,
+        subtitle: l10n.errorsWrongUrlSubtitle,
       );
 }
 
 class SnackBarOrderingErrors {
-  static SnackBarData addingToMarketplace(L10n lang) => SnackBarData(
+  static SnackBarData addingToMarketplace(L10n l10n) => SnackBarData(
         iconData: Icons.warning_amber_rounded,
-        title: lang.errorsAddingToMarketplace,
-        subtitle: lang.errorsAddingToMarketplaceSubtitle,
+        title: l10n.errorsAddingToMarketplace,
+        subtitle: l10n.errorsAddingToMarketplaceSubtitle,
       );
-  static SnackBarData cancelingOrder(L10n lang) => SnackBarData(
+  static SnackBarData cancelingOrder(L10n l10n) => SnackBarData(
         iconData: Icons.cancel_presentation_rounded,
-        title: lang.errorsCancelingOrder,
-        subtitle: lang.errorsCancelingOrderSubtitle,
+        title: l10n.errorsCancelingOrder,
+        subtitle: l10n.errorsCancelingOrderSubtitle,
       );
-  static SnackBarData dishNotInMarketplace(L10n lang) => SnackBarData(
+  static SnackBarData dishNotInMarketplace(L10n l10n) => SnackBarData(
         iconData: Icons.search_off_rounded,
-        title: lang.errorsDishNotInMarketplace,
-        subtitle: lang.errorsDishNotInMarketplaceSubtitle,
+        title: l10n.errorsDishNotInMarketplace,
+        subtitle: l10n.errorsDishNotInMarketplaceSubtitle,
       );
-  static SnackBarData menuLoadingFailed(L10n lang) => SnackBarData(
+  static SnackBarData menuLoadingFailed(L10n l10n) => SnackBarData(
         iconData: Icons.warning_amber_rounded,
-        title: lang.errorsMenuLoadingFailed,
-        subtitle: lang.errorsMenuLoadingFailedSubtitle,
+        title: l10n.errorsMenuLoadingFailed,
+        subtitle: l10n.errorsMenuLoadingFailedSubtitle,
       );
-  static SnackBarData dishCannotBeOrdered(L10n lang) => SnackBarData(
+  static SnackBarData dishCannotBeOrdered(L10n l10n) => SnackBarData(
         iconData: Icons.block_rounded,
-        title: lang.errorsDishCannotBeOrdered,
-        subtitle: lang.errorsDishCannotBeOrderedSubtitle,
+        title: l10n.errorsDishCannotBeOrdered,
+        subtitle: l10n.errorsDishCannotBeOrderedSubtitle,
       );
-  static SnackBarData insufficientCredit(L10n lang) => SnackBarData(
+  static SnackBarData insufficientCredit(L10n l10n) => SnackBarData(
         iconData: Icons.account_balance_wallet_outlined,
-        title: lang.errorsInsufficientCredit,
-        subtitle: lang.errorsInsufficientCreditSubtitle,
+        title: l10n.errorsInsufficientCredit,
+        subtitle: l10n.errorsInsufficientCreditSubtitle,
       );
-  static SnackBarData dishCancellationExpired(L10n lang) => SnackBarData(
+  static SnackBarData dishCancellationExpired(L10n l10n) => SnackBarData(
         iconData: Icons.hourglass_bottom_rounded,
-        title: lang.errorsDishCancellationExpired,
-        subtitle: lang.errorsDishCancellationExpiredSubtitle,
+        title: l10n.errorsDishCancellationExpired,
+        subtitle: l10n.errorsDishCancellationExpiredSubtitle,
       );
-  static SnackBarData dishOrdering(L10n lang) => SnackBarData(
+  static SnackBarData dishOrdering(L10n l10n) => SnackBarData(
         iconData: Icons.restaurant_menu_rounded,
-        title: lang.errorsDishOrdering,
-        subtitle: lang.errorsDishOrderingSubtitle,
+        title: l10n.errorsDishOrdering,
+        subtitle: l10n.errorsDishOrderingSubtitle,
       );
 }

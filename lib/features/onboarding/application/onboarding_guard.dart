@@ -3,7 +3,6 @@ import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
@@ -15,7 +14,7 @@ class OnboardingGuard extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     bool isFirstTime = Hive.box(Boxes.appState).get(HiveKeys.appState.firstTime, defaultValue: true);
 
-    if (isFirstTime || kDebugMode) {
+    if (isFirstTime) {
       final stepFlow = StepFlowController.instance..reset();
 
       await ref.read(userProvider).updateLoggedSafeAccounts();

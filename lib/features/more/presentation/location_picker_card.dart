@@ -23,21 +23,21 @@ class LocationPickerCard extends ConsumerStatefulWidget {
 class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
   @override
   Widget build(BuildContext context) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
     User? user = ref.watch(userProvider.select((it) => (it.user)));
     final Map<int, String> locations = user?.canteenLocations ?? {};
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
         LinedCard(
-          title: lang.location,
-          footer: locations.length > 1 ? lang.pickLocation : null,
+          title: l10n.location,
+          footer: locations.length > 1 ? l10n.pickLocation : null,
           footerTextAlign: TextAlign.end,
           onPressed: locations.length < 2 ? null : () => pickerDialog(ref, locations),
           child: ListTile(
             contentPadding: EdgeInsets.zero,
             visualDensity: const VisualDensity(vertical: -4),
-            title: Text(locations[ref.read(canteenProvider).locationId + 1] ?? locations[1] ?? lang.locationsUnknown),
+            title: Text(locations[ref.read(canteenProvider).locationId + 1] ?? locations[1] ?? l10n.locationsUnknown),
           ),
         ),
         if (locations.isEmpty) lockedCover(context),

@@ -59,22 +59,22 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
       if (context.mounted) await userProv.loadUser();
     } catch (e) {
       if (!context.mounted) return false;
-      final L10n lang = context.l10n;
+      final L10n l10n = context.l10n;
       switch (e) {
         case AuthErrors.accountNotSelected:
-          showErrorSnackBar(SnackBarAuthErrors.accountNotFound(lang));
+          showErrorSnackBar(SnackBarAuthErrors.accountNotFound(l10n));
           break;
         case AuthErrors.connectionFailed:
-          showErrorSnackBar(SnackBarAuthErrors.connectionFailed(lang));
+          showErrorSnackBar(SnackBarAuthErrors.connectionFailed(l10n));
           break;
         case AuthErrors.noInternetConnection:
           if (await showInternetConnectionSnackBar() && context.mounted) return await onNextPage(context);
           break;
         case AuthErrors.wrongCredentials:
-          showErrorSnackBar(SnackBarAuthErrors.wrongCredentials(lang));
+          showErrorSnackBar(SnackBarAuthErrors.wrongCredentials(l10n));
           break;
         case AuthErrors.wrongUrl:
-          showErrorSnackBar(SnackBarAuthErrors.wrongUrl(lang));
+          showErrorSnackBar(SnackBarAuthErrors.wrongUrl(l10n));
           break;
         default:
       }

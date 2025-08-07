@@ -47,7 +47,7 @@ class _RouterPageState extends ConsumerState<RouterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final lang = context.l10n;
+    final l10n = context.l10n;
 
     bool isSmallMobile = Breakpoints.smallMobile.isActive(context);
 
@@ -72,12 +72,12 @@ class _RouterPageState extends ConsumerState<RouterPage> {
       NavigationDestination(
         icon: const Icon(Icons.menu_book),
         selectedIcon: const Icon(Icons.menu_book_outlined),
-        label: lang.menu,
+        label: l10n.menu,
       ),
       NavigationDestination(
         icon: const Icon(Icons.more_horiz),
         selectedIcon: const Icon(Icons.more_horiz_outlined),
-        label: lang.more,
+        label: l10n.more,
       ),
     ];
 
@@ -96,7 +96,7 @@ class _RouterPageState extends ConsumerState<RouterPage> {
           contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(128)),
           leading: const Icon(Icons.menu),
-          title: Text(lang.navigationRailExpantionButtonTitle),
+          title: Text(l10n.navigationRailExpantionButtonTitle),
           onTap: () => changeExtention(context),
         ),
       ),

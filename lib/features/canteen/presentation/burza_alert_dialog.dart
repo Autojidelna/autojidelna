@@ -1,4 +1,3 @@
-import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/features/canteen/application/ordering.dart';
@@ -16,7 +15,7 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish, StavJidla stav) {
     return;
   }
 
-  final L10n lang = context.l10n;
+  final L10n l10n = context.l10n;
   ValueNotifier<bool> checkbox = ValueNotifier<bool>(false);
 
   return configuredDialog(
@@ -30,7 +29,7 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish, StavJidla stav) {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(lang.burzaAlertDialogContent),
+                child: Text(l10n.burzaAlertDialogContent),
               ),
               const SizedBox(height: 2),
               ValueListenableBuilder(
@@ -42,7 +41,7 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish, StavJidla stav) {
                     Hive.box(Boxes.appState).put(HiveKeys.appState.hideBurzaAlertDialog, data);
                   },
                   controlAffinity: ListTileControlAffinity.leading,
-                  title: Text(lang.dontShowAgain, style: Theme.of(context).listTileTheme.subtitleTextStyle),
+                  title: Text(l10n.dontShowAgain, style: Theme.of(context).listTileTheme.subtitleTextStyle),
                 ),
               ),
             ],
@@ -55,9 +54,7 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish, StavJidla stav) {
                 padding: const EdgeInsets.only(right: 16),
               ),
               onPressed: () {
-                // TODO: replace with Riverpod
-                BuildContext? ctx = ref.read(appRouterProvider).navigatorKey.currentContext;
-                if (ctx != null) pressed(context, updatedDish, stav);
+                pressed(context, updatedDish, stav);
                 Navigator.pop(context);
               },
               child: Text(getObedText(context, updatedDish, stav)),
