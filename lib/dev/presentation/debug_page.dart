@@ -3,7 +3,7 @@ import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/dev/crash_logic.dart';
-import 'package:autojidelna/src/logic/show_snack_bar.dart';
+import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/dev/presentation/test_notifications.dart';
 import 'package:flutter/material.dart';
 

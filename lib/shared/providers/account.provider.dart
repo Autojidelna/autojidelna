@@ -1,6 +1,6 @@
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/logic/services/auth_service.dart';
+import 'package:autojidelna/features/auth/data/auth_service.dart';
 import 'package:autojidelna/core/types/app_context.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';

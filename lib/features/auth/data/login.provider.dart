@@ -4,12 +4,12 @@ import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.da
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:autojidelna/shared/config/hive.dart';
-import 'package:autojidelna/src/_global/providers/account.provider.dart';
+import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
-import 'package:autojidelna/src/logic/show_snack_bar.dart';
+import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 
 final loginProvider = riverpod.ChangeNotifierProvider<LoginProvider>((ref) => LoginProvider());

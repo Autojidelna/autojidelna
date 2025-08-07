@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/_global/providers/account.provider.dart';
+import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/configured_bottom_sheet.dart';
 import 'package:autojidelna/src/ui/widgets/lined_card.dart';

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/src/_global/providers/account.provider.dart';
+import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:autojidelna/src/logic/services/canteen_service.dart';
 import 'package:autojidelna/core/types/app_context.dart';

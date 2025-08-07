@@ -1,5 +1,5 @@
 import 'package:autojidelna/app/app_providers.dart';
-import 'package:autojidelna/src/_global/providers/remote_config.dart';
+import 'package:autojidelna/core/firebase/remote_config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Links {
