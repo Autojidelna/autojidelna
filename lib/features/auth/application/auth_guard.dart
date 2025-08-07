@@ -11,17 +11,21 @@ import 'package:autojidelna/src/types/app_context.dart';
 import 'package:autojidelna/src/types/errors.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
 
 class AuthGuard extends AutoRouteGuard {
+  AuthGuard(this.ref);
+  Ref ref;
+
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     BuildContext? ctx = App.getIt<AppContext>().context;
     if (ctx == null) return;
-    final UserProvider userProvider = ctx.read<UserProvider>();
+    final UserProvider provider = ref.read(userProvider);
     final L10n lang = ctx.l10n;
 
-    if (userProvider.user != null) {
+    if (provider.user != null) {
       try {
         if (ctx.mounted) await ctx.read<CanteenProvider>().preIndexMenus();
       } catch (_) {} // Just QoL
@@ -29,7 +33,7 @@ class AuthGuard extends AutoRouteGuard {
     }
 
     try {
-      await userProvider.loadUser();
+      await provider.loadUser();
       try {
         if (ctx.mounted) await ctx.read<CanteenProvider>().preIndexMenus();
       } catch (_) {} // Just QoL
@@ -56,8 +60,8 @@ class AuthGuard extends AutoRouteGuard {
           break;
         default:
       }
-      if (ctx.mounted) await userProvider.updateLoggedSafeAccounts();
-      if (userProvider.loggedInAccounts.isNotEmpty) {
+      if (ctx.mounted) await provider.updateLoggedSafeAccounts();
+      if (provider.loggedInAccounts.isNotEmpty) {
         StepFlowController.instance.setAccountPickerFlow();
         resolver.redirect(OnboardingRoute(onCompletedCallback: (_) => onNavigation(resolver, router)), replace: true);
         return;
