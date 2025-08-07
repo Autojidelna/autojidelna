@@ -1,4 +1,4 @@
-import 'package:autojidelna/app/app.dart';
+import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/shared/localization/current_locale.dart';
 import 'package:autojidelna/shared/monitoring/firebase_tab_observer.dart';
@@ -7,7 +7,6 @@ import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
 import 'package:autojidelna/shared/theme/domain/theme_state.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/utils/deep_link_transformer_logic.dart';
-import 'package:autojidelna/core/types/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,10 +32,6 @@ class MyApp extends ConsumerWidget {
         includePrefixMatches: true,
         navigatorObservers: () => [FirebaseTabObserver()],
         deepLinkTransformer: (uri) async => deepLinkTransformer(uri),
-        placeholder: (context) {
-          App.getIt<AppContext>().setContext(context);
-          return const Scaffold(body: Center(child: CircularProgressIndicator()));
-        },
       ),
     );
   }

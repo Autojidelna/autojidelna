@@ -1,13 +1,11 @@
 import 'package:autojidelna/app/app_init.dart';
 import 'package:autojidelna/core/firebase/firebase_options.dart';
-import 'package:autojidelna/core/types/app_context.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_list_view/flutter_list_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 
 class App {
   static List<Override> initProviderOverrides = [];
@@ -17,8 +15,6 @@ class App {
 
     // Start the stopwatch
     stopwatch.start();
-
-    getIt.registerSingleton(AppContext());
 
     // We're using Future.wait to run multiple Futures in parallel
     // These Futures must take less than 200 ms to run
@@ -50,7 +46,7 @@ class App {
     DeviceOrientation.landscapeRight,
   ];
 
-  static final GetIt getIt = GetIt.instance;
+  static final globalContainer = ProviderContainer(overrides: initProviderOverrides);
 
   static PageController pageController = PageController();
   static FlutterListViewController listController = FlutterListViewController();
