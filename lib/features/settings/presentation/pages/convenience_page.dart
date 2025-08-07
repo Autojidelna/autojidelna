@@ -1,0 +1,51 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/shared/widgets/scroll_view_column.dart';
+import 'package:autojidelna/shared/widgets/section_title.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+@RoutePage()
+class ConveniencePage extends ConsumerWidget {
+  const ConveniencePage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final L10n lang = context.l10n;
+
+    final skipWeekends = ref.watch(skipWeekendsProvider);
+    final skipWeekendsNotifier = ref.read(skipWeekendsProvider.notifier);
+    final bigCalendarMarkers = ref.watch(bigCalendarMarkersProvider);
+    final bigCalendarMarkersNotifier = ref.read(bigCalendarMarkersProvider.notifier);
+    final listUi = ref.watch(listUiProvider);
+    final listUiNotifier = ref.read(listUiProvider.notifier);
+
+    return Scaffold(
+      appBar: AppBar(title: Text(lang.convenience)),
+      body: ScrollViewColumn(
+        children: [
+          SectionTitle(lang.convenience),
+          // TODO: skip weekends
+          SwitchListTile(
+            title: Text(lang.skipWeekends),
+            value: skipWeekends,
+            onChanged: skipWeekendsNotifier.update,
+          ),
+          SwitchListTile(
+            title: Text(lang.calendarBigMarkers),
+            value: bigCalendarMarkers,
+            onChanged: bigCalendarMarkersNotifier.update,
+          ),
+          SectionTitle(lang.experimental),
+          SwitchListTile(
+            title: Text(lang.listUi),
+            subtitle: Text(lang.listUiSubtitle),
+            value: listUi,
+            onChanged: listUiNotifier.update,
+          ),
+        ],
+      ),
+    );
+  }
+}
