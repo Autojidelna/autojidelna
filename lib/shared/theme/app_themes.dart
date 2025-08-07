@@ -1,6 +1,6 @@
 import 'package:autojidelna/shared/theme/domain/color_style.dart';
 import 'package:autojidelna/shared/theme/fonts.dart';
-import 'package:autojidelna/src/types/custom_bottom_sheet_shape.dart';
+import 'package:autojidelna/core/types/custom_bottom_sheet_shape.dart';
 import 'package:flutter/material.dart';
 
 class AppThemes {

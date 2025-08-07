@@ -1,6 +1,6 @@
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/src/logic/datetime_wrapper.dart';
-import 'package:autojidelna/src/types/errors.dart';
+import 'package:autojidelna/core/types/errors.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 

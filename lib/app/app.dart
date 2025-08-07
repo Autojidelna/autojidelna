@@ -1,8 +1,6 @@
 import 'package:autojidelna/app/app_init.dart';
-import 'package:autojidelna/core/firebase/firebase_options.dart';
-import 'package:autojidelna/src/types/app_context.dart';
+import 'package:autojidelna/core/types/app_context.dart';
 import 'package:canteenlib/canteenlib.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_list_view/flutter_list_view.dart';

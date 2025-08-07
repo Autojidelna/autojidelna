@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 
 /// Hive boxes. Use these values to open a box.
 class Boxes {

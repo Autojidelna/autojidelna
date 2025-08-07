@@ -1,10 +1,10 @@
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/logic/services/auth_service.dart';
-import 'package:autojidelna/src/types/app_context.dart';
-import 'package:autojidelna/src/types/freezed/account/account.dart';
-import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
-import 'package:autojidelna/src/types/freezed/user/user.dart';
+import 'package:autojidelna/core/types/app_context.dart';
+import 'package:autojidelna/core/types/freezed/account/account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
 import 'package:autojidelna/shared/config/dates.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
@@ -6,7 +7,6 @@ import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/change_date.dart';
 import 'package:autojidelna/src/logic/ordering.dart';
 import 'package:autojidelna/src/logic/string_extension.dart';
-import 'package:autojidelna/src/types/all.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_dialog.dart';
 import 'package:canteenlib/canteenlib.dart';

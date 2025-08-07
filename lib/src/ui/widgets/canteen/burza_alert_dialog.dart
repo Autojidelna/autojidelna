@@ -2,7 +2,7 @@ import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/logic/ordering.dart';
-import 'package:autojidelna/src/types/all.dart';
+import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_alert_dialog.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_dialog.dart';
 import 'package:canteenlib/canteenlib.dart';

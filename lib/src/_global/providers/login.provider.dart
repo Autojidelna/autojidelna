@@ -1,13 +1,13 @@
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/types/errors.dart';
-import 'package:autojidelna/src/types/freezed/account/account.dart';
+import 'package:autojidelna/core/types/errors.dart';
+import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:autojidelna/src/logic/show_snack_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;

@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';

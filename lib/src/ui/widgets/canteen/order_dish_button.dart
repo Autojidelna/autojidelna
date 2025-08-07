@@ -1,6 +1,6 @@
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
 import 'package:autojidelna/src/logic/ordering.dart';
-import 'package:autojidelna/src/types/all.dart';
+import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/burza_alert_dialog.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';

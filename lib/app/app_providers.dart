@@ -1,4 +1,3 @@
-import 'package:autojidelna/src/_global/providers/remote_config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:package_info_plus/package_info_plus.dart';

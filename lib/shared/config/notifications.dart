@@ -1,7 +1,7 @@
 // Purpose: stores constants used throughout the app.
 
 import 'package:autojidelna/app/app_providers.dart';
-import 'package:autojidelna/src/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NotificationIds {

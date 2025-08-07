@@ -6,7 +6,6 @@ import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/core/crashlytics/crashlytics_service.dart';
 import 'package:autojidelna/shared/config/adapters.hive.dart';
 import 'package:autojidelna/shared/config/hive.dart';
-import 'package:autojidelna/src/_global/providers/remote_config.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
