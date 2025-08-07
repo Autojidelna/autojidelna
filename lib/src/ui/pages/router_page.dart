@@ -3,7 +3,7 @@ import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
-import 'package:autojidelna/src/ui/widgets/appbars/menu_appbar.dart';
+import 'package:autojidelna/features/canteen/presentation/appbar/menu_appbar.dart';
 import 'package:autojidelna/src/ui/widgets/appbars/more_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

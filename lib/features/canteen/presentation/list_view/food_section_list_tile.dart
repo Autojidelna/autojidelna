@@ -3,7 +3,7 @@ import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/features/canteen/application/ordering.dart';
 import 'package:autojidelna/core/types/stav_jidla.dart';
-import 'package:autojidelna/src/ui/widgets/canteen/burza_alert_dialog.dart';
+import 'package:autojidelna/features/canteen/presentation/burza_alert_dialog.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

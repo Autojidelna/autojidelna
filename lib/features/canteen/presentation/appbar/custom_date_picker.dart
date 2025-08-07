@@ -7,8 +7,8 @@ import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/utils/change_date.dart';
 import 'package:autojidelna/features/canteen/application/ordering.dart';
 import 'package:autojidelna/core/utils/string_extension.dart';
-import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
-import 'package:autojidelna/src/ui/widgets/dialogs/configured_dialog.dart';
+import 'package:autojidelna/shared/widgets/custom_divider.dart';
+import 'package:autojidelna/shared/widgets/configured_dialog.dart';
 import 'package:canteenlib/canteenlib.dart';
 
 import 'package:flutter/material.dart';

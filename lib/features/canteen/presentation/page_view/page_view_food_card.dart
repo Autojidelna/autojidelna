@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/src/ui/widgets/canteen/order_dish_button.dart';
-import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
-import 'package:autojidelna/src/ui/widgets/lined_card.dart';
+import 'package:autojidelna/features/canteen/presentation/order_dish_button.dart';
+import 'package:autojidelna/shared/widgets/custom_divider.dart';
+import 'package:autojidelna/shared/widgets/lined_card.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

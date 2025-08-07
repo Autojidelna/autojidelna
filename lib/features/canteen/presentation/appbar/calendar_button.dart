@@ -1,7 +1,7 @@
 import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/shared/utils/get_correct_date_string.dart';
-import 'package:autojidelna/src/ui/widgets/dialogs/custom_date_picker.dart';
+import 'package:autojidelna/features/canteen/presentation/appbar/custom_date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';

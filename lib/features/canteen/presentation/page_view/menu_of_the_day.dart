@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
-import 'package:autojidelna/src/ui/widgets/canteen/page_view/dish_list.dart';
-import 'package:autojidelna/src/ui/widgets/canteen/error_loading_data.dart';
+import 'package:autojidelna/features/canteen/presentation/page_view/dish_list.dart';
+import 'package:autojidelna/features/canteen/presentation/error_loading_data.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/ui/widgets/canteen/order_dish_button.dart';
-import 'package:autojidelna/src/ui/widgets/section_title.dart';
+import 'package:autojidelna/features/canteen/presentation/order_dish_button.dart';
+import 'package:autojidelna/shared/widgets/section_title.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 

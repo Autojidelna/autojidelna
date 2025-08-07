@@ -4,7 +4,7 @@ import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/shared/config/dates.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
-import 'package:autojidelna/src/ui/widgets/canteen/list_view/day_card.dart';
+import 'package:autojidelna/features/canteen/presentation/list_view/day_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_list_view/flutter_list_view.dart';
