@@ -43,10 +43,9 @@ dependencies:
   firebase_core: ^3.1.0
   firebase_crashlytics: ^4.0.4
   firebase_analytics: ^11.0.1
-  firebase_remote_config: ^5.0.2
   flutter_adaptive_scaffold: ^0.2.1
 
-  package_info_plus: ^8.0.0 # Package info used in about page
+  package_info_plus: ^8.0.0
   share_plus: ^10.0.2
 
   url_launcher: ^6.3.0

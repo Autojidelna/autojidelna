@@ -18,7 +18,6 @@ class AppInit {
   static bool _hiveExecuted = false;
   static bool _firebaseCrashlyticsExecuted = false;
   static bool _firebaseAnalyticsExecuted = false;
-  static bool _remoteConfigExecuted = false;
   static bool _secureStorageExecuted = false;
   static bool _packageInfoExecuted = false;
   static bool _rotationExecuted = false;
