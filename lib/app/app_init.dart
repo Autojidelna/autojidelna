@@ -78,17 +78,6 @@ class AppInit {
     _firebaseAnalyticsExecuted = true;
   }
 
-  static Future<void> remoteConfig() async {
-    assert(_remoteConfigExecuted == false, 'AppInit.remoteConfig() must be called only once');
-    if (_remoteConfigExecuted) return;
-
-    //TODO: make initRemoteConfig work
-    //await remoteConfigProvider.init();
-    //App.initProviderOverrides.add(remoteConfigProvider.overrideWithValue(Rmc()));
-
-    _remoteConfigExecuted = true;
-  }
-
   static Future<void> secureStorage() async {
     assert(_secureStorageExecuted == false, 'AppInit.secureStorage() must be called only once');
     if (_secureStorageExecuted) return;

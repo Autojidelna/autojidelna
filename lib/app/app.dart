@@ -26,7 +26,6 @@ class App {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await AppInit.hive();
     await AppInit.firebaseCrashlytics();
-    await AppInit.remoteConfig();
     await Future.wait([
       AppInit.firebaseAnalytics(),
       AppInit.secureStorage(),

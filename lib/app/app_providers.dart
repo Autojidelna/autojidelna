@@ -5,9 +5,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_providers.g.dart';
 
-// @Riverpod(keepAlive: true)
-// Rmc remoteConfig(Ref ref) => Rmc();
-
 @Riverpod(keepAlive: true)
 FlutterSecureStorage secureStorage(Ref ref) => const FlutterSecureStorage();
 
