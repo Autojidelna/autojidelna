@@ -80,7 +80,7 @@ class AccountPage extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
       child: IconButton(
-        onPressed: () => configuredDialog(context, builder: (BuildContext context) => logoutDialog(context, safeAccount)),
+        onPressed: () => configuredDialog(context, builder: (BuildContext context) => logoutDialog(safeAccount)),
         icon: const Icon(Icons.logout),
       ),
     );

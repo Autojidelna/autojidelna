@@ -113,7 +113,7 @@ void cannotBeOrderedFix(BuildContext context, DateTime date) async {
   final l10n = context.l10n;
   await Future.delayed(const Duration(milliseconds: 200));
   try {
-    if (!date.isBefore(DateTime.now()) && context.mounted) {
+    if (!date.isBefore(DateTime.now())) {
       final CanteenProvider prov = container.read(canteenProvider);
       Jidelnicek jidelnicekCheck = prov.getCachedMenu(date)!;
 

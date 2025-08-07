@@ -6,26 +6,29 @@ import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.da
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-Widget logoutDialog(BuildContext context, SafeAccount safeAccount) {
-  final L10n l10n = context.l10n;
-
-  return AlertDialog(
-    title: Text(l10n.logoutUSure),
-    actionsAlignment: MainAxisAlignment.spaceBetween,
-    alignment: Alignment.bottomCenter,
-    actions: <Widget>[
-      TextButton(
-        onPressed: () async {
-          await ProviderScope.containerOf(context).read(userProvider).logout(safeAccount);
-          if (context.mounted) context.router.replaceAll([const RouterRoute()], updateExistingRoutes: false);
-        },
-        child: Text(l10n.logoutConfirm),
-      ),
-      TextButton(
-        onPressed: () => Navigator.of(context).pop(),
-        style: Theme.of(context).textButtonTheme.style!.copyWith(foregroundColor: WidgetStatePropertyAll(Theme.of(context).colorScheme.primary)),
-        child: Text(l10n.cancel),
-      ),
-    ],
+Widget logoutDialog(SafeAccount safeAccount) {
+  return Builder(
+    builder: (context) {
+      final L10n l10n = context.l10n;
+      return AlertDialog(
+        title: Text(l10n.logoutUSure),
+        actionsAlignment: MainAxisAlignment.spaceBetween,
+        alignment: Alignment.bottomCenter,
+        actions: <Widget>[
+          TextButton(
+            onPressed: () async {
+              await ProviderScope.containerOf(context).read(userProvider).logout(safeAccount);
+              if (context.mounted) context.router.replaceAll([const RouterRoute()], updateExistingRoutes: false);
+            },
+            child: Text(l10n.logoutConfirm),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            style: Theme.of(context).textButtonTheme.style!.copyWith(foregroundColor: WidgetStatePropertyAll(Theme.of(context).colorScheme.primary)),
+            child: Text(l10n.cancel),
+          ),
+        ],
+      );
+    },
   );
 }

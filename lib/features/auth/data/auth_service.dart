@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/shared/config/secure_storage.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/core/types/errors.dart';
