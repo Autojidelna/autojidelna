@@ -14,13 +14,6 @@ class ConveniencePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final L10n lang = context.l10n;
 
-    final skipWeekends = ref.watch(skipWeekendsProvider);
-    final skipWeekendsNotifier = ref.read(skipWeekendsProvider.notifier);
-    final bigCalendarMarkers = ref.watch(bigCalendarMarkersProvider);
-    final bigCalendarMarkersNotifier = ref.read(bigCalendarMarkersProvider.notifier);
-    final listUi = ref.watch(listUiProvider);
-    final listUiNotifier = ref.read(listUiProvider.notifier);
-
     return Scaffold(
       appBar: AppBar(title: Text(lang.convenience)),
       body: ScrollViewColumn(
@@ -29,20 +22,20 @@ class ConveniencePage extends ConsumerWidget {
           // TODO: skip weekends
           SwitchListTile(
             title: Text(lang.skipWeekends),
-            value: skipWeekends,
-            onChanged: skipWeekendsNotifier.update,
+            value: ref.watch(skipWeekendsProvider),
+            onChanged: ref.read(skipWeekendsProvider.notifier).update,
           ),
           SwitchListTile(
             title: Text(lang.calendarBigMarkers),
-            value: bigCalendarMarkers,
-            onChanged: bigCalendarMarkersNotifier.update,
+            value: ref.watch(bigCalendarMarkersProvider),
+            onChanged: ref.read(bigCalendarMarkersProvider.notifier).update,
           ),
           SectionTitle(lang.experimental),
           SwitchListTile(
             title: Text(lang.listUi),
             subtitle: Text(lang.listUiSubtitle),
-            value: listUi,
-            onChanged: listUiNotifier.update,
+            value: ref.watch(listUiProvider),
+            onChanged: ref.read(listUiProvider.notifier).update,
           ),
         ],
       ),
