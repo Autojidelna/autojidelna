@@ -1,20 +1,15 @@
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomUrlField extends StatefulWidget {
+class CustomUrlField extends ConsumerWidget {
   const CustomUrlField({super.key});
 
   @override
-  State<CustomUrlField> createState() => _CustomUrlFieldState();
-}
-
-class _CustomUrlFieldState extends State<CustomUrlField> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final L10n lang = context.l10n;
-    final LoginProvider provider = context.watch<LoginProvider>();
+    final LoginProvider provider = ref.watch(loginProvider);
     final ThemeData theme = Theme.of(context);
 
     return Padding(

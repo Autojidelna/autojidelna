@@ -1,17 +1,15 @@
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
 import 'package:autojidelna/src/logic/url.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CanteenUrlPicker extends StatelessWidget {
+class CanteenUrlPicker extends ConsumerWidget {
   const CanteenUrlPicker({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final LoginProvider provider = context.read<LoginProvider>();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final LoginProvider provider = ref.read(loginProvider);
     Map<String, String> urls = provider.urls;
-    if (kDebugMode) urls.addAll({'Testing API': 'api.autojidelna.cz'});
     return ValueListenableBuilder<TextEditingValue>(
       valueListenable: provider.urlController,
       builder: (_, urlController, ___) {

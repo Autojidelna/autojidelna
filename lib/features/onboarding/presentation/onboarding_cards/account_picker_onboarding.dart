@@ -18,7 +18,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
     List<SafeAccount> accounts = ref.read(userProvider).loggedInAccounts;
     final loginProv = ref.read(loginProvider);
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => loginProv.setPickedAccount(accounts.first));
+    if (accounts.isNotEmpty) WidgetsBinding.instance.addPostFrameCallback((_) => loginProv.setPickedAccount(accounts.first));
 
     return Padding(
       padding: const EdgeInsets.all(8),

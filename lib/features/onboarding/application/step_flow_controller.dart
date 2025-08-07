@@ -51,12 +51,6 @@ class StepFlowController {
     _pages.addAll(newSteps);
   }
 
-  void _removeStepsAfter(int index) {
-    if (index < _pages.length - 1) {
-      _pages.removeRange(index + 1, _pages.length);
-    }
-  }
-
   void clear() {
     _pages.clear();
     _currentPageIndex = 0;
@@ -65,15 +59,6 @@ class StepFlowController {
   void reset() {
     clear();
     addSteps(_defaultPages);
-  }
-
-  void handleDecisionPoints() {
-    OnboardingStep step = _pages[_currentPageIndex];
-    bool hasDecision = step is ThemeOnboarding;
-
-    if (!hasDecision) return;
-
-    _removeStepsAfter(_currentPageIndex);
   }
 
   void setLoginFlow() {

@@ -11,14 +11,10 @@ void main() async {
   await App.init();
   await MigrationManager.runMigrations();
 
-  if (!kDebugMode) {
-    runApp(
-      ProviderScope(
-        overrides: App.initProviderOverrides,
-        child: const MyApp(),
-      ),
-    );
-  } else {
-    runApp(const ProviderScope(child: MyApp()));
-  }
+  runApp(
+    ProviderScope(
+      overrides: App.initProviderOverrides,
+      child: const MyApp(),
+    ),
+  );
 }

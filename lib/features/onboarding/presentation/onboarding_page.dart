@@ -30,6 +30,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         duration: Durations.medium1,
         curve: Curves.easeInOut,
       );
+      return;
     }
 
     if (!mounted) return;
@@ -46,8 +47,6 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       context.router.maybePop();
       return;
     }
-
-    _stepFlow.handleDecisionPoints();
 
     _pageController.previousPage(
       duration: Durations.medium1,
