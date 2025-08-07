@@ -1,8 +1,11 @@
 import 'package:autojidelna/app/app_init.dart';
+import 'package:autojidelna/core/firebase/firebase_options.dart';
 import 'package:autojidelna/core/types/app_context.dart';
-import 'package:canteenlib/canteenlib.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter_list_view/flutter_list_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -20,7 +23,7 @@ class App {
 
     // We're using Future.wait to run multiple Futures in parallel
     // These Futures must take less than 200 ms to run
-    //await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await AppInit.hive();
     //await AppInit.firebaseCrashlytics();
     await AppInit.remoteConfig();
