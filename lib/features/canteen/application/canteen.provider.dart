@@ -1,12 +1,11 @@
 import 'dart:async';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/app.dart';
+import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:autojidelna/features/canteen/data/canteen_service.dart';
-import 'package:autojidelna/core/types/app_context.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:canteenlib/canteenlib.dart';
@@ -14,12 +13,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-final canteenProvider = riverpod.ChangeNotifierProvider<CanteenProvider>((ref) => CanteenProvider(CanteenService()));
+final canteenProvider = riverpod.ChangeNotifierProvider<CanteenProvider>((ref) => CanteenProvider(ref, CanteenService()));
 
 class CanteenProvider with ChangeNotifier {
-  CanteenProvider(this._canteenService);
+  CanteenProvider(this._ref, this._canteenService);
 
   final CanteenService _canteenService;
+  final riverpod.Ref _ref;
 
   bool _ordering = false;
 
@@ -200,12 +200,11 @@ class CanteenProvider with ChangeNotifier {
   Future<void> handleErrors(dynamic e) async {
     switch (e) {
       case CanteenErrors.needToLogin:
-        final riverpod.ProviderContainer container = riverpod.ProviderScope.containerOf(App.getIt<AppContext>().context!);
         try {
-          await container.read(userProvider).loadUser();
+          await _ref.read(userProvider).loadUser();
         } catch (e) {
-          await container.read(userProvider).unloadUser();
-          App.getIt<AppContext>().context!.router.replaceAll([const RouterRoute()], updateExistingRoutes: false);
+          await _ref.read(userProvider).unloadUser();
+          _ref.read(appRouterProvider).replaceAll([const RouterRoute()], updateExistingRoutes: false);
         }
         break;
       case CanteenErrors.noInternetConnection:
