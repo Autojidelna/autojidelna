@@ -1,7 +1,7 @@
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
+import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
 import 'package:autojidelna/src/ui/widgets/dialogs/configured_alert_dialog.dart';

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
+import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';

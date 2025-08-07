@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
+import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/page_view/page_view_food_card.dart';
 import 'package:canteenlib/canteenlib.dart';

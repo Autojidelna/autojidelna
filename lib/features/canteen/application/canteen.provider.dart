@@ -5,7 +5,7 @@ import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
-import 'package:autojidelna/src/logic/services/canteen_service.dart';
+import 'package:autojidelna/features/canteen/data/canteen_service.dart';
 import 'package:autojidelna/core/types/app_context.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';

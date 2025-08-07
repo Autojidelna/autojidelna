@@ -1,5 +1,5 @@
 import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
+import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/features/auth/data/auth_service.dart';
 import 'package:autojidelna/core/types/app_context.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';

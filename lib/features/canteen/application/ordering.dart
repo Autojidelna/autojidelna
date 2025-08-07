@@ -4,7 +4,7 @@ import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/core/analytics/statistic_type.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
+import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/core/analytics/analytics_service.dart';
@@ -14,6 +14,8 @@ import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+
+// TODO: Separate into multiple files
 
 void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
   final ProviderContainer container = ProviderScope.containerOf(context);

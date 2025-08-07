@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
+import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/page_view/dish_list.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/error_loading_data.dart';
 import 'package:canteenlib/canteenlib.dart';

@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/logic/ordering.dart';
+import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
+import 'package:autojidelna/features/canteen/application/ordering.dart';
 import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/burza_alert_dialog.dart';
 import 'package:canteenlib/canteenlib.dart';
