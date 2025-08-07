@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-import 'package:autojidelna/shared/config/secure_storage.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/logged_accounts/logged_accounts.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
+import 'package:autojidelna/shared/config/secure_storage.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
+
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'package:http/http.dart' as http;
@@ -93,9 +93,9 @@ class AuthService {
   /// [AuthErrors.accountNotFound] - A matching [Account] was not found
   Future<User?> loginBySafeAccount(SafeAccount safeAccount) async {
     Account? account = await _findBySafeAccount(safeAccount);
-    throwIf(account == null, AuthErrors.accountNotFound);
+    if (account == null) return Future.error(AuthErrors.accountNotFound);
 
-    return login(account!);
+    return login(account);
   }
 
   /// Logs in using data saved in Secure storage
@@ -108,8 +108,8 @@ class AuthService {
   Future<User?> loginFromStorage() async {
     final LoggedAccounts loginData = await _getDataFromStorage();
 
-    throwIf(loginData.accounts.isEmpty, AuthErrors.missingCredentials);
-    throwIf(loginData.loggedInAccount == null, AuthErrors.accountNotSelected);
+    if (loginData.accounts.isEmpty) return Future.error(AuthErrors.missingCredentials);
+    if (loginData.loggedInAccount == null) return Future.error(AuthErrors.accountNotSelected);
     return await loginBySafeAccount(loginData.loggedInAccount!);
   }
 
@@ -129,7 +129,10 @@ class AuthService {
   /// [AuthService.loginFromStorage] NEEDS TO BE CALLED AFTER THIS
   Future<void> changeAccount(SafeAccount saveAccount) async {
     LoggedAccounts loginData = await _getDataFromStorage();
-    throwIf(!loginData.accounts.any((account) => SafeAccount.fromAccount(account) == saveAccount), AuthErrors.accountNotFound);
+
+    bool accountFound = !loginData.accounts.any((account) => SafeAccount.fromAccount(account) == saveAccount);
+    if (!accountFound) return Future.error(AuthErrors.accountNotFound);
+
     LoggedAccounts updatedData = LoggedAccounts(accounts: loginData.accounts, loggedInAccount: saveAccount);
     await _saveDataToStorage(updatedData);
   }
@@ -146,9 +149,9 @@ class AuthService {
   /// [AuthErrors.accountNotFound] - A matching [Account] was not found
   Future<void> logout(SafeAccount safeAccount) async {
     Account? account = await _findBySafeAccount(safeAccount);
-    throwIf(account == null, AuthErrors.accountNotFound);
+    if (account == null) return Future.error(AuthErrors.accountNotFound);
 
-    await _removeAccountFromStorage(account!);
+    await _removeAccountFromStorage(account);
     //NotificationService().removeNotifications(SafeAccount.fromAccount(account));
     //NotificationService().removeNotifications(SafeAccount.fromAccount(account));
 
