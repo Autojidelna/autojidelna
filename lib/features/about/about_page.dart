@@ -20,9 +20,9 @@ class AboutPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
 
-    String appVersion = lang.versionSubtitle(kDebugMode.toString(), ref.read(packageInfoProvider)!.version);
+    String appVersion = l10n.versionSubtitle(kDebugMode.toString(), ref.read(packageInfoProvider)!.version);
 
     Widget logo = SvgPicture.asset(
       Assets.logo,
@@ -31,7 +31,7 @@ class AboutPage extends ConsumerWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(title: Text(lang.about)),
+      appBar: AppBar(title: Text(l10n.about)),
       body: ScrollViewColumn(
         children: [
           // logo
@@ -39,20 +39,20 @@ class AboutPage extends ConsumerWidget {
           const CustomDivider(isTransparent: false),
           // version list tile
           ListTile(
-            title: Text(lang.version),
+            title: Text(l10n.version),
             subtitle: Text(appVersion),
           ),
           // licenses list tile
           ListTile(
-            title: Text(lang.licenses),
+            title: Text(l10n.licenses),
             onTap: () => unawaited(
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => LicensePage(
-                    applicationName: lang.appName,
+                    applicationName: l10n.appName,
                     applicationVersion: appVersion,
                     applicationIcon: logo,
-                    applicationLegalese: lang.appLegalese(DateTime.now()),
+                    applicationLegalese: l10n.appLegalese(DateTime.now()),
                   ),
                 ),
               ),
@@ -60,7 +60,7 @@ class AboutPage extends ConsumerWidget {
           ),
           // privacy policy
           ListTile(
-            title: Text(lang.privacyPolicy),
+            title: Text(l10n.privacyPolicy),
             onTap: () => unawaited(launchUrl(Uri.parse(Links.privacyPolicy))),
           ),
           const CustomDivider(isTransparent: false),

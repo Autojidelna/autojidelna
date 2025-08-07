@@ -15,20 +15,20 @@ class AppearancePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
 
     return Scaffold(
-      appBar: AppBar(title: Text(lang.appearance)),
+      appBar: AppBar(title: Text(l10n.appearance)),
       body: ScrollViewColumn(
         children: [
-          SectionTitle(lang.theme),
+          SectionTitle(l10n.theme),
           const CustomDivider(height: 24),
           const ThemeModePicker(),
           const CustomDivider(height: 38),
           const ThemeStylePicker(),
           const CustomDivider(height: 30),
           const AmoledModeSwitch(),
-          SectionTitle(lang.display),
+          SectionTitle(l10n.display),
           const DateFormatPickerListTile(),
         ],
       ),

@@ -8,7 +8,7 @@ class CustomUrlField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
     final LoginProvider provider = ref.watch(loginProvider);
     final ThemeData theme = Theme.of(context);
 
@@ -24,13 +24,13 @@ class CustomUrlField extends ConsumerWidget {
           decoration: InputDecoration(
             border: InputBorder.none,
             floatingLabelBehavior: FloatingLabelBehavior.always,
-            labelText: lang.loginUrlFieldLabel,
+            labelText: l10n.loginUrlFieldLabel,
             errorStyle: Theme.of(context).textTheme.bodySmall!.copyWith(color: theme.colorScheme.error, height: .04),
             errorText: provider.urlError,
             suffixIcon: const Icon(Icons.edit_rounded),
           ),
           onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
-          validator: (value) => value == null || value.isEmpty ? lang.loginUrlFieldHint : null,
+          validator: (value) => value == null || value.isEmpty ? l10n.loginUrlFieldHint : null,
         ),
       ),
     );

@@ -45,8 +45,8 @@ void backgroundFetchHeadlessTask(HeadlessTask task) async {
 }
 
 Future<void> doNotifications({bool force = false}) async {
-  //TODO: add more langueages
-  final lang = lookupTexts(Locales.cs);
+  //TODO: add morel10nueages
+  final l10n = lookupTexts(Locales.cs);
   LoggedInCanteen loggedInCanteen = LoggedInCanteen();
   AuthService authService = AuthService();
   List<SafeAccount> limitedAccounts = await AuthService().getLimitedAccounts();
@@ -56,7 +56,7 @@ Future<void> doNotifications({bool force = false}) async {
       locked: true,
       channelKey: NotificationIds.channelElse,
       actionType: ActionType.Default,
-      title: lang.gettingDataNotifications,
+      title:l10n.gettingDataNotifications,
     ),
   );
   // Don't send notifications before 9 and after 22
@@ -164,7 +164,7 @@ Future<void> doNotifications({bool force = false}) async {
               payload: {
                 NotificationIds.payloadUser: jsonEncode(limitedAccounts[i].toJson()),
               },
-              body: lang.noFood,
+              body:l10n.noFood,
             ),
           );
         } else {

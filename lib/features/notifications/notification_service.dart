@@ -62,7 +62,7 @@ class NotificationService {
       ...limitedAccounts.expand((account) => _createNotificationChannelGroups(account)),
       NotificationChannelGroup(
         channelGroupKey: NotificationIds.channelGroupElse,
-        channelGroupName: _lang.notificationOther,
+        channelGroupName: _l10n.notificationOther,
       ),
     ];
 
@@ -72,8 +72,8 @@ class NotificationService {
       NotificationChannel(
         channelGroupKey: NotificationIds.channelGroupElse,
         channelKey: NotificationIds.channelElse,
-        channelName: _lang.notificationOther,
-        channelDescription: _lang.notificationOtherDescription,
+        channelName: _l10n.notificationOther,
+        channelDescription: _l10n.notificationOtherDescription,
         importance: NotificationImportance.Min,
         playSound: false,
       ),
@@ -88,7 +88,7 @@ class NotificationService {
   }
 
   List<NotificationChannelGroup> _createNotificationChannelGroups(SafeAccount account) {
-    return [_createChannelGroup(NotificationIds.channelGroup(account), _lang.notificationsFor(account.username))];
+    return [_createChannelGroup(NotificationIds.channelGroup(account), _l10n.notificationsFor(account.username))];
   }
 
   List<NotificationChannel> _createNotificationChannels(SafeAccount account) {
@@ -96,20 +96,20 @@ class NotificationService {
       _createChannel(
         NotificationIds.channelGroup(account),
         NotificationIds.dnesniJidloChannel(account),
-        _lang.channelNameDish,
-        _lang.channelDescriptionDish(account.username),
+        _l10n.channelNameDish,
+        _l10n.channelDescriptionDish(account.username),
       ),
       _createChannel(
         NotificationIds.channelGroup(account),
         NotificationIds.kreditChannel(account),
-        _lang.channelNameLowCredit,
-        _lang.channelDescriptionLowCredit(account.username),
+        _l10n.channelNameLowCredit,
+        _l10n.channelDescriptionLowCredit(account.username),
       ),
       _createChannel(
         NotificationIds.channelGroup(account),
         NotificationIds.objednanoChannel(account),
-        _lang.channelNameOrdered,
-        _lang.channelDescriptionOrdered(account.username),
+        _l10n.channelNameOrdered,
+        _l10n.channelDescriptionOrdered(account.username),
       ),
     ];
   }

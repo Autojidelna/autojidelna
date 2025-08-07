@@ -8,7 +8,7 @@ class ThemeModePicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final lang = context.l10n;
+    final l10n = context.l10n;
     return SizedBox(
       width: MediaQuery.sizeOf(context).width * .9,
       child: SegmentedButton<ThemeMode>(
@@ -16,9 +16,9 @@ class ThemeModePicker extends ConsumerWidget {
         selected: {ref.watch(themeNotifierProvider.select((data) => data.themeMode))},
         onSelectionChanged: (Set<ThemeMode> selected) => ref.read(themeNotifierProvider.notifier).setThemeMode(selected.first),
         segments: [
-          ButtonSegment<ThemeMode>(value: ThemeMode.system, label: Text(lang.themeModeSystem)),
-          ButtonSegment<ThemeMode>(value: ThemeMode.light, label: Text(lang.themeModeLight)),
-          ButtonSegment<ThemeMode>(value: ThemeMode.dark, label: Text(lang.themeModeDark)),
+          ButtonSegment<ThemeMode>(value: ThemeMode.system, label: Text(l10n.themeModeSystem)),
+          ButtonSegment<ThemeMode>(value: ThemeMode.light, label: Text(l10n.themeModeLight)),
+          ButtonSegment<ThemeMode>(value: ThemeMode.dark, label: Text(l10n.themeModeDark)),
         ],
       ),
     );

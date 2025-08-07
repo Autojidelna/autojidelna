@@ -22,7 +22,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
   final CanteenProvider prov = container.read(canteenProvider);
   final Uzivatel uzivatel = container.read(userProvider).user!.data;
   final Canteen canteen = App.getIt<Canteen>();
-  final L10n lang = context.l10n;
+  final L10n l10n = context.l10n;
   final DateTime date = dish.den;
 
   if (prov.ordering) return;
@@ -40,7 +40,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
         prov.updateMenu(menu);
         AnalyticsService().addStatistic(StatisticType.order);
       } catch (e) {
-        showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(lang));
+        showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(l10n));
       }
       break;
 
@@ -48,7 +48,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
       Burza? burza = prov.getMarketplaceTypeDish(dish);
 
       if (burza == null) {
-        showErrorSnackBar(SnackBarOrderingErrors.dishNotInMarketplace(lang));
+        showErrorSnackBar(SnackBarOrderingErrors.dishNotInMarketplace(l10n));
         break;
       }
 
@@ -57,12 +57,12 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
         prov.updateMenu(menu);
         AnalyticsService().addStatistic(StatisticType.order);
       } catch (e) {
-        showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(lang));
+        showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(l10n));
       }
       break;
 
     case StavJidla.objednanoVyprsenaPlatnost:
-      showErrorSnackBar(SnackBarOrderingErrors.dishCancellationExpired(lang));
+      showErrorSnackBar(SnackBarOrderingErrors.dishCancellationExpired(l10n));
       break;
 
     case StavJidla.objednanoPouzeNaBurzu:
@@ -70,20 +70,20 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
         Jidelnicek menu = await canteen.doBurzy(dish);
         prov.updateMenu(menu);
       } catch (e) {
-        showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(lang));
+        showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(l10n));
       }
       break;
 
     case StavJidla.nedostupne:
       if (date.isBefore(DateTime.now())) {
-        showErrorSnackBar(SnackBarOrderingErrors.dishCannotBeOrdered(lang));
+        showErrorSnackBar(SnackBarOrderingErrors.dishCannotBeOrdered(l10n));
         break;
       }
       if (uzivatel.kredit < dish.cena!) {
-        showErrorSnackBar(SnackBarOrderingErrors.insufficientCredit(lang));
+        showErrorSnackBar(SnackBarOrderingErrors.insufficientCredit(l10n));
         break;
       }
-      showErrorSnackBar(SnackBarOrderingErrors.dishCannotBeOrdered(lang));
+      showErrorSnackBar(SnackBarOrderingErrors.dishCannotBeOrdered(l10n));
       break;
 
     case StavJidla.objednano:
@@ -91,7 +91,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
         Jidelnicek jidelnicek = await canteen.objednat(dish);
         prov.updateMenu(jidelnicek);
       } catch (e) {
-        showErrorSnackBar(SnackBarOrderingErrors.cancelingOrder(lang));
+        showErrorSnackBar(SnackBarOrderingErrors.cancelingOrder(l10n));
       }
       break;
 
@@ -100,7 +100,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
         Jidelnicek jidelnicek = await canteen.doBurzy(dish);
         prov.updateMenu(jidelnicek);
       } catch (e) {
-        showErrorSnackBar(SnackBarOrderingErrors.addingToMarketplace(lang));
+        showErrorSnackBar(SnackBarOrderingErrors.addingToMarketplace(l10n));
       }
       break;
   }
@@ -110,7 +110,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
 
 void cannotBeOrderedFix(BuildContext context, DateTime date) async {
   final ProviderContainer container = ProviderScope.containerOf(context);
-  final lang = context.l10n;
+  final l10n = context.l10n;
   await Future.delayed(const Duration(milliseconds: 200));
   try {
     if (!date.isBefore(DateTime.now()) && context.mounted) {
@@ -125,7 +125,7 @@ void cannotBeOrderedFix(BuildContext context, DateTime date) async {
       }
     }
   } catch (e) {
-    showErrorSnackBar(SnackBarAuthErrors.connectionFailed(lang));
+    showErrorSnackBar(SnackBarAuthErrors.connectionFailed(l10n));
   }
 }
 
@@ -165,22 +165,22 @@ bool isButtonEnabled(StavJidla stavJidla) {
 
 String getObedText(BuildContext context, Jidlo dish, StavJidla stavJidla) {
   final ProviderContainer container = ProviderScope.containerOf(context);
-  final lang = context.l10n;
+  final l10n = context.l10n;
   DateTime date = dish.den;
   Jidelnicek menu = container.read(canteenProvider).getCachedMenu(date)!;
   switch (stavJidla) {
     case StavJidla.objednano:
-      return lang.cancel;
+      return l10n.cancel;
     case StavJidla.neobjednano:
-      return lang.objednat;
+      return l10n.objednat;
     case StavJidla.objednanoVyprsenaPlatnost:
-      return lang.nelzeZrusit;
+      return l10n.nelzeZrusit;
     case StavJidla.objednanoPouzeNaBurzu:
-      return lang.vlozitNaBurzu;
+      return l10n.vlozitNaBurzu;
     case StavJidla.dostupneNaBurze:
-      return lang.objednatZBurzy;
+      return l10n.objednatZBurzy;
     case StavJidla.vlozenoNaBurze:
-      return lang.odebratZBurzy;
+      return l10n.odebratZBurzy;
     case StavJidla.nedostupne:
       try {
         bool jeVeDneDostupnyObed = false;
@@ -206,9 +206,9 @@ String getObedText(BuildContext context, Jidlo dish, StavJidla stavJidla) {
       }
       Uzivatel uzivatel = container.read(userProvider).user!.data;
       if (uzivatel.kredit < dish.cena! && !date.isBefore(DateTime.now())) {
-        return lang.errorsInsufficientCredit;
+        return l10n.errorsInsufficientCredit;
       } else {
-        return lang.nelzeObjednat;
+        return l10n.nelzeObjednat;
       }
   }
 }

@@ -12,28 +12,28 @@ class ConveniencePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
 
     return Scaffold(
-      appBar: AppBar(title: Text(lang.convenience)),
+      appBar: AppBar(title: Text(l10n.convenience)),
       body: ScrollViewColumn(
         children: [
-          SectionTitle(lang.convenience),
+          SectionTitle(l10n.convenience),
           // TODO: skip weekends
           SwitchListTile(
-            title: Text(lang.skipWeekends),
+            title: Text(l10n.skipWeekends),
             value: ref.watch(skipWeekendsProvider),
             onChanged: ref.read(skipWeekendsProvider.notifier).update,
           ),
           SwitchListTile(
-            title: Text(lang.calendarBigMarkers),
+            title: Text(l10n.calendarBigMarkers),
             value: ref.watch(bigCalendarMarkersProvider),
             onChanged: ref.read(bigCalendarMarkersProvider.notifier).update,
           ),
-          SectionTitle(lang.experimental),
+          SectionTitle(l10n.experimental),
           SwitchListTile(
-            title: Text(lang.listUi),
-            subtitle: Text(lang.listUiSubtitle),
+            title: Text(l10n.listUi),
+            subtitle: Text(l10n.listUiSubtitle),
             value: ref.watch(listUiProvider),
             onChanged: ref.read(listUiProvider.notifier).update,
           ),

@@ -15,7 +15,7 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish, StavJidla stav) {
     return;
   }
 
-  final L10n lang = context.l10n;
+  final L10n l10n = context.l10n;
   ValueNotifier<bool> checkbox = ValueNotifier<bool>(false);
 
   return configuredDialog(
@@ -29,7 +29,7 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish, StavJidla stav) {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(lang.burzaAlertDialogContent),
+                child: Text(l10n.burzaAlertDialogContent),
               ),
               const SizedBox(height: 2),
               ValueListenableBuilder(
@@ -41,7 +41,7 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish, StavJidla stav) {
                     Hive.box(Boxes.appState).put(HiveKeys.appState.hideBurzaAlertDialog, data);
                   },
                   controlAffinity: ListTileControlAffinity.leading,
-                  title: Text(lang.dontShowAgain, style: Theme.of(context).listTileTheme.subtitleTextStyle),
+                  title: Text(l10n.dontShowAgain, style: Theme.of(context).listTileTheme.subtitleTextStyle),
                 ),
               ),
             ],

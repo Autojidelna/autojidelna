@@ -9,7 +9,7 @@ class AnalyticsSwitches extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
 
     final allowAnalytics = ref.watch(allowAnalyticsProvider);
     final allowAnalyticsNotifier = ref.read(allowAnalyticsProvider.notifier);
@@ -21,16 +21,16 @@ class AnalyticsSwitches extends ConsumerWidget {
       children: [
         SwitchListTile(
           dense: false,
-          title: Text(lang.allowAnalytics),
-          subtitle: Text(lang.allowAnalyticsSubtitle),
+          title: Text(l10n.allowAnalytics),
+          subtitle: Text(l10n.allowAnalyticsSubtitle),
           value: allowAnalytics,
           onChanged: allowAnalyticsNotifier.update,
         ),
         const CustomDivider(height: 8),
         SwitchListTile(
           dense: false,
-          title: Text(lang.sendCrashLogs),
-          subtitle: Text(lang.sendCrashLogsSubtitle),
+          title: Text(l10n.sendCrashLogs),
+          subtitle: Text(l10n.sendCrashLogsSubtitle),
           value: sendCrashLogs,
           onChanged: sendCrashLogsNotifier.update,
         ),

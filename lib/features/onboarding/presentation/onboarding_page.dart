@@ -63,7 +63,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
     bool canNavigateBack = ref.read(userProvider).user != null;
     ThemeData theme = Theme.of(context);
 
@@ -81,7 +81,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                 child: Icon(Icons.rocket_launch_outlined, size: 55, color: theme.colorScheme.primary),
               ),
               ListTile(
-                title: Text(lang.welcome, style: theme.textTheme.displaySmall),
+                title: Text(l10n.welcome, style: theme.textTheme.displaySmall),
                 subtitle: Text(_stepFlow.currentPage.description(context), style: theme.textTheme.titleMedium),
               ),
               const CustomDivider(height: 32),

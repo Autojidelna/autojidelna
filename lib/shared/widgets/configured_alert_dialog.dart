@@ -12,7 +12,7 @@ class ConfiguredAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final L10n lang = context.l10n;
+    final L10n l10n = context.l10n;
     return AlertDialog(
       titlePadding: const EdgeInsets.only(top: 4),
       contentPadding: EdgeInsets.zero,
@@ -38,7 +38,7 @@ class ConfiguredAlertDialog extends StatelessWidget {
                     visualDensity: const VisualDensity(vertical: -4),
                     padding: const EdgeInsets.only(right: 16),
                   ),
-                  child: Text(customCancelText != null && customCancelText!.trim().isNotEmpty ? customCancelText! : lang.cancel),
+                  child: Text(customCancelText != null && customCancelText!.trim().isNotEmpty ? customCancelText! : l10n.cancel),
                 ),
               ],
             ),

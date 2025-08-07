@@ -10,7 +10,7 @@ class ErrorLoadingData extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final lang = context.l10n;
+    final l10n = context.l10n;
     return RefreshIndicator(
       onRefresh: ref.read(canteenProvider).refreshCurrentPage,
       child: SingleChildScrollView(
@@ -29,7 +29,7 @@ class ErrorLoadingData extends ConsumerWidget {
               SizedBox(
                 width: MediaQuery.sizeOf(context).width * 0.75,
                 child: Text(
-                  lang.errorsLoadingData,
+                  l10n.errorsLoadingData,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         fontWeight: FontWeight.bold,
