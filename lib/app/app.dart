@@ -25,10 +25,10 @@ class App {
     // These Futures must take less than 200 ms to run
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await AppInit.hive();
-    //await AppInit.firebaseCrashlytics();
+    await AppInit.firebaseCrashlytics();
     await AppInit.remoteConfig();
     await Future.wait([
-      //AppInit.firebaseAnalytics(),
+      AppInit.firebaseAnalytics(),
       AppInit.secureStorage(),
       AppInit.packageInfo(),
       AppInit.rotation(),

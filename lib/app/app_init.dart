@@ -54,9 +54,7 @@ class AppInit {
     // We don't want to send crash reports while in development. Web is not supported yet by Crashlytics.
     if (!kIsWeb && kReleaseMode && sendCrashLogs) {
       // Flutter error handling
-      FlutterError.onError = (errorDetails) async {
-        FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-      };
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
       // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
       PlatformDispatcher.instance.onError = (error, stack) {
