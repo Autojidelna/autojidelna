@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/src/_global/providers/account.provider.dart';
-import 'package:autojidelna/src/logic/datetime_wrapper.dart';
+import 'package:autojidelna/src/logic/datetime_utils.dart';
 import 'package:autojidelna/src/logic/services/canteen_service.dart';
 import 'package:autojidelna/core/types/app_context.dart';
 import 'package:autojidelna/core/types/errors.dart';
@@ -155,7 +155,7 @@ class CanteenProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setDayIndex(int dayIndex) => setSelectedDate(convertIndexToDatetime(dayIndex));
+  void setDayIndex(int dayIndex) => setSelectedDate(dayIndex.toDateTime());
 
   set ordering(bool ordering) {
     if (_ordering == ordering) return;
