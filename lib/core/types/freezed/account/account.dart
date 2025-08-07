@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/logic/url.dart';
+import 'package:autojidelna/core/utils/url.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 

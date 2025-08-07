@@ -6,7 +6,7 @@ import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
 import 'package:autojidelna/shared/theme/domain/theme_state.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/logic/deep_link_transformer_logic.dart';
+import 'package:autojidelna/core/utils/deep_link_transformer_logic.dart';
 import 'package:autojidelna/core/types/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

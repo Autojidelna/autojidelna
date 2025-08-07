@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/logic/change_date.dart';
+import 'package:autojidelna/shared/utils/change_date.dart';
 import 'package:flutter/material.dart';
 
 class JumpToTodayButton extends StatelessWidget {

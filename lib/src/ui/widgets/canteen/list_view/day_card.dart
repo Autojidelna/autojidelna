@@ -1,7 +1,7 @@
 import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
 import 'package:autojidelna/src/_global/providers/canteen.provider.dart';
-import 'package:autojidelna/src/logic/get_correct_date_string.dart';
-import 'package:autojidelna/src/logic/string_extension.dart';
+import 'package:autojidelna/shared/utils/get_correct_date_string.dart';
+import 'package:autojidelna/core/utils/string_extension.dart';
 import 'package:autojidelna/src/ui/widgets/canteen/list_view/food_section_list_tile.dart';
 import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';

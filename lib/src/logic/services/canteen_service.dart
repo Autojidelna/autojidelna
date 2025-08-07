@@ -1,5 +1,5 @@
 import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/src/logic/datetime_utils.dart';
+import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';

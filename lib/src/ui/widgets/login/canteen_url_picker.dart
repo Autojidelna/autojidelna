@@ -1,5 +1,5 @@
 import 'package:autojidelna/src/_global/providers/login.provider.dart';
-import 'package:autojidelna/src/logic/url.dart';
+import 'package:autojidelna/core/utils/url.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
