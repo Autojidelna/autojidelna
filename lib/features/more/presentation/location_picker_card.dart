@@ -1,12 +1,13 @@
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/core/types/freezed/user/user.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
-import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/core/types/freezed/user/user.dart';
 import 'package:autojidelna/shared/widgets/configured_alert_dialog.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';
 import 'package:autojidelna/shared/widgets/lined_card.dart';
+import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';

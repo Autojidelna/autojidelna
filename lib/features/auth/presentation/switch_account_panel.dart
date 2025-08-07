@@ -4,15 +4,20 @@ import 'package:autojidelna/features/onboarding/application/step_flow_controller
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/shared/widgets/configured_bottom_sheet.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';
-import 'package:autojidelna/src/ui/widgets/dialogs/logout_dialog.dart';
+import 'package:autojidelna/features/auth/presentation/logout_dialog.dart';
 import 'package:autojidelna/shared/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SwitchAccountPanel extends StatelessWidget {
   const SwitchAccountPanel({super.key});
+
+  static void open(BuildContext context) {
+    configuredBottomSheet(context, builder: (context) => const SwitchAccountPanel());
+  }
 
   @override
   Widget build(BuildContext context) {

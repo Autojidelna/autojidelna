@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/ui/widgets/snackbars/base_snack_bar.dart';
+import 'package:autojidelna/shared/snackbars/base_snack_bar.dart';
 import 'package:flutter/material.dart';
 
 SnackBar infoSnackBar(BuildContext context, {String title = '', String? subtitle, IconData icon = Icons.info_outline_rounded}) {

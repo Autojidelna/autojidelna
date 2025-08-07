@@ -9,7 +9,7 @@ import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/core/types/stav_jidla.dart';
-import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
+import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

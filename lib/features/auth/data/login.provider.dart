@@ -8,7 +8,7 @@ import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
-import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
+import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 

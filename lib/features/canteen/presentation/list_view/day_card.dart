@@ -4,7 +4,7 @@ import 'package:autojidelna/shared/utils/get_correct_date_string.dart';
 import 'package:autojidelna/core/utils/string_extension.dart';
 import 'package:autojidelna/features/canteen/presentation/list_view/food_section_list_tile.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
-import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
+import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

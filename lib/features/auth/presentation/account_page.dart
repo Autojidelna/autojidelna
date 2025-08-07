@@ -1,16 +1,17 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
+import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';
-import 'package:autojidelna/src/ui/widgets/dialogs/logout_dialog.dart';
-import 'package:autojidelna/src/ui/widgets/more/account_overview_card.dart';
 import 'package:autojidelna/shared/widgets/section_title.dart';
-import 'package:canteenlib/canteenlib.dart';
+import 'package:autojidelna/features/auth/presentation/logout_dialog.dart';
+import 'package:autojidelna/features/more/presentation/account_overview_card.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()

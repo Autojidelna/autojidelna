@@ -7,9 +7,9 @@ import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/shared/widgets/divider_with_text.dart';
-import 'package:autojidelna/src/ui/widgets/login/canteen_url_picker.dart';
-import 'package:autojidelna/src/ui/widgets/login/custom_url_field.dart';
-import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';
+import 'package:autojidelna/features/onboarding/presentation/widgets/canteen_url_picker.dart';
+import 'package:autojidelna/features/onboarding/presentation/widgets/custom_url_field.dart';
+import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
