@@ -1,5 +1,6 @@
 import 'package:autojidelna/app/app_init.dart';
 import 'package:autojidelna/core/firebase/firebase_options.dart';
+import 'package:autojidelna/src/types/app_context.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +18,16 @@ class App {
     // Start the stopwatch
     stopwatch.start();
 
+    getIt.registerSingleton(AppContext());
+
     // We're using Future.wait to run multiple Futures in parallel
     // These Futures must take less than 200 ms to run
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    //await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await AppInit.hive();
-    await AppInit.firebaseCrashlytics();
-    await AppInit.removeConfig();
+    //await AppInit.firebaseCrashlytics();
+    await AppInit.remoteConfig();
     await Future.wait([
-      AppInit.firebaseAnalytics(),
+      //AppInit.firebaseAnalytics(),
       AppInit.secureStorage(),
       AppInit.packageInfo(),
       AppInit.rotation(),

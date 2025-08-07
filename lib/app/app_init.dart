@@ -34,6 +34,7 @@ class AppInit {
     Hive.registerAdapter(ThemeModeAdapter());
     Hive.registerAdapter(ThemeStyleAdapter());
     Hive.registerAdapter(DateFormatOptionsAdapter());
+    Hive.registerAdapter(LocaleAdapter());
     await Hive.openBox(Boxes.settings);
     await Hive.openBox(Boxes.appState);
     await Hive.openBox(Boxes.analytics);
@@ -80,13 +81,13 @@ class AppInit {
     _firebaseAnalyticsExecuted = true;
   }
 
-  static Future<void> removeConfig() async {
+  static Future<void> remoteConfig() async {
     assert(_remoteConfigExecuted == false, 'AppInit.remoteConfig() must be called only once');
     if (_remoteConfigExecuted) return;
 
     //TODO: make initRemoteConfig work
     //await remoteConfigProvider.init();
-    App.initProviderOverrides.add(remoteConfigProvider.overrideWithValue(Rmc()));
+    //App.initProviderOverrides.add(remoteConfigProvider.overrideWithValue(Rmc()));
 
     _remoteConfigExecuted = true;
   }

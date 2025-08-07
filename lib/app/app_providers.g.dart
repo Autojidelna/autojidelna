@@ -6,22 +6,6 @@ part of 'app_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$remoteConfigHash() => r'3fc1ba80563b44eb9869a13b0684b770f2843812';
-
-/// See also [remoteConfig].
-@ProviderFor(remoteConfig)
-final remoteConfigProvider = Provider<Rmc>.internal(
-  remoteConfig,
-  name: r'remoteConfigProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$remoteConfigHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef RemoteConfigRef = ProviderRef<Rmc>;
 String _$secureStorageHash() => r'0cd1b80f91784467390034386f925a0be155bfbd';
 
 /// See also [secureStorage].
