@@ -11,22 +11,26 @@
 import 'package:auto_route/auto_route.dart' as _i14;
 import 'package:autojidelna/dev/presentation/debug_page.dart' as _i6;
 import 'package:autojidelna/features/about/about_page.dart' as _i1;
+import 'package:autojidelna/features/app/router_page.dart' as _i11;
+import 'package:autojidelna/features/auth/presentation/account_page.dart'
+    as _i2;
+import 'package:autojidelna/features/canteen/presentation/pages/dish_detail_page.dart'
+    as _i7;
+import 'package:autojidelna/features/canteen/presentation/pages/menu_page.dart'
+    as _i8;
+import 'package:autojidelna/features/more/presentation/more_page.dart' as _i9;
 import 'package:autojidelna/features/onboarding/presentation/onboarding_page.dart'
     as _i10;
-import 'package:autojidelna/features/settings/presentation/analytics_page.dart'
+import 'package:autojidelna/features/settings/presentation/pages/analytics_page.dart'
     as _i3;
-import 'package:autojidelna/features/settings/presentation/appearance_page.dart'
+import 'package:autojidelna/features/settings/presentation/pages/appearance_page.dart'
     as _i4;
-import 'package:autojidelna/features/settings/presentation/convenience_page.dart'
+import 'package:autojidelna/features/settings/presentation/pages/convenience_page.dart'
     as _i5;
-import 'package:autojidelna/features/settings/presentation/settings_page.dart'
+import 'package:autojidelna/features/settings/presentation/pages/settings_page.dart'
     as _i12;
-import 'package:autojidelna/src/ui/pages/dish_detail_page.dart' as _i7;
-import 'package:autojidelna/src/ui/pages/menu_page.dart' as _i8;
-import 'package:autojidelna/src/ui/pages/more/account_page.dart' as _i2;
-import 'package:autojidelna/src/ui/pages/more/statistics_page.dart' as _i13;
-import 'package:autojidelna/src/ui/pages/more_page.dart' as _i9;
-import 'package:autojidelna/src/ui/pages/router_page.dart' as _i11;
+import 'package:autojidelna/features/statistics/presentation/statistics_page.dart'
+    as _i13;
 import 'package:canteenlib/canteenlib.dart' as _i16;
 import 'package:flutter/material.dart' as _i15;
 
