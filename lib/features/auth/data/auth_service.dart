@@ -1,17 +1,18 @@
 import 'dart:convert';
 
+import 'package:autojidelna/app/app.dart';
+import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/logged_accounts/logged_accounts.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
-import 'package:autojidelna/shared/config/secure_storage.dart';
+import 'package:autojidelna/shared/config/secure_storage_keys.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
 
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'package:http/http.dart' as http;
@@ -195,16 +196,16 @@ class AuthService {
 
   /// Reads [LoggedAccounts] from Secure storage.
   Future<LoggedAccounts> _getDataFromStorage() async {
-    // TODO: Replace FlutterSecureStorage with secureStorageProvider
-    String? value = await const FlutterSecureStorage().read(key: SecureStorage.loginData);
+    final secureStorage = App.globalContainer.read(secureStorageProvider);
+    String? value = await secureStorage.read(key: SecureStorageKeys.loginData);
     if (value == null || value.trim().isEmpty) return LoggedAccounts();
     return LoggedAccounts.fromJson(jsonDecode(value));
   }
 
   /// Saves [LoggedAccounts] to Secure storage.
   Future<void> _saveDataToStorage(LoggedAccounts loginData) async {
-    // TODO: Replace FlutterSecureStorage with secureStorageProvider
-    await const FlutterSecureStorage().write(key: SecureStorage.loginData, value: jsonEncode(loginData.toJson()));
+    final secureStorage = App.globalContainer.read(secureStorageProvider);
+    await secureStorage.write(key: SecureStorageKeys.loginData, value: jsonEncode(loginData.toJson()));
   }
 
   /// Saves an [Account] to Secure storage.

@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
 
-// TODO: Needs to be tested
 class LocationPickerCard extends ConsumerStatefulWidget {
   const LocationPickerCard({super.key});
 

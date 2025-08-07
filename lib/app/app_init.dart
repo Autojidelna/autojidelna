@@ -82,7 +82,9 @@ class AppInit {
     if (_secureStorageExecuted) return;
 
     AndroidOptions android = const AndroidOptions(encryptedSharedPreferences: true);
-    FlutterSecureStorage secureStorage = FlutterSecureStorage(aOptions: android);
+    IOSOptions iosOptions = const IOSOptions(accessibility: KeychainAccessibility.first_unlock);
+
+    FlutterSecureStorage secureStorage = FlutterSecureStorage(aOptions: android, iOptions: iosOptions);
 
     App.initProviderOverrides.add(secureStorageProvider.overrideWithValue(secureStorage));
     _secureStorageExecuted = true;
