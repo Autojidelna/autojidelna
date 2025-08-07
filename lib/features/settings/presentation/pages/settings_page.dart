@@ -3,6 +3,7 @@ import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/shared/widgets/scroll_view_column.dart';
+import 'package:flutter/foundation.dart';
 // import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 
@@ -47,6 +48,12 @@ class SettingsPage extends StatelessWidget {
             title: Text(lang.about),
             onTap: () async => router.navigate(const AboutRoute()),
           ),
+          if (!kReleaseMode)
+            ListTile(
+              leading: const Icon(Icons.bug_report_outlined),
+              title: Text(lang.debug),
+              onTap: () async => router.navigate(const DebugRoute()),
+            ),
         ],
       ),
     );
