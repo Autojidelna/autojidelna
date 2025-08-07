@@ -22,6 +22,7 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      scaffoldMessengerKey: ref.read(scaffoldMessengerProvider),
       themeMode: themeProvider.themeMode,
       theme: AppThemes.theme(themeNotifier.colorSchemeLight()),
       darkTheme: AppThemes.theme(themeNotifier.colorSchemeDark(), amoledMode: themeProvider.amoledMode),
