@@ -2,8 +2,8 @@ import 'package:autojidelna/shared/config/date_format_options.dart';
 import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/utils/get_correct_date_string.dart';
-import 'package:autojidelna/src/ui/widgets/dialogs/configured_alert_dialog.dart';
-import 'package:autojidelna/src/ui/widgets/dialogs/configured_dialog.dart';
+import 'package:autojidelna/shared/widgets/configured_alert_dialog.dart';
+import 'package:autojidelna/shared/widgets/configured_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/analytics/presentation/analytics_switches.dart';
-import 'package:autojidelna/src/ui/widgets/dialogs/configured_alert_dialog.dart';
-import 'package:autojidelna/src/ui/widgets/dialogs/configured_dialog.dart';
+import 'package:autojidelna/shared/widgets/configured_alert_dialog.dart';
+import 'package:autojidelna/shared/widgets/configured_dialog.dart';
 import 'package:autojidelna/shared/widgets/scroll_view_column.dart';
 import 'package:autojidelna/shared/widgets/section_title.dart';
 import 'package:flutter/material.dart';
