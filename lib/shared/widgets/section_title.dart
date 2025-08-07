@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
+import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 
 class SectionTitle extends StatelessWidget {

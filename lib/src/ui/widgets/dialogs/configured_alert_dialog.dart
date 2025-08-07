@@ -1,6 +1,6 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
-import 'package:autojidelna/src/ui/widgets/section_title.dart';
+import 'package:autojidelna/shared/widgets/custom_divider.dart';
+import 'package:autojidelna/shared/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
 class ConfiguredAlertDialog extends StatelessWidget {

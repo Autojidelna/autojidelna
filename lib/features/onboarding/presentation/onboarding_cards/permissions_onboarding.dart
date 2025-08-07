@@ -4,7 +4,7 @@ import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/analytics/presentation/analytics_switches.dart';
-import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
+import 'package:autojidelna/shared/widgets/custom_divider.dart';
 //import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

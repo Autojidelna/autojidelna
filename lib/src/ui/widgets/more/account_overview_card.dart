@@ -1,7 +1,7 @@
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/ui/widgets/configured_bottom_sheet.dart';
-import 'package:autojidelna/src/ui/widgets/lined_card.dart';
+import 'package:autojidelna/shared/widgets/configured_bottom_sheet.dart';
+import 'package:autojidelna/shared/widgets/lined_card.dart';
 import 'package:autojidelna/src/ui/widgets/switch_account_panel.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';

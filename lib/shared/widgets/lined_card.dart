@@ -1,4 +1,4 @@
-import 'package:autojidelna/src/ui/widgets/divider_with_text.dart';
+import 'package:autojidelna/shared/widgets/divider_with_text.dart';
 import 'package:flutter/material.dart';
 
 /// Creates a card with a horizontal bar at the top and bottom

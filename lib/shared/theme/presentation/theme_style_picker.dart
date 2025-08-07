@@ -2,7 +2,7 @@ import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/theme/domain/color_style.dart';
 import 'package:autojidelna/shared/theme/domain/theme_state.dart';
 import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
-import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
+import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

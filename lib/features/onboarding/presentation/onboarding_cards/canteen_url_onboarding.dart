@@ -6,7 +6,7 @@ import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
-import 'package:autojidelna/src/ui/widgets/divider_with_text.dart';
+import 'package:autojidelna/shared/widgets/divider_with_text.dart';
 import 'package:autojidelna/src/ui/widgets/login/canteen_url_picker.dart';
 import 'package:autojidelna/src/ui/widgets/login/custom_url_field.dart';
 import 'package:autojidelna/src/ui/widgets/snackbars/show_internet_connection_snack_bar.dart';

@@ -5,7 +5,7 @@ import 'package:autojidelna/features/onboarding/application/step_flow_controller
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/features/auth/data/login.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/src/ui/widgets/custom_divider.dart';
+import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
