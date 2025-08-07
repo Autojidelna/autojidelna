@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/core/analytics/statistic_type.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/core/types/stav_jidla.dart';
@@ -21,7 +21,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
   final ProviderContainer container = ProviderScope.containerOf(context);
   final CanteenProvider prov = container.read(canteenProvider);
   final Uzivatel uzivatel = container.read(userProvider).user!.data;
-  final Canteen canteen = App.getIt<Canteen>();
+  final Canteen canteen = container.read(currentCanteen);
   final L10n l10n = context.l10n;
   final DateTime date = dish.den;
 

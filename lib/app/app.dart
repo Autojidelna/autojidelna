@@ -5,7 +5,6 @@ import 'package:autojidelna/core/types/app_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter_list_view/flutter_list_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -40,12 +39,6 @@ class App {
     // Get the elapsed time
     Duration elapsed = stopwatch.elapsed;
     debugPrint('Initialization took ${elapsed.inMilliseconds} ms');
-  }
-
-  /// Call this after retrieving the URL
-  void registerCanteen(Canteen canteen) async {
-    if (getIt.isRegistered<Canteen>()) getIt.unregister<Canteen>();
-    getIt.registerLazySingleton<Canteen>(() => canteen);
   }
 
   static late final bool shouldAskForNotification;

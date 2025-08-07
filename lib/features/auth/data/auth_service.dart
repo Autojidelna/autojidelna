@@ -8,7 +8,9 @@ import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/logged_accounts/logged_accounts.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:canteenlib/canteenlib.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -16,6 +18,9 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
+  AuthService(this._ref);
+  final Ref _ref;
+
   /// Main logic for loging in.
   /// Can throw:
   ///
@@ -63,7 +68,7 @@ class AuthService {
       }
     }
 
-    App().registerCanteen(instance);
+    _ref.read(currentCanteen.notifier).state = instance;
 
     try {
       user = User(
@@ -131,7 +136,7 @@ class AuthService {
   }
 
   Future<Uzivatel> fetchUserData(String username) async {
-    Canteen instance = App.getIt<Canteen>();
+    Canteen instance = _ref.read(currentCanteen);
     return instance.missingFeatures.contains(Features.ziskatUzivatele) ? Uzivatel(uzivatelskeJmeno: username) : await instance.ziskejUzivatele();
   }
 

@@ -6,7 +6,7 @@ import 'package:autojidelna/core/types/freezed/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final userProvider = ChangeNotifierProvider<UserProvider>((ref) => UserProvider(ref, AuthService()));
+final userProvider = ChangeNotifierProvider<UserProvider>((ref) => UserProvider(ref, AuthService(ref)));
 
 class UserProvider extends ChangeNotifier {
   UserProvider(this._ref, this._authService);

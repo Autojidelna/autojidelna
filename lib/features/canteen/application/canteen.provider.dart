@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:autojidelna/features/canteen/data/canteen_service.dart';
 import 'package:autojidelna/core/types/errors.dart';
@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-final canteenProvider = riverpod.ChangeNotifierProvider<CanteenProvider>((ref) => CanteenProvider(ref, CanteenService()));
+final canteenProvider = riverpod.ChangeNotifierProvider<CanteenProvider>((ref) => CanteenProvider(ref, CanteenService(ref)));
 
 class CanteenProvider with ChangeNotifier {
   CanteenProvider(this._ref, this._canteenService);
@@ -39,7 +39,7 @@ class CanteenProvider with ChangeNotifier {
   Future<void> getMenu(DateTime date) async {
     try {
       if (_dishMarketplace.isEmpty) _dishMarketplace = List.from(await _canteenService.getMarketplace());
-      if (!App.getIt<Canteen>().missingFeatures.contains(Features.jidelnicekMesic)) {
+      if (_ref.read(currentCanteen).missingFeatures.contains(Features.jidelnicekMesic)) {
         if (await _getMonthlyMenu()) {
           notifyListeners();
         }
@@ -73,7 +73,7 @@ class CanteenProvider with ChangeNotifier {
   Future<void> preIndexMenus({DateTime? targetDate}) async {
     try {
       // If monthly menu fetching is available, use it
-      if (!App.getIt<Canteen>().missingFeatures.contains(Features.jidelnicekMesic)) {
+      if (_ref.read(currentCanteen).missingFeatures.contains(Features.jidelnicekMesic)) {
         await _getMonthlyMenu();
         notifyListeners();
         return;
