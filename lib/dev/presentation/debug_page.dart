@@ -18,11 +18,13 @@ class DebugPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Debug')),
       body: ListView(
         children: <Widget>[
-          TextField(
-            onChanged: (value) async => value == 'crash' ? crashTestFunction() : null,
-            decoration: InputDecoration(
-              labelText: lang.typeCrash,
-              border: const OutlineInputBorder(),
+          ListTile(
+            title: TextField(
+              onChanged: (value) async => value == 'crash' ? crashTestFunction() : null,
+              decoration: InputDecoration(
+                labelText: lang.typeCrash,
+                border: const OutlineInputBorder(),
+              ),
             ),
           ),
           ListTile(

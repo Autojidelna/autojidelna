@@ -1,4 +1,3 @@
-import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/features/canteen/application/ordering.dart';
@@ -55,9 +54,7 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish, StavJidla stav) {
                 padding: const EdgeInsets.only(right: 16),
               ),
               onPressed: () {
-                // TODO: replace with Riverpod
-                BuildContext? ctx = ref.read(appRouterProvider).navigatorKey.currentContext;
-                if (ctx != null) pressed(context, updatedDish, stav);
+                pressed(context, updatedDish, stav);
                 Navigator.pop(context);
               },
               child: Text(getObedText(context, updatedDish, stav)),

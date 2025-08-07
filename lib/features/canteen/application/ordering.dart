@@ -104,7 +104,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
       }
       break;
   }
-  if (context.mounted) container.read(userProvider).updateUserData();
+  container.read(userProvider).updateUserData();
   prov.ordering = false;
 }
 
@@ -199,7 +199,7 @@ String getObedText(BuildContext context, Jidlo dish, StavJidla stavJidla) {
         }
         if (!jeVeDneDostupnyObed && prvniIndex == menu.jidla.indexOf(dish)) cannotBeOrderedFix(context, date);
       } catch (e) {
-        // TODO
+        // TODO: move to analytics service
         // if (analyticsEnabledGlobally && analytics != null) unawaited(FirebaseCrashlytics.instance.recordError(e, StackTrace.current));
 
         //hope it's not important

@@ -93,7 +93,6 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
     bigMarkersEnabled = ref.read(bigCalendarMarkersProvider);
     selectedDate = ref.read(canteenProvider).selectedDate;
 
-    defaultTextStyle = Theme.of(context).textTheme.titleMedium!;
     defaultDecoration = const BoxDecoration(shape: BoxShape.circle);
 
     appFocusedDate = selectedDate;
@@ -106,6 +105,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
     super.didChangeDependencies();
     locale = Localizations.localeOf(context).toLanguageTag();
     colorScheme = Theme.of(context).colorScheme;
+    defaultTextStyle = Theme.of(context).textTheme.titleMedium!;
   }
 
   @override
