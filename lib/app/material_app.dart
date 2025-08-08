@@ -1,5 +1,6 @@
 import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/app/routing/app_router.dart';
+import 'package:autojidelna/shared/widgets/bouncing_logo.dart';
 import 'package:autojidelna/shared/localization/current_locale.dart';
 import 'package:autojidelna/shared/monitoring/firebase_tab_observer.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
@@ -32,6 +33,7 @@ class MyApp extends ConsumerWidget {
         includePrefixMatches: true,
         navigatorObservers: () => [FirebaseTabObserver()],
         deepLinkTransformer: (uri) async => deepLinkTransformer(uri),
+        placeholder: (context) => const Scaffold(body: BouncingLogo()),
       ),
     );
   }
