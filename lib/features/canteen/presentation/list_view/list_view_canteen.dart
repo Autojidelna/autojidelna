@@ -26,7 +26,7 @@ class _ListViewCanteenState extends ConsumerState<ListViewCanteen> {
     final DateTime visibleDate = (visibleRange.first as int).toDateTime();
 
     _debounceTimer?.cancel();
-    _debounceTimer = Timer(Durations.medium1, () {
+    _debounceTimer = Timer(Durations.short1, () {
       final canteen = ref.read(canteenProvider);
       if (canteen.selectedDate != visibleDate) {
         canteen.setSelectedDate(visibleDate);

@@ -74,7 +74,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
 
   void onConfirm() {
     Navigator.of(context).pop();
-    changeDate(ref, userFocusedDate);
+    changeDate(userFocusedDate);
   }
 
   void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
