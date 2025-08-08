@@ -1,13 +1,14 @@
 name: Scheduled FCM Messages
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 11 * * *'   # Every day at 11:00 UTC
     - cron: '0 15 * * *'   # Every day at 15:00 UTC
 
 jobs:
   food_today_1100:
-    if: github.event.schedule == '0 11 * * *'
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '0 11 * * *')
     runs-on: ubuntu-latest
     steps:
       - name: Authenticate
@@ -44,7 +45,7 @@ jobs:
             }'
 
   low_credit_1500:
-    if: github.event.schedule == '0 15 * * *'
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '0 15 * * *')
     runs-on: ubuntu-latest
     steps:
       - name: Authenticate
@@ -81,7 +82,7 @@ jobs:
             }'
 
   next_week_food_check_1500:
-    if: github.event.schedule == '0 15 * * *'
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '0 15 * * *')
     runs-on: ubuntu-latest
     steps:
       - name: Authenticate
