@@ -90,17 +90,19 @@ class CanteenProvider with ChangeNotifier {
 
   Future<void> _smartPreIndexing(DateTime targetDate) async {
     try {
-      await _preIndexLunchesRange(targetDate, 3);
-      await _preIndexLunchesRange(targetDate.subtract(const Duration(days: 2)), 2);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 3)), 3);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 6)), 3);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 9)), 3);
-      await _preIndexLunchesRange(targetDate.subtract(const Duration(days: 5)), 3);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 12)), 3);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 15)), 3);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 18)), 3);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 21)), 3);
-      await _preIndexLunchesRange(targetDate.subtract(const Duration(days: 8)), 3);
+      await Future.wait([
+        _preIndexLunchesRange(targetDate, 3),
+        _preIndexLunchesRange(targetDate.subtract(const Duration(days: 2)), 2),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 3)), 3),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 6)), 3),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 9)), 3),
+        _preIndexLunchesRange(targetDate.subtract(const Duration(days: 5)), 3),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 12)), 3),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 15)), 3),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 18)), 3),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 21)), 3),
+        _preIndexLunchesRange(targetDate.subtract(const Duration(days: 8)), 3),
+      ]);
     } catch (_) {}
   }
 
