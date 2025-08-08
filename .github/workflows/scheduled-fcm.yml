@@ -16,7 +16,7 @@ jobs:
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
-          echo "$FIREBASE_SERVICE_ACCOUNT" > /tmp/account.json
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > /tmp/account.json
           gcloud auth activate-service-account --key-file=/tmp/account.json
       
       - name: Get access token
@@ -54,7 +54,7 @@ jobs:
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
-          echo "$FIREBASE_SERVICE_ACCOUNT" > /tmp/account.json
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > /tmp/account.json
           gcloud auth activate-service-account --key-file=/tmp/account.json
       
       - name: Get access token
@@ -92,7 +92,7 @@ jobs:
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
-          echo "$FIREBASE_SERVICE_ACCOUNT" > /tmp/account.json
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > /tmp/account.json
           gcloud auth activate-service-account --key-file=/tmp/account.json
       
       - name: Get access token
