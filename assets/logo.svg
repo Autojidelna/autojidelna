@@ -21,27 +21,6 @@
    xmlns:dc="http://purl.org/dc/elements/1.1/">
   <title
      id="title1">Logo - Autojídelna</title>
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#505050"
-     bordercolor="#eeeeee"
-     borderopacity="1"
-     inkscape:showpageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#505050"
-     inkscape:document-units="px"
-     inkscape:zoom="0.75878906"
-     inkscape:cx="345.287"
-     inkscape:cy="347.92278"
-     inkscape:window-width="1745"
-     inkscape:window-height="911"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
-  <defs
-     id="defs1" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
@@ -51,20 +30,4 @@
        style="fill:#000000;fill-opacity:1;stroke-width:1.48516"
        d="m 287.17348,0 -43.45277,18.24997 -52.90266,78.066496 -1.88717,179.452564 39.67278,-5.06959 3.77998,225.07902 L 265.44571,512 Z m 145.47813,0 -45.34553,19.262691 -48.17633,91.246879 17.94781,92.26258 33.06208,44.61072 -2.83356,258.53479 41.56556,-16.22455 10.3907,-232.17104 27.39492,-54.74992 L 512,122.6772 473.2708,26.36074 Z M 89.741885,28.389188 52.899869,38.528407 55.733432,163.23104 32.118475,165.25948 31.17208,40.553831 -2e-6,49.680312 0.94359718,223.05056 61.400557,284.89552 51.953474,506.93038 102.02256,502.87351 107.6897,278.8102 130.36108,211.89564 129.41749,38.528407 109.57969,36.499959 106.74612,166.2722 H 85.018337 Z" />
   </g>
-  <metadata
-     id="metadata1">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:title>Autojídelna - Logo</dc:title>
-        <dc:creator>
-          <cc:Agent>
-            <dc:title>Matěj Verhaegen</dc:title>
-          </cc:Agent>
-        </dc:creator>
-        <dc:description>Logo for the app Autojídelna</dc:description>
-        <dc:date>15/10/2023</dc:date>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
 </svg>
