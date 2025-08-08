@@ -50,7 +50,7 @@ class MorePage extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.share_outlined),
           title: Text(l10n.shareApp),
-          onTap: () async => Share.share(Links.autojidelna, subject: l10n.appName),
+          onTap: () async => SharePlus.instance.share(ShareParams(uri: Uri.parse(Links.autojidelna), subject: l10n.appName)),
         ),
       ],
     );
