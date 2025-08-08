@@ -1,14 +1,11 @@
 import 'package:autojidelna/app/app_init.dart';
 import 'package:autojidelna/core/firebase/firebase_options.dart';
-import 'package:autojidelna/core/types/app_context.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter_list_view/flutter_list_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 
 class App {
   static List<Override> initProviderOverrides = [];
@@ -19,14 +16,11 @@ class App {
     // Start the stopwatch
     stopwatch.start();
 
-    getIt.registerSingleton(AppContext());
-
     // We're using Future.wait to run multiple Futures in parallel
     // These Futures must take less than 200 ms to run
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await AppInit.hive();
     await AppInit.firebaseCrashlytics();
-    await AppInit.remoteConfig();
     await Future.wait([
       AppInit.firebaseAnalytics(),
       AppInit.secureStorage(),
@@ -43,12 +37,6 @@ class App {
     debugPrint('Initialization took ${elapsed.inMilliseconds} ms');
   }
 
-  /// Call this after retrieving the URL
-  void registerCanteen(Canteen canteen) async {
-    if (getIt.isRegistered<Canteen>()) getIt.unregister<Canteen>();
-    getIt.registerLazySingleton<Canteen>(() => canteen);
-  }
-
   static late final bool shouldAskForNotification;
 
   static const defaultRotations = [
@@ -58,7 +46,7 @@ class App {
     DeviceOrientation.landscapeRight,
   ];
 
-  static final GetIt getIt = GetIt.instance;
+  static final globalContainer = ProviderContainer(overrides: initProviderOverrides);
 
   static PageController pageController = PageController();
   static FlutterListViewController listController = FlutterListViewController();

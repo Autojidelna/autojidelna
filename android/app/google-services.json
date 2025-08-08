@@ -1,80 +1,26 @@
 {
   "project_info": {
-    "project_number": "108088693003",
-    "firebase_url": "https://autojidelna-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "autojidelna",
-    "storage_bucket": "autojidelna.appspot.com"
+    "project_number": "94191658090",
+    "project_id": "autojidelna-be937",
+    "storage_bucket": "autojidelna-be937.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:108088693003:android:a876fdaf042a909d96d20e",
-        "android_client_info": {
-          "package_name": "com.tomprotiva.autojidelna"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "108088693003-nu0jmettp9aohnmu1kbtdp98ar24n895.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyACTnrxRr55tjfBo6asnamXJdB7gy2VqcQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "108088693003-nu0jmettp9aohnmu1kbtdp98ar24n895.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "108088693003-8svtmkptltbqo5a7a8lj2g04a7m01s95.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.autojidelna"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:108088693003:android:eb6d15855fefa46f96d20e",
+        "mobilesdk_app_id": "1:94191658090:android:0cf7a3dcd66a251303d613",
         "android_client_info": {
           "package_name": "cz.appelevate.autojidelna"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "108088693003-nu0jmettp9aohnmu1kbtdp98ar24n895.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyACTnrxRr55tjfBo6asnamXJdB7gy2VqcQ"
+          "current_key": "AIzaSyB3Mgk8pOAI-8Qv09xGWrnt81UozKu2LYE"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "108088693003-nu0jmettp9aohnmu1kbtdp98ar24n895.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "108088693003-8svtmkptltbqo5a7a8lj2g04a7m01s95.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.autojidelna"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

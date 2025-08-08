@@ -19,7 +19,6 @@ class ConveniencePage extends ConsumerWidget {
       body: ScrollViewColumn(
         children: [
           SectionTitle(l10n.convenience),
-          // TODO: skip weekends
           SwitchListTile(
             title: Text(l10n.skipWeekends),
             value: ref.watch(skipWeekendsProvider),

@@ -1,17 +1,16 @@
 import 'dart:async';
 import 'package:autojidelna/app/app.dart';
+import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/core/types/app_context.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-bool isVisible = false;
+bool _isVisible = false;
 Timer? _internetCheckTimer;
 
 Future<bool> showInternetConnectionSnackBar() async {
-  if (isVisible) return false;
-  isVisible = true;
-  BuildContext? ctx = App.getIt<AppContext>().context;
+  if (_isVisible) return false;
+  _isVisible = true;
+  BuildContext? ctx = App.globalContainer.read(scaffoldMessengerProvider).currentContext;
   if (ctx == null) return false;
 
   final Completer<bool> completer = Completer<bool>();
@@ -57,7 +56,7 @@ Future<bool> showInternetConnectionSnackBar() async {
   _internetCheckTimer = Timer.periodic(
     const Duration(seconds: 1),
     (timer) async {
-      bool hasInternet = await InternetConnectionChecker().hasConnection;
+      bool hasInternet = await App.globalContainer.read(connectionCheckerProvider).hasConnection;
 
       if (hasInternet && !notifier.value) {
         notifier.value = true;
@@ -67,7 +66,7 @@ Future<bool> showInternetConnectionSnackBar() async {
         scaffoldMessenger.hideCurrentSnackBar();
 
         _internetCheckTimer?.cancel(); // Stop checking after reconnecting
-        isVisible = false;
+        _isVisible = false;
         completer.complete(true); // Resolve future and return true
       }
     },

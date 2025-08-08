@@ -28,7 +28,7 @@ class DefaultFirebaseOptions {
         return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macOS - '
+          'DefaultFirebaseOptions have not been configured for macos - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
@@ -49,21 +49,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyACTnrxRr55tjfBo6asnamXJdB7gy2VqcQ',
-    appId: '1:108088693003:android:eb6d15855fefa46f96d20e',
-    messagingSenderId: '108088693003',
-    projectId: 'autojidelna',
-    databaseURL: 'https://autojidelna-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'autojidelna.appspot.com',
+    apiKey: 'AIzaSyB3Mgk8pOAI-8Qv09xGWrnt81UozKu2LYE',
+    appId: '1:94191658090:android:0cf7a3dcd66a251303d613',
+    messagingSenderId: '94191658090',
+    projectId: 'autojidelna-be937',
+    storageBucket: 'autojidelna-be937.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAEdu5514F6Wveeh0hHnfiDgf6AV4YYVoI',
-    appId: '1:108088693003:ios:3ee0dec76b21a50596d20e',
-    messagingSenderId: '108088693003',
-    projectId: 'autojidelna',
-    databaseURL: 'https://autojidelna-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'autojidelna.appspot.com',
+    apiKey: 'AIzaSyA2Kw2Diop2YS3WWC3BDxjIGbei8Bu25EE',
+    appId: '1:94191658090:ios:921279341e57bdf503d613',
+    messagingSenderId: '94191658090',
+    projectId: 'autojidelna-be937',
+    storageBucket: 'autojidelna-be937.firebasestorage.app',
     iosBundleId: 'cz.appelevate.autojidelna',
   );
 }

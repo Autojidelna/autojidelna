@@ -1,25 +1,26 @@
 import 'dart:async';
 
-import 'package:auto_route/auto_route.dart';
-import 'package:autojidelna/app/app.dart';
+import 'package:autojidelna/app/app_providers.dart';
+import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/shared/utils/datetime_utils.dart';
-import 'package:autojidelna/features/canteen/data/canteen_service.dart';
-import 'package:autojidelna/core/types/app_context.dart';
 import 'package:autojidelna/core/types/errors.dart';
+import 'package:autojidelna/shared/providers/account.provider.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
+import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
+import 'package:autojidelna/features/canteen/data/canteen_service.dart';
+
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final canteenProvider = riverpod.ChangeNotifierProvider<CanteenProvider>((ref) => CanteenProvider(CanteenService()));
+final canteenProvider = ChangeNotifierProvider<CanteenProvider>((ref) => CanteenProvider(ref, CanteenService(ref)));
 
 class CanteenProvider with ChangeNotifier {
-  CanteenProvider(this._canteenService);
+  CanteenProvider(this._ref, this._canteenService);
 
   final CanteenService _canteenService;
+  final Ref _ref;
 
   bool _ordering = false;
 
@@ -39,7 +40,7 @@ class CanteenProvider with ChangeNotifier {
   Future<void> getMenu(DateTime date) async {
     try {
       if (_dishMarketplace.isEmpty) _dishMarketplace = List.from(await _canteenService.getMarketplace());
-      if (!App.getIt<Canteen>().missingFeatures.contains(Features.jidelnicekMesic)) {
+      if (_ref.read(currentCanteen).missingFeatures.contains(Features.jidelnicekMesic)) {
         if (await _getMonthlyMenu()) {
           notifyListeners();
         }
@@ -73,7 +74,7 @@ class CanteenProvider with ChangeNotifier {
   Future<void> preIndexMenus({DateTime? targetDate}) async {
     try {
       // If monthly menu fetching is available, use it
-      if (!App.getIt<Canteen>().missingFeatures.contains(Features.jidelnicekMesic)) {
+      if (_ref.read(currentCanteen).missingFeatures.contains(Features.jidelnicekMesic)) {
         await _getMonthlyMenu();
         notifyListeners();
         return;
@@ -89,17 +90,19 @@ class CanteenProvider with ChangeNotifier {
 
   Future<void> _smartPreIndexing(DateTime targetDate) async {
     try {
-      await _preIndexLunchesRange(targetDate, 3);
-      await _preIndexLunchesRange(targetDate.subtract(const Duration(days: 2)), 2);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 3)), 3);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 6)), 3);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 9)), 3);
-      await _preIndexLunchesRange(targetDate.subtract(const Duration(days: 5)), 3);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 12)), 3);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 15)), 3);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 18)), 3);
-      await _preIndexLunchesRange(targetDate.add(const Duration(days: 21)), 3);
-      await _preIndexLunchesRange(targetDate.subtract(const Duration(days: 8)), 3);
+      await Future.wait([
+        _preIndexLunchesRange(targetDate, 3),
+        _preIndexLunchesRange(targetDate.subtract(const Duration(days: 2)), 2),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 3)), 3),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 6)), 3),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 9)), 3),
+        _preIndexLunchesRange(targetDate.subtract(const Duration(days: 5)), 3),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 12)), 3),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 15)), 3),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 18)), 3),
+        _preIndexLunchesRange(targetDate.add(const Duration(days: 21)), 3),
+        _preIndexLunchesRange(targetDate.subtract(const Duration(days: 8)), 3),
+      ]);
     } catch (_) {}
   }
 
@@ -143,7 +146,7 @@ class CanteenProvider with ChangeNotifier {
   void setSelectedDate(DateTime selectedDate) async {
     if (_selectedDate == selectedDate.normalize) return;
     _selectedDate = selectedDate.normalize;
-    if (await InternetConnectionChecker().hasConnection) preIndexMenus(targetDate: selectedDate);
+    if (await _ref.read(connectionCheckerProvider).hasConnection) preIndexMenus(targetDate: selectedDate);
     notifyListeners();
   }
 
@@ -200,12 +203,11 @@ class CanteenProvider with ChangeNotifier {
   Future<void> handleErrors(dynamic e) async {
     switch (e) {
       case CanteenErrors.needToLogin:
-        final riverpod.ProviderContainer container = riverpod.ProviderScope.containerOf(App.getIt<AppContext>().context!);
         try {
-          await container.read(userProvider).loadUser();
+          await _ref.read(userProvider).loadUser();
         } catch (e) {
-          await container.read(userProvider).unloadUser();
-          App.getIt<AppContext>().context!.router.replaceAll([const RouterRoute()], updateExistingRoutes: false);
+          await _ref.read(userProvider).unloadUser();
+          _ref.read(appRouterProvider).replaceAll([const RouterRoute()], updateExistingRoutes: false);
         }
         break;
       case CanteenErrors.noInternetConnection:

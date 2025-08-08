@@ -18,7 +18,6 @@ class AppInit {
   static bool _hiveExecuted = false;
   static bool _firebaseCrashlyticsExecuted = false;
   static bool _firebaseAnalyticsExecuted = false;
-  static bool _remoteConfigExecuted = false;
   static bool _secureStorageExecuted = false;
   static bool _packageInfoExecuted = false;
   static bool _rotationExecuted = false;
@@ -78,23 +77,14 @@ class AppInit {
     _firebaseAnalyticsExecuted = true;
   }
 
-  static Future<void> remoteConfig() async {
-    assert(_remoteConfigExecuted == false, 'AppInit.remoteConfig() must be called only once');
-    if (_remoteConfigExecuted) return;
-
-    //TODO: make initRemoteConfig work
-    //await remoteConfigProvider.init();
-    //App.initProviderOverrides.add(remoteConfigProvider.overrideWithValue(Rmc()));
-
-    _remoteConfigExecuted = true;
-  }
-
   static Future<void> secureStorage() async {
     assert(_secureStorageExecuted == false, 'AppInit.secureStorage() must be called only once');
     if (_secureStorageExecuted) return;
 
     AndroidOptions android = const AndroidOptions(encryptedSharedPreferences: true);
-    FlutterSecureStorage secureStorage = FlutterSecureStorage(aOptions: android);
+    IOSOptions iosOptions = const IOSOptions(accessibility: KeychainAccessibility.first_unlock);
+
+    FlutterSecureStorage secureStorage = FlutterSecureStorage(aOptions: android, iOptions: iosOptions);
 
     App.initProviderOverrides.add(secureStorageProvider.overrideWithValue(secureStorage));
     _secureStorageExecuted = true;
@@ -121,7 +111,7 @@ class AppInit {
     assert(_codePushExecuted == false, 'AppInit.codePush() must be called only once');
     if (_codePushExecuted) return;
 
-    int? currentPatchNumber = await ShorebirdCodePush().currentPatchNumber();
+    int? currentPatchNumber = (await ShorebirdUpdater().readCurrentPatch())?.number;
     if (!kIsWeb && kReleaseMode) {
       FirebaseCrashlytics.instance.setCustomKey(
         'shorebird_patch_number',

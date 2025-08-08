@@ -85,7 +85,7 @@ class SwitchAccountPanel extends StatelessWidget {
           } else {
             configuredDialog(
               context,
-              builder: (BuildContext context) => logoutDialog(context, safeAccount),
+              builder: (BuildContext context) => logoutDialog(safeAccount),
             );
           }
         },

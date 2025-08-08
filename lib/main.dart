@@ -11,8 +11,8 @@ void main() async {
   await MigrationManager.runMigrations();
 
   runApp(
-    ProviderScope(
-      overrides: App.initProviderOverrides,
+    UncontrolledProviderScope(
+      container: App.globalContainer,
       child: const MyApp(),
     ),
   );

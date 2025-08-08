@@ -1,20 +1,18 @@
-import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/features/auth/data/auth_service.dart';
-import 'package:autojidelna/core/types/app_context.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final userProvider = ChangeNotifierProvider<UserProvider>((ref) => UserProvider(AuthService()));
+final userProvider = ChangeNotifierProvider<UserProvider>((ref) => UserProvider(ref, AuthService(ref)));
 
 class UserProvider extends ChangeNotifier {
-  UserProvider(this._authService);
+  UserProvider(this._ref, this._authService);
 
   final AuthService _authService;
-  final ProviderContainer container = ProviderScope.containerOf(App.getIt<AppContext>().context!);
+  final Ref _ref;
 
   User? _user;
   List<SafeAccount> _loggedSafeAccounts = [];
@@ -36,7 +34,7 @@ class UserProvider extends ChangeNotifier {
     _loggedSafeAccounts = List.from(_loggedSafeAccounts)..remove(safeAccount);
     if (_user!.accountData.username == safeAccount.username) {
       _user = null;
-      container.read(canteenProvider).clear();
+      _ref.read(canteenProvider).clear();
     }
     notifyListeners();
   }
@@ -44,7 +42,7 @@ class UserProvider extends ChangeNotifier {
   Future<void> logoutEveryone() async {
     await _authService.logoutEveryone();
     _user = null;
-    container.read(canteenProvider).clear();
+    _ref.read(canteenProvider).clear();
     _loggedSafeAccounts = [];
     notifyListeners();
   }
@@ -60,13 +58,13 @@ class UserProvider extends ChangeNotifier {
   Future<void> unloadUser() async {
     await _authService.ghostLogout();
     _user = null;
-    container.read(canteenProvider).clear();
+    _ref.read(canteenProvider).clear();
     notifyListeners();
   }
 
   Future<void> changeUser(SafeAccount safeAccount) async {
     _user = null;
-    container.read(canteenProvider).clear();
+    _ref.read(canteenProvider).clear();
     await _authService.changeAccount(safeAccount);
     notifyListeners();
   }

@@ -10,9 +10,9 @@ import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final loginProvider = riverpod.ChangeNotifierProvider<LoginProvider>((ref) => LoginProvider());
+final loginProvider = ChangeNotifierProvider<LoginProvider>((ref) => LoginProvider());
 
 class LoginProvider extends ChangeNotifier {
   final TextEditingController usernameController = TextEditingController();
@@ -79,7 +79,7 @@ class LoginProvider extends ChangeNotifier {
     );
 
     try {
-      final riverpod.ProviderContainer container = riverpod.ProviderScope.containerOf(context);
+      final ProviderContainer container = ProviderScope.containerOf(context);
 
       await container.read(userProvider).login(account);
       Hive.box(Boxes.appState).put(HiveKeys.appState.url, urlController.text);

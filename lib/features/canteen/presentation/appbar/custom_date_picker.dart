@@ -1,20 +1,21 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/features/canteen/application/is_button_enabled.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/core/utils/string_extension.dart';
 import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
 import 'package:autojidelna/shared/config/dates.dart';
-import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
-import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/utils/change_date.dart';
-import 'package:autojidelna/features/canteen/application/ordering.dart';
-import 'package:autojidelna/core/utils/string_extension.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';
-import 'package:canteenlib/canteenlib.dart';
+import 'package:autojidelna/features/canteen/application/get_primary_state.dart';
+import 'package:autojidelna/features/canteen/application/get_stav_jidla.dart';
+import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-
+import 'package:canteenlib/canteenlib.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 showCustomDatePicker(BuildContext context) => configuredDialog(context, builder: (_) => const _CustomDatePicker());
@@ -74,7 +75,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
 
   void onConfirm() {
     Navigator.of(context).pop();
-    changeDate(ref, userFocusedDate);
+    changeDate(userFocusedDate);
   }
 
   void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
