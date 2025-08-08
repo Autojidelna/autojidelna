@@ -1,13 +1,14 @@
 import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/app/routing/app_router.dart';
-import 'package:autojidelna/shared/widgets/bouncing_logo.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/core/utils/deep_link_transformer_logic.dart';
 import 'package:autojidelna/shared/localization/current_locale.dart';
 import 'package:autojidelna/shared/monitoring/firebase_tab_observer.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
 import 'package:autojidelna/shared/theme/domain/theme_state.dart';
-import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/core/utils/deep_link_transformer_logic.dart';
+import 'package:autojidelna/features/splash_screen/splash_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,7 +34,7 @@ class MyApp extends ConsumerWidget {
         includePrefixMatches: true,
         navigatorObservers: () => [FirebaseTabObserver()],
         deepLinkTransformer: (uri) async => deepLinkTransformer(uri),
-        placeholder: (context) => const Scaffold(body: BouncingLogo()),
+        placeholder: (context) => const SplashPage(),
       ),
     );
   }
