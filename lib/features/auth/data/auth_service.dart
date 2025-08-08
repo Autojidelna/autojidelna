@@ -14,8 +14,6 @@ import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:http/http.dart' as http;
-
 class AuthService {
   AuthService(this._ref);
   final Ref _ref;
@@ -50,18 +48,13 @@ class AuthService {
         if (!await instance.login(account.username, account.password)) {
           return Future.error(AuthErrors.wrongCredentials);
         }
-      } catch (_) {
+      } catch (e) {
         // Check for internet connectivity
         if (!await _ref.read(connectionCheckerProvider).hasConnection) {
           return Future.error(AuthErrors.noInternetConnection);
         }
 
-        // Check if the URL is valid by making a request
-        try {
-          await http.get(Uri.parse(url));
-        } catch (_) {
-          return Future.error(AuthErrors.wrongUrl);
-        }
+        if (e == CanteenLibExceptions.neplatneUrl) return Future.error(AuthErrors.wrongUrl);
 
         return Future.error(AuthErrors.connectionFailed);
       }
