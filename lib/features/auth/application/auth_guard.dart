@@ -58,7 +58,7 @@ class AuthGuard extends AutoRouteGuard {
       await provider.updateLoggedSafeAccounts();
       if (provider.loggedInAccounts.isNotEmpty) {
         StepFlowController.instance.setAccountPickerFlow();
-        resolver.redirect(OnboardingRoute(onCompletedCallback: (_) => onNavigation(resolver, router)), replace: true);
+        resolver.redirect(OnboardingRoute(onCompletedCallback: resolver.next), replace: true);
         return;
       }
       StepFlowController.instance.setLoginFlow();
