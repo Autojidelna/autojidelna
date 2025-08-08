@@ -131,7 +131,7 @@ class AuthService {
   Future<void> changeAccount(SafeAccount saveAccount) async {
     LoggedAccounts loginData = await _getDataFromStorage();
 
-    bool accountFound = !loginData.accounts.any((account) => SafeAccount.fromAccount(account) == saveAccount);
+    bool accountFound = loginData.accounts.any((account) => SafeAccount.fromAccount(account) == saveAccount);
     if (!accountFound) return Future.error(AuthErrors.accountNotFound);
 
     LoggedAccounts updatedData = LoggedAccounts(accounts: loginData.accounts, loggedInAccount: saveAccount);
