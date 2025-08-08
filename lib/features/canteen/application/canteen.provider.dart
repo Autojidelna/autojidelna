@@ -1,25 +1,26 @@
 import 'dart:async';
 
+import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
+import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
-import 'package:autojidelna/features/canteen/data/canteen_service.dart';
-import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
+import 'package:autojidelna/features/canteen/data/canteen_service.dart';
+
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final canteenProvider = riverpod.ChangeNotifierProvider<CanteenProvider>((ref) => CanteenProvider(ref, CanteenService(ref)));
+final canteenProvider = ChangeNotifierProvider<CanteenProvider>((ref) => CanteenProvider(ref, CanteenService(ref)));
 
 class CanteenProvider with ChangeNotifier {
   CanteenProvider(this._ref, this._canteenService);
 
   final CanteenService _canteenService;
-  final riverpod.Ref _ref;
+  final Ref _ref;
 
   bool _ordering = false;
 
@@ -143,7 +144,7 @@ class CanteenProvider with ChangeNotifier {
   void setSelectedDate(DateTime selectedDate) async {
     if (_selectedDate == selectedDate.normalize) return;
     _selectedDate = selectedDate.normalize;
-    if (await InternetConnectionChecker().hasConnection) preIndexMenus(targetDate: selectedDate);
+    if (await _ref.read(connectionCheckerProvider).hasConnection) preIndexMenus(targetDate: selectedDate);
     notifyListeners();
   }
 

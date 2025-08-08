@@ -13,7 +13,6 @@ import 'package:autojidelna/shared/providers/current_canteen.dart';
 
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -53,7 +52,7 @@ class AuthService {
         }
       } catch (_) {
         // Check for internet connectivity
-        if (!await InternetConnectionChecker().hasConnection) {
+        if (!await _ref.read(connectionCheckerProvider).hasConnection) {
           return Future.error(AuthErrors.noInternetConnection);
         }
 

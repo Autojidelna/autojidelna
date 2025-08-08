@@ -111,7 +111,7 @@ class AppInit {
     assert(_codePushExecuted == false, 'AppInit.codePush() must be called only once');
     if (_codePushExecuted) return;
 
-    int? currentPatchNumber = await ShorebirdCodePush().currentPatchNumber();
+    int? currentPatchNumber = (await ShorebirdUpdater().readCurrentPatch())?.number;
     if (!kIsWeb && kReleaseMode) {
       FirebaseCrashlytics.instance.setCustomKey(
         'shorebird_patch_number',
