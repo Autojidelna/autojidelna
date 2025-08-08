@@ -13,6 +13,7 @@ import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 
 import 'package:canteenlib/canteenlib.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -110,6 +111,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
 }
 
 void cannotBeOrderedFix(BuildContext context, DateTime date) async {
+  FirebaseAnalytics.instance.logEvent(name: 'cannotBeOrderedFix');
   final ProviderContainer container = ProviderScope.containerOf(context);
   final l10n = context.l10n;
   await Future.delayed(const Duration(milliseconds: 200));
