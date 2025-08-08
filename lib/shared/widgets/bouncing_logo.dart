@@ -70,29 +70,31 @@ class _BouncingLogoState extends State<BouncingLogo> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      maxWidth = constraints.maxWidth - 100; // logo width
-      maxHeight = constraints.maxHeight - 50; // logo height
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        maxWidth = constraints.maxWidth - size;
+        maxHeight = constraints.maxHeight - size;
 
-      posX ??= maxWidth / 2;
-      posY ??= maxHeight / 2;
+        posX ??= maxWidth / 2;
+        posY ??= maxHeight / 2;
 
-      return Stack(
-        children: [
-          Positioned(
-            left: posX!,
-            top: posY!,
-            child: GestureDetector(
-              onTap: startMovement,
-              child: SvgPicture.asset(
-                Assets.logo,
-                colorFilter: ColorFilter.mode(Theme.of(context).colorScheme.onSurface, BlendMode.srcIn),
-                height: MediaQuery.sizeOf(context).height * .10,
+        return Stack(
+          children: [
+            Positioned(
+              left: posX!,
+              top: posY!,
+              child: GestureDetector(
+                onTap: startMovement,
+                child: SvgPicture.asset(
+                  Assets.logo,
+                  colorFilter: ColorFilter.mode(Theme.of(context).colorScheme.onSurface, BlendMode.srcIn),
+                  height: size,
+                ),
               ),
             ),
-          ),
-        ],
-      );
-    });
+          ],
+        );
+      },
+    );
   }
 }
