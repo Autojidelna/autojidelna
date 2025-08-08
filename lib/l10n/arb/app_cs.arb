@@ -1,0 +1,401 @@
+{
+  "@@locale": "cs",
+  "about": "O aplikaci",
+  "@about": {},
+  "account": "Účet",
+  "@account": {},
+  "accounts": "Účty",
+  "@accounts": {},
+  "addAccount": "Přidat účet",
+  "@addAccount": {},
+  "allergens": "Alergeny",
+  "@allergens": {},
+  "amoledMode": "AMOLED mód",
+  "@amoledMode": {},
+  "amoledModeSubtitle": "Přidej se k temné straně síly!",
+  "@amoledModeSubtitle": {},
+  "analytics": "Shromažďování údajů",
+  "@analytics": {},
+  "analyticsMoreInfo": "Informace shromažďujeme výhradně za účelem identifikace a opravy chyb v aplikaci, zlepšení výkonu a udržování základních statistických údajů.\n\nVšechna data jsou odesílána anonymně.",
+  "@analyticsMoreInfo": {},
+  "appDescription": "Aplikace pro objednávání ze systému Icanteen. Cíl této aplikace je zjednodušit, zrychlit, (případně i zautomatizovat) objednávání obědů.",
+  "@appDescription": {},
+  "appLegalese": "© 2023 - {year} Tomáš Protiva, Matěj Verhaegen a kolaborátoři\nZveřejněno pod licencí GNU GPLv3",
+  "@appLegalese": {
+    "description": "appLegalese",
+    "placeholders": {
+      "year": {
+        "type": "DateTime",
+        "format": "y"
+      }
+    }
+  },
+  "appName": "Autojídelna",
+  "@appName": {},
+  "appearance": "Vzhled",
+  "@appearance": {},
+  "burzaAlertDialogContent": "Přidáváte jídlo na burzu. Peníze se Vám vrátí pouze v případě, že si jídlo objedná někdo jiný.",
+  "@burzaAlertDialogContent": {},
+  "calendarBigMarkers": "Velké ukazatele v kalendáři",
+  "@calendarBigMarkers": {},
+  "cancel": "Zrušit",
+  "@cancel": {},
+  "category": "Kategorie",
+  "@category": {},
+  "changeAccount": "Změnit účet",
+  "@changeAccount": {},
+  "convenience": "Pohodlí",
+  "@convenience": {},
+  "credit": "Kredit: {ammount} Kč",
+  "@credit": {
+    "placeholders": {
+      "ammount": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dateFormat": "Formát dat",
+  "@dateFormat": {},
+  "debug": "Debug",
+  "@debug": {},
+  "display": "Zobrazení",
+  "@display": {},
+  "dontShowAgain": "Příště nezobrazovat",
+  "@dontShowAgain": {},
+  "drinks": "Pití",
+  "@drinks": {},
+  "error": "Chyba",
+  "@error": {},
+  "errorsAccountNotFound": "Účet nenalezen",
+  "@errorsAccountNotFound": {},
+  "errorsAccountNotFoundSubtitle": "Jste si jistí, že existujete? Přihlaste se ručně.",
+  "@errorsAccountNotFoundSubtitle": {},
+  "errorsAddingToMarketplace": "Chyba při dávání jídla na burzu",
+  "@errorsAddingToMarketplace": {},
+  "errorsAddingToMarketplaceSubtitle": "Něco se pokazilo, zkuste to znovu.",
+  "@errorsAddingToMarketplaceSubtitle": {},
+  "errorsCancelingOrder": "Chyba při rušení objednávky",
+  "@errorsCancelingOrder": {},
+  "errorsCancelingOrderSubtitle": "Objednávku se nepodařilo zrušit.",
+  "@errorsCancelingOrderSubtitle": {},
+  "errorsConnectionFailed": "Server si dal pauzu",
+  "@errorsConnectionFailed": {},
+  "errorsConnectionFailedSubtitle": "Zkuste to později, možná si jen dává kafe.",
+  "@errorsConnectionFailedSubtitle": {},
+  "errorsDishCancellationExpired": "Objednávku nelze zrušit",
+  "@errorsDishCancellationExpired": {},
+  "errorsDishCancellationExpiredSubtitle": "Platnost objednávky vypršela, není už možné ji zrušit.",
+  "@errorsDishCancellationExpiredSubtitle": {},
+  "errorsDishCannotBeOrdered": "Oběd nelze objednat",
+  "@errorsDishCannotBeOrdered": {},
+  "errorsDishCannotBeOrderedSubtitle": "Momentálně to není možné. Zkuste to za chvíli.",
+  "@errorsDishCannotBeOrderedSubtitle": {},
+  "errorsDishNotInMarketplace": "Jídlo není na burze",
+  "@errorsDishNotInMarketplace": {},
+  "errorsDishNotInMarketplaceSubtitle": "Možná jste si vybrali něco, co tam už není. Zkuste jinou možnost.",
+  "@errorsDishNotInMarketplaceSubtitle": {},
+  "errorsDishOrdering": "Chyba při objednávání jídla",
+  "@errorsDishOrdering": {},
+  "errorsDishOrderingSubtitle": "Něco se pokazilo při odesílání vaší objednávky. Zkuste to znovu.",
+  "@errorsDishOrderingSubtitle": {},
+  "errorsGotInternetConnection": "Jste zpět online!",
+  "@errorsGotInternetConnection": {},
+  "errorsGotInternetConnectionSubtitle": "Síť je v pořádku. Pokračujeme!",
+  "@errorsGotInternetConnectionSubtitle": {},
+  "errorsInsufficientCredit": "Nedostatečný kredit",
+  "@errorsInsufficientCredit": {},
+  "errorsInsufficientCreditSubtitle": "Chcete-li objednat, přidejte kredit. Bez něj to nepůjde.",
+  "@errorsInsufficientCreditSubtitle": {},
+  "errorsLoadingData": "Nastala chyba při načítání dat",
+  "@errorsLoadingData": {},
+  "errorsMenuLoadingFailed": "Chyba při načítání jídelníčku",
+  "@errorsMenuLoadingFailed": {},
+  "errorsMenuLoadingFailedSubtitle": "Něco se zadrhlo při načítání nabídky. Zkuste to později.",
+  "@errorsMenuLoadingFailedSubtitle": {},
+  "errorsNoInternetConnection": "Žádné připojení k internetu",
+  "@errorsNoInternetConnection": {},
+  "errorsNoInternetConnectionSubtitle": "Kontrolujeme síť... ujistěte se, že jste online.",
+  "@errorsNoInternetConnectionSubtitle": {},
+  "errorsWrongCredentials": "Špatné údaje, špatný den?",
+  "@errorsWrongCredentials": {},
+  "errorsWrongCredentialsSubtitle": "Zkuste to znovu – nebo si je změňte.",
+  "@errorsWrongCredentialsSubtitle": {},
+  "errorsWrongCredentialsTextField": "Přihlašovací údaje jsou nesprávné.",
+  "@errorsWrongCredentialsTextField": {},
+  "errorsWrongUrl": "Špatná adresa",
+  "@errorsWrongUrl": {},
+  "errorsWrongUrlSubtitle": "Tahle cesta nikam nevede. Zkontrolujte adresu.",
+  "@errorsWrongUrlSubtitle": {},
+  "experimental": "Experimentální",
+  "@experimental": {},
+  "gettingDataNotifications": "Získávám data pro oznámení",
+  "@gettingDataNotifications": {},
+  "language": "Jazyk",
+  "@language": {},
+  "languageCzech": "Čeština",
+  "@languageCzech": {},
+  "languageEnglish": "Angličtina",
+  "@languageEnglish": {},
+  "licenses": "Licence",
+  "@licenses": {},
+  "listUi": "Seznamové zobrazení",
+  "@listUi": {},
+  "listUiSubtitle": "Zobrazit jednotlivé dny ve vertikálním seznamu.",
+  "@listUiSubtitle": {},
+  "location": "Výdejna",
+  "@location": {},
+  "locationsUnknown": "Neznámá výdejna",
+  "@locationsUnknown": {},
+  "login": "Přihlásit se",
+  "@login": {},
+  "loginPasswordFieldHint": "Zadejte heslo",
+  "@loginPasswordFieldHint": {},
+  "loginSuccess": "Přihlášení úspěšné!",
+  "@loginSuccess": {},
+  "loginSuccessSubtitle": "Vítejte zpět, {username}!",
+  "@loginSuccessSubtitle": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "loginUrlFieldHint": "Zadejte adresu stránky icanteen",
+  "@loginUrlFieldHint": {},
+  "loginUrlFieldLabel": "Adresa stránky icanteen",
+  "@loginUrlFieldLabel": {},
+  "loginUserFieldHint": "Zadejte uživatelské jméno",
+  "@loginUserFieldHint": {},
+  "loginUserFieldLabel": "Uživatelské jméno",
+  "@loginUserFieldLabel": {},
+  "logoutConfirm": "Odhlásit se",
+  "@logoutConfirm": {},
+  "logoutUSure": "Opravdu se chcete odhlásit?",
+  "@logoutUSure": {},
+  "mainCourse": "Hlavní chod",
+  "@mainCourse": {},
+  "menu": "Jídelníček",
+  "@menu": {},
+  "more": "Více",
+  "@more": {},
+  "moreInfo": "Více informací",
+  "@moreInfo": {},
+  "name": "Jméno",
+  "@name": {},
+  "navigationRailExpantionButtonTitle": "Menu",
+  "@navigationRailExpantionButtonTitle": {},
+  "nelzeObjednat": "Nelze objednat",
+  "@nelzeObjednat": {},
+  "nelzeZrusit": "Nelze zrušit",
+  "@nelzeZrusit": {},
+  "noFood": "Žádná jídla pro tento den.",
+  "@noFood": {},
+  "noThankYou": "Ne, děkuji",
+  "@noThankYou": {},
+  "notificationKreditPro": "Kredit pro {username}: {ammount} Kč",
+  "@notificationKreditPro": {
+    "description": "TODO",
+    "placeholders": {
+      "username": {
+        "type": "String"
+      },
+      "ammount": {
+        "type": "String"
+      }
+    }
+  },
+  "notifications": "Oznámení",
+  "@notifications": {},
+  "notificationsFor": "Oznámení pro {username}",
+  "@notificationsFor": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "objednat": "Objednat",
+  "@objednat": {},
+  "objednatAction": "Objednat náhodně",
+  "@objednatAction": {},
+  "objednatZBurzy": "Objednat z burzy",
+  "@objednatZBurzy": {},
+  "odebratZBurzy": "Odebrat z burzy",
+  "@odebratZBurzy": {},
+  "ok": "OK",
+  "@ok": {},
+  "other": "Ostatní",
+  "@other": {},
+  "otherDescription": "Ostatní oznámení, např. chybové hlášky",
+  "@otherDescription": {},
+  "password": "Heslo",
+  "@password": {},
+  "patch": "patch",
+  "@patch": {},
+  "paymentAccountNumber": "Číslo účtu",
+  "@paymentAccountNumber": {},
+  "paymentInfo": "Platební Údaje",
+  "@paymentInfo": {},
+  "personalInfo": "Osobní Údaje",
+  "@personalInfo": {},
+  "pickLocation": "Vyberte výdejnu",
+  "@pickLocation": {},
+  "privacyPolicy": "Zásady ochrany osobních údajů",
+  "@privacyPolicy": {},
+  "requestNotificationPermission": "Požádat o povolení notifikací",
+  "@requestNotificationPermission": {},
+  "settings": "Nastavení",
+  "@settings": {},
+  "settingsRelativeTimestamps": "Relativní časové značky",
+  "@settingsRelativeTimestamps": {},
+  "settingsRelativeTimestampsSub": "„Dnes“ místo „{date}“",
+  "@settingsRelativeTimestampsSub": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsStopDataCollection": "Zastavit sledování analytických služeb",
+  "@settingsStopDataCollection": {},
+  "settingsTitleCredit": "Nízký credit",
+  "@settingsTitleCredit": {},
+  "shareApp": "Sdílet aplikaci",
+  "@shareApp": {},
+  "shareDescription": "Autojídelna (aplikace na objednávání jídla)",
+  "@shareDescription": {},
+  "sideDish": "Přílohy",
+  "@sideDish": {},
+  "skipWeekends": "Přeskakovat víkendy",
+  "@skipWeekends": {},
+  "soup": "Polévka",
+  "@soup": {},
+  "specificSymbol": "Specifický symbol",
+  "@specificSymbol": {},
+  "stable": "Stable",
+  "@stable": {},
+  "statistics": "Statistiky",
+  "@statistics": {},
+  "allowAnalytics": "Povolit analytické služby",
+  "@allowAnalytics": {},
+  "allowAnalyticsSubtitle": "Odesílejte anonymizované údaje o používání ke zlepšení aplikace",
+  "@allowAnalyticsSubtitle": {},
+  "sendCrashLogs": "Odesílat crash logy",
+  "@sendCrashLogs": {},
+  "sendCrashLogsSubtitle": "Odesílejte anonymizované crash logy vývojářům",
+  "@sendCrashLogsSubtitle": {},
+  "tabletUi": "Tablet UI",
+  "@tabletUi": {},
+  "tabletUiOptions": "{arg, select, other{error} auto{Automaticky} always{Vždy} landscape{Na šířku} never{Nikdy}}",
+  "@tabletUiOptions": {
+    "description": "tabletUiOptions",
+    "placeholders": {
+      "arg": {
+        "type": "String",
+        "example": "always"
+      }
+    }
+  },
+  "theme": "Schéma",
+  "@theme": {},
+  "themeModeDark": "Tmavý",
+  "@themeModeDark": {},
+  "themeModeLight": "Světlý",
+  "@themeModeLight": {},
+  "themeModeSystem": "Systém",
+  "@themeModeSystem": {},
+  "tryAgain": "Zkusit znovu",
+  "@tryAgain": {},
+  "typeCrash": "Napište \"crash\" pro pád aplikace",
+  "@typeCrash": {},
+  "variableSymbol": "Variabilní symbol",
+  "@variableSymbol": {},
+  "version": "Verze",
+  "@version": {},
+  "versionSubtitle": "{arg, select, true{Debug} other{Stable}} {version}",
+  "@versionSubtitle": {
+    "description": "versionSubtitle",
+    "placeholders": {
+      "arg": {
+        "type": "String",
+        "example": "true"
+      },
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "vlozitNaBurzu": "Vložit na burzu",
+  "@vlozitNaBurzu": {},
+  "welcome": "Vítejte!",
+  "@welcome": {},
+  "onboardingSubtitle": "Pojďme nastavit nějaké věci. Později je můžete změnit v nastavení.",
+  "@onboardingSubtitle": {},
+  "allowNotifications": "Povolit oznámení",
+  "@allowNotifications": {},
+  "allowNotifcitaionsReasons": "Dáme vám vědět o důležitých informacích, jako je nízký kredit nebo připomenutí objednávky.",
+  "@allowNotifcitaionsReasons": {},
+  "grant": "Udělit",
+  "@grant": {},
+  "next": "Další",
+  "@next": {},
+  "getStarted": "Začínáme",
+  "@getStarted": {},
+  "loginSubtitle": "Přihlaste se a můžeme začít. Užijte si všechny funkce aplikace!",
+  "@loginSubtitle": {},
+  "channelNameDish": "Dnešní jídlo",
+  "@channelNameDish": {},
+  "channelDescriptionDish": "Oznámení každý den o tom jaké je dnes jídlo pro {username}",
+  "@channelDescriptionDish": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "channelNameLowCredit": "Docházející kredit",
+  "@channelNameLowCredit": {},
+  "channelDescriptionLowCredit": "Oznámení o tom, zda vám dochází kredit týden dopředu pro {username}",
+  "@channelDescriptionLowCredit": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "channelNameOrdered": "Máte příští týden objednáno?",
+  "@channelNameOrdered": {},
+  "channelDescriptionOrdered": "Zda má {username} příští týden objednáno",
+  "@channelDescriptionOrdered": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationOther": "Ostatní",
+  "@notificationOther": {},
+  "notificationOtherDescription": "Ostatní Oznámení (např. chybové hlášky)",
+  "@notificationOtherDescription": {},
+  "notificationLowCredit": "Dochází vám kredit!",
+  "@notificationLowCredit": {},
+  "notificationDoNotDisturb": "Ztlumit na týden",
+  "@notificationDoNotDisturb": {},
+  "notificationDontForgetToOrder": "Objednejte si na příští týden",
+  "@notificationDontForgetToOrder": {},
+  "notificationDontForgetToOrderDetail": "Uživatel {username} si stále ještě neobjenal na příští týden",
+  "@notificationDontForgetToOrderDetail": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationNoFood": "Žádná jídla pro tento den",
+  "@notificationNoFood": {},
+  "nastalaChyba": "Nastala chyba",
+  "@nastalaChyba": {},
+  "or": "nebo",
+  "@or": {}
+}

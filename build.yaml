@@ -4,3 +4,8 @@ targets:
       json_serializable:
         options:
           explicit_to_json: true
+      auto_route_generator:auto_route_generator:
+        generate_for:
+          - lib/app/routing/**.dart
+          - lib/dev/**_page.dart
+          - lib/features/**_page.dart

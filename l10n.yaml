@@ -1,9 +1,9 @@
-arb-dir: lib/src/lang/arb
-output-dir: lib/src/lang/output
+arb-dir: lib/l10n/arb
+output-dir: lib/l10n/output
 template-arb-file: app_cs.arb
-output-localization-file: texts.dart
-untranslated-messages-file: untranslated_messages.json
-output-class: Texts
+output-localization-file: l10n.dart
+untranslated-messages-file: lib/l10n/untranslated_messages.json
+output-class: L10n
 format: true
 use-escaping: true
 nullable-getter: false

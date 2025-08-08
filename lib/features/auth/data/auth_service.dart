@@ -1,0 +1,229 @@
+import 'dart:convert';
+
+import 'package:autojidelna/app/app.dart';
+import 'package:autojidelna/app/app_providers.dart';
+import 'package:autojidelna/core/utils/url.dart';
+import 'package:autojidelna/core/types/errors.dart';
+import 'package:autojidelna/core/types/freezed/account/account.dart';
+import 'package:autojidelna/core/types/freezed/logged_accounts/logged_accounts.dart';
+import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/user/user.dart';
+import 'package:autojidelna/shared/config/secure_storage_keys.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
+
+import 'package:canteenlib/canteenlib.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:http/http.dart' as http;
+
+class AuthService {
+  AuthService(this._ref);
+  final Ref _ref;
+
+  /// Main logic for loging in.
+  /// Can throw:
+  ///
+  /// [AuthErrors.connectionFailed] - Connection to the canteen server failed
+  ///
+  /// [AuthErrors.noInternetConnection] - The user doesn't have an internet connection
+  ///
+  /// [AuthErrors.wrongCredentials] - The user has entered incorrect credentials
+  ///
+  /// [AuthErrors.wrongUrl] - The user has entered an invalid URL
+  Future<User?> login(Account account) async {
+    String url = Url.clean(account.url);
+    User? user;
+
+    Canteen instance = Canteen(url);
+
+    try {
+      // First login attempt (with cleaned URL)
+      if (!await instance.login(account.username, account.password)) {
+        return Future.error(AuthErrors.wrongCredentials);
+      }
+    } catch (_) {
+      // Second login attempt
+      url = account.url;
+      instance = Canteen(url);
+
+      try {
+        if (!await instance.login(account.username, account.password)) {
+          return Future.error(AuthErrors.wrongCredentials);
+        }
+      } catch (_) {
+        // Check for internet connectivity
+        if (!await _ref.read(connectionCheckerProvider).hasConnection) {
+          return Future.error(AuthErrors.noInternetConnection);
+        }
+
+        // Check if the URL is valid by making a request
+        try {
+          await http.get(Uri.parse(url));
+        } catch (_) {
+          return Future.error(AuthErrors.wrongUrl);
+        }
+
+        return Future.error(AuthErrors.connectionFailed);
+      }
+    }
+
+    _ref.read(currentCanteen.notifier).state = instance;
+
+    try {
+      user = User(
+        accountData: SafeAccount.fromAccount(account),
+        canteenLocations: (await instance.jidelnicekDen()).vydejny,
+        data: await fetchUserData(account.username),
+      );
+    } catch (e) {
+      rethrow;
+    }
+
+    if (!await _hasDuplicates(account)) {
+      await _saveAccountToStorage(account);
+      //await NotificationService().initAwesome();
+    }
+
+    return user;
+  }
+
+  /// Logs in by provided [safeAccount]
+  /// Can throw:
+  ///
+  /// [AuthErrors.accountNotFound] - A matching [Account] was not found
+  Future<User?> loginBySafeAccount(SafeAccount safeAccount) async {
+    Account? account = await _findBySafeAccount(safeAccount);
+    if (account == null) return Future.error(AuthErrors.accountNotFound);
+
+    return login(account);
+  }
+
+  /// Logs in using data saved in Secure storage
+  ///
+  /// Can throw:
+  ///
+  /// [AuthErrors.accountNotFound] - A matching [Account] was not found
+  ///
+  /// [AuthErrors.missingCredentials] - Secure storage doesn't contain any credentials
+  Future<User?> loginFromStorage() async {
+    final LoggedAccounts loginData = await _getDataFromStorage();
+
+    if (loginData.accounts.isEmpty) return Future.error(AuthErrors.missingCredentials);
+    if (loginData.loggedInAccount == null) return Future.error(AuthErrors.accountNotSelected);
+    return await loginBySafeAccount(loginData.loggedInAccount!);
+  }
+
+  /// Sets [LoggedAccounts.loggedInAccount] to null. Doesn't delete user credentials
+  Future<void> ghostLogout() async {
+    final LoggedAccounts loginData = await _getDataFromStorage();
+    loginData.loggedInAccount = null;
+    await _saveDataToStorage(loginData);
+  }
+
+  Future<List<SafeAccount>> getLimitedAccounts() async {
+    return (await _getDataFromStorage()).accounts.map(SafeAccount.fromAccount).toList();
+  }
+
+  /// Changes [LoggedAccounts.loggedInAccount] to the provided [saveAccount]
+  ///
+  /// [AuthService.loginFromStorage] NEEDS TO BE CALLED AFTER THIS
+  Future<void> changeAccount(SafeAccount saveAccount) async {
+    LoggedAccounts loginData = await _getDataFromStorage();
+
+    bool accountFound = loginData.accounts.any((account) => SafeAccount.fromAccount(account) == saveAccount);
+    if (!accountFound) return Future.error(AuthErrors.accountNotFound);
+
+    LoggedAccounts updatedData = LoggedAccounts(accounts: loginData.accounts, loggedInAccount: saveAccount);
+    await _saveDataToStorage(updatedData);
+  }
+
+  Future<Uzivatel> fetchUserData(String username) async {
+    Canteen instance = _ref.read(currentCanteen);
+    return instance.missingFeatures.contains(Features.ziskatUzivatele) ? Uzivatel(uzivatelskeJmeno: username) : await instance.ziskejUzivatele();
+  }
+
+  /// Logs out a specific user
+  ///
+  /// Can throw:
+  ///
+  /// [AuthErrors.accountNotFound] - A matching [Account] was not found
+  Future<void> logout(SafeAccount safeAccount) async {
+    Account? account = await _findBySafeAccount(safeAccount);
+    if (account == null) return Future.error(AuthErrors.accountNotFound);
+
+    await _removeAccountFromStorage(account);
+    //NotificationService().removeNotifications(SafeAccount.fromAccount(account));
+    //NotificationService().removeNotifications(SafeAccount.fromAccount(account));
+
+    // TODO: move to analytics service or something
+    // if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logout);
+  }
+
+  // Logs out every logged in user
+  Future<void> logoutEveryone() async {
+    //LoggedAccounts loginData = await _getDataFromStorage();
+
+    /*for (Account account in loginData.accounts) {
+      // NotificationService().removeNotifications(SafeAccount.fromAccount(account));
+    }*/
+
+    await _saveDataToStorage(LoggedAccounts());
+
+    // TODO: move to analytics service or something
+    // if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logoutEveryone);
+  }
+
+  /// Checks for duplicates in logged accounts.
+  ///
+  /// Compares [Account.url] and [Account.username]
+  Future<bool> _hasDuplicates(Account account) async {
+    LoggedAccounts loginData = await _getDataFromStorage();
+    for (Account loggedAccount in loginData.accounts) {
+      if (loggedAccount.isSame(account)) return true;
+    }
+    return false;
+  }
+
+  /// Finds user in [LoggedAccounts], returns null if a matching account isn't found.
+  Future<Account?> _findBySafeAccount(SafeAccount safeAccount) async {
+    LoggedAccounts loginData = await _getDataFromStorage();
+    for (Account account in loginData.accounts) {
+      if (safeAccount.matches(account)) return account;
+    }
+    return null;
+  }
+
+  /// Reads [LoggedAccounts] from Secure storage.
+  Future<LoggedAccounts> _getDataFromStorage() async {
+    final secureStorage = App.globalContainer.read(secureStorageProvider);
+    String? value = await secureStorage.read(key: SecureStorageKeys.loginData);
+    if (value == null || value.trim().isEmpty) return LoggedAccounts();
+    return LoggedAccounts.fromJson(jsonDecode(value));
+  }
+
+  /// Saves [LoggedAccounts] to Secure storage.
+  Future<void> _saveDataToStorage(LoggedAccounts loginData) async {
+    final secureStorage = App.globalContainer.read(secureStorageProvider);
+    await secureStorage.write(key: SecureStorageKeys.loginData, value: jsonEncode(loginData.toJson()));
+  }
+
+  /// Saves an [Account] to Secure storage.
+  Future<void> _saveAccountToStorage(Account account) async {
+    LoggedAccounts loginData = await _getDataFromStorage();
+    LoggedAccounts updatedData = LoggedAccounts(
+      loggedInAccount: SafeAccount.fromAccount(account),
+      accounts: [...loginData.accounts, account],
+    );
+    await _saveDataToStorage(updatedData);
+  }
+
+  /// Removes an [Account] from Secure storage.
+  Future<void> _removeAccountFromStorage(Account account) async {
+    LoggedAccounts loginData = await _getDataFromStorage();
+    LoggedAccounts updatedData = LoggedAccounts(
+      loggedInAccount: loginData.loggedInAccount!.matches(account) ? null : loginData.loggedInAccount,
+      accounts: List.from(loginData.accounts)..remove(account),
+    );
+    await _saveDataToStorage(updatedData);
+  }
+}
