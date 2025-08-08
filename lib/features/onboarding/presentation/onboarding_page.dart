@@ -44,6 +44,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   void _previousPage() async {
     if (_stepFlow.isFirstPage) {
+      _stepFlow.reset();
       context.router.maybePop();
       return;
     }
