@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:autojidelna/core/notifications/user_channel_service.dart';
+import 'package:autojidelna/core/notifications/notification_channel_service.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
@@ -74,7 +74,7 @@ class AuthService {
 
     if (!await _hasDuplicates(account)) {
       await _saveAccountToStorage(account);
-      UserChannelService().createChannelsForUser(SafeAccount.fromAccount(account));
+      NotificationChannelService().createChannelsForUser(SafeAccount.fromAccount(account));
     }
 
     return user;
@@ -145,7 +145,7 @@ class AuthService {
     if (account == null) return Future.error(AuthErrors.accountNotFound);
 
     await _removeAccountFromStorage(account);
-    UserChannelService().removeChannelsForUser(safeAccount);
+    NotificationChannelService().removeChannelsForUser(safeAccount);
 
     // TODO: move to analytics service or something
     // if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logout);
@@ -156,7 +156,7 @@ class AuthService {
     LoggedAccounts loginData = await _getDataFromStorage();
 
     for (Account account in loginData.accounts) {
-      UserChannelService().removeChannelsForUser(SafeAccount.fromAccount(account));
+      NotificationChannelService().removeChannelsForUser(SafeAccount.fromAccount(account));
     }
 
     await _saveDataToStorage(LoggedAccounts());

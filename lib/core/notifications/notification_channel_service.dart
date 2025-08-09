@@ -7,7 +7,7 @@ import 'package:autojidelna/shared/localization/current_locale.dart';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 
-class UserChannelService {
+class NotificationChannelService {
   static final L10n _l10n = lookupL10n(App.globalContainer.read(currentLocaleProvider));
 
   static String userIdGen(SafeAccount account) => '${Url.clean(account.url)}-${account.username}';

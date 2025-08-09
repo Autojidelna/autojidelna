@@ -6,7 +6,7 @@ import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/core/crashlytics/crashlytics_service.dart';
 import 'package:autojidelna/core/notifications/notification_topics.dart';
 import 'package:autojidelna/core/notifications/notification_handler.dart';
-import 'package:autojidelna/core/notifications/user_channel_service.dart';
+import 'package:autojidelna/core/notifications/notification_channel_service.dart';
 import 'package:autojidelna/shared/config/adapters.hive.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 
@@ -111,7 +111,7 @@ class AppInit {
           importance: NotificationImportance.High,
         ),
       ],
-      channelGroups: UserChannelService.channelGroups,
+      channelGroups: NotificationChannelService.channelGroups,
       debug: kDebugMode,
     );
 
