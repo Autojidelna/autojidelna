@@ -103,7 +103,14 @@ class AppInit {
 
     await AwesomeNotifications().initialize(
       'resource://drawable/ic_launcher',
-      [NotificationChannel(channelKey: 'default', channelName: 'Default', channelDescription: 'Default')],
+      [
+        NotificationChannel(
+          channelKey: 'default',
+          channelName: 'Default',
+          channelDescription: 'Default',
+          importance: NotificationImportance.High,
+        ),
+      ],
       channelGroups: UserChannelService.channelGroups,
       debug: kDebugMode,
     );
