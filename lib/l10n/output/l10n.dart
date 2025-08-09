@@ -915,35 +915,17 @@ abstract class L10n {
   /// **'Dnešní jídlo'**
   String get channelNameDish;
 
-  /// No description provided for @channelDescriptionDish.
-  ///
-  /// In cs, this message translates to:
-  /// **'Oznámení každý den o tom jaké je dnes jídlo pro {username}'**
-  String channelDescriptionDish(String username);
-
   /// No description provided for @channelNameLowCredit.
   ///
   /// In cs, this message translates to:
   /// **'Docházející kredit'**
   String get channelNameLowCredit;
 
-  /// No description provided for @channelDescriptionLowCredit.
-  ///
-  /// In cs, this message translates to:
-  /// **'Oznámení o tom, zda vám dochází kredit týden dopředu pro {username}'**
-  String channelDescriptionLowCredit(String username);
-
   /// No description provided for @channelNameOrdered.
   ///
   /// In cs, this message translates to:
-  /// **'Máte příští týden objednáno?'**
+  /// **'Nezapomínat... Na oběd!'**
   String get channelNameOrdered;
-
-  /// No description provided for @channelDescriptionOrdered.
-  ///
-  /// In cs, this message translates to:
-  /// **'Zda má {username} příští týden objednáno'**
-  String channelDescriptionOrdered(String username);
 
   /// No description provided for @notificationLowCredit.
   ///
@@ -980,6 +962,24 @@ abstract class L10n {
   /// In cs, this message translates to:
   /// **'Oznámení'**
   String get notifications;
+
+  /// No description provided for @notificationFoodTodayDescription.
+  ///
+  /// In cs, this message translates to:
+  /// **'Upozorní na dnešní mňamku.'**
+  String get notificationFoodTodayDescription;
+
+  /// No description provided for @notificationLowCreditDescription.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pošli peníze a hraj dál!'**
+  String get notificationLowCreditDescription;
+
+  /// No description provided for @notificationNextWeekFoodCheckDescription.
+  ///
+  /// In cs, this message translates to:
+  /// **'Není třeba děkovat'**
+  String get notificationNextWeekFoodCheckDescription;
 
   /// No description provided for @nastalaChyba.
   ///

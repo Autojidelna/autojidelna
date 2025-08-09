@@ -480,25 +480,10 @@ class L10nCs extends L10n {
   String get channelNameDish => 'Dnešní jídlo';
 
   @override
-  String channelDescriptionDish(String username) {
-    return 'Oznámení každý den o tom jaké je dnes jídlo pro $username';
-  }
-
-  @override
   String get channelNameLowCredit => 'Docházející kredit';
 
   @override
-  String channelDescriptionLowCredit(String username) {
-    return 'Oznámení o tom, zda vám dochází kredit týden dopředu pro $username';
-  }
-
-  @override
-  String get channelNameOrdered => 'Máte příští týden objednáno?';
-
-  @override
-  String channelDescriptionOrdered(String username) {
-    return 'Zda má $username příští týden objednáno';
-  }
+  String get channelNameOrdered => 'Nezapomínat... Na oběd!';
 
   @override
   String get notificationLowCredit => 'Dochází vám kredit!';
@@ -521,6 +506,15 @@ class L10nCs extends L10n {
 
   @override
   String get notifications => 'Oznámení';
+
+  @override
+  String get notificationFoodTodayDescription => 'Upozorní na dnešní mňamku.';
+
+  @override
+  String get notificationLowCreditDescription => 'Pošli peníze a hraj dál!';
+
+  @override
+  String get notificationNextWeekFoodCheckDescription => 'Není třeba děkovat';
 
   @override
   String get nastalaChyba => 'Nastala chyba';
