@@ -435,12 +435,6 @@ abstract class L10n {
   /// **'Experimentální'**
   String get experimental;
 
-  /// No description provided for @gettingDataNotifications.
-  ///
-  /// In cs, this message translates to:
-  /// **'Získávám data pro oznámení'**
-  String get gettingDataNotifications;
-
   /// No description provided for @language.
   ///
   /// In cs, this message translates to:
@@ -609,24 +603,6 @@ abstract class L10n {
   /// **'Ne, děkuji'**
   String get noThankYou;
 
-  /// TODO
-  ///
-  /// In cs, this message translates to:
-  /// **'Kredit pro {username}: {ammount} Kč'**
-  String notificationKreditPro(String username, String ammount);
-
-  /// No description provided for @notifications.
-  ///
-  /// In cs, this message translates to:
-  /// **'Oznámení'**
-  String get notifications;
-
-  /// No description provided for @notificationsFor.
-  ///
-  /// In cs, this message translates to:
-  /// **'Oznámení pro {username}'**
-  String notificationsFor(String username);
-
   /// No description provided for @objednat.
   ///
   /// In cs, this message translates to:
@@ -710,12 +686,6 @@ abstract class L10n {
   /// In cs, this message translates to:
   /// **'Zásady ochrany osobních údajů'**
   String get privacyPolicy;
-
-  /// No description provided for @requestNotificationPermission.
-  ///
-  /// In cs, this message translates to:
-  /// **'Požádat o povolení notifikací'**
-  String get requestNotificationPermission;
 
   /// No description provided for @settings.
   ///
@@ -975,29 +945,11 @@ abstract class L10n {
   /// **'Zda má {username} příští týden objednáno'**
   String channelDescriptionOrdered(String username);
 
-  /// No description provided for @notificationOther.
-  ///
-  /// In cs, this message translates to:
-  /// **'Ostatní'**
-  String get notificationOther;
-
-  /// No description provided for @notificationOtherDescription.
-  ///
-  /// In cs, this message translates to:
-  /// **'Ostatní Oznámení (např. chybové hlášky)'**
-  String get notificationOtherDescription;
-
   /// No description provided for @notificationLowCredit.
   ///
   /// In cs, this message translates to:
   /// **'Dochází vám kredit!'**
   String get notificationLowCredit;
-
-  /// No description provided for @notificationDoNotDisturb.
-  ///
-  /// In cs, this message translates to:
-  /// **'Ztlumit na týden'**
-  String get notificationDoNotDisturb;
 
   /// No description provided for @notificationDontForgetToOrder.
   ///
@@ -1016,6 +968,18 @@ abstract class L10n {
   /// In cs, this message translates to:
   /// **'Žádná jídla pro tento den'**
   String get notificationNoFood;
+
+  ///
+  ///
+  /// In cs, this message translates to:
+  /// **'Kredit pro {username}: {ammount} Kč'**
+  String notificationKreditPro(String username, String ammount);
+
+  /// No description provided for @notifications.
+  ///
+  /// In cs, this message translates to:
+  /// **'Oznámení'**
+  String get notifications;
 
   /// No description provided for @nastalaChyba.
   ///

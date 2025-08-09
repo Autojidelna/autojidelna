@@ -208,9 +208,6 @@ class L10nCs extends L10n {
   String get experimental => 'Experimentální';
 
   @override
-  String get gettingDataNotifications => 'Získávám data pro oznámení';
-
-  @override
   String get language => 'Jazyk';
 
   @override
@@ -298,19 +295,6 @@ class L10nCs extends L10n {
   String get noThankYou => 'Ne, děkuji';
 
   @override
-  String notificationKreditPro(String username, String ammount) {
-    return 'Kredit pro $username: $ammount Kč';
-  }
-
-  @override
-  String get notifications => 'Oznámení';
-
-  @override
-  String notificationsFor(String username) {
-    return 'Oznámení pro $username';
-  }
-
-  @override
   String get objednat => 'Objednat';
 
   @override
@@ -351,9 +335,6 @@ class L10nCs extends L10n {
 
   @override
   String get privacyPolicy => 'Zásady ochrany osobních údajů';
-
-  @override
-  String get requestNotificationPermission => 'Požádat o povolení notifikací';
 
   @override
   String get settings => 'Nastavení';
@@ -520,17 +501,7 @@ class L10nCs extends L10n {
   }
 
   @override
-  String get notificationOther => 'Ostatní';
-
-  @override
-  String get notificationOtherDescription =>
-      'Ostatní Oznámení (např. chybové hlášky)';
-
-  @override
   String get notificationLowCredit => 'Dochází vám kredit!';
-
-  @override
-  String get notificationDoNotDisturb => 'Ztlumit na týden';
 
   @override
   String get notificationDontForgetToOrder => 'Objednejte si na příští týden';
@@ -542,6 +513,14 @@ class L10nCs extends L10n {
 
   @override
   String get notificationNoFood => 'Žádná jídla pro tento den';
+
+  @override
+  String notificationKreditPro(String username, String ammount) {
+    return 'Kredit pro $username: $ammount Kč';
+  }
+
+  @override
+  String get notifications => 'Oznámení';
 
   @override
   String get nastalaChyba => 'Nastala chyba';
