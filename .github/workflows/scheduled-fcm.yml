@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '15 9 * * *' # Every day at 9:00 UTC (11:15 in Prague)
-    - cron: '15 15 * * 2,4,6,7' # Every day at 15:00 UTC (17:15 in Prague)
+    - cron: '15 15 * * 0,2,4,6' # Every day at 15:00 UTC (17:15 in Prague)
 
 jobs:
   food_today:
