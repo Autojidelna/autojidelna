@@ -6,6 +6,7 @@ import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/core/crashlytics/crashlytics_service.dart';
 import 'package:autojidelna/core/notifications/notification_topics.dart';
 import 'package:autojidelna/core/notifications/notification_handler.dart';
+import 'package:autojidelna/core/notifications/user_channel_service.dart';
 import 'package:autojidelna/shared/config/adapters.hive.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 
@@ -89,7 +90,7 @@ class AppInit {
     // When notification is tapped & app opens
     FirebaseMessaging.onMessageOpenedApp.listen(NotificationHandler.handleIncomingMessage);
 
-    for (var topic in NotificationTopics.all) {
+    for (String topic in NotificationTopics.all) {
       FirebaseMessaging.instance.subscribeToTopic(topic);
     }
 
@@ -103,7 +104,7 @@ class AppInit {
     await AwesomeNotifications().initialize(
       'resource://drawable/ic_launcher',
       [NotificationChannel(channelKey: 'default', channelName: 'Default', channelDescription: 'Default')],
-      channelGroups: NotificationTopics.channelGroups,
+      channelGroups: UserChannelService.channelGroups,
       debug: kDebugMode,
     );
 

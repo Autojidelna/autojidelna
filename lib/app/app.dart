@@ -24,6 +24,7 @@ class App {
     await Future.wait([
       AppInit.firebaseAnalytics(),
       AppInit.firebaseMessaging(),
+      AppInit.awesomeNotifications(),
       AppInit.codePush(),
     ]);
 
