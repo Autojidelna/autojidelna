@@ -11,7 +11,6 @@ import 'package:autojidelna/shared/config/hive.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -24,7 +23,7 @@ class AppInit {
   static bool _firebaseCrashlyticsExecuted = false;
   static bool _firebaseAnalyticsExecuted = false;
   static bool _firebaseMessagingExecuted = false;
-  static bool _secureStorageExecuted = false;
+  static bool _awesomeNotificationsExecuted = false;
   static bool _packageInfoExecuted = false;
   static bool _rotationExecuted = false;
   static bool _codePushExecuted = false;
@@ -94,13 +93,6 @@ class AppInit {
     // When notification is tapped & app opens
     FirebaseMessaging.onMessageOpenedApp.listen(NotificationHandler.handleIncomingMessage);
 
-    AwesomeNotifications().initialize(
-      'resource://drawable/ic_launcher',
-      [NotificationChannel(channelKey: 'default', channelName: 'Default', channelDescription: 'Default')],
-      channelGroups: NotificationTopics.channelGroups,
-      debug: true,
-    );
-
     for (var topic in NotificationTopics.all) {
       FirebaseMessaging.instance.subscribeToTopic(topic);
     }
@@ -108,17 +100,18 @@ class AppInit {
     _firebaseMessagingExecuted = true;
   }
 
-  static Future<void> secureStorage() async {
-    assert(_secureStorageExecuted == false, 'AppInit.secureStorage() must be called only once');
-    if (_secureStorageExecuted) return;
+  static Future<void> awesomeNotifications() async {
+    assert(_awesomeNotificationsExecuted == false, 'AppInit.awesomeNotifications() must be called only once');
+    if (_awesomeNotificationsExecuted) return;
 
-    AndroidOptions android = const AndroidOptions(encryptedSharedPreferences: true);
-    IOSOptions iosOptions = const IOSOptions(accessibility: KeychainAccessibility.first_unlock);
+    await AwesomeNotifications().initialize(
+      'resource://drawable/ic_launcher',
+      [NotificationChannel(channelKey: 'default', channelName: 'Default', channelDescription: 'Default')],
+      channelGroups: NotificationTopics.channelGroups,
+      debug: kDebugMode,
+    );
 
-    FlutterSecureStorage secureStorage = FlutterSecureStorage(aOptions: android, iOptions: iosOptions);
-
-    App.initProviderOverrides.add(secureStorageProvider.overrideWithValue(secureStorage));
-    _secureStorageExecuted = true;
+    _awesomeNotificationsExecuted = true;
   }
 
   static Future<void> packageInfo() async {

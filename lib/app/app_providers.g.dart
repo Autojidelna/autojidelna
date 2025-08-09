@@ -24,23 +24,6 @@ final scaffoldMessengerProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ScaffoldMessengerRef = ProviderRef<GlobalKey<ScaffoldMessengerState>>;
-String _$secureStorageHash() => r'0cd1b80f91784467390034386f925a0be155bfbd';
-
-/// See also [secureStorage].
-@ProviderFor(secureStorage)
-final secureStorageProvider = Provider<FlutterSecureStorage>.internal(
-  secureStorage,
-  name: r'secureStorageProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$secureStorageHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef SecureStorageRef = ProviderRef<FlutterSecureStorage>;
 String _$packageInfoHash() => r'2a7c0f3591674adadbedbc24a619d23815acdb74';
 
 /// See also [packageInfo].
@@ -75,22 +58,5 @@ final currentPatchNumberProvider = Provider<int?>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CurrentPatchNumberRef = ProviderRef<int?>;
-String _$connectionCheckerHash() => r'2398afc38f1177d136b35be691ea4b6527bcc02e';
-
-/// See also [connectionChecker].
-@ProviderFor(connectionChecker)
-final connectionCheckerProvider = Provider<InternetConnectionChecker>.internal(
-  connectionChecker,
-  name: r'connectionCheckerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$connectionCheckerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef ConnectionCheckerRef = ProviderRef<InternetConnectionChecker>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

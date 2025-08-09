@@ -24,7 +24,6 @@ class App {
     await Future.wait([
       AppInit.firebaseAnalytics(),
       AppInit.firebaseMessaging(),
-      AppInit.secureStorage(),
       AppInit.packageInfo(),
       AppInit.rotation(),
       AppInit.codePush(),

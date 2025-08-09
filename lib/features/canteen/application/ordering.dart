@@ -1,4 +1,3 @@
-import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/analytics/statistic_type.dart';
 import 'package:autojidelna/core/types/stav_jidla.dart';
@@ -13,6 +12,7 @@ import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
   final ProviderContainer container = ProviderScope.containerOf(context);
@@ -25,7 +25,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
   if (prov.ordering) return;
   prov.ordering = true;
 
-  if (!await container.read(connectionCheckerProvider).hasConnection) {
+  if (!await InternetConnectionChecker.instance.hasConnection) {
     final bool value = await showInternetConnectionSnackBar();
     if (value && context.mounted) pressed(context, dish, stavJidla);
   }

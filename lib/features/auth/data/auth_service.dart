@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/core/notifications/user_channel_service.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/core/types/errors.dart';
@@ -9,11 +7,12 @@ import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/logged_accounts/logged_accounts.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
-import 'package:autojidelna/shared/config/secure_storage_keys.dart';
+import 'package:autojidelna/shared/config/secure_storage.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
 
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class AuthService {
   AuthService(this._ref);
@@ -51,7 +50,7 @@ class AuthService {
         }
       } catch (e) {
         // Check for internet connectivity
-        if (!await _ref.read(connectionCheckerProvider).hasConnection) {
+        if (!await InternetConnectionChecker.instance.hasConnection) {
           return Future.error(AuthErrors.noInternetConnection);
         }
 
@@ -188,16 +187,16 @@ class AuthService {
 
   /// Reads [LoggedAccounts] from Secure storage.
   Future<LoggedAccounts> _getDataFromStorage() async {
-    final secureStorage = App.globalContainer.read(secureStorageProvider);
-    String? value = await secureStorage.read(key: SecureStorageKeys.loginData);
+    final secureStorage = SecureStorage.instance;
+    String? value = await secureStorage.read(key: SecureStorage.keys.loginData);
     if (value == null || value.trim().isEmpty) return LoggedAccounts();
     return LoggedAccounts.fromJson(jsonDecode(value));
   }
 
   /// Saves [LoggedAccounts] to Secure storage.
   Future<void> _saveDataToStorage(LoggedAccounts loginData) async {
-    final secureStorage = App.globalContainer.read(secureStorageProvider);
-    await secureStorage.write(key: SecureStorageKeys.loginData, value: jsonEncode(loginData.toJson()));
+    final secureStorage = SecureStorage.instance;
+    await secureStorage.write(key: SecureStorage.keys.loginData, value: jsonEncode(loginData.toJson()));
   }
 
   /// Saves an [Account] to Secure storage.
