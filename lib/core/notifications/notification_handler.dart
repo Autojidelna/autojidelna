@@ -1,5 +1,5 @@
 import 'package:autojidelna/core/notifications/notification_topics.dart';
-
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 @pragma('vm:entry-point')
@@ -8,23 +8,30 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 class NotificationHandler {
-  static void handleIncomingMessage(RemoteMessage message) async {
-    Map<String, dynamic> data = message.data;
-    final topic = data['type'];
-
-    // Run specific function based on topic
-    _runTopicAction(topic);
-  }
+  static void handleIncomingMessage(RemoteMessage message) async => _runTopicAction(message.data['type']);
 
   static void _runTopicAction(String? topic) {
     if (topic == null) return;
 
+    // TODO: replace with actual topic based methods
     final actions = <String, Function>{
-      NotificationTopics.foodToday: () => throw UnimplementedError('Food Today logic not implemented'),
-      NotificationTopics.lowCredit: () => throw UnimplementedError('Low Credit logic not implemented'),
-      NotificationTopics.nextWeekFoodCheck: () => throw UnimplementedError('Next Week Food Check logic not implemented'),
+      NotificationTopics.foodToday: _placeholderNotification,
+      NotificationTopics.lowCredit: _placeholderNotification,
+      NotificationTopics.nextWeekFoodCheck: _placeholderNotification,
     };
 
-    actions[topic]?.call();
+    actions[topic]?.call(topic);
+  }
+
+  static void _placeholderNotification(String topic) async {
+    AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: topic.hashCode,
+        channelKey: 'default',
+        title: 'Test notification',
+        body: 'Topic recieved: $topic',
+        criticalAlert: true,
+      ),
+    );
   }
 }
