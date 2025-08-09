@@ -24,11 +24,11 @@ final scaffoldMessengerProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ScaffoldMessengerRef = ProviderRef<GlobalKey<ScaffoldMessengerState>>;
-String _$packageInfoHash() => r'2a7c0f3591674adadbedbc24a619d23815acdb74';
+String _$packageInfoHash() => r'5fd12e5a46daf085d283c70a7608ea667979e1a4';
 
 /// See also [packageInfo].
 @ProviderFor(packageInfo)
-final packageInfoProvider = Provider<PackageInfo?>.internal(
+final packageInfoProvider = FutureProvider<PackageInfo>.internal(
   packageInfo,
   name: r'packageInfoProvider',
   debugGetCreateSourceHash:
@@ -39,7 +39,7 @@ final packageInfoProvider = Provider<PackageInfo?>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef PackageInfoRef = ProviderRef<PackageInfo?>;
+typedef PackageInfoRef = FutureProviderRef<PackageInfo>;
 String _$currentPatchNumberHash() =>
     r'9e5375d76c322730ac2bae263a52919f49104ccd';
 

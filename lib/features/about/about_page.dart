@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
@@ -22,7 +23,13 @@ class AboutPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final L10n l10n = context.l10n;
 
-    String appVersion = l10n.versionSubtitle(kDebugMode.toString(), ref.read(packageInfoProvider)!.version);
+    final AsyncValue<PackageInfo> packageInfo = ref.watch(packageInfoProvider);
+    String version = '';
+
+    if (packageInfo.hasValue) {
+      version = packageInfo.value!.version;
+    }
+    String appVersion = l10n.versionSubtitle(kDebugMode.toString(), version);
 
     Widget logo = SvgPicture.asset(
       Assets.logo,

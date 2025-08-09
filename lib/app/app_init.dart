@@ -14,7 +14,6 @@ import 'package:flutter/services.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:awesome_notifications/awesome_notifications.dart' hide NotificationHandler;
 
@@ -24,7 +23,6 @@ class AppInit {
   static bool _firebaseAnalyticsExecuted = false;
   static bool _firebaseMessagingExecuted = false;
   static bool _awesomeNotificationsExecuted = false;
-  static bool _packageInfoExecuted = false;
   static bool _rotationExecuted = false;
   static bool _codePushExecuted = false;
 
@@ -112,15 +110,6 @@ class AppInit {
     );
 
     _awesomeNotificationsExecuted = true;
-  }
-
-  static Future<void> packageInfo() async {
-    assert(_packageInfoExecuted == false, 'AppInit.packageInfo() must be called only once');
-    if (_packageInfoExecuted) return;
-
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    App.initProviderOverrides.add(packageInfoProvider.overrideWithValue(packageInfo));
-    _packageInfoExecuted = true;
   }
 
   static Future<void> rotation() async {

@@ -9,7 +9,7 @@ part 'app_providers.g.dart';
 GlobalKey<ScaffoldMessengerState> scaffoldMessenger(Ref ref) => GlobalKey<ScaffoldMessengerState>();
 
 @Riverpod(keepAlive: true)
-PackageInfo? packageInfo(Ref ref) => null;
+Future<PackageInfo> packageInfo(Ref ref) async => await PackageInfo.fromPlatform();
 
 @Riverpod(keepAlive: true)
 int? currentPatchNumber(Ref ref) => null;
