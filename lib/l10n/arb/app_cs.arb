@@ -129,8 +129,6 @@
   "@errorsWrongUrlSubtitle": {},
   "experimental": "Experimentální",
   "@experimental": {},
-  "gettingDataNotifications": "Získávám data pro oznámení",
-  "@gettingDataNotifications": {},
   "language": "Jazyk",
   "@language": {},
   "languageCzech": "Čeština",
@@ -193,28 +191,6 @@
   "@noFood": {},
   "noThankYou": "Ne, děkuji",
   "@noThankYou": {},
-  "notificationKreditPro": "Kredit pro {username}: {ammount} Kč",
-  "@notificationKreditPro": {
-    "description": "TODO",
-    "placeholders": {
-      "username": {
-        "type": "String"
-      },
-      "ammount": {
-        "type": "String"
-      }
-    }
-  },
-  "notifications": "Oznámení",
-  "@notifications": {},
-  "notificationsFor": "Oznámení pro {username}",
-  "@notificationsFor": {
-    "placeholders": {
-      "username": {
-        "type": "String"
-      }
-    }
-  },
   "objednat": "Objednat",
   "@objednat": {},
   "objednatAction": "Objednat náhodně",
@@ -243,8 +219,6 @@
   "@pickLocation": {},
   "privacyPolicy": "Zásady ochrany osobních údajů",
   "@privacyPolicy": {},
-  "requestNotificationPermission": "Požádat o povolení notifikací",
-  "@requestNotificationPermission": {},
   "settings": "Nastavení",
   "@settings": {},
   "settingsRelativeTimestamps": "Relativní časové značky",
@@ -346,42 +320,12 @@
   "@loginSubtitle": {},
   "channelNameDish": "Dnešní jídlo",
   "@channelNameDish": {},
-  "channelDescriptionDish": "Oznámení každý den o tom jaké je dnes jídlo pro {username}",
-  "@channelDescriptionDish": {
-    "placeholders": {
-      "username": {
-        "type": "String"
-      }
-    }
-  },
   "channelNameLowCredit": "Docházející kredit",
   "@channelNameLowCredit": {},
-  "channelDescriptionLowCredit": "Oznámení o tom, zda vám dochází kredit týden dopředu pro {username}",
-  "@channelDescriptionLowCredit": {
-    "placeholders": {
-      "username": {
-        "type": "String"
-      }
-    }
-  },
-  "channelNameOrdered": "Máte příští týden objednáno?",
+  "channelNameOrdered": "Nezapomínat... Na oběd!",
   "@channelNameOrdered": {},
-  "channelDescriptionOrdered": "Zda má {username} příští týden objednáno",
-  "@channelDescriptionOrdered": {
-    "placeholders": {
-      "username": {
-        "type": "String"
-      }
-    }
-  },
-  "notificationOther": "Ostatní",
-  "@notificationOther": {},
-  "notificationOtherDescription": "Ostatní Oznámení (např. chybové hlášky)",
-  "@notificationOtherDescription": {},
   "notificationLowCredit": "Dochází vám kredit!",
   "@notificationLowCredit": {},
-  "notificationDoNotDisturb": "Ztlumit na týden",
-  "@notificationDoNotDisturb": {},
   "notificationDontForgetToOrder": "Objednejte si na příští týden",
   "@notificationDontForgetToOrder": {},
   "notificationDontForgetToOrderDetail": "Uživatel {username} si stále ještě neobjenal na příští týden",
@@ -394,6 +338,26 @@
   },
   "notificationNoFood": "Žádná jídla pro tento den",
   "@notificationNoFood": {},
+  "notificationKreditPro": "Kredit pro {username}: {ammount} Kč",
+  "@notificationKreditPro": {
+    "description": "",
+    "placeholders": {
+      "username": {
+        "type": "String"
+      },
+      "ammount": {
+        "type": "String"
+      }
+    }
+  },
+  "notifications": "Oznámení",
+  "@notifications": {},
+  "notificationFoodTodayDescription": "Upozorní na dnešní mňamku.",
+  "@notificationFoodTodayDescription": {},
+  "notificationLowCreditDescription": "Pošli peníze a hraj dál!",
+  "@notificationLowCreditDescription": {},
+  "notificationNextWeekFoodCheckDescription": "Není třeba děkovat",
+  "@notificationNextWeekFoodCheckDescription": {},
   "nastalaChyba": "Nastala chyba",
   "@nastalaChyba": {},
   "or": "nebo",

@@ -1,11 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/shared/widgets/scroll_view_column.dart';
+
 import 'package:flutter/foundation.dart';
-// import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 
 @RoutePage()
 class SettingsPage extends StatelessWidget {
@@ -33,11 +34,11 @@ class SettingsPage extends StatelessWidget {
             title: Text(l10n.convenience),
             onTap: () async => router.navigate(const ConvenienceRoute()),
           ),
-          /*ListTile(
+          ListTile(
             leading: const Icon(Icons.edit_notifications_outlined),
             title: Text(l10n.notifications),
-            onTap: () async => AwesomeNotifications().showNotificationConfigRoute(),
-          ),*/
+            onTap: () async => AwesomeNotifications().showNotificationConfigPage(),
+          ),
           ListTile(
             leading: const Icon(Icons.cookie_outlined),
             title: Text(l10n.analytics),

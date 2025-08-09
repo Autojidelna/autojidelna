@@ -1,8 +1,11 @@
 import 'dart:async';
+
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/app/app_providers.dart';
-import 'package:autojidelna/l10n/l10n_context_extension.dart';
+
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 bool _isVisible = false;
 Timer? _internetCheckTimer;
@@ -56,7 +59,7 @@ Future<bool> showInternetConnectionSnackBar() async {
   _internetCheckTimer = Timer.periodic(
     const Duration(seconds: 1),
     (timer) async {
-      bool hasInternet = await App.globalContainer.read(connectionCheckerProvider).hasConnection;
+      bool hasInternet = await InternetConnectionChecker.instance.hasConnection;
 
       if (hasInternet && !notifier.value) {
         notifier.value = true;

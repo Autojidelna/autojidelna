@@ -4,25 +4,26 @@ import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/core/crashlytics/crashlytics_service.dart';
+import 'package:autojidelna/core/notifications/notification_topics.dart';
+import 'package:autojidelna/core/notifications/notification_handler.dart';
+import 'package:autojidelna/core/notifications/notification_channel_service.dart';
 import 'package:autojidelna/shared/config/adapters.hive.dart';
 import 'package:autojidelna/shared/config/hive.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
+import 'package:awesome_notifications/awesome_notifications.dart' hide NotificationHandler;
 
 class AppInit {
   static bool _hiveExecuted = false;
   static bool _firebaseCrashlyticsExecuted = false;
   static bool _firebaseAnalyticsExecuted = false;
-  static bool _secureStorageExecuted = false;
-  static bool _packageInfoExecuted = false;
-  static bool _rotationExecuted = false;
+  static bool _firebaseMessagingExecuted = false;
+  static bool _awesomeNotificationsExecuted = false;
   static bool _codePushExecuted = false;
-  //static bool _initNotificationsExecuted = false;
 
   static Future<void> hive() async {
     assert(_hiveExecuted == false, 'AppInit.hive() must be called only once');
@@ -77,34 +78,44 @@ class AppInit {
     _firebaseAnalyticsExecuted = true;
   }
 
-  static Future<void> secureStorage() async {
-    assert(_secureStorageExecuted == false, 'AppInit.secureStorage() must be called only once');
-    if (_secureStorageExecuted) return;
+  static Future<void> firebaseMessaging() async {
+    assert(_firebaseMessagingExecuted == false, 'AppInit.firebaseMessaging() must be called only once');
+    if (_firebaseMessagingExecuted) return;
 
-    AndroidOptions android = const AndroidOptions(encryptedSharedPreferences: true);
-    IOSOptions iosOptions = const IOSOptions(accessibility: KeychainAccessibility.first_unlock);
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
-    FlutterSecureStorage secureStorage = FlutterSecureStorage(aOptions: android, iOptions: iosOptions);
+    // Foreground messages
+    FirebaseMessaging.onMessage.listen(NotificationHandler.handleIncomingMessage);
 
-    App.initProviderOverrides.add(secureStorageProvider.overrideWithValue(secureStorage));
-    _secureStorageExecuted = true;
+    // When notification is tapped & app opens
+    FirebaseMessaging.onMessageOpenedApp.listen(NotificationHandler.handleIncomingMessage);
+
+    for (String topic in NotificationTopics.all) {
+      FirebaseMessaging.instance.subscribeToTopic(topic);
+    }
+
+    _firebaseMessagingExecuted = true;
   }
 
-  static Future<void> packageInfo() async {
-    assert(_packageInfoExecuted == false, 'AppInit.packageInfo() must be called only once');
-    if (_packageInfoExecuted) return;
+  static Future<void> awesomeNotifications() async {
+    assert(_awesomeNotificationsExecuted == false, 'AppInit.awesomeNotifications() must be called only once');
+    if (_awesomeNotificationsExecuted) return;
 
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    App.initProviderOverrides.add(packageInfoProvider.overrideWithValue(packageInfo));
-    _packageInfoExecuted = true;
-  }
+    await AwesomeNotifications().initialize(
+      'resource://drawable/ic_launcher',
+      [
+        NotificationChannel(
+          channelKey: 'default',
+          channelName: 'Default',
+          channelDescription: 'Default',
+          importance: NotificationImportance.High,
+        ),
+      ],
+      channelGroups: NotificationChannelService.channelGroups,
+      debug: kDebugMode,
+    );
 
-  static Future<void> rotation() async {
-    assert(_rotationExecuted == false, 'AppInit.rotation() must be called only once');
-    if (_rotationExecuted) return;
-
-    SystemChrome.setPreferredOrientations(App.defaultRotations);
-    _rotationExecuted = true;
+    _awesomeNotificationsExecuted = true;
   }
 
   static Future<void> codePush() async {

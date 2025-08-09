@@ -23,7 +23,6 @@ class _AccountBox {
   static String boxName(SafeAccount account) => 'account_${account.username}_${account.url}';
 
   String location(SafeAccount account) => 'location_${account.username}_${account.url}';
-  String lastNotificationCheck(SafeAccount account) => 'last_check_${account.username}_${account.url}';
   String lastJidloDneCheck(SafeAccount account) => 'last_jidlo_dne_check_${account.username}_${account.url}';
   String nemateObjednanoNotifications(SafeAccount account) => 'ignore_objednat_${account.username}_${account.url}';
   String dailyFoodInfo(SafeAccount account) => 'send_dish_info_${account.username}_${account.url}';

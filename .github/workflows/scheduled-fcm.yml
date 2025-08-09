@@ -3,12 +3,12 @@ name: Scheduled FCM Messages
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 11 * * *'   # Every day at 11:00 UTC
-    - cron: '0 15 * * *'   # Every day at 15:00 UTC
+    - cron: '15 9 * * *' # Every day at 9:00 UTC (11:15 in Prague)
+    - cron: '15 15 * * 2,4,6,7' # Every day at 15:00 UTC (17:15 in Prague)
 
 jobs:
-  food_today_1100:
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '0 11 * * *')
+  food_today:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '15 9 * * *')
     runs-on: ubuntu-latest
     environment: scheduled-fcm
     steps:
@@ -18,11 +18,11 @@ jobs:
         run: |
           printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > /tmp/account.json
           gcloud auth activate-service-account --key-file=/tmp/account.json
-      
+
       - name: Get access token
         id: get_token
         run: echo "token=$(gcloud auth print-access-token)" >> $GITHUB_OUTPUT
-      
+
       - name: Send FCM message
         env:
           ACCESS_TOKEN: ${{ steps.get_token.outputs.token }}
@@ -33,7 +33,7 @@ jobs:
             -H "Content-Type: application/json; UTF-8" \
             -d '{
               "message": {
-                "topic": "food_today_1100",
+                "topic": "food_today",
                 "data": {
                   "type": "food_today"
                 },
@@ -45,8 +45,8 @@ jobs:
               }
             }'
 
-  low_credit_1500:
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '0 15 * * *')
+  low_credit:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule != '15 9 * * *')
     runs-on: ubuntu-latest
     environment: scheduled-fcm
     steps:
@@ -56,11 +56,11 @@ jobs:
         run: |
           printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > /tmp/account.json
           gcloud auth activate-service-account --key-file=/tmp/account.json
-      
+
       - name: Get access token
         id: get_token
         run: echo "token=$(gcloud auth print-access-token)" >> $GITHUB_OUTPUT
-      
+
       - name: Send FCM message
         env:
           ACCESS_TOKEN: ${{ steps.get_token.outputs.token }}
@@ -71,7 +71,7 @@ jobs:
             -H "Content-Type: application/json; UTF-8" \
             -d '{
               "message": {
-                "topic": "low_credit_1500",
+                "topic": "low_credit",
                 "data": {
                   "type": "low_credit"
                 },
@@ -83,8 +83,8 @@ jobs:
               }
             }'
 
-  next_week_food_check_1500:
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '0 15 * * *')
+  next_week_food_check:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule != '15 9 * * *')
     runs-on: ubuntu-latest
     environment: scheduled-fcm
     steps:
@@ -94,11 +94,11 @@ jobs:
         run: |
           printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > /tmp/account.json
           gcloud auth activate-service-account --key-file=/tmp/account.json
-      
+
       - name: Get access token
         id: get_token
         run: echo "token=$(gcloud auth print-access-token)" >> $GITHUB_OUTPUT
-      
+
       - name: Send FCM message
         env:
           ACCESS_TOKEN: ${{ steps.get_token.outputs.token }}
@@ -109,7 +109,7 @@ jobs:
             -H "Content-Type: application/json; UTF-8" \
             -d '{
               "message": {
-                "topic": "next_week_food_check_1500",
+                "topic": "next_week_food_check",
                 "data": {
                   "type": "next_week_food_check"
                 },

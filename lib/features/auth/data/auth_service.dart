@@ -1,20 +1,18 @@
 import 'dart:convert';
 
-import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/app/app_providers.dart';
+import 'package:autojidelna/core/notifications/notification_channel_service.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/logged_accounts/logged_accounts.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
-import 'package:autojidelna/shared/config/secure_storage_keys.dart';
+import 'package:autojidelna/shared/config/secure_storage.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
 
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:http/http.dart' as http;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class AuthService {
   AuthService(this._ref);
@@ -50,18 +48,13 @@ class AuthService {
         if (!await instance.login(account.username, account.password)) {
           return Future.error(AuthErrors.wrongCredentials);
         }
-      } catch (_) {
+      } catch (e) {
         // Check for internet connectivity
-        if (!await _ref.read(connectionCheckerProvider).hasConnection) {
+        if (!await InternetConnectionChecker.instance.hasConnection) {
           return Future.error(AuthErrors.noInternetConnection);
         }
 
-        // Check if the URL is valid by making a request
-        try {
-          await http.get(Uri.parse(url));
-        } catch (_) {
-          return Future.error(AuthErrors.wrongUrl);
-        }
+        if (e == CanteenLibExceptions.neplatneUrl) return Future.error(AuthErrors.wrongUrl);
 
         return Future.error(AuthErrors.connectionFailed);
       }
@@ -81,7 +74,7 @@ class AuthService {
 
     if (!await _hasDuplicates(account)) {
       await _saveAccountToStorage(account);
-      //await NotificationService().initAwesome();
+      NotificationChannelService().createChannelsForUser(SafeAccount.fromAccount(account));
     }
 
     return user;
@@ -152,8 +145,7 @@ class AuthService {
     if (account == null) return Future.error(AuthErrors.accountNotFound);
 
     await _removeAccountFromStorage(account);
-    //NotificationService().removeNotifications(SafeAccount.fromAccount(account));
-    //NotificationService().removeNotifications(SafeAccount.fromAccount(account));
+    NotificationChannelService().removeChannelsForUser(safeAccount);
 
     // TODO: move to analytics service or something
     // if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logout);
@@ -161,11 +153,11 @@ class AuthService {
 
   // Logs out every logged in user
   Future<void> logoutEveryone() async {
-    //LoggedAccounts loginData = await _getDataFromStorage();
+    LoggedAccounts loginData = await _getDataFromStorage();
 
-    /*for (Account account in loginData.accounts) {
-      // NotificationService().removeNotifications(SafeAccount.fromAccount(account));
-    }*/
+    for (Account account in loginData.accounts) {
+      NotificationChannelService().removeChannelsForUser(SafeAccount.fromAccount(account));
+    }
 
     await _saveDataToStorage(LoggedAccounts());
 
@@ -195,16 +187,16 @@ class AuthService {
 
   /// Reads [LoggedAccounts] from Secure storage.
   Future<LoggedAccounts> _getDataFromStorage() async {
-    final secureStorage = App.globalContainer.read(secureStorageProvider);
-    String? value = await secureStorage.read(key: SecureStorageKeys.loginData);
+    final secureStorage = SecureStorage.instance;
+    String? value = await secureStorage.read(key: SecureStorage.keys.loginData);
     if (value == null || value.trim().isEmpty) return LoggedAccounts();
     return LoggedAccounts.fromJson(jsonDecode(value));
   }
 
   /// Saves [LoggedAccounts] to Secure storage.
   Future<void> _saveDataToStorage(LoggedAccounts loginData) async {
-    final secureStorage = App.globalContainer.read(secureStorageProvider);
-    await secureStorage.write(key: SecureStorageKeys.loginData, value: jsonEncode(loginData.toJson()));
+    final secureStorage = SecureStorage.instance;
+    await secureStorage.write(key: SecureStorage.keys.loginData, value: jsonEncode(loginData.toJson()));
   }
 
   /// Saves an [Account] to Secure storage.

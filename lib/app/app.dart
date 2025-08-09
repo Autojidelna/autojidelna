@@ -23,12 +23,13 @@ class App {
     await AppInit.firebaseCrashlytics();
     await Future.wait([
       AppInit.firebaseAnalytics(),
-      AppInit.secureStorage(),
-      AppInit.packageInfo(),
-      AppInit.rotation(),
+      AppInit.firebaseMessaging(),
+      AppInit.awesomeNotifications(),
       AppInit.codePush(),
-      // TODO: App.initNotifications(),
     ]);
+
+    SystemChrome.setPreferredOrientations(_defaultRotations);
+
     // Stop the stopwatch
     stopwatch.stop();
 
@@ -39,7 +40,7 @@ class App {
 
   static late final bool shouldAskForNotification;
 
-  static const defaultRotations = [
+  static const _defaultRotations = [
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
     DeviceOrientation.landscapeLeft,
