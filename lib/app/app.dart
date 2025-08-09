@@ -23,11 +23,11 @@ class App {
     await AppInit.firebaseCrashlytics();
     await Future.wait([
       AppInit.firebaseAnalytics(),
+      AppInit.firebaseMessaging(),
       AppInit.secureStorage(),
       AppInit.packageInfo(),
       AppInit.rotation(),
       AppInit.codePush(),
-      // TODO: App.initNotifications(),
     ]);
     // Stop the stopwatch
     stopwatch.stop();

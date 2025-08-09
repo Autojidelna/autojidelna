@@ -33,7 +33,7 @@ class MyApp extends ConsumerWidget {
       routerConfig: appRouter.config(
         includePrefixMatches: true,
         navigatorObservers: () => [FirebaseTabObserver()],
-        deepLinkTransformer: (uri) async => deepLinkTransformer(uri),
+        deepLinkTransformer: deepLinkTransformer,
         placeholder: (context) => const SplashPage(),
       ),
     );
