@@ -10,7 +10,6 @@ import 'package:autojidelna/shared/config/adapters.hive.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -23,7 +22,6 @@ class AppInit {
   static bool _firebaseAnalyticsExecuted = false;
   static bool _firebaseMessagingExecuted = false;
   static bool _awesomeNotificationsExecuted = false;
-  static bool _rotationExecuted = false;
   static bool _codePushExecuted = false;
 
   static Future<void> hive() async {
@@ -110,14 +108,6 @@ class AppInit {
     );
 
     _awesomeNotificationsExecuted = true;
-  }
-
-  static Future<void> rotation() async {
-    assert(_rotationExecuted == false, 'AppInit.rotation() must be called only once');
-    if (_rotationExecuted) return;
-
-    SystemChrome.setPreferredOrientations(App.defaultRotations);
-    _rotationExecuted = true;
   }
 
   static Future<void> codePush() async {
