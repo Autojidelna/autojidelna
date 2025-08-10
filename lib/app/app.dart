@@ -23,6 +23,7 @@ class App {
     await AppInit.firebaseCrashlytics();
     await Future.wait([
       AppInit.firebaseAnalytics(),
+      AppInit.firebaseRemoteConfig(),
       AppInit.firebaseMessaging(),
       AppInit.awesomeNotifications(),
       AppInit.codePush(),
