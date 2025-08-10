@@ -40,9 +40,9 @@ class NotificationChannelService {
   }
 
   static final Map<String, String> _channelDescriptions = {
-    'food_today_1100': _l10n.notificationFoodTodayDescription,
-    'low_credit_1500': _l10n.notificationLowCreditDescription,
-    'next_week_food_check_1500': _l10n.notificationNextWeekFoodCheckDescription,
+    NotificationTopics.foodToday: _l10n.notificationFoodTodayDescription,
+    NotificationTopics.lowCredit: _l10n.notificationLowCreditDescription,
+    NotificationTopics.nextWeekFoodCheck: _l10n.notificationNextWeekFoodCheckDescription,
   };
 
   static List<NotificationChannelGroup> channelGroups = [
