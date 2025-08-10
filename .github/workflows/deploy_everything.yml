@@ -1,62 +1,51 @@
-name: "[Flutter] Deploy Everything"
+name: '[Flutter] Deploy Everything'
 on:
   pull_request:
     types: [closed]
     branches:
       - main
     paths:
-      - "android/**"
-      - "assets/**"
-      - "ios/**"
-      - "lib/**"
-      - "web/**"
-      - "test/**"
-      - "pubspec.yaml"
-      - "analysis_options.yaml"
+      - 'android/**'
+      - 'assets/**'
+      - 'ios/**'
+      - 'lib/**'
+      - 'test/**'
+      - 'pubspec.yaml'
+      - 'analysis_options.yaml'
   workflow_dispatch:
     inputs:
       android:
-        description: "Deploy Android?"
+        description: 'Deploy Android?'
         required: true
         type: boolean
         default: true
       ios:
-        description: "Deploy iOS?"
-        required: true
-        type: boolean
-        default: true
-      macos:
-        description: "Deploy macOS?"
-        required: true
-        type: boolean
-        default: true
-      cloudflare:
-        description: "Deploy to Cloudflare Pages?"
+        description: 'Deploy iOS?'
         required: true
         type: boolean
         default: true
       patch:
-        description: "Make it an instant patch release?"
+        description: 'Make it an instant patch release?'
         required: true
         type: boolean
         default: false
       skip:
-        description: "Increment build number instead?"
+        description: 'Increment build number instead?'
         required: true
         type: boolean
         default: false
       version:
-        description: "Custom version (format: 1.1.1 or 1.1.1+1):"
+        description: 'Custom version (format: 1.1.1 or 1.1.1+1):'
         required: false
         type: string
-        default: ""
+        default: ''
 
 permissions:
   contents: read
   pull-requests: write
 
 concurrency:
-  group: "deploy"
+  group: 'deploy'
   cancel-in-progress: false
 
 jobs:
@@ -238,185 +227,8 @@ jobs:
                --data "$PAYLOAD" \
                -X POST https://api.codemagic.io/builds
 
-      - name: Run macOS Deployment
-        if: ${{ (github.event.pull_request.merged == true || github.event.inputs.macos == 'true') && github.event.inputs.patch != 'true' }}
-        run: |
-          PAYLOAD=$(cat <<EOF
-          {
-            "appId": "${{ vars.CODEMAGIC_APP_ID }}",
-            "workflowId": "deploy_macos",
-            "tag": "${{ steps.tag.outputs.tag }}",
-            "environment": {
-              "softwareVersions": {
-                "flutter": "${{ vars.FLUTTER_VERSION }}"
-              }
-            }
-          }
-          EOF
-          )
-
-          curl -H "Content-Type: application/json" \
-               -H "x-auth-token: ${{ secrets.CODEMAGIC_TOKEN }}" \
-               --data "$PAYLOAD" \
-               -X POST https://api.codemagic.io/builds
-
-  build_web:
-    name: "[Web] Build Web"
-    if: ${{ github.event.pull_request.merged == true || github.event.inputs.cloudflare == 'true' || github.event.inputs.github_pages == 'true' || github.event.inputs.firebase_hosting == 'true' }}
-    needs: version
-    # Works on ubuntu and macOS. Should propably work on windows as well
-    runs-on: blacksmith-4vcpu-ubuntu-2204
-    steps:
-      - uses: actions/checkout@v4
-      - name: Get pubspec
-        uses: actions/download-artifact@v4
-        with:
-          name: pubspec
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: "stable"
-          flutter-version: ${{ vars.FLUTTER_VERSION }}
-          cache: true
-      - name: Build web
-        run: flutter build web --release --source-maps
-      - name: Sentry symbols upload
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        run: |
-          dart run sentry_dart_plugin
-      - name: Copy index.html to 404.html
-        run: cp build/web/index.html build/web/404.html
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          include-hidden-files: true
-          name: web-build
-          path: build/web
-
-  deploy_cloudflare:
-    name: "[Web] Deploy to Cloudflare Pages"
-    if: ${{ github.event.pull_request.merged == true || github.event.inputs.cloudflare == 'true' }}
-    needs: build_web
-    # Works on ubuntu and macOS. Should propably work on windows as well
-    runs-on: blacksmith-4vcpu-ubuntu-2204
-    environment:
-      name: cloudflare-pages
-      url: ${{ vars.CLOUDFLARE_PAGES_URL }}
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup git
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git fetch origin dist-cloudflare-pages:dist-cloudflare-pages || true
-          git checkout -b dist-cloudflare-pages || true
-          git checkout dist-cloudflare-pages || true
-          find . -maxdepth 1 ! -name ".git" ! -name "." -exec rm -rf {} +
-
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: web-build
-
-      - name: Deploy to Cloudflare Pages
-        run: |
-          # Push the new branch to the repository
-          git add .
-          git commit -m "Built web"
-          git push origin dist-cloudflare-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Wait for deployment
-        run: |
-          sleep 30
-      - name: Purge cache
-        run: |
-          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ vars.CLOUDFLARE_ZONE_ID }}/purge_cache" \
-            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_PURGE_KEY }}" \
-            -H "Content-Type: application/json" \
-              --data '{"purge_everything": true}'
-
-  deploy_firebase:
-    name: "[Web] Deploy to Firebase Hosting"
-    runs-on: blacksmith-4vcpu-ubuntu-2204
-    if: false #${{ github.event.pull_request.merged == true || github.event.inputs.firebase_hosting == 'true' }}
-    environment:
-      name: firebase-hosting
-      url: ${{ vars.FIREBASE_HOSTING_URL }}
-    needs: build_web
-    permissions:
-      contents: read
-      checks: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Get build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: web-build
-          path: build/web
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_ELEVATE_CORE }}
-          channelId: live
-          projectId: app-elevate-core
-
-  deploy_github_pages:
-    name: "[Web] Deploy to GitHub Pages"
-    if: false # ${{ github.event.pull_request.merged == true || github.event.inputs.github_pages == 'true' }}
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    needs: build_web
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: blacksmith-4vcpu-ubuntu-2204
-    steps:
-      - name: Get build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: web-build
-          path: build/web
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Get custom domain from GitHub API
-        id: get_custom_domain
-        run: |
-          CUSTOM_DOMAIN=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            https://api.github.com/repos/${{ github.repository }}/pages | jq -r .cname)
-          if [ "$CUSTOM_DOMAIN" != "null" ]; then
-            echo "CUSTOM_DOMAIN=$CUSTOM_DOMAIN"
-            echo "CUSTOM_DOMAIN=$CUSTOM_DOMAIN" >> $GITHUB_ENV
-          fi
-
-      - name: Rewrite base href
-        run: |
-          if [ ! -n "$CUSTOM_DOMAIN" ]; then
-          sed -i "s|<base href=\"/\">|<base href=\"/$(basename $GITHUB_REPOSITORY)/\">|" build/web/index.html
-          fi
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: "./build/web"
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
   deploy_android:
-    name: "[Android] Deploy to Google Play Store"
+    name: '[Android] Deploy to Google Play Store'
     environment:
       name: google-play
       url: https://play.google.com/store/apps/details?id=${{ needs.version.outputs.app_id }}
@@ -450,37 +262,31 @@ jobs:
       - name: Setup Java
         uses: useblacksmith/setup-java@v5
         with:
-          distribution: "zulu"
-          java-version: "17.x"
-          cache: "gradle"
+          distribution: 'zulu'
+          java-version: '17.x'
+          cache: 'gradle'
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
+          channel: 'stable'
           flutter-version: ${{ vars.FLUTTER_VERSION }}
           cache: true
 
       - name: 🐦 Setup Shorebird
         uses: shorebirdtech/setup-shorebird@v1
 
-      - name: 🚀 Use Shorebird
+      - name: 🚀 Use Shorebird - release
         if: ${{ github.event.inputs.patch != 'true' }}
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
         run: shorebird release android --flutter-version=${{ vars.FLUTTER_VERSION }} -- --split-debug-info="symbolsAndroid" --obfuscate
 
-      - name: 🚀 Use Shorebird
+      - name: 🚀 Use Shorebird - patch
         if: ${{ github.event.inputs.patch == 'true' }}
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
         run: shorebird patch android --release-version=${{ needs.version.outputs.full_version }} -- --split-debug-info="symbolsAndroid" --obfuscate
-
-      - name: Sentry symbols upload
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        run: |
-          dart run sentry_dart_plugin
 
       - name: Symbols extraction
         run: |
@@ -493,11 +299,11 @@ jobs:
       - uses: vacxe/google-play-cli-kt@0.4.8
         if: ${{ github.event.inputs.patch != 'true' }}
         env:
-          JAVA_HOME: ""
+          JAVA_HOME: ''
         with:
           service-account-json: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
           package-name: ${{needs.version.outputs.app_id}}
-          custom-script: "sh scripts/ci/deploy_google_play.sh build/app/outputs/bundle/release/app-release.aab ${{ needs.version.outputs.build_number }} internal completed build/app/outputs/mapping/release/mapping.txt build/symbols.zip"
+          custom-script: 'sh scripts/ci/deploy_google_play.sh build/app/outputs/bundle/release/app-release.aab ${{ needs.version.outputs.build_number }} internal completed build/app/outputs/mapping/release/mapping.txt build/symbols.zip'
 
       - name: Release Artifact Upload
         uses: actions/upload-artifact@v4
@@ -512,7 +318,7 @@ jobs:
           path: symbolsAndroid
 
   symbols_android:
-    name: "[Android] Upload Crashlytics Symbols"
+    name: '[Android] Upload Crashlytics Symbols'
     # Doesn't work on ubuntu, Windows works sometimes but it's super slow. macOS is the best option even with the 10x
     runs-on: macos-latest
     needs:
@@ -531,7 +337,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
 
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
