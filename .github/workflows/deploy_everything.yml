@@ -154,7 +154,7 @@ jobs:
       - name: Get applicationId
         id: extract_app_id
         run: |
-          application_id=$(grep -oP 'applicationId\s*=\s*"\K[^"]+' android/app/build.gradle)
+          application_id=$(grep -oP 'applicationId\s*=\s*"\K[^"]+' android/app/build.gradle.kts)
           echo "app_id=$application_id"
           echo "app_id=$application_id" >> "$GITHUB_OUTPUT"
 
