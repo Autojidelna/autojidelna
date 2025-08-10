@@ -1,19 +1,18 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 
-class RequestNotificationPermission extends ConsumerStatefulWidget {
+class RequestNotificationPermission extends StatefulWidget {
   const RequestNotificationPermission({super.key});
 
   @override
-  ConsumerState<RequestNotificationPermission> createState() => _RequestNotificationPermissionState();
+  State<RequestNotificationPermission> createState() => _RequestNotificationPermissionState();
 }
 
-class _RequestNotificationPermissionState extends ConsumerState<RequestNotificationPermission> {
+class _RequestNotificationPermissionState extends State<RequestNotificationPermission> {
   bool notificationsEnabled = false;
   bool notificationsRefused = false;
 
