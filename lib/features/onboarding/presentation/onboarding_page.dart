@@ -34,17 +34,15 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     }
 
     if (!mounted) return;
-    _stepFlow.reset();
     if (widget.onCompletedCallback == null) {
       context.router.replaceAll([const RouterRoute()]);
-      return;
+    } else {
+      widget.onCompletedCallback!(true);
     }
-    widget.onCompletedCallback!(true);
   }
 
   void _previousPage() async {
     if (_stepFlow.isFirstPage) {
-      _stepFlow.reset();
       context.router.maybePop();
       return;
     }
@@ -60,6 +58,12 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     super.initState();
     _pageController = PageController();
     _stepFlow = StepFlowController.instance;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _stepFlow.reset();
   }
 
   @override

@@ -187,7 +187,7 @@ class AuthService {
 
   /// Reads [LoggedAccounts] from Secure storage.
   Future<LoggedAccounts> _getDataFromStorage() async {
-    final secureStorage = SecureStorage.instance;
+    const secureStorage = SecureStorage.instance;
     String? value = await secureStorage.read(key: SecureStorage.keys.loginData);
     if (value == null || value.trim().isEmpty) return LoggedAccounts();
     return LoggedAccounts.fromJson(jsonDecode(value));
@@ -195,7 +195,7 @@ class AuthService {
 
   /// Saves [LoggedAccounts] to Secure storage.
   Future<void> _saveDataToStorage(LoggedAccounts loginData) async {
-    final secureStorage = SecureStorage.instance;
+    const secureStorage = SecureStorage.instance;
     await secureStorage.write(key: SecureStorage.keys.loginData, value: jsonEncode(loginData.toJson()));
   }
 

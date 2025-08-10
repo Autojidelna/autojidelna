@@ -37,7 +37,9 @@ class DebugPage extends StatelessWidget {
           ),
           ListTile(
             title: const Text('Onboarding guide'),
-            onTap: () async => context.router.push(OnboardingRoute()),
+            onTap: () async => context.router.push(
+              OnboardingRoute(onCompletedCallback: (p0) => context.router.navigate(const RouterRoute())),
+            ),
           ),
           const NotificationActionButton(),
         ],
