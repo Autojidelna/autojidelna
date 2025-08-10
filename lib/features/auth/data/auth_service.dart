@@ -146,23 +146,6 @@ class AuthService {
 
     await _removeAccountFromStorage(account);
     NotificationChannelService().removeChannelsForUser(safeAccount);
-
-    // TODO: move to analytics service or something
-    // if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logout);
-  }
-
-  // Logs out every logged in user
-  Future<void> logoutEveryone() async {
-    LoggedAccounts loginData = await _getDataFromStorage();
-
-    for (Account account in loginData.accounts) {
-      NotificationChannelService().removeChannelsForUser(SafeAccount.fromAccount(account));
-    }
-
-    await _saveDataToStorage(LoggedAccounts());
-
-    // TODO: move to analytics service or something
-    // if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logoutEveryone);
   }
 
   /// Checks for duplicates in logged accounts.
