@@ -1,17 +1,18 @@
 import 'dart:async';
 
-import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/shared/config/assets.dart';
 import 'package:autojidelna/shared/config/links.dart';
-import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/shared/widgets/scroll_view_column.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,10 +26,7 @@ class AboutPage extends ConsumerWidget {
 
     final AsyncValue<PackageInfo> packageInfo = ref.watch(packageInfoProvider);
     String version = '';
-
-    if (packageInfo.hasValue) {
-      version = packageInfo.value!.version;
-    }
+    if (packageInfo.hasValue) version = packageInfo.value!.version;
     String appVersion = l10n.versionSubtitle(kDebugMode.toString(), version);
 
     Widget logo = SvgPicture.asset(
@@ -54,11 +52,13 @@ class AboutPage extends ConsumerWidget {
             title: Text(l10n.licenses),
             onTap: () => unawaited(
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => LicensePage(
+                PageRouteBuilder(
+                  transitionDuration: Durations.short3,
+                  transitionsBuilder: (_, animation, __, child) => FadeTransition(opacity: animation, child: child),
+                  pageBuilder: (_, __, ___) => LicensePage(
                     applicationName: l10n.appName,
                     applicationVersion: appVersion,
-                    applicationIcon: logo,
+                    applicationIcon: Padding(padding: const EdgeInsets.symmetric(vertical: 24), child: logo),
                     applicationLegalese: l10n.appLegalese(DateTime.now()),
                   ),
                 ),
