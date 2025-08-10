@@ -1,3 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/app/routing/app_router.gr.dart';
+import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
@@ -7,6 +10,7 @@ import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
+import 'package:autojidelna/shared/widgets/divider_with_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,6 +44,18 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
                 );
               },
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: DividerWithText(text: context.l10n.or),
+          ),
+          ListTile(
+            leading: const Icon(Icons.add),
+            title: Text(context.l10n.addAccount),
+            onTap: () async {
+              StepFlowController.instance.setLoginFlow();
+              context.router.replaceAll([OnboardingRoute()]);
+            },
           ),
         ],
       ),
