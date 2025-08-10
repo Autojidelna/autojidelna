@@ -76,7 +76,7 @@ class AppInit {
 
     final box = Hive.box(Boxes.analytics);
     bool allowAnalytics = box.get(HiveKeys.analytics.allowAnalytics, defaultValue: false);
-    AnalyticsService.enabled(allowAnalytics);
+    AnalyticsService.instance.enabled(allowAnalytics);
     box.put(HiveKeys.analytics.allowAnalytics, allowAnalytics);
 
     _firebaseAnalyticsExecuted = true;
