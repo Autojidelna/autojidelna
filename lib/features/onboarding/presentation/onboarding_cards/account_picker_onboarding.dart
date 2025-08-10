@@ -50,6 +50,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
             child: DividerWithText(text: context.l10n.or),
           ),
           ListTile(
+            enabled: !ref.read(loginProvider).loggingIn,
             leading: const Icon(Icons.add),
             title: Text(context.l10n.addAccount),
             onTap: () async {
