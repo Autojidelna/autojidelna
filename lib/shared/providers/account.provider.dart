@@ -39,14 +39,6 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> logoutEveryone() async {
-    await _authService.logoutEveryone();
-    _user = null;
-    _ref.read(canteenProvider).clear();
-    _loggedSafeAccounts = [];
-    notifyListeners();
-  }
-
   Future<void> loadUser() async {
     final user = await _authService.loginFromStorage();
     if (user == null) return;

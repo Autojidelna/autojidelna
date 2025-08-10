@@ -35,7 +35,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
       try {
         Jidelnicek menu = await canteen.objednat(dish);
         prov.updateMenu(menu);
-        AnalyticsService().addStatistic(StatisticType.order);
+        AnalyticsService.instance.addStatistic(StatisticType.order);
       } catch (e) {
         showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(l10n));
       }
@@ -52,7 +52,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
       try {
         Jidelnicek menu = await canteen.objednatZBurzy(burza);
         prov.updateMenu(menu);
-        AnalyticsService().addStatistic(StatisticType.order);
+        AnalyticsService.instance.addStatistic(StatisticType.order);
       } catch (e) {
         showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(l10n));
       }
