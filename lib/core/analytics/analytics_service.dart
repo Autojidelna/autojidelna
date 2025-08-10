@@ -19,9 +19,6 @@ class AnalyticsService {
   void addStatistic(StatisticType type) async {
     Box box = Hive.box(Boxes.analytics);
 
-    // EXAMPLE
-    // FirebaseAnalytics.instance.logEvent(name: 'logout');
-
     switch (type) {
       //default case
       case StatisticType.order:
@@ -42,5 +39,15 @@ class AnalyticsService {
         box.put(HiveKeys.analytics.statistikaBurzaCatcher, pocetStatistiky);
         break;
     }
+  }
+
+  static void logCanteenUrl(String url, String? canteenVersion) async {
+    await FirebaseAnalytics.instance.logEvent(
+      name: 'login_url',
+      parameters: {
+        'url': Url.clean(url),
+        'canteen_version': canteenVersion ?? 'Unavailable',
+      },
+    );
   }
 }
