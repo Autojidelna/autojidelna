@@ -1,12 +1,16 @@
 import 'dart:async';
 
 import 'package:autojidelna/core/analytics/statistic_type.dart';
+import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:hive/hive.dart';
 
 // TODO
 class AnalyticsService {
+  AnalyticsService._();
+  static final AnalyticsService instance = AnalyticsService._();
+
   static void enabled(bool enabled) {
     unawaited(FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(enabled));
     if (!enabled) unawaited(FirebaseAnalytics.instance.resetAnalyticsData());
