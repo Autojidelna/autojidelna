@@ -29,12 +29,6 @@ class LoginProvider extends ChangeNotifier {
   bool hidePassword = true;
   SafeAccount? _pickedAccount;
 
-  final Map<String, String> urls = {
-    'Střední průmyslová škola a Gymnázium Třebešín': 'jidelna.trebesin.cz',
-    'Základní škola Ostrava': 'obedy.zs-mat5.cz',
-    'Česká zemědělská akademie v Humpolci': 'jidelna.cza-hu.cz',
-  };
-
   LoginProvider() {
     setLastUrl();
   }

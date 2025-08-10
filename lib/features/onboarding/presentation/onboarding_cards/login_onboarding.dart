@@ -1,3 +1,5 @@
+import 'package:autojidelna/core/remote-config/remote_config.dart';
+import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/features/auth/data/login.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
@@ -13,10 +15,11 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
     final L10n l10n = context.l10n;
     final provider = ref.watch(loginProvider);
 
-    final MapEntry<String, String> url = provider.urls.entries.firstWhere(
-      (e) => e.value == provider.urlController.text,
-      orElse: () => MapEntry(provider.urlController.text.split('.').reversed.elementAt(1), provider.urlController.text),
-    );
+    final MapEntry<String, String> url = ref.read(remoteConfigValues)[RemoteConfig.canteenUrls].entries.firstWhere(
+          (e) => e.value == provider.urlController.text,
+          orElse: () => MapEntry(Url.clean(provider.urlController.text).split('.').reversed.elementAt(1), provider.urlController.text),
+        );
+
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Form(

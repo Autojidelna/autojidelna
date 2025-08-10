@@ -4,7 +4,7 @@ class SecureStorage {
   static const AndroidOptions _androidOptions = AndroidOptions(encryptedSharedPreferences: true);
   static const IOSOptions _iosOptions = IOSOptions(accessibility: KeychainAccessibility.first_unlock);
 
-  static FlutterSecureStorage instance = const FlutterSecureStorage(aOptions: _androidOptions, iOptions: _iosOptions);
+  static const FlutterSecureStorage instance = FlutterSecureStorage(aOptions: _androidOptions, iOptions: _iosOptions);
 
   static final keys = _SecureStorageKeys();
 }
