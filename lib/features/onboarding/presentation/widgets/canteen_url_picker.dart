@@ -1,3 +1,4 @@
+import 'package:autojidelna/core/remote-config/remote_config.dart';
 import 'package:autojidelna/features/auth/data/login.provider.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,15 @@ class CanteenUrlPicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final LoginProvider provider = ref.read(loginProvider);
-    Map<String, String> urls = provider.urls;
+    final rawUrls = ref.read(remoteConfigValues)[RemoteConfig.canteenUrls];
+
+    Map<String, String> urls;
+
+    if (rawUrls is Map) {
+      urls = Map<String, String>.from(rawUrls);
+    } else {
+      urls = {};
+    }
     return ValueListenableBuilder<TextEditingValue>(
       valueListenable: provider.urlController,
       builder: (_, urlController, ___) {
