@@ -3,8 +3,8 @@ name: Scheduled FCM Messages
 on:
   workflow_dispatch:
   schedule:
-    - cron: '15 9 * * *' # Every day at 9:00 UTC (11:15 in Prague)
-    - cron: '15 15 * * 0,2,4,6' # Every day at 15:00 UTC (17:15 in Prague)
+    - cron: '45 8 * * *' # Every day at 8:45 UTC (10:45 in Prague)
+    - cron: '45 15 * * 0,1,2,3,6' # Thursday and Friday at 15:45 UTC (17:45 in Prague)
 
 jobs:
   send_messages:
@@ -53,10 +53,10 @@ jobs:
             send_message "low_credit"
             send_message "next_week_food_check"
 
-          elif [[ "$SCHEDULE" == "15 9 * * *" ]]; then
+          elif [[ "$SCHEDULE" == "45 8 * * *" ]]; then
             send_message "food_today"
 
-          elif [[ "$SCHEDULE" == "15 15 * * 0,2,4,6" ]]; then
+          elif [[ "$SCHEDULE" == "45 15 * * 0,1,2,3,6" ]]; then
             send_message "low_credit"
             send_message "next_week_food_check"
           fi
