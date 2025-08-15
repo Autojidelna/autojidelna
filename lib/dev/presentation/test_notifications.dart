@@ -1,3 +1,8 @@
+import 'package:autojidelna/core/notifications/notification_handler.dart';
+import 'package:autojidelna/core/notifications/notification_topics.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/shared/widgets/section_title.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 class NotificationActionButton extends StatelessWidget {
@@ -5,10 +10,21 @@ class NotificationActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        ListTile(onTap: null /* TODO: () async => doNotifications(force: true), title: const Text('Notifications Force')*/),
-        ListTile(onTap: null /* TODO: () async => doNotifications(), title: const Text('Notifications')*/),
+        SectionTitle(context.l10n.notifications),
+        ListTile(
+          title: const Text('Today\'s food notification'),
+          onTap: () => NotificationHandler.handleIncomingMessage(const RemoteMessage(data: {'type': NotificationTopics.foodToday})),
+        ),
+        ListTile(
+          title: const Text('Low credit notification'),
+          onTap: () => NotificationHandler.handleIncomingMessage(const RemoteMessage(data: {'type': NotificationTopics.lowCredit})),
+        ),
+        ListTile(
+          title: const Text('Weekly food check notification'),
+          onTap: () => NotificationHandler.handleIncomingMessage(const RemoteMessage(data: {'type': NotificationTopics.nextWeekFoodCheck})),
+        ),
       ],
     );
   }
