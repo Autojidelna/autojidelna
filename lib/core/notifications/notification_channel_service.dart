@@ -13,6 +13,7 @@ class NotificationChannelService {
   static String userIdGen(SafeAccount account) => '${Url.clean(account.url)}-${account.username}';
   static String getChannelKey(String userId, String topic) => '$userId-$topic';
   static String getGroup(String topic) => 'group-$topic';
+  static String defaultChannelKey = 'default';
 
   Future<void> createChannelsForUser(SafeAccount account) async {
     String userId = userIdGen(account);
