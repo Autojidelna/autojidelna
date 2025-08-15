@@ -30,7 +30,7 @@ class NotificationHandler {
 
     final actions = <String, Function>{
       NotificationTopics.foodToday: _foodToday,
-      NotificationTopics.lowCredit: _placeholderNotification,
+      NotificationTopics.lowCredit: _lowCredit,
       NotificationTopics.nextWeekFoodCheck: _placeholderNotification,
     };
 
@@ -79,7 +79,7 @@ class NotificationHandler {
             content: NotificationContent(
               id: 1024 - i,
               channelKey: NotificationChannelService.getChannelKey(NotificationChannelService.userIdGen(safeAccount), topic),
-              title: 'TEst',
+              title: 'FOOD',
               body: menu.jidla[k].kategorizovano?.hlavniJidlo ?? menu.jidla[k].nazev,
             ),
           );
@@ -92,6 +92,43 @@ class NotificationHandler {
               id: 10,
               channelKey: NotificationChannelService.defaultChannelKey,
               title: 'Failed today food',
+              body: e.toString(),
+            ),
+          );
+        }
+      }
+    }
+  }
+
+  static void _lowCredit(String topic) async {
+    final l10n = lookupL10n(App.globalContainer.read(currentLocaleProvider));
+    final limitedAccounts = await _getLimitedAccountsFromStorage();
+
+    for (var i = 0; i < limitedAccounts.length; i++) {
+      final safeAccount = limitedAccounts[i];
+
+      try {
+        final canteen = await _loginBySafeAccount(safeAccount);
+        final user = await canteen.ziskejUzivatele();
+
+        if (user.kredit < 500) {
+          AwesomeNotifications().createNotification(
+            content: NotificationContent(
+              id: 1024 - i,
+              channelKey: NotificationChannelService.getChannelKey(NotificationChannelService.userIdGen(safeAccount), topic),
+              title: ' LOW CREDIT',
+              body: ' SEND MONEY',
+            ),
+          );
+          continue;
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          AwesomeNotifications().createNotification(
+            content: NotificationContent(
+              id: 10,
+              channelKey: NotificationChannelService.defaultChannelKey,
+              title: 'Failed low credit',
               body: e.toString(),
             ),
           );
