@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/shared/config/errors.dart';
@@ -7,6 +9,7 @@ import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 
 import 'package:canteenlib/canteenlib.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -46,9 +49,7 @@ String getObedText(BuildContext context, Jidlo dish, StavJidla stavJidla) {
         }
         if (!jeVeDneDostupnyObed && prvniIndex == menu.jidla.indexOf(dish)) cannotBeOrderedFix(context, date);
       } catch (e) {
-        // TODO: move to analytics service
-        // if (analyticsEnabledGlobally && analytics != null) unawaited(FirebaseCrashlytics.instance.recordError(e, StackTrace.current));
-
+        unawaited(FirebaseCrashlytics.instance.recordError(e, StackTrace.current));
         //hope it's not important
       }
       Uzivatel uzivatel = container.read(userProvider).user!.data;
