@@ -31,13 +31,13 @@ class NotificationHandler {
     final actions = <String, Function>{
       NotificationTopics.foodToday: _foodToday,
       NotificationTopics.lowCredit: _lowCredit,
-      NotificationTopics.nextWeekFoodCheck: _placeholderNotification,
+      NotificationTopics.nextWeekFoodCheck: _nextWeekFoodCheck,
     };
 
     actions[topic]?.call(topic);
   }
 
-  static void _placeholderNotification(String topic) async {
+  /*static void _placeholderNotification(String topic) async {
     AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: topic.hashCode,
@@ -47,7 +47,7 @@ class NotificationHandler {
         criticalAlert: true,
       ),
     );
-  }
+  }*/
 
   static Future<void> _foodToday(String topic) async {
     final l10n = lookupL10n(App.globalContainer.read(currentLocaleProvider));
@@ -114,7 +114,7 @@ class NotificationHandler {
         if (user.kredit < 500) {
           AwesomeNotifications().createNotification(
             content: NotificationContent(
-              id: 1024 - i,
+              id: 512 - i,
               channelKey: NotificationChannelService.getChannelKey(NotificationChannelService.userIdGen(safeAccount), topic),
               title: ' LOW CREDIT',
               body: ' SEND MONEY',
@@ -129,6 +129,55 @@ class NotificationHandler {
               id: 10,
               channelKey: NotificationChannelService.defaultChannelKey,
               title: 'Failed low credit',
+              body: e.toString(),
+            ),
+          );
+        }
+      }
+    }
+  }
+
+  static void _nextWeekFoodCheck(String topic) async {
+    final l10n = lookupL10n(App.globalContainer.read(currentLocaleProvider));
+    DateTime now = DateTime.now();
+    final limitedAccounts = await _getLimitedAccountsFromStorage();
+
+    for (var i = 0; i < limitedAccounts.length; i++) {
+      final safeAccount = limitedAccounts[i];
+
+      try {
+        final canteen = await _loginBySafeAccount(safeAccount);
+        int orderedDays = 0;
+
+        for (var i = 0; i < 7; i++) {
+          now = now.add(const Duration(days: 1));
+          final menu = await _getDailyMenu(canteen, now);
+          if (menu == null || menu.jidla.isEmpty) continue;
+          for (var k = 0; k < menu.jidla.length; k++) {
+            if (!menu.jidla[k].objednano) continue;
+            orderedDays++;
+            break;
+          }
+        }
+
+        if (orderedDays < 3) {
+          AwesomeNotifications().createNotification(
+            content: NotificationContent(
+              id: 256 - i,
+              channelKey: NotificationChannelService.getChannelKey(NotificationChannelService.userIdGen(safeAccount), topic),
+              title: 'YOU DIDNT ORDER!',
+              body: 'DO IT',
+            ),
+          );
+          continue;
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          AwesomeNotifications().createNotification(
+            content: NotificationContent(
+              id: 10,
+              channelKey: NotificationChannelService.defaultChannelKey,
+              title: 'Failed next week food check',
               body: e.toString(),
             ),
           );
