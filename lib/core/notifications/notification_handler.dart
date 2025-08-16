@@ -66,8 +66,8 @@ class NotificationHandler {
             content: NotificationContent(
               id: 1024 - i,
               channelKey: NotificationChannelService.getChannelKey(NotificationChannelService.userIdGen(safeAccount), topic),
-              title: 'No FOOD',
-              body: l10n.noFood,
+              title: l10n.notificationFoodTodayNoTitle,
+              body: l10n.notificationFoodTodayNoDescription,
             ),
           );
           continue;
@@ -79,7 +79,7 @@ class NotificationHandler {
             content: NotificationContent(
               id: 1024 - i,
               channelKey: NotificationChannelService.getChannelKey(NotificationChannelService.userIdGen(safeAccount), topic),
-              title: 'FOOD',
+              title: l10n.notificationFoodTodayYesTitle,
               body: menu.jidla[k].kategorizovano?.hlavniJidlo ?? menu.jidla[k].nazev,
             ),
           );
@@ -91,7 +91,7 @@ class NotificationHandler {
             content: NotificationContent(
               id: 10,
               channelKey: NotificationChannelService.defaultChannelKey,
-              title: 'Failed today food',
+              title: l10n.debugFailedNotification(topic),
               body: e.toString(),
             ),
           );
@@ -116,8 +116,8 @@ class NotificationHandler {
             content: NotificationContent(
               id: 512 - i,
               channelKey: NotificationChannelService.getChannelKey(NotificationChannelService.userIdGen(safeAccount), topic),
-              title: ' LOW CREDIT',
-              body: ' SEND MONEY',
+              title: l10n.notificationLowCreditTitle,
+              body: l10n.notificationLowCreditDescription,
             ),
           );
           continue;
@@ -128,7 +128,7 @@ class NotificationHandler {
             content: NotificationContent(
               id: 10,
               channelKey: NotificationChannelService.defaultChannelKey,
-              title: 'Failed low credit',
+              title: l10n.debugFailedNotification(topic),
               body: e.toString(),
             ),
           );
@@ -165,8 +165,8 @@ class NotificationHandler {
             content: NotificationContent(
               id: 256 - i,
               channelKey: NotificationChannelService.getChannelKey(NotificationChannelService.userIdGen(safeAccount), topic),
-              title: 'YOU DIDNT ORDER!',
-              body: 'DO IT',
+              title: l10n.notificationNextWeekFoodCheckTitle,
+              body: l10n.notificationNextWeekFoodCheckDescription,
             ),
           );
           continue;
@@ -177,7 +177,7 @@ class NotificationHandler {
             content: NotificationContent(
               id: 10,
               channelKey: NotificationChannelService.defaultChannelKey,
-              title: 'Failed next week food check',
+              title: l10n.debugFailedNotification(topic),
               body: e.toString(),
             ),
           );

@@ -56,8 +56,8 @@ class _RequestNotificationPermissionState extends State<RequestNotificationPermi
     final L10n l10n = context.l10n;
 
     return ListTile(
-      title: Text(l10n.allowNotifications),
-      subtitle: Text(l10n.allowNotifcitaionsReasons),
+      title: Text(l10n.notificationsAllow),
+      subtitle: Text(l10n.notificationsAllowReasons),
       trailing: OutlinedButton(
         onPressed: notificationsEnabled ? null : askForPermission,
         child: notificationsEnabled

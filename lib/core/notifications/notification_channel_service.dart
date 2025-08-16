@@ -41,14 +41,23 @@ class NotificationChannelService {
   }
 
   static final Map<String, String> _channelDescriptions = {
-    NotificationTopics.foodToday: _l10n.notificationFoodTodayDescription,
-    NotificationTopics.lowCredit: _l10n.notificationLowCreditDescription,
-    NotificationTopics.nextWeekFoodCheck: _l10n.notificationNextWeekFoodCheckDescription,
+    NotificationTopics.foodToday: _l10n.notificationSystemSettingsFoodTodayDescription,
+    NotificationTopics.lowCredit: _l10n.notificationSystemSettingsLowCreditDescription,
+    NotificationTopics.nextWeekFoodCheck: _l10n.notificationSystemSettingsNextWeekFoodCheckDescription,
   };
 
   static List<NotificationChannelGroup> channelGroups = [
-    NotificationChannelGroup(channelGroupKey: getGroup(NotificationTopics.foodToday), channelGroupName: _l10n.channelNameDish),
-    NotificationChannelGroup(channelGroupKey: getGroup(NotificationTopics.lowCredit), channelGroupName: _l10n.channelNameLowCredit),
-    NotificationChannelGroup(channelGroupKey: getGroup(NotificationTopics.nextWeekFoodCheck), channelGroupName: _l10n.channelNameOrdered),
+    NotificationChannelGroup(
+      channelGroupKey: getGroup(NotificationTopics.foodToday),
+      channelGroupName: _l10n.notificationChannelNameFoodToday,
+    ),
+    NotificationChannelGroup(
+      channelGroupKey: getGroup(NotificationTopics.lowCredit),
+      channelGroupName: _l10n.notificationChannelNameLowCredit,
+    ),
+    NotificationChannelGroup(
+      channelGroupKey: getGroup(NotificationTopics.nextWeekFoodCheck),
+      channelGroupName: _l10n.notificationChannelNameNextWeekFoodCheck,
+    ),
   ];
 }
