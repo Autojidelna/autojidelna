@@ -66,6 +66,8 @@ class NotificationHandler {
             content: NotificationContent(
               id: 1024 - i,
               channelKey: NotificationChannelService.getChannelKey(NotificationChannelService.userIdGen(safeAccount), topic),
+              groupKey: NotificationChannelService.userIdGen(safeAccount),
+              summary: safeAccount.username,
               title: l10n.notificationFoodTodayNoTitle,
               body: l10n.notificationFoodTodayNoDescription,
             ),
@@ -79,6 +81,8 @@ class NotificationHandler {
             content: NotificationContent(
               id: 1024 - i,
               channelKey: NotificationChannelService.getChannelKey(NotificationChannelService.userIdGen(safeAccount), topic),
+              groupKey: NotificationChannelService.userIdGen(safeAccount),
+              summary: safeAccount.username,
               title: l10n.notificationFoodTodayYesTitle,
               body: menu.jidla[k].kategorizovano?.hlavniJidlo ?? menu.jidla[k].nazev,
             ),
@@ -116,6 +120,8 @@ class NotificationHandler {
             content: NotificationContent(
               id: 512 - i,
               channelKey: NotificationChannelService.getChannelKey(NotificationChannelService.userIdGen(safeAccount), topic),
+              groupKey: NotificationChannelService.userIdGen(safeAccount),
+              summary: safeAccount.username,
               title: l10n.notificationLowCreditTitle,
               body: l10n.notificationLowCreditDescription,
             ),
