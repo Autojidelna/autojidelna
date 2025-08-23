@@ -19,6 +19,8 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await App.backgroundInit();
+  //NotificationHandler.placeholderNotification(message.data['type']);
   NotificationHandler.handleIncomingMessage(message);
 }
 
@@ -37,7 +39,7 @@ class NotificationHandler {
     actions[topic]?.call(topic);
   }
 
-  /*static void _placeholderNotification(String topic) async {
+  static void placeholderNotification(String topic) async {
     AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: topic.hashCode,
@@ -47,7 +49,7 @@ class NotificationHandler {
         criticalAlert: true,
       ),
     );
-  }*/
+  }
 
   static Future<void> _foodToday(String topic) async {
     final l10n = lookupL10n(App.globalContainer.read(currentLocaleProvider));
