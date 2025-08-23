@@ -134,7 +134,7 @@ class NotificationHandler {
         if (kDebugMode) {
           AwesomeNotifications().createNotification(
             content: NotificationContent(
-              id: 10,
+              id: 11,
               channelKey: NotificationChannelService.defaultChannelKey,
               title: l10n.debugFailedNotification(topic),
               body: e.toString(),
@@ -173,6 +173,8 @@ class NotificationHandler {
             content: NotificationContent(
               id: 256 - i,
               channelKey: NotificationChannelService.getChannelKey(NotificationChannelService.userIdGen(safeAccount), topic),
+              groupKey: NotificationChannelService.userIdGen(safeAccount),
+              summary: safeAccount.username,
               title: l10n.notificationNextWeekFoodCheckTitle,
               body: l10n.notificationNextWeekFoodCheckDescription,
             ),
@@ -183,7 +185,7 @@ class NotificationHandler {
         if (kDebugMode) {
           AwesomeNotifications().createNotification(
             content: NotificationContent(
-              id: 10,
+              id: 12,
               channelKey: NotificationChannelService.defaultChannelKey,
               title: l10n.debugFailedNotification(topic),
               body: e.toString(),
