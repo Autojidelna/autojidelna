@@ -18,7 +18,7 @@ class AllowAnalytics extends _$AllowAnalytics {
 
   void update(bool enabled) {
     state = enabled;
-    AnalyticsService.enabled(state);
+    AnalyticsService.instance.enabled(state);
     unawaited(_box.put(HiveKeys.analytics.allowAnalytics, state));
   }
 }

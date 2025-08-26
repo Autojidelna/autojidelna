@@ -59,6 +59,14 @@
   "@dateFormat": {},
   "debug": "Debug",
   "@debug": {},
+  "debugTypeCrash": "Napište \"crash\" pro pád aplikace",
+  "@debugTypeCrash": {},
+  "debugFailedNotification": "Failed notification: {topic}",
+  "@debugFailedNotification": {
+    "placeholders": {
+      "topic": {}
+    }
+  },
   "display": "Zobrazení",
   "@display": {},
   "dontShowAgain": "Příště nezobrazovat",
@@ -193,8 +201,6 @@
   "@noThankYou": {},
   "objednat": "Objednat",
   "@objednat": {},
-  "objednatAction": "Objednat náhodně",
-  "@objednatAction": {},
   "objednatZBurzy": "Objednat z burzy",
   "@objednatZBurzy": {},
   "odebratZBurzy": "Odebrat z burzy",
@@ -281,8 +287,6 @@
   "@themeModeSystem": {},
   "tryAgain": "Zkusit znovu",
   "@tryAgain": {},
-  "typeCrash": "Napište \"crash\" pro pád aplikace",
-  "@typeCrash": {},
   "variableSymbol": "Variabilní symbol",
   "@variableSymbol": {},
   "version": "Verze",
@@ -306,10 +310,6 @@
   "@welcome": {},
   "onboardingSubtitle": "Pojďme nastavit nějaké věci. Později je můžete změnit v nastavení.",
   "@onboardingSubtitle": {},
-  "allowNotifications": "Povolit oznámení",
-  "@allowNotifications": {},
-  "allowNotifcitaionsReasons": "Dáme vám vědět o důležitých informacích, jako je nízký kredit nebo připomenutí objednávky.",
-  "@allowNotifcitaionsReasons": {},
   "grant": "Udělit",
   "@grant": {},
   "next": "Další",
@@ -318,48 +318,38 @@
   "@getStarted": {},
   "loginSubtitle": "Přihlaste se a můžeme začít. Užijte si všechny funkce aplikace!",
   "@loginSubtitle": {},
-  "channelNameDish": "Dnešní jídlo",
-  "@channelNameDish": {},
-  "channelNameLowCredit": "Docházející kredit",
-  "@channelNameLowCredit": {},
-  "channelNameOrdered": "Nezapomínat... Na oběd!",
-  "@channelNameOrdered": {},
-  "notificationLowCredit": "Dochází vám kredit!",
-  "@notificationLowCredit": {},
-  "notificationDontForgetToOrder": "Objednejte si na příští týden",
-  "@notificationDontForgetToOrder": {},
-  "notificationDontForgetToOrderDetail": "Uživatel {username} si stále ještě neobjenal na příští týden",
-  "@notificationDontForgetToOrderDetail": {
-    "placeholders": {
-      "username": {
-        "type": "String"
-      }
-    }
-  },
-  "notificationNoFood": "Žádná jídla pro tento den",
-  "@notificationNoFood": {},
-  "notificationKreditPro": "Kredit pro {username}: {ammount} Kč",
-  "@notificationKreditPro": {
-    "description": "",
-    "placeholders": {
-      "username": {
-        "type": "String"
-      },
-      "ammount": {
-        "type": "String"
-      }
-    }
-  },
   "notifications": "Oznámení",
   "@notifications": {},
-  "notificationFoodTodayDescription": "Upozorní na dnešní mňamku.",
-  "@notificationFoodTodayDescription": {},
-  "notificationLowCreditDescription": "Pošli peníze a hraj dál!",
+  "notificationsAllow": "Povolit oznámení",
+  "@notificationsAllow": {},
+  "notificationsAllowReasons": "Dáme vám vědět o důležitých informacích, jako je nízký kredit nebo připomenutí objednávky.",
+  "@notificationsAllowReasons": {},
+  "notificationChannelNameFoodToday": "Dnešní jídlo",
+  "@notificationChannelNameFoodToday": {},
+  "notificationChannelNameLowCredit": "Docházející kredit",
+  "@notificationChannelNameLowCredit": {},
+  "notificationChannelNameNextWeekFoodCheck": "Nezapomínat... Na oběd!",
+  "@notificationChannelNameNextWeekFoodCheck": {},
+  "notificationSystemSettingsFoodTodayDescription": "Upozorní na dnešní mňamku.",
+  "@notificationSystemSettingsFoodTodayDescription": {},
+  "notificationSystemSettingsLowCreditDescription": "Pošli peníze a hraj dál!",
+  "@notificationSystemSettingsLowCreditDescription": {},
+  "notificationSystemSettingsNextWeekFoodCheckDescription": "Není třeba děkovat",
+  "@notificationSystemSettingsNextWeekFoodCheckDescription": {},
+  "notificationFoodTodayYesTitle": "Na dnešek máte objednáno",
+  "@notificationFoodTodayYesTitle": {},
+  "notificationFoodTodayNoTitle": "Na dnešek nemáte objednáno",
+  "@notificationFoodTodayNoTitle": {},
+  "notificationFoodTodayNoDescription": "Dnes nemáte objednané jídlo. Zkontrolujte nabídku a objednejte si.",
+  "@notificationFoodTodayNoDescription": {},
+  "notificationLowCreditTitle": "Nízký kredit",
+  "@notificationLowCreditTitle": {},
+  "notificationLowCreditDescription": "Váš kredit je nízký. Dobijte ho, abyste mohli dál objednávat.",
   "@notificationLowCreditDescription": {},
-  "notificationNextWeekFoodCheckDescription": "Není třeba děkovat",
+  "notificationNextWeekFoodCheckTitle": "Objednávky na příští týden",
+  "@notificationNextWeekFoodCheckTitle": {},
+  "notificationNextWeekFoodCheckDescription": "Na některé dny příštího týdne nemáte objednávky. Prohlédněte si nabídku.",
   "@notificationNextWeekFoodCheckDescription": {},
-  "nastalaChyba": "Nastala chyba",
-  "@nastalaChyba": {},
   "or": "nebo",
   "@or": {}
 }

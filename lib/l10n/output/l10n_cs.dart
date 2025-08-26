@@ -89,6 +89,14 @@ class L10nCs extends L10n {
   String get debug => 'Debug';
 
   @override
+  String get debugTypeCrash => 'Napište \"crash\" pro pád aplikace';
+
+  @override
+  String debugFailedNotification(Object topic) {
+    return 'Failed notification: $topic';
+  }
+
+  @override
   String get display => 'Zobrazení';
 
   @override
@@ -298,9 +306,6 @@ class L10nCs extends L10n {
   String get objednat => 'Objednat';
 
   @override
-  String get objednatAction => 'Objednat náhodně';
-
-  @override
   String get objednatZBurzy => 'Objednat z burzy';
 
   @override
@@ -426,9 +431,6 @@ class L10nCs extends L10n {
   String get tryAgain => 'Zkusit znovu';
 
   @override
-  String get typeCrash => 'Napište \"crash\" pro pád aplikace';
-
-  @override
   String get variableSymbol => 'Variabilní symbol';
 
   @override
@@ -457,13 +459,6 @@ class L10nCs extends L10n {
       'Pojďme nastavit nějaké věci. Později je můžete změnit v nastavení.';
 
   @override
-  String get allowNotifications => 'Povolit oznámení';
-
-  @override
-  String get allowNotifcitaionsReasons =>
-      'Dáme vám vědět o důležitých informacích, jako je nízký kredit nebo připomenutí objednávky.';
-
-  @override
   String get grant => 'Udělit';
 
   @override
@@ -477,47 +472,60 @@ class L10nCs extends L10n {
       'Přihlaste se a můžeme začít. Užijte si všechny funkce aplikace!';
 
   @override
-  String get channelNameDish => 'Dnešní jídlo';
-
-  @override
-  String get channelNameLowCredit => 'Docházející kredit';
-
-  @override
-  String get channelNameOrdered => 'Nezapomínat... Na oběd!';
-
-  @override
-  String get notificationLowCredit => 'Dochází vám kredit!';
-
-  @override
-  String get notificationDontForgetToOrder => 'Objednejte si na příští týden';
-
-  @override
-  String notificationDontForgetToOrderDetail(String username) {
-    return 'Uživatel $username si stále ještě neobjenal na příští týden';
-  }
-
-  @override
-  String get notificationNoFood => 'Žádná jídla pro tento den';
-
-  @override
-  String notificationKreditPro(String username, String ammount) {
-    return 'Kredit pro $username: $ammount Kč';
-  }
-
-  @override
   String get notifications => 'Oznámení';
 
   @override
-  String get notificationFoodTodayDescription => 'Upozorní na dnešní mňamku.';
+  String get notificationsAllow => 'Povolit oznámení';
 
   @override
-  String get notificationLowCreditDescription => 'Pošli peníze a hraj dál!';
+  String get notificationsAllowReasons =>
+      'Dáme vám vědět o důležitých informacích, jako je nízký kredit nebo připomenutí objednávky.';
 
   @override
-  String get notificationNextWeekFoodCheckDescription => 'Není třeba děkovat';
+  String get notificationChannelNameFoodToday => 'Dnešní jídlo';
 
   @override
-  String get nastalaChyba => 'Nastala chyba';
+  String get notificationChannelNameLowCredit => 'Docházející kredit';
+
+  @override
+  String get notificationChannelNameNextWeekFoodCheck =>
+      'Nezapomínat... Na oběd!';
+
+  @override
+  String get notificationSystemSettingsFoodTodayDescription =>
+      'Upozorní na dnešní mňamku.';
+
+  @override
+  String get notificationSystemSettingsLowCreditDescription =>
+      'Pošli peníze a hraj dál!';
+
+  @override
+  String get notificationSystemSettingsNextWeekFoodCheckDescription =>
+      'Není třeba děkovat';
+
+  @override
+  String get notificationFoodTodayYesTitle => 'Na dnešek máte objednáno';
+
+  @override
+  String get notificationFoodTodayNoTitle => 'Na dnešek nemáte objednáno';
+
+  @override
+  String get notificationFoodTodayNoDescription =>
+      'Dnes nemáte objednané jídlo. Zkontrolujte nabídku a objednejte si.';
+
+  @override
+  String get notificationLowCreditTitle => 'Nízký kredit';
+
+  @override
+  String get notificationLowCreditDescription =>
+      'Váš kredit je nízký. Dobijte ho, abyste mohli dál objednávat.';
+
+  @override
+  String get notificationNextWeekFoodCheckTitle => 'Objednávky na příští týden';
+
+  @override
+  String get notificationNextWeekFoodCheckDescription =>
+      'Na některé dny příštího týdne nemáte objednávky. Prohlédněte si nabídku.';
 
   @override
   String get or => 'nebo';

@@ -22,7 +22,7 @@ class DebugPage extends StatelessWidget {
             title: TextField(
               onChanged: (value) async => value == 'crash' ? crashTestFunction() : null,
               decoration: InputDecoration(
-                labelText: l10n.typeCrash,
+                labelText: l10n.debugTypeCrash,
                 border: const OutlineInputBorder(),
               ),
             ),
@@ -37,7 +37,9 @@ class DebugPage extends StatelessWidget {
           ),
           ListTile(
             title: const Text('Onboarding guide'),
-            onTap: () async => context.router.push(OnboardingRoute()),
+            onTap: () async => context.router.push(
+              OnboardingRoute(onCompletedCallback: (p0) => context.router.navigate(const RouterRoute())),
+            ),
           ),
           const NotificationActionButton(),
         ],

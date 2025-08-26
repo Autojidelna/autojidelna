@@ -225,6 +225,18 @@ abstract class L10n {
   /// **'Debug'**
   String get debug;
 
+  /// No description provided for @debugTypeCrash.
+  ///
+  /// In cs, this message translates to:
+  /// **'Napište \"crash\" pro pád aplikace'**
+  String get debugTypeCrash;
+
+  /// No description provided for @debugFailedNotification.
+  ///
+  /// In cs, this message translates to:
+  /// **'Failed notification: {topic}'**
+  String debugFailedNotification(Object topic);
+
   /// No description provided for @display.
   ///
   /// In cs, this message translates to:
@@ -609,12 +621,6 @@ abstract class L10n {
   /// **'Objednat'**
   String get objednat;
 
-  /// No description provided for @objednatAction.
-  ///
-  /// In cs, this message translates to:
-  /// **'Objednat náhodně'**
-  String get objednatAction;
-
   /// No description provided for @objednatZBurzy.
   ///
   /// In cs, this message translates to:
@@ -831,12 +837,6 @@ abstract class L10n {
   /// **'Zkusit znovu'**
   String get tryAgain;
 
-  /// No description provided for @typeCrash.
-  ///
-  /// In cs, this message translates to:
-  /// **'Napište \"crash\" pro pád aplikace'**
-  String get typeCrash;
-
   /// No description provided for @variableSymbol.
   ///
   /// In cs, this message translates to:
@@ -873,18 +873,6 @@ abstract class L10n {
   /// **'Pojďme nastavit nějaké věci. Později je můžete změnit v nastavení.'**
   String get onboardingSubtitle;
 
-  /// No description provided for @allowNotifications.
-  ///
-  /// In cs, this message translates to:
-  /// **'Povolit oznámení'**
-  String get allowNotifications;
-
-  /// No description provided for @allowNotifcitaionsReasons.
-  ///
-  /// In cs, this message translates to:
-  /// **'Dáme vám vědět o důležitých informacích, jako je nízký kredit nebo připomenutí objednávky.'**
-  String get allowNotifcitaionsReasons;
-
   /// No description provided for @grant.
   ///
   /// In cs, this message translates to:
@@ -909,83 +897,101 @@ abstract class L10n {
   /// **'Přihlaste se a můžeme začít. Užijte si všechny funkce aplikace!'**
   String get loginSubtitle;
 
-  /// No description provided for @channelNameDish.
-  ///
-  /// In cs, this message translates to:
-  /// **'Dnešní jídlo'**
-  String get channelNameDish;
-
-  /// No description provided for @channelNameLowCredit.
-  ///
-  /// In cs, this message translates to:
-  /// **'Docházející kredit'**
-  String get channelNameLowCredit;
-
-  /// No description provided for @channelNameOrdered.
-  ///
-  /// In cs, this message translates to:
-  /// **'Nezapomínat... Na oběd!'**
-  String get channelNameOrdered;
-
-  /// No description provided for @notificationLowCredit.
-  ///
-  /// In cs, this message translates to:
-  /// **'Dochází vám kredit!'**
-  String get notificationLowCredit;
-
-  /// No description provided for @notificationDontForgetToOrder.
-  ///
-  /// In cs, this message translates to:
-  /// **'Objednejte si na příští týden'**
-  String get notificationDontForgetToOrder;
-
-  /// No description provided for @notificationDontForgetToOrderDetail.
-  ///
-  /// In cs, this message translates to:
-  /// **'Uživatel {username} si stále ještě neobjenal na příští týden'**
-  String notificationDontForgetToOrderDetail(String username);
-
-  /// No description provided for @notificationNoFood.
-  ///
-  /// In cs, this message translates to:
-  /// **'Žádná jídla pro tento den'**
-  String get notificationNoFood;
-
-  ///
-  ///
-  /// In cs, this message translates to:
-  /// **'Kredit pro {username}: {ammount} Kč'**
-  String notificationKreditPro(String username, String ammount);
-
   /// No description provided for @notifications.
   ///
   /// In cs, this message translates to:
   /// **'Oznámení'**
   String get notifications;
 
-  /// No description provided for @notificationFoodTodayDescription.
+  /// No description provided for @notificationsAllow.
+  ///
+  /// In cs, this message translates to:
+  /// **'Povolit oznámení'**
+  String get notificationsAllow;
+
+  /// No description provided for @notificationsAllowReasons.
+  ///
+  /// In cs, this message translates to:
+  /// **'Dáme vám vědět o důležitých informacích, jako je nízký kredit nebo připomenutí objednávky.'**
+  String get notificationsAllowReasons;
+
+  /// No description provided for @notificationChannelNameFoodToday.
+  ///
+  /// In cs, this message translates to:
+  /// **'Dnešní jídlo'**
+  String get notificationChannelNameFoodToday;
+
+  /// No description provided for @notificationChannelNameLowCredit.
+  ///
+  /// In cs, this message translates to:
+  /// **'Docházející kredit'**
+  String get notificationChannelNameLowCredit;
+
+  /// No description provided for @notificationChannelNameNextWeekFoodCheck.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nezapomínat... Na oběd!'**
+  String get notificationChannelNameNextWeekFoodCheck;
+
+  /// No description provided for @notificationSystemSettingsFoodTodayDescription.
   ///
   /// In cs, this message translates to:
   /// **'Upozorní na dnešní mňamku.'**
-  String get notificationFoodTodayDescription;
+  String get notificationSystemSettingsFoodTodayDescription;
+
+  /// No description provided for @notificationSystemSettingsLowCreditDescription.
+  ///
+  /// In cs, this message translates to:
+  /// **'Pošli peníze a hraj dál!'**
+  String get notificationSystemSettingsLowCreditDescription;
+
+  /// No description provided for @notificationSystemSettingsNextWeekFoodCheckDescription.
+  ///
+  /// In cs, this message translates to:
+  /// **'Není třeba děkovat'**
+  String get notificationSystemSettingsNextWeekFoodCheckDescription;
+
+  /// No description provided for @notificationFoodTodayYesTitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Na dnešek máte objednáno'**
+  String get notificationFoodTodayYesTitle;
+
+  /// No description provided for @notificationFoodTodayNoTitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Na dnešek nemáte objednáno'**
+  String get notificationFoodTodayNoTitle;
+
+  /// No description provided for @notificationFoodTodayNoDescription.
+  ///
+  /// In cs, this message translates to:
+  /// **'Dnes nemáte objednané jídlo. Zkontrolujte nabídku a objednejte si.'**
+  String get notificationFoodTodayNoDescription;
+
+  /// No description provided for @notificationLowCreditTitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nízký kredit'**
+  String get notificationLowCreditTitle;
 
   /// No description provided for @notificationLowCreditDescription.
   ///
   /// In cs, this message translates to:
-  /// **'Pošli peníze a hraj dál!'**
+  /// **'Váš kredit je nízký. Dobijte ho, abyste mohli dál objednávat.'**
   String get notificationLowCreditDescription;
+
+  /// No description provided for @notificationNextWeekFoodCheckTitle.
+  ///
+  /// In cs, this message translates to:
+  /// **'Objednávky na příští týden'**
+  String get notificationNextWeekFoodCheckTitle;
 
   /// No description provided for @notificationNextWeekFoodCheckDescription.
   ///
   /// In cs, this message translates to:
-  /// **'Není třeba děkovat'**
+  /// **'Na některé dny příštího týdne nemáte objednávky. Prohlédněte si nabídku.'**
   String get notificationNextWeekFoodCheckDescription;
-
-  /// No description provided for @nastalaChyba.
-  ///
-  /// In cs, this message translates to:
-  /// **'Nastala chyba'**
-  String get nastalaChyba;
 
   /// No description provided for @or.
   ///

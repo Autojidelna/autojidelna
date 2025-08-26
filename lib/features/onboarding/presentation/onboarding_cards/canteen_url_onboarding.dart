@@ -1,15 +1,18 @@
-import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/core/analytics/analytics_service.dart';
+import 'package:autojidelna/core/types/freezed/account/account.dart';
+import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/features/auth/data/login.provider.dart';
-import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
-import 'package:autojidelna/core/types/errors.dart';
-import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/shared/widgets/divider_with_text.dart';
+import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
+import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
+import 'package:autojidelna/features/auth/data/login.provider.dart';
 import 'package:autojidelna/features/onboarding/presentation/widgets/canteen_url_picker.dart';
 import 'package:autojidelna/features/onboarding/presentation/widgets/custom_url_field.dart';
-import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -69,6 +72,8 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
       loginProv.usernameController.clear();
       loginProv.passwordController.clear();
     }
+
+    AnalyticsService.instance.logCanteenUrl(loginProv.urlController.text, ref.read(currentCanteen).verze);
 
     return value;
   }

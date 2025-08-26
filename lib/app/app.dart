@@ -39,6 +39,12 @@ class App {
     debugPrint('Initialization took ${elapsed.inMilliseconds} ms');
   }
 
+  static Future<void> backgroundInit() async {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    await AppInit.hive();
+    await AppInit.awesomeNotifications();
+  }
+
   static late final bool shouldAskForNotification;
 
   static const _defaultRotations = [

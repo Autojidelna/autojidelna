@@ -146,23 +146,6 @@ class AuthService {
 
     await _removeAccountFromStorage(account);
     NotificationChannelService().removeChannelsForUser(safeAccount);
-
-    // TODO: move to analytics service or something
-    // if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logout);
-  }
-
-  // Logs out every logged in user
-  Future<void> logoutEveryone() async {
-    LoggedAccounts loginData = await _getDataFromStorage();
-
-    for (Account account in loginData.accounts) {
-      NotificationChannelService().removeChannelsForUser(SafeAccount.fromAccount(account));
-    }
-
-    await _saveDataToStorage(LoggedAccounts());
-
-    // TODO: move to analytics service or something
-    // if (analyticsEnabledGlobally && analytics != null) analytics!.logEvent(name: AnalyticsNames.logoutEveryone);
   }
 
   /// Checks for duplicates in logged accounts.
@@ -187,7 +170,7 @@ class AuthService {
 
   /// Reads [LoggedAccounts] from Secure storage.
   Future<LoggedAccounts> _getDataFromStorage() async {
-    final secureStorage = SecureStorage.instance;
+    const secureStorage = SecureStorage.instance;
     String? value = await secureStorage.read(key: SecureStorage.keys.loginData);
     if (value == null || value.trim().isEmpty) return LoggedAccounts();
     return LoggedAccounts.fromJson(jsonDecode(value));
@@ -195,7 +178,7 @@ class AuthService {
 
   /// Saves [LoggedAccounts] to Secure storage.
   Future<void> _saveDataToStorage(LoggedAccounts loginData) async {
-    final secureStorage = SecureStorage.instance;
+    const secureStorage = SecureStorage.instance;
     await secureStorage.write(key: SecureStorage.keys.loginData, value: jsonEncode(loginData.toJson()));
   }
 
