@@ -22,7 +22,9 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
     List<SafeAccount> accounts = ref.read(userProvider).loggedInAccounts;
     final loginProv = ref.read(loginProvider);
 
-    if (accounts.isNotEmpty) WidgetsBinding.instance.addPostFrameCallback((_) => loginProv.setPickedAccount(accounts.first));
+    if (accounts.isNotEmpty && loginProv.pickedAccount == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => loginProv.setPickedAccount(accounts.first));
+    }
 
     return Padding(
       padding: const EdgeInsets.all(8),
@@ -39,6 +41,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
                 return ListTile(
                   title: Text(account.username),
                   subtitle: Text(account.url),
+                  enabled: ref.watch(loginProvider).pickedAccount == account || !loginProv.loggingIn,
                   trailing: ref.watch(loginProvider).pickedAccount == account ? const Icon(Icons.check) : null,
                   onTap: loginProv.loggingIn ? null : () => loginProv.setPickedAccount(account),
                 );
@@ -50,6 +53,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
             child: DividerWithText(text: context.l10n.or),
           ),
           ListTile(
+            enabled: !ref.read(loginProvider).loggingIn,
             leading: const Icon(Icons.add),
             title: Text(context.l10n.addAccount),
             onTap: () async {

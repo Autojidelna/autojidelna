@@ -13,6 +13,7 @@ class NotificationChannelService {
   static String userIdGen(SafeAccount account) => '${Url.clean(account.url)}-${account.username}';
   static String getChannelKey(String userId, String topic) => '$userId-$topic';
   static String getGroup(String topic) => 'group-$topic';
+  static String defaultChannelKey = 'default';
 
   Future<void> createChannelsForUser(SafeAccount account) async {
     String userId = userIdGen(account);
@@ -40,14 +41,23 @@ class NotificationChannelService {
   }
 
   static final Map<String, String> _channelDescriptions = {
-    'food_today_1100': _l10n.notificationFoodTodayDescription,
-    'low_credit_1500': _l10n.notificationLowCreditDescription,
-    'next_week_food_check_1500': _l10n.notificationNextWeekFoodCheckDescription,
+    NotificationTopics.foodToday: _l10n.notificationSystemSettingsFoodTodayDescription,
+    NotificationTopics.lowCredit: _l10n.notificationSystemSettingsLowCreditDescription,
+    NotificationTopics.nextWeekFoodCheck: _l10n.notificationSystemSettingsNextWeekFoodCheckDescription,
   };
 
   static List<NotificationChannelGroup> channelGroups = [
-    NotificationChannelGroup(channelGroupKey: getGroup(NotificationTopics.foodToday), channelGroupName: _l10n.channelNameDish),
-    NotificationChannelGroup(channelGroupKey: getGroup(NotificationTopics.lowCredit), channelGroupName: _l10n.channelNameLowCredit),
-    NotificationChannelGroup(channelGroupKey: getGroup(NotificationTopics.nextWeekFoodCheck), channelGroupName: _l10n.channelNameOrdered),
+    NotificationChannelGroup(
+      channelGroupKey: getGroup(NotificationTopics.foodToday),
+      channelGroupName: _l10n.notificationChannelNameFoodToday,
+    ),
+    NotificationChannelGroup(
+      channelGroupKey: getGroup(NotificationTopics.lowCredit),
+      channelGroupName: _l10n.notificationChannelNameLowCredit,
+    ),
+    NotificationChannelGroup(
+      channelGroupKey: getGroup(NotificationTopics.nextWeekFoodCheck),
+      channelGroupName: _l10n.notificationChannelNameNextWeekFoodCheck,
+    ),
   ];
 }
