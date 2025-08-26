@@ -24,21 +24,11 @@ on:
         required: true
         type: boolean
         default: true
-      patch:
-        description: 'Make it an instant patch release?'
-        required: true
-        type: boolean
-        default: false
       skip:
         description: 'Increment build number instead?'
         required: true
         type: boolean
         default: false
-      version:
-        description: 'Custom version (format: 1.1.1 or 1.1.1+1):'
-        required: false
-        type: string
-        default: ''
 
 permissions:
   contents: read
@@ -72,7 +62,6 @@ jobs:
           fetch-depth: 0
 
       - name: Get version from branch name or merge commit
-        if: ${{ github.event.inputs.version == '' && github.event.inputs.patch != 'true' }}
         run: |
           version=""
           if [[ "${GITHUB_REF#refs/heads/}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
@@ -107,15 +96,6 @@ jobs:
           done
           echo "$version+${{ github.run_number }}"
           echo "$version+${{ github.run_number }}" > version.txt
-
-      - name: Get version from yaml
-        if: ${{ github.event.inputs.version == '' && github.event.inputs.patch == 'true' }}
-        run: |
-          sed -n 's/^version: \(.*\)$/\1/p' pubspec.yaml > version.txt
-
-      - name: Get version from input (and build number if not provided)
-        if: ${{ github.event.inputs.version != '' }}
-        run: echo "${{ github.event.inputs.version }}" | sed 's/^[^+]*$/&+${{ github.run_number }}/' > version.txt
 
       - name: Update version in YAML
         run: |
@@ -175,21 +155,8 @@ jobs:
           VERSION_PREFIX="$(cat version.txt)"
           # Get the highest existing patch tag, if any
 
-          if [ "${{ github.event.inputs.patch }}" == "true" ]; then
-            HIGHEST_TAG=$(git tag -l "${VERSION_PREFIX}-patch*" | sort -V | tail -n 1)
-            # Check if a tag was found
-            if [ -z "$HIGHEST_TAG" ]; then
-              # No tags found, create the first patch tag
-              NEW_TAG="${VERSION_PREFIX}-patch1"
-            else
-              # Extract the patch number and increment it
-              LAST_PATCH_NUMBER=$(echo "$HIGHEST_TAG" | sed 's/.*patch\([0-9]*\).*/\1/')
-              NEW_PATCH_NUMBER=$((LAST_PATCH_NUMBER + 1))
-              NEW_TAG="${VERSION_PREFIX}-patch${NEW_PATCH_NUMBER}"
-            fi
-          else
-            NEW_TAG="${VERSION_PREFIX}"
-          fi
+          NEW_TAG="${VERSION_PREFIX}"
+
           git tag $NEW_TAG # Create the tag
           git push -u origin $NEW_TAG # Push the tag
 
@@ -199,9 +166,6 @@ jobs:
         if: ${{ github.event.pull_request.merged == true || github.event.inputs.ios == 'true' }}
         run: |
           LABEL=""
-          if [[ "${{ github.event.inputs.patch }}" == "true" ]]; then
-            LABEL="\"labels\": [\"patch\"],"
-          fi
 
           PAYLOAD=$(cat <<EOF
           {
@@ -211,7 +175,6 @@ jobs:
             $LABEL
             "environment": {
               "variables": {
-                "PATCH": "${{ github.event.inputs.patch }}",
                 "FLUTTER_VERSION": "${{ vars.FLUTTER_VERSION }}"
               },
               "softwareVersions": {
@@ -273,20 +236,8 @@ jobs:
           flutter-version: ${{ vars.FLUTTER_VERSION }}
           cache: true
 
-      - name: 🐦 Setup Shorebird
-        uses: shorebirdtech/setup-shorebird@v1
-
-      - name: 🚀 Use Shorebird - release
-        if: ${{ github.event.inputs.patch != 'true' }}
-        env:
-          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
-        run: shorebird release android --flutter-version=${{ vars.FLUTTER_VERSION }} -- --split-debug-info="symbolsAndroid" --obfuscate
-
-      - name: 🚀 Use Shorebird - patch
-        if: ${{ github.event.inputs.patch == 'true' }}
-        env:
-          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
-        run: shorebird patch android --release-version=${{ needs.version.outputs.full_version }} -- --split-debug-info="symbolsAndroid" --obfuscate
+      - name: Build AAB
+        run: flutter build appbundle --release --obfuscate --split-debug-info=symbolsAndroid
 
       - name: Symbols extraction
         run: |
@@ -297,7 +248,6 @@ jobs:
           cd $CURRENT_EXECUTION_PATH
           mv $PATH_TO_NATIVE_SYMBOLS/symbols.zip build/symbols.zip
       - uses: vacxe/google-play-cli-kt@0.4.8
-        if: ${{ github.event.inputs.patch != 'true' }}
         env:
           JAVA_HOME: ''
         with:
