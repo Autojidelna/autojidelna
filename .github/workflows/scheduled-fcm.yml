@@ -36,9 +36,9 @@ jobs:
               -H "Content-Type: application/json; UTF-8" \
               -d '{
                 "message": {
+                  "priority": "high",
                   "topic": "'"${topic}"'",
                   "data": { "type": "'"${topic}"'" },
-                  "android": { "priority": "high" },
                   "apns": {
                     "headers": { "apns-priority": "10" },
                     "payload": { "aps": { "content-available": 1 } }
