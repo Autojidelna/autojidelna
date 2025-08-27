@@ -21,7 +21,7 @@ jobs:
       REPO_OWNER: ${{ github.repository_owner }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     outputs:
-      valid: ${{ steps.branch-check.outputs.valid }}
+      valid: ${{ steps.final-check.outputs.valid }}
     steps:
       - uses: actions/checkout@v4
 
@@ -31,7 +31,7 @@ jobs:
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
           echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
 
-      - name: Check branch name
+      - name: Check branch name format
         id: branch-check
         run: |
           if [[ ! ${{ github.event.pull_request.head.ref }} =~ ^([0-9]+\.[0-9]+\.[0-9]+|.*patch.*)$ ]]; then
@@ -42,10 +42,39 @@ jobs:
             echo "valid=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Extract pubspec version
+        id: pubspec
+        run: |
+          VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check pubspec version vs branch
+        id: version-check
+        run: |
+          BRANCH="${{ github.event.pull_request.head.ref }}"
+          VERSION="${{ steps.pubspec.outputs.version }}"
+
+          if [[ "$BRANCH" == "$VERSION" ]]; then
+            echo "Pubspec version matches branch."
+            echo "valid=true" >> $GITHUB_OUTPUT
+          else
+            echo "Pubspec version ($VERSION) does not match branch ($BRANCH)."
+            echo "valid=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Combine checks
+        id: final-check
+        run: |
+          if [[ "${{ steps.branch-check.outputs.valid }}" == "true" && "${{ steps.version-check.outputs.valid }}" == "true" ]]; then
+            echo "valid=true" >> $GITHUB_OUTPUT
+          else
+            echo "valid=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Set comment body
         id: comment-body
         run: |
-          if [ "${{ steps.branch-check.outputs.valid }}" == "false" ]; then
+          if [ "${{ steps.final-check.outputs.valid }}" == "false" ]; then
             echo "body=${{ vars.COMMENT_CLOSED }}" >> $GITHUB_OUTPUT
           else
             echo "body=${{ vars.COMMENT_NICE }}" >> $GITHUB_OUTPUT
@@ -78,7 +107,7 @@ jobs:
             "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/issues/$PR_NUMBER/comments"
 
       - name: Close PR
-        if: steps.branch-check.outputs.valid == 'false' && steps.comment-check.outputs.comment_exists == 'false'
+        if: steps.final-check.outputs.valid == 'false' && steps.comment-check.outputs.comment_exists == 'false'
         run: |
           curl -s -H "Authorization: token $GITHUB_TOKEN" \
             -X PATCH \
