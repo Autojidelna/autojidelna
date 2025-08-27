@@ -10,18 +10,13 @@ jobs:
     runs-on: blacksmith-2vcpu-ubuntu-2204
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install yq
-        run: |
-          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq
-          chmod +x /usr/local/bin/yq
+        uses: actions/checkout@v4
 
       - name: Set pubspec version
-        run: |
-          VERSION="${GITHUB_REF#refs/heads/}"
-          echo "Updating pubspec.yaml to version $VERSION"
-          yq -i ".version = \"$VERSION\"" pubspec.yaml
+        id: setVersion
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq -i ".version = \"${GITHUB_REF#refs/heads/}\"" pubspec.yaml
 
       - name: Configure Git
         run: |
@@ -31,7 +26,7 @@ jobs:
       - name: Commit version change
         run: |
           git add pubspec.yaml
-          git commit -S -m "Update pubspec version to $VERSION"
+          git commit -m "Update pubspec version to ${GITHUB_REF#refs/heads/}" -S || echo "No changes to commit"
 
       - name: Push changes
         run: git push
