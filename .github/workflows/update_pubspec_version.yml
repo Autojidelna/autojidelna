@@ -3,38 +3,35 @@ name: Update Pubspec Version
 on:
   create:
     branches:
-      - '[0-9]+.[0-9]+.[0-9]+'
+      - '*.*.*'
 
 jobs:
   update-version:
     runs-on: blacksmith-2vcpu-ubuntu-2204
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Set up Git
+      - name: Install yq
+        run: |
+          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq
+          chmod +x /usr/local/bin/yq
+
+      - name: Set pubspec version
+        run: |
+          VERSION="${GITHUB_REF#refs/heads/}"
+          echo "Updating pubspec.yaml to version $VERSION"
+          yq -i ".version = \"$VERSION\"" pubspec.yaml
+
+      - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Install yq
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y yq
-
-      - name: Update pubspec.yaml version
-        run: |
-          yq -i ".version = \"${GITHUB_REF#refs/heads/}\"" pubspec.yaml
-
-      - name: Commit version update
+      - name: Commit version change
         run: |
           git add pubspec.yaml
-          git commit -S -m "Update pubspec version to ${GITHUB_REF#refs/heads/}"
+          git commit -S -m "Update pubspec version to $VERSION"
 
       - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        run: git push
