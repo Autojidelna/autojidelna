@@ -3,8 +3,6 @@ import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/core/types/errors.dart';
@@ -18,21 +16,16 @@ final loginProvider = ChangeNotifierProvider<LoginProvider>((ref) => LoginProvid
 class LoginProvider extends ChangeNotifier {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController urlController = TextEditingController();
 
-  final GlobalKey<FormState> urlForm = GlobalKey<FormState>();
   final GlobalKey<FormState> credentialsForm = GlobalKey<FormState>();
 
-  String? urlError;
   bool usernameError = false;
   String? passwordError;
   bool hidePassword = true;
   SafeAccount? _pickedAccount;
   Ref ref;
 
-  LoginProvider(this.ref) {
-    setLastUrl();
-  }
+  LoginProvider(this.ref);
 
   SafeAccount? get pickedAccount => _pickedAccount;
 
@@ -47,15 +40,11 @@ class LoginProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setLastUrl() {
-    urlController.text = Hive.box(Boxes.appState).get(HiveKeys.appState.url, defaultValue: '');
-  }
-
   Future<bool> login(BuildContext context) async {
     if (!credentialsForm.currentState!.validate()) return false;
 
     FocusManager.instance.primaryFocus?.unfocus();
-    setErrors(null, null, null);
+    setErrors(null, null);
     bool value = false;
     ref.read(disableInteractions.notifier).state = true;
     notifyListeners();
@@ -63,14 +52,13 @@ class LoginProvider extends ChangeNotifier {
     final account = Account(
       username: usernameController.text,
       password: passwordController.text,
-      url: urlController.text,
+      url: 'urlController.text',
     );
 
     try {
       final ProviderContainer container = ProviderScope.containerOf(context);
 
       await container.read(userProvider).login(account);
-      Hive.box(Boxes.appState).put(HiveKeys.appState.url, urlController.text);
       if (context.mounted) await container.read(canteenProvider).preIndexMenus();
       value = true;
     } catch (e) {
@@ -89,20 +77,19 @@ class LoginProvider extends ChangeNotifier {
         if (retry && context.mounted) login(context);
         break;
       case AuthErrors.wrongCredentials:
-        setErrors(l10n.errorsWrongCredentialsTextField, true, null);
+        setErrors(l10n.errorsWrongCredentialsTextField, true);
         break;
       case AuthErrors.wrongUrl:
-        setErrors(null, null, l10n.errorsWrongUrl);
+        setErrors(null, null);
         break;
       default:
         showErrorSnackBar(SnackBarAuthErrors.connectionFailed(l10n));
     }
   }
 
-  void setErrors(String? passwordErr, bool? usernameErr, String? urlErr) {
+  void setErrors(String? passwordErr, bool? usernameErr) {
     passwordError = passwordErr;
     usernameError = usernameErr ?? false;
-    urlError = urlErr;
     notifyListeners();
   }
 }

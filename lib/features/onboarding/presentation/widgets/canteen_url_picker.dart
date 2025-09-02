@@ -1,6 +1,7 @@
 import 'package:autojidelna/core/remote-config/remote_config.dart';
-import 'package:autojidelna/features/auth/data/login.provider.dart';
 import 'package:autojidelna/core/utils/url.dart';
+import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,7 +10,6 @@ class CanteenUrlPicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final LoginProvider provider = ref.read(loginProvider);
     final rawUrls = ref.read(remoteConfigValues)[RemoteConfig.canteenUrls];
 
     Map<String, String> urls;
@@ -19,8 +19,9 @@ class CanteenUrlPicker extends ConsumerWidget {
     } else {
       urls = {};
     }
+
     return ValueListenableBuilder<TextEditingValue>(
-      valueListenable: provider.urlController,
+      valueListenable: ref.read(textFieldControllerProvider(OnboardingFields.url)),
       builder: (_, urlController, ___) {
         return ListView.builder(
           shrinkWrap: true,
@@ -33,7 +34,7 @@ class CanteenUrlPicker extends ConsumerWidget {
               title: Text(title),
               subtitle: Text(url),
               trailing: Url.clean(urlController.text) == url ? const Icon(Icons.check) : null,
-              onTap: () => provider.urlController.text = url,
+              onTap: () => ref.read(textFieldControllerProvider(OnboardingFields.url)).text = url,
             );
           },
         );
