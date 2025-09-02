@@ -82,6 +82,26 @@ class RemoteConfig {
     // integer: 42,
     // doubleNum: 42.5,
 
-    canteenUrls: {'Střední průmyslová škola a Gymnázium Třebešín': 'jidelna.trebesin.cz'},
+    canteenUrls: {
+      'Arcibiskupské gymnázium v Kroměříži': 'strava.agkm.cz',
+      'Česká zemědělská akademie v Humpolci, střední škola': 'jidelna.cza-hu.cz',
+      'Gymnázium Boskovice, příspěvková organizace': 'stravne.gymbos.cz:8080',
+      'Gymnázium J. K. Tyla': 'jidelna.gjkt.cz',
+      'Hotelová škola, Ostrava, příspěvková organizace': 'strava.ssss.cz',
+      'Obědy v Brně': 'objednavky.obedyvbrne.cz',
+      'Střední průmyslová škola a Gymnázium Na Třebešíně': 'jidelna.trebesin.cz',
+      'Střední průmyslová škola Chrudim': 'strava.sps-chrudim.cz',
+      'Střední škola Edvarda Beneše Břeclav, příspěvková organizace': 'jidelnicek.sseb.cz',
+      'Střední škola hotelnictví, gastronomie a služeb SČMSD Šilheřovice, s.r.o.': 'jidelna.hssilherovice.cz',
+      'Střední škola technická a dopravní, Ostrava-Vítkovice, příspěvková organizace': 'strava.sstd.cz',
+      'Střední škola technická a ekonomická Brno, Olomoucká, příspěvková organizace': 'stravovani.sstebrno.cz',
+      'Základní škola a Mateřská škola Blansko, Dvorská 26': 'sj.zsdvorska.cz:8080',
+      'Základní škola a Mateřská škola Bolatice, příspěvková organizace': 'sluzby.zsbolatice.cz:8443',
+      'Základní škola a mateřská škola, Praha 2, Na Smetance 1': 'obedy.nasmetance.cz',
+      'Základní škola Ostrava, Matiční 5, příspěvková organizace': 'obedy.zs-mat5.cz',
+      'Základní škola Přibyslav': 'mail.zspribyslav.cz:8443',
+      'Základní škola Třešť': 'strava.zs-trest.cz:8088',
+      'Základní škola Velká Bíteš, příspěvková organizace': 'strava.zsbites.cz:8443'
+    }
   };
 }
