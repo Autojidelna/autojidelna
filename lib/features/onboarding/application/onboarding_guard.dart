@@ -25,7 +25,7 @@ class OnboardingGuard extends AutoRouteGuard {
     await ref.read(userProvider).updateLoggedSafeAccounts();
     int loggedInAccounts = ref.read(userProvider).loggedInAccounts.length;
 
-    if (loggedInAccounts > 1) {
+    if (loggedInAccounts >= 1) {
       stepFlow.addSteps(stepFlow.accountPickerFlowPages);
     } else if (1 > loggedInAccounts) {
       stepFlow.addSteps(stepFlow.loginFlowPage);
