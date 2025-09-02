@@ -4,6 +4,7 @@ import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/shared/config/errors.dart';
+import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
@@ -14,6 +15,7 @@ import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 
 class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
   const LoginOnboarding({super.key});
@@ -78,7 +80,14 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
   }
 
   @override
-  Future<bool> onPreviousPage(BuildContext context, WidgetRef ref) async => true;
+  Future<bool> onPreviousPage(BuildContext context, WidgetRef ref) async {
+    ref.invalidate(formKeyProvider(FormKeys.credentials));
+    ref.invalidate(textFieldControllerProvider(OnboardingFields.username));
+    ref.invalidate(textFieldControllerProvider(OnboardingFields.password));
+    ref.invalidate(textFieldProvider(OnboardingFields.username));
+    ref.invalidate(textFieldProvider(OnboardingFields.password));
+    return true;
+  }
 
   @override
   Future<bool> onNextPage(BuildContext context, WidgetRef ref) async {
@@ -109,17 +118,18 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
         case AuthErrors.noInternetConnection:
           if (await showInternetConnectionSnackBar() && context.mounted) onNextPage(context, ref);
           break;
+        case AuthErrors.connectionFailed:
+          if (context.mounted) showErrorSnackBar(SnackBarAuthErrors.connectionFailed(context.l10n));
+          break;
         case AuthErrors.wrongCredentials:
           if (context.mounted) ref.read(textFieldProvider(OnboardingFields.password).notifier).setError(context.l10n.errorsWrongCredentialsTextField);
           break;
-        case AuthErrors.wrongUrl:
-          break;
         default:
-          showErrorSnackBar(SnackBarAuthErrors.connectionFailed(context.l10n));
       }
     }
 
-    ref.read(disableInteractions.notifier).state = false;
+    Hive.box(Boxes.appState).put(HiveKeys.appState.url, ref.read(textFieldProvider(OnboardingFields.url)).value);
+    disableInteractionsNotifier.state = false;
     return allowNextPage;
   }
 
