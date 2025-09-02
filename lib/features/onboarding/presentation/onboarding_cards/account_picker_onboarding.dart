@@ -6,6 +6,7 @@ import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/features/auth/data/login.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
@@ -41,9 +42,9 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
                 return ListTile(
                   title: Text(account.username),
                   subtitle: Text(account.url),
-                  enabled: ref.watch(loginProvider).pickedAccount == account || !loginProv.loggingIn,
+                  enabled: ref.watch(loginProvider).pickedAccount == account || !ref.watch(disableInteractions),
                   trailing: ref.watch(loginProvider).pickedAccount == account ? const Icon(Icons.check) : null,
-                  onTap: loginProv.loggingIn ? null : () => loginProv.setPickedAccount(account),
+                  onTap: ref.watch(disableInteractions) ? null : () => loginProv.setPickedAccount(account),
                 );
               },
             ),
@@ -53,7 +54,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
             child: DividerWithText(text: context.l10n.or),
           ),
           ListTile(
-            enabled: !ref.read(loginProvider).loggingIn,
+            enabled: !ref.watch(disableInteractions),
             leading: const Icon(Icons.add),
             title: Text(context.l10n.addAccount),
             onTap: () async {
@@ -72,7 +73,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
     final userProv = ref.read(userProvider);
 
     if (loginProv.pickedAccount == null) return false;
-    loginProv.loggingIn = true;
+    ref.read(disableInteractions.notifier).state = true;
 
     try {
       await userProv.changeUser(loginProv.pickedAccount!);
@@ -98,10 +99,10 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
           break;
         default:
       }
-      if (context.mounted) loginProv.loggingIn = false;
+      if (context.mounted) ref.read(disableInteractions.notifier).state = false;
       return false;
     }
-    if (context.mounted) loginProv.loggingIn = false;
+    if (context.mounted) ref.read(disableInteractions.notifier).state = false;
 
     return true;
   }

@@ -1,6 +1,7 @@
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:autojidelna/shared/config/hive.dart';
@@ -12,7 +13,7 @@ import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final loginProvider = ChangeNotifierProvider<LoginProvider>((ref) => LoginProvider());
+final loginProvider = ChangeNotifierProvider<LoginProvider>((ref) => LoginProvider(ref));
 
 class LoginProvider extends ChangeNotifier {
   final TextEditingController usernameController = TextEditingController();
@@ -22,25 +23,18 @@ class LoginProvider extends ChangeNotifier {
   final GlobalKey<FormState> urlForm = GlobalKey<FormState>();
   final GlobalKey<FormState> credentialsForm = GlobalKey<FormState>();
 
-  bool _loggingIn = false;
   String? urlError;
   bool usernameError = false;
   String? passwordError;
   bool hidePassword = true;
   SafeAccount? _pickedAccount;
+  Ref ref;
 
-  LoginProvider() {
+  LoginProvider(this.ref) {
     setLastUrl();
   }
 
-  bool get loggingIn => _loggingIn;
   SafeAccount? get pickedAccount => _pickedAccount;
-
-  set loggingIn(bool value) {
-    if (_loggingIn == value) return;
-    _loggingIn = value;
-    notifyListeners();
-  }
 
   void setPickedAccount(SafeAccount account) {
     if (_pickedAccount == account) return;
@@ -63,7 +57,7 @@ class LoginProvider extends ChangeNotifier {
     FocusManager.instance.primaryFocus?.unfocus();
     setErrors(null, null, null);
     bool value = false;
-    _loggingIn = true;
+    ref.read(disableInteractions.notifier).state = true;
     notifyListeners();
 
     final account = Account(
@@ -82,7 +76,7 @@ class LoginProvider extends ChangeNotifier {
     } catch (e) {
       if (context.mounted) handleAuthError(context, e);
     }
-    _loggingIn = false;
+    ref.read(disableInteractions.notifier).state = false;
     notifyListeners();
     return value;
   }

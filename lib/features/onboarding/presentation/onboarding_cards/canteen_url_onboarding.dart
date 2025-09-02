@@ -5,6 +5,7 @@ import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
+import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/shared/widgets/divider_with_text.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
@@ -41,11 +42,11 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
     final loginProv = ref!.read(loginProvider);
 
     if (!loginProv.urlForm.currentState!.validate()) {
-      loginProv.loggingIn = false;
+      ref.read(disableInteractions.notifier).state = false;
       return false;
     }
     loginProv.setErrors(null, false, null);
-    loginProv.loggingIn = true;
+    ref.read(disableInteractions.notifier).state = true;
     bool value = true;
     try {
       await ref.read(userProvider).login(Account(username: '', password: '', url: loginProv.urlController.text));
@@ -68,7 +69,7 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
       }
     }
     if (context.mounted) {
-      loginProv.loggingIn = false;
+      ref.read(disableInteractions.notifier).state = false;
       loginProv.usernameController.clear();
       loginProv.passwordController.clear();
     }
