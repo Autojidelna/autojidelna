@@ -25,7 +25,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   late final StepFlowController _stepFlow;
 
   void _nextPage() async {
-    if (!await _stepFlow.currentPage.onNextPage(context, ref: ref)) return;
+    if (!await _stepFlow.currentPage.onNextPage(context, ref)) return;
     if (!_stepFlow.isLastPage) {
       _pageController.nextPage(
         duration: Durations.medium1,

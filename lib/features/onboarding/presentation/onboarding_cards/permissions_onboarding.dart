@@ -27,7 +27,7 @@ class PermissionsOnboarding extends StatelessWidget implements OnboardingStep {
   }
 
   @override
-  Future<bool> onNextPage(BuildContext context, {WidgetRef? ref}) async => true;
+  Future<bool> onNextPage(BuildContext context, WidgetRef ref) async => true;
 
   @override
   String buttonText(BuildContext context) => StepFlowController.instance.isLastPage ? context.l10n.getStarted : context.l10n.next;

@@ -63,8 +63,8 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
   }
 
   @override
-  Future<bool> onNextPage(BuildContext context, {WidgetRef? ref}) async {
-    final userProv = ref!.read(userProvider);
+  Future<bool> onNextPage(BuildContext context, WidgetRef ref) async {
+    final userProv = ref.read(userProvider);
 
     ref.read(disableInteractions.notifier).state = true;
 
@@ -83,7 +83,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
           showErrorSnackBar(SnackBarAuthErrors.connectionFailed(l10n));
           break;
         case AuthErrors.noInternetConnection:
-          if (await showInternetConnectionSnackBar() && context.mounted) return await onNextPage(context);
+          if (await showInternetConnectionSnackBar() && context.mounted) return await onNextPage(context, ref);
           break;
         case AuthErrors.wrongCredentials:
           showErrorSnackBar(SnackBarAuthErrors.wrongCredentials(l10n));
