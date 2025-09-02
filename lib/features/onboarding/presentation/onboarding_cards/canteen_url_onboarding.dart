@@ -27,6 +27,7 @@ class CanteenUrlOnboarding extends ConsumerWidget implements OnboardingStep {
               key: ref.read(formKeyProvider(FormKeys.url)),
               child: TextFormField(
                 controller: ref.watch(textFieldControllerProvider(OnboardingFields.url)),
+                focusNode: ref.watch(focusNodeProvider(OnboardingFields.url)),
                 autocorrect: false,
                 textInputAction: TextInputAction.done,
                 autofillHints: const [AutofillHints.url],
