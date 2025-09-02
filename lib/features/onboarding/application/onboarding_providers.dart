@@ -21,6 +21,16 @@ final textFieldControllerProvider = Provider.family<TextEditingController, Onboa
   return controller;
 });
 
+final isAnyFocusedProvider = Provider<bool>((ref) {
+  return OnboardingFields.values.any((field) => ref.watch(focusNodeProvider(field)).hasFocus);
+});
+
+final focusNodeProvider = ChangeNotifierProvider.family<FocusNode, OnboardingFields>((ref, field) {
+  final node = FocusNode();
+  ref.onDispose(node.dispose);
+  return node;
+});
+
 final textFieldProvider = StateNotifierProvider.family<TextFieldNotifier, TextFieldState, OnboardingFields>((ref, fieldKey) => TextFieldNotifier());
 
 class TextFieldNotifier extends StateNotifier<TextFieldState> {

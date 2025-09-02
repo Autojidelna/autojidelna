@@ -29,6 +29,7 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
                 padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 child: TextFormField(
                   controller: ref.watch(textFieldControllerProvider(OnboardingFields.username)),
+                  focusNode: ref.watch(focusNodeProvider(OnboardingFields.username)),
                   autocorrect: false,
                   textInputAction: TextInputAction.next,
                   autofillHints: const [AutofillHints.username],
@@ -46,6 +47,7 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
                 padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 child: TextFormField(
                   controller: ref.watch(textFieldControllerProvider(OnboardingFields.password)),
+                  focusNode: ref.watch(focusNodeProvider(OnboardingFields.password)),
                   autocorrect: false,
                   obscureText: ref.watch(textFieldProvider(OnboardingFields.password)).obscureText,
                   textInputAction: TextInputAction.done,

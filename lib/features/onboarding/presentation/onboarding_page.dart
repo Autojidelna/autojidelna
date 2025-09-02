@@ -5,6 +5,7 @@ import 'package:autojidelna/shared/providers/disable_interactions_provider.dart'
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/account_picker_onboarding.dart';
 import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
+import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -85,9 +86,24 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.rocket_launch_outlined, size: 55, color: theme.colorScheme.primary),
+              TweenAnimationBuilder<double>(
+                // visible -> collapsed
+                tween: Tween<double>(begin: 1, end: ref.watch(isAnyFocusedProvider) ? 0 : 1),
+                duration: Durations.medium1,
+                curve: Curves.easeInOut,
+                builder: (context, value, child) {
+                  return SizedBox(
+                    height: 55 * value, // shrink height with animation
+                    child: Transform.translate(
+                      offset: Offset(0, -55 * (1 - value)), // move up while shrinking
+                      child: Opacity(opacity: value, child: child),
+                    ),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Icon(Icons.rocket_launch_outlined, size: 55, color: theme.colorScheme.primary),
+                ),
               ),
               ListTile(
                 title: Text(l10n.welcome, style: theme.textTheme.displaySmall),
