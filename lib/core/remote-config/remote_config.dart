@@ -101,7 +101,7 @@ class RemoteConfig {
       'Základní škola Ostrava, Matiční 5, příspěvková organizace': 'obedy.zs-mat5.cz',
       'Základní škola Přibyslav': 'mail.zspribyslav.cz:8443',
       'Základní škola Třešť': 'strava.zs-trest.cz:8088',
-      'Základní škola Velká Bíteš, příspěvková organizace': 'strava.zsbites.cz:8443'
-    }
+      'Základní škola Velká Bíteš, příspěvková organizace': 'strava.zsbites.cz:8443',
+    },
   };
 }
