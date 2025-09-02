@@ -99,6 +99,18 @@ class AppThemes {
     onInverseSurface: Colors.black,
   );
 
+  static backgroundColorWidgetState(Set<WidgetState> states, ColorScheme colorScheme, bool amoledMode, {Color? primaryColor}) {
+    if (states.contains(WidgetState.disabled)) {
+      return amoledMode ? colorScheme.surfaceContainerHighest.withAlpha(16) : colorScheme.surfaceContainerHighest;
+    } // Disabled color
+    return primaryColor ?? colorScheme.primary; // Regular color
+  }
+
+  static foregroundColorWidgetState(Set<WidgetState> states, ColorScheme colorScheme, bool amoledMode, {Color? onPrimaryColor}) {
+    if (states.contains(WidgetState.disabled)) return colorScheme.onSurfaceVariant; // Disabled color
+    return onPrimaryColor ?? colorScheme.onPrimary; // Regular color
+  }
+
   static ThemeData theme(ColorScheme colorScheme, {bool amoledMode = false}) {
     if (colorScheme.brightness == Brightness.light) amoledMode = false;
 
@@ -225,16 +237,8 @@ class AppThemes {
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
           textStyle: WidgetStatePropertyAll(textTheme.titleMedium),
-          backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return amoledMode ? colorScheme.surfaceContainerHighest.withAlpha(16) : colorScheme.surfaceContainerHighest;
-            } // Disabled color
-            return colorScheme.primary; // Regular color
-          }),
-          foregroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) return colorScheme.onSurfaceVariant;
-            return colorScheme.onPrimary;
-          }),
+          backgroundColor: WidgetStateProperty.resolveWith((states) => backgroundColorWidgetState(states, colorScheme, amoledMode)),
+          foregroundColor: WidgetStateProperty.resolveWith((states) => foregroundColorWidgetState(states, colorScheme, amoledMode)),
           fixedSize: const WidgetStatePropertyAll(Size.fromHeight(45)),
           shadowColor: const WidgetStatePropertyAll(Colors.transparent),
           splashFactory: InkRipple.splashFactory,
@@ -255,12 +259,10 @@ class AppThemes {
       ),
       segmentedButtonTheme: SegmentedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.resolveWith<Color>(
-            (Set<WidgetState> states) {
-              if (states.contains(WidgetState.selected)) return colorScheme.primary;
-              return Colors.transparent;
-            },
-          ),
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) return colorScheme.primary;
+            return Colors.transparent;
+          }),
         ),
       ),
     );

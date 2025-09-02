@@ -2,8 +2,9 @@ import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
+import 'package:autojidelna/shared/theme/app_themes.dart';
+import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
-import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/account_picker_onboarding.dart';
 import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
@@ -90,10 +91,11 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                 // visible -> collapsed
                 tween: Tween<double>(begin: 1, end: ref.watch(isAnyFocusedProvider) ? 0 : 1),
                 duration: Durations.medium1,
-                curve: Curves.easeInOut,
-                builder: (context, value, child) {
-                  return SizedBox(
-                    height: 55 * value, // shrink height with animation
+                curve: Curves.easeOut,
+                builder: (_, value, child) {
+                  return Align(
+                    alignment: Alignment.topLeft,
+                    heightFactor: value, // shrink height with animation
                     child: Transform.translate(
                       offset: Offset(0, -55 * (1 - value)), // move up while shrinking
                       child: Opacity(opacity: value, child: child),
@@ -113,6 +115,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
               Card(
                 child: ExpandablePageView(
                   controller: _pageController,
+                  animationDuration: Durations.medium1,
                   physics: const NeverScrollableScrollPhysics(),
                   onPageChanged: (value) => setState(() => _stepFlow.setCurrentPageIndex(value)),
                   children: _stepFlow.pages.map((e) => e as Widget).toList(),
@@ -125,17 +128,39 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           elevation: 0,
           child: Row(
             children: [
-              if (canNavigateBack || !_stepFlow.isFirstPage)
-                FilledButton(
-                  style: theme.filledButtonTheme.style!.copyWith(backgroundColor: WidgetStatePropertyAll(theme.disabledColor)),
+              TweenAnimationBuilder<double>(
+                tween: Tween<double>(begin: 0, end: (canNavigateBack || !_stepFlow.isFirstPage) ? 1 : 0), // 0 = hidden, 1 = visible
+                duration: Durations.medium1,
+                curve: Curves.easeOut,
+                builder: (context, value, child) {
+                  return Align(
+                    alignment: Alignment.centerLeft,
+                    widthFactor: value,
+                    child: Transform.translate(
+                      offset: Offset((value - 1) * 60, 0), // slide in from left
+                      child: Opacity(opacity: value, child: child),
+                    ),
+                  );
+                },
+                child: FilledButton(
+                  style: theme.filledButtonTheme.style!.copyWith(
+                    backgroundColor: WidgetStateProperty.resolveWith(
+                      (states) => AppThemes.backgroundColorWidgetState(
+                        states,
+                        theme.colorScheme,
+                        ref.read(themeNotifierProvider).amoledMode,
+                        primaryColor: theme.colorScheme.secondary,
+                      ),
+                    ),
+                  ),
                   onPressed: ref.watch(disableInteractions) ? null : _previousPage,
                   child: const Icon(Icons.arrow_back_outlined),
                 ),
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: FilledButton(
-                  onPressed:
-                      ref.watch(disableInteractions) || (_stepFlow.pages.last is AccountPickerOnboarding && _stepFlow.isLastPage) ? null : _nextPage,
+                  onPressed: ref.watch(disableInteractions) ? null : _nextPage,
                   child: Text(_stepFlow.currentPage.buttonText(context)),
                 ),
               ),
