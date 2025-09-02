@@ -5,6 +5,7 @@ import 'package:autojidelna/features/onboarding/application/step_flow_controller
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/features/auth/data/login.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
@@ -108,13 +109,13 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
               if (canNavigateBack || !_stepFlow.isFirstPage)
                 FilledButton(
                   style: theme.filledButtonTheme.style!.copyWith(backgroundColor: WidgetStatePropertyAll(theme.disabledColor)),
-                  onPressed: ref.watch(loginProvider).loggingIn ? null : _previousPage,
+                  onPressed: ref.watch(disableInteractions) ? null : _previousPage,
                   child: const Icon(Icons.arrow_back_outlined),
                 ),
               const SizedBox(width: 8),
               Expanded(
                 child: FilledButton(
-                  onPressed: ref.watch(loginProvider).loggingIn ||
+                  onPressed: ref.watch(disableInteractions) ||
                           (_stepFlow.pages.last is AccountPickerOnboarding && _stepFlow.isLastPage && ref.watch(loginProvider).pickedAccount == null)
                       ? null
                       : _nextPage,
