@@ -64,7 +64,7 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
           }
           break;
         case AuthErrors.noInternetConnection:
-          if (await showInternetConnectionSnackBar() && context.mounted) onNextPage(context);
+          if (await showInternetConnectionSnackBar() && context.mounted) onNextPage(context, ref: ref);
           break;
         case AuthErrors.connectionFailed:
           if (context.mounted) showErrorSnackBar(SnackBarAuthErrors.connectionFailed(context.l10n));

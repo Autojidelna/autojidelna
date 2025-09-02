@@ -1,7 +1,6 @@
 import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
@@ -14,18 +13,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final loginProvider = ChangeNotifierProvider<LoginProvider>((ref) => LoginProvider(ref));
 
 class LoginProvider extends ChangeNotifier {
-  SafeAccount? _pickedAccount;
   Ref ref;
 
   LoginProvider(this.ref);
-
-  SafeAccount? get pickedAccount => _pickedAccount;
-
-  void setPickedAccount(SafeAccount account) {
-    if (_pickedAccount == account) return;
-    _pickedAccount = account;
-    notifyListeners();
-  }
 
   Future<bool> login(BuildContext context) async {
     final formKey = ref.read(formKeyProvider(FormKeys.credentials));
