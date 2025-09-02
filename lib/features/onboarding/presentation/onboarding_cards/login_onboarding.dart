@@ -14,59 +14,52 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final L10n l10n = context.l10n;
-    final provider = ref.watch(loginProvider);
-
-    final String? urlFieldValue = ref.read(textFieldProvider(OnboardingFields.url)).value;
-
-    final Map<String, String> urls = Map<String, String>.from(ref.read(remoteConfigValues)[RemoteConfig.canteenUrls]);
-    final MapEntry<String, String> url = urls.entries.firstWhere(
-      (e) => e.value == urlFieldValue,
-      orElse: () => MapEntry(Url.clean(urlFieldValue!).split('.').reversed.elementAt(1), urlFieldValue),
-    );
 
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Form(
-        key: provider.credentialsForm,
+        key: ref.read(formKeyProvider(FormKeys.credentials)),
         child: AutofillGroup(
           child: Column(
             children: [
-              ListTile(title: Text(url.key), subtitle: Text(url.value)),
+              const _UrlListTile(),
               const CustomDivider(isTransparent: false),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 child: TextFormField(
-                  controller: provider.usernameController,
+                  controller: ref.watch(textFieldControllerProvider(OnboardingFields.username)),
                   autocorrect: false,
                   textInputAction: TextInputAction.next,
                   autofillHints: const [AutofillHints.username],
                   decoration: InputDecoration(
                     labelText: l10n.loginUserFieldLabel,
-                    errorText: provider.usernameError ? '' : null,
+                    errorText: ref.watch(textFieldProvider(OnboardingFields.password)).error != null ? '' : null,
                   ),
                   onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                   validator: (value) => (value?.isEmpty ?? true) ? l10n.loginUserFieldHint : null,
+                  onSaved: ref.read(textFieldProvider(OnboardingFields.username).notifier).setValue,
                 ),
               ),
               const CustomDivider(),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 child: TextFormField(
-                  controller: provider.passwordController,
+                  controller: ref.watch(textFieldControllerProvider(OnboardingFields.password)),
                   autocorrect: false,
-                  obscureText: provider.hidePassword,
+                  obscureText: ref.watch(textFieldProvider(OnboardingFields.password)).obscureText,
                   textInputAction: TextInputAction.done,
                   autofillHints: const [AutofillHints.password],
                   decoration: InputDecoration(
                     labelText: l10n.password,
-                    errorText: provider.passwordError,
+                    errorText: ref.watch(textFieldProvider(OnboardingFields.password)).error,
                     suffixIcon: IconButton(
-                      onPressed: provider.changePasswordVisibility,
-                      icon: Icon(provider.hidePassword ? Icons.visibility_off : Icons.visibility),
+                      onPressed: ref.read(textFieldProvider(OnboardingFields.password).notifier).toggleObscure,
+                      icon: Icon(ref.watch(textFieldProvider(OnboardingFields.password)).obscureText ? Icons.visibility_off : Icons.visibility),
                     ),
                   ),
                   onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                   validator: (value) => (value?.isEmpty ?? true) ? l10n.loginPasswordFieldHint : null,
+                  onSaved: ref.read(textFieldProvider(OnboardingFields.password).notifier).setValue,
                 ),
               ),
               const CustomDivider(),
@@ -85,4 +78,21 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
 
   @override
   String description(BuildContext context) => context.l10n.loginSubtitle;
+}
+
+class _UrlListTile extends ConsumerWidget {
+  const _UrlListTile();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final String? urlFieldValue = ref.read(textFieldProvider(OnboardingFields.url)).value;
+
+    final Map<String, String> urls = Map<String, String>.from(ref.read(remoteConfigValues)[RemoteConfig.canteenUrls]);
+    final MapEntry<String, String> url = urls.entries.firstWhere(
+      (e) => e.value == urlFieldValue,
+      orElse: () => MapEntry(Url.clean(urlFieldValue!).split('.').reversed.elementAt(1), urlFieldValue),
+    );
+
+    return ListTile(title: Text(url.key), subtitle: Text(url.value));
+  }
 }

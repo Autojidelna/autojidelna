@@ -1,10 +1,10 @@
+import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
@@ -14,14 +14,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final loginProvider = ChangeNotifierProvider<LoginProvider>((ref) => LoginProvider(ref));
 
 class LoginProvider extends ChangeNotifier {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  final GlobalKey<FormState> credentialsForm = GlobalKey<FormState>();
-
-  bool usernameError = false;
-  String? passwordError;
-  bool hidePassword = true;
   SafeAccount? _pickedAccount;
   Ref ref;
 
@@ -35,61 +27,50 @@ class LoginProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changePasswordVisibility() {
-    hidePassword = !hidePassword;
-    notifyListeners();
-  }
-
   Future<bool> login(BuildContext context) async {
-    if (!credentialsForm.currentState!.validate()) return false;
+    final formKey = ref.read(formKeyProvider(FormKeys.credentials));
+    final disableInteractionsNotifier = ref.read(disableInteractions.notifier);
 
-    FocusManager.instance.primaryFocus?.unfocus();
-    setErrors(null, null);
-    bool value = false;
-    ref.read(disableInteractions.notifier).state = true;
-    notifyListeners();
+    if (!formKey.currentState!.validate()) return false;
+    formKey.currentState!.save();
+
+    for (var field in OnboardingFields.values) {
+      ref.read(textFieldProvider(field).notifier).setError(null);
+    }
+
+    disableInteractionsNotifier.state = true;
+    bool allowNextPage = false;
 
     final account = Account(
-      username: usernameController.text,
-      password: passwordController.text,
-      url: 'urlController.text',
+      username: ref.read(textFieldProvider(OnboardingFields.username)).value!,
+      password: ref.read(textFieldProvider(OnboardingFields.password)).value!,
+      url: ref.read(textFieldProvider(OnboardingFields.url)).value!,
     );
 
     try {
-      final ProviderContainer container = ProviderScope.containerOf(context);
-
-      await container.read(userProvider).login(account);
-      if (context.mounted) await container.read(canteenProvider).preIndexMenus();
-      value = true;
+      await ref.read(userProvider).login(account);
+      allowNextPage = true;
     } catch (e) {
       if (context.mounted) handleAuthError(context, e);
     }
+
     ref.read(disableInteractions.notifier).state = false;
-    notifyListeners();
-    return value;
+    return allowNextPage;
   }
 
   void handleAuthError(BuildContext context, dynamic e) async {
     final l10n = context.l10n;
     switch (e) {
       case AuthErrors.noInternetConnection:
-        bool retry = await showInternetConnectionSnackBar();
-        if (retry && context.mounted) login(context);
+        if (await showInternetConnectionSnackBar() && context.mounted) login(context);
         break;
       case AuthErrors.wrongCredentials:
-        setErrors(l10n.errorsWrongCredentialsTextField, true);
+        ref.read(textFieldProvider(OnboardingFields.password).notifier).setError(l10n.errorsWrongCredentialsTextField);
         break;
       case AuthErrors.wrongUrl:
-        setErrors(null, null);
         break;
       default:
         showErrorSnackBar(SnackBarAuthErrors.connectionFailed(l10n));
     }
-  }
-
-  void setErrors(String? passwordErr, bool? usernameErr) {
-    passwordError = passwordErr;
-    usernameError = usernameErr ?? false;
-    notifyListeners();
   }
 }

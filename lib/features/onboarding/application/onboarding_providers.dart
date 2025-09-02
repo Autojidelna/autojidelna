@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
-enum FormKeys { url, login }
+enum FormKeys { url, credentials }
 
 enum OnboardingFields { url, username, password }
 
