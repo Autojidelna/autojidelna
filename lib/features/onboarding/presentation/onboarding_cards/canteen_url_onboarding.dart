@@ -42,14 +42,9 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
   @override
   Future<bool> onNextPage(BuildContext context, {WidgetRef? ref}) async {
     final formKey = ref!.read(formKeyProvider(FormKeys.url));
-
     final disableInteractionsNotifier = ref.read(disableInteractions.notifier);
 
-    if (!formKey.currentState!.validate()) {
-      disableInteractionsNotifier.state = false;
-      return false;
-    }
-
+    if (!formKey.currentState!.validate()) return false;
     formKey.currentState!.save();
 
     for (var field in OnboardingFields.values) {
@@ -80,11 +75,9 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
     }
     Hive.box(Boxes.appState).put(HiveKeys.appState.url, ref.read(textFieldProvider(OnboardingFields.url)).value);
 
-    if (context.mounted) {
-      disableInteractionsNotifier.state = false;
-      ref.read(textFieldControllerProvider(OnboardingFields.username)).clear();
-      ref.read(textFieldControllerProvider(OnboardingFields.password)).clear();
-    }
+    disableInteractionsNotifier.state = false;
+    ref.read(textFieldControllerProvider(OnboardingFields.username)).clear();
+    ref.read(textFieldControllerProvider(OnboardingFields.password)).clear();
 
     AnalyticsService.instance.logCanteenUrl(ref.read(textFieldProvider(OnboardingFields.url)).value!, ref.read(currentCanteen).verze);
 

@@ -11,7 +11,6 @@ class CustomUrlField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final L10n l10n = context.l10n;
-    final ThemeData theme = Theme.of(context);
     final TextFieldState provider = ref.watch(textFieldProvider(OnboardingFields.url));
 
     return Padding(
@@ -25,14 +24,12 @@ class CustomUrlField extends ConsumerWidget {
           autofillHints: const [AutofillHints.url],
           decoration: InputDecoration(
             border: InputBorder.none,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
             labelText: l10n.loginUrlFieldLabel,
-            errorStyle: theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.error, height: .04),
             errorText: provider.error,
             suffixIcon: const Icon(Icons.edit_rounded),
           ),
           onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
-          validator: (value) => value == null || value.isEmpty ? l10n.loginUrlFieldHint : null,
+          validator: (value) => (value?.isEmpty ?? true) ? l10n.loginUrlFieldHint : null,
           onSaved: ref.read(textFieldProvider(OnboardingFields.url).notifier).setValue,
         ),
       ),
