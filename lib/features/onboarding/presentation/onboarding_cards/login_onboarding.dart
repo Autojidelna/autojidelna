@@ -1,6 +1,7 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/remote-config/remote_config.dart';
 import 'package:autojidelna/core/utils/url.dart';
+import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
@@ -31,6 +32,7 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
                   controller: ref.watch(textFieldControllerProvider(OnboardingFields.username)),
                   focusNode: ref.watch(focusNodeProvider(OnboardingFields.username)),
                   autocorrect: false,
+                  enabled: !ref.watch(disableInteractions),
                   textInputAction: TextInputAction.next,
                   autofillHints: const [AutofillHints.username],
                   decoration: InputDecoration(
@@ -49,6 +51,7 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
                   controller: ref.watch(textFieldControllerProvider(OnboardingFields.password)),
                   focusNode: ref.watch(focusNodeProvider(OnboardingFields.password)),
                   autocorrect: false,
+                  enabled: !ref.watch(disableInteractions),
                   obscureText: ref.watch(textFieldProvider(OnboardingFields.password)).obscureText,
                   textInputAction: TextInputAction.done,
                   autofillHints: const [AutofillHints.password],
