@@ -40,8 +40,8 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
   }
 
   @override
-  Future<bool> onNextPage(BuildContext context, {WidgetRef? ref}) async {
-    final formKey = ref!.read(formKeyProvider(FormKeys.url));
+  Future<bool> onNextPage(BuildContext context, WidgetRef ref) async {
+    final formKey = ref.read(formKeyProvider(FormKeys.url));
     final disableInteractionsNotifier = ref.read(disableInteractions.notifier);
 
     if (!formKey.currentState!.validate()) return false;
@@ -64,7 +64,7 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
           }
           break;
         case AuthErrors.noInternetConnection:
-          if (await showInternetConnectionSnackBar() && context.mounted) onNextPage(context, ref: ref);
+          if (await showInternetConnectionSnackBar() && context.mounted) onNextPage(context, ref);
           break;
         case AuthErrors.connectionFailed:
           if (context.mounted) showErrorSnackBar(SnackBarAuthErrors.connectionFailed(context.l10n));
