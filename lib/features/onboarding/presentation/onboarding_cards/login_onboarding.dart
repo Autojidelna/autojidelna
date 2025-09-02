@@ -1,21 +1,13 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/remote-config/remote_config.dart';
-import 'package:autojidelna/core/types/errors.dart';
-import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/utils/url.dart';
-import 'package:autojidelna/shared/config/errors.dart';
-import 'package:autojidelna/shared/config/hive.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
-import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
-import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
-import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
+import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
+import 'package:autojidelna/features/onboarding/application/onboarding.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
 
 class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
   const LoginOnboarding({super.key});
@@ -90,48 +82,7 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
   }
 
   @override
-  Future<bool> onNextPage(BuildContext context, WidgetRef ref) async {
-    final formKey = ref.read(formKeyProvider(FormKeys.credentials));
-    final disableInteractionsNotifier = ref.read(disableInteractions.notifier);
-
-    if (!formKey.currentState!.validate()) return false;
-    formKey.currentState!.save();
-
-    for (var field in OnboardingFields.values) {
-      ref.read(textFieldProvider(field).notifier).setError(null);
-    }
-
-    disableInteractionsNotifier.state = true;
-    bool allowNextPage = false;
-
-    final account = Account(
-      username: ref.read(textFieldProvider(OnboardingFields.username)).value!,
-      password: ref.read(textFieldProvider(OnboardingFields.password)).value!,
-      url: ref.read(textFieldProvider(OnboardingFields.url)).value!,
-    );
-
-    try {
-      await ref.read(userProvider).login(account);
-      allowNextPage = true;
-    } catch (e) {
-      switch (e) {
-        case AuthErrors.noInternetConnection:
-          if (await showInternetConnectionSnackBar() && context.mounted) onNextPage(context, ref);
-          break;
-        case AuthErrors.connectionFailed:
-          if (context.mounted) showErrorSnackBar(SnackBarAuthErrors.connectionFailed(context.l10n));
-          break;
-        case AuthErrors.wrongCredentials:
-          if (context.mounted) ref.read(textFieldProvider(OnboardingFields.password).notifier).setError(context.l10n.errorsWrongCredentialsTextField);
-          break;
-        default:
-      }
-    }
-
-    Hive.box(Boxes.appState).put(HiveKeys.appState.url, ref.read(textFieldProvider(OnboardingFields.url)).value);
-    disableInteractionsNotifier.state = false;
-    return allowNextPage;
-  }
+  Future<bool> onNextPage(BuildContext context, WidgetRef ref) async => await Onboarding.login(context, ref, FormKeys.credentials);
 
   @override
   String buttonText(BuildContext context) => context.l10n.login;
