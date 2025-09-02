@@ -1,4 +1,5 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/providers/text_fields/text_field_state.dart';
 import 'package:autojidelna/shared/widgets/divider_with_text.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
@@ -29,6 +30,7 @@ class CanteenUrlOnboarding extends ConsumerWidget implements OnboardingStep {
                 controller: ref.watch(textFieldControllerProvider(OnboardingFields.url)),
                 focusNode: ref.watch(focusNodeProvider(OnboardingFields.url)),
                 autocorrect: false,
+                enabled: !ref.watch(disableInteractions),
                 textInputAction: TextInputAction.done,
                 autofillHints: const [AutofillHints.url],
                 decoration: InputDecoration(
