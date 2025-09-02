@@ -55,6 +55,7 @@ class Onboarding {
           if (context.mounted && formKeyEnum == FormKeys.credentials) {
             ref.read(textFieldProvider(OnboardingFields.password).notifier).setError(context.l10n.errorsWrongCredentialsTextField);
           }
+          if (formKeyEnum == FormKeys.url) allowNextPage = true;
           break;
         default:
       }
