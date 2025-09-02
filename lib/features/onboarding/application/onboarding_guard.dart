@@ -13,6 +13,12 @@ class OnboardingGuard extends AutoRouteGuard {
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
+    // Don't guard the onboarding route itself
+    if (resolver.route.name == OnboardingRoute.name) {
+      resolver.next(true);
+      return;
+    }
+
     bool isFirstTime = Hive.box(Boxes.appState).get(HiveKeys.appState.firstTime, defaultValue: true);
 
     if (!isFirstTime) {
