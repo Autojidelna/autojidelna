@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
+import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
+import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/account_picker_onboarding.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/dev/crash_logic.dart';
@@ -40,6 +42,14 @@ class DebugPage extends StatelessWidget {
             onTap: () async => context.router.push(
               OnboardingRoute(onCompletedCallback: (p0) => context.router.navigate(const RouterRoute())),
             ),
+          ),
+          ListTile(
+            title: const Text('Onboarding guide - Account picker'),
+            onTap: () async {
+              StepFlowController.instance.clear();
+              StepFlowController.instance.addSteps([const AccountPickerOnboarding()]);
+              context.router.push(OnboardingRoute(onCompletedCallback: (p0) => context.router.navigate(const RouterRoute())));
+            },
           ),
           const NotificationActionButton(),
         ],
