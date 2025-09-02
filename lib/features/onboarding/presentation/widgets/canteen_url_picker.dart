@@ -10,29 +10,55 @@ class CanteenUrlPicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ThemeData theme = Theme.of(context);
+    ListTileThemeData listTileTheme = theme.listTileTheme;
     final rawUrls = ref.read(remoteConfigValues)[RemoteConfig.canteenUrls];
+    Map<String, String> urls = rawUrls is Map ? Map<String, String>.from(rawUrls) : {};
 
-    Map<String, String> urls;
+    TextSpan highlightText(String text, String query, TextStyle? textStyle) {
+      if (query.isEmpty) return TextSpan(text: text, style: textStyle);
 
-    if (rawUrls is Map) {
-      urls = Map<String, String>.from(rawUrls);
-    } else {
-      urls = {};
+      final lowerText = text.toLowerCase();
+      final start = lowerText.indexOf(query);
+      if (start == -1) return TextSpan(text: text, style: textStyle);
+
+      final end = start + query.length;
+
+      return TextSpan(
+        children: [
+          TextSpan(text: text.substring(0, start), style: textStyle),
+          TextSpan(text: text.substring(start, end), style: textStyle!.copyWith(color: theme.colorScheme.primary)),
+          TextSpan(text: text.substring(end), style: textStyle),
+        ],
+      );
     }
 
     return ValueListenableBuilder<TextEditingValue>(
       valueListenable: ref.read(textFieldControllerProvider(OnboardingFields.url)),
       builder: (_, urlController, ___) {
+        final query = urlController.text.trim().toLowerCase();
+        final allEntries = urls.entries.toList();
+
+        // check if query perfectly matches any key or value
+        final hasPerfectMatch = allEntries.any(
+          (entry) => entry.key.toLowerCase() == query || entry.value.toLowerCase() == query,
+        );
+
+        final filteredUrls = query.isEmpty || hasPerfectMatch
+            ? allEntries
+            : allEntries.where((e) => e.key.toLowerCase().contains(query) || e.value.toLowerCase().contains(query)).toList();
+
         return ListView.builder(
           shrinkWrap: true,
-          itemCount: urls.length,
+          itemCount: filteredUrls.length,
           itemBuilder: (_, index) {
-            String title = urls.entries.elementAt(index).key;
-            String url = urls.entries.elementAt(index).value;
+            final entry = filteredUrls[index];
+            final title = entry.key;
+            final url = entry.value;
 
             return ListTile(
-              title: Text(title),
-              subtitle: Text(url),
+              title: RichText(text: highlightText(title, query, listTileTheme.titleTextStyle), textScaler: MediaQuery.of(context).textScaler),
+              subtitle: RichText(text: highlightText(url, query, listTileTheme.subtitleTextStyle), textScaler: MediaQuery.of(context).textScaler),
               trailing: Url.clean(urlController.text) == url ? const Icon(Icons.check) : null,
               onTap: () => ref.read(textFieldControllerProvider(OnboardingFields.url)).text = url,
             );
