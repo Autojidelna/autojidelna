@@ -1,13 +1,14 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
-import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/account_picker_onboarding.dart';
-import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/dev/crash_logic.dart';
-import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/dev/presentation/test_notifications.dart';
+import 'package:autojidelna/shared/config/errors.dart';
+import 'package:autojidelna/shared/config/hive.dart';
+import 'package:autojidelna/shared/utils/show_snack_bar.dart';
+
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:hive/hive.dart';
 
 @RoutePage()
 class DebugPage extends StatelessWidget {
@@ -44,12 +45,8 @@ class DebugPage extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Onboarding guide - Account picker'),
-            onTap: () async {
-              StepFlowController.instance.clear();
-              StepFlowController.instance.addSteps([const AccountPickerOnboarding()]);
-              context.router.push(OnboardingRoute(onCompletedCallback: (p0) => context.router.navigate(const RouterRoute())));
-            },
+            title: const Text('Set AppState.firstTime to true'),
+            onTap: () => Hive.box(Boxes.appState).put(HiveKeys.appState.firstTime, true),
           ),
           const NotificationActionButton(),
         ],
