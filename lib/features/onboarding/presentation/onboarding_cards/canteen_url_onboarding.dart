@@ -34,7 +34,12 @@ class CanteenUrlOnboarding extends ConsumerWidget implements OnboardingStep {
                   border: InputBorder.none,
                   labelText: l10n.loginUrlFieldLabel,
                   errorText: provider.error,
-                  suffixIcon: const Icon(Icons.edit_rounded),
+                  suffixIcon: ValueListenableBuilder<TextEditingValue>(
+                    valueListenable: ref.read(textFieldControllerProvider(OnboardingFields.url)),
+                    builder: (_, urlController, ___) => urlController.text.isEmpty
+                        ? const Icon(Icons.edit_rounded)
+                        : IconButton(onPressed: ref.read(textFieldControllerProvider(OnboardingFields.url)).clear, icon: const Icon(Icons.close)),
+                  ),
                 ),
                 onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                 validator: (value) => (value?.isEmpty ?? true) ? l10n.loginUrlFieldHint : null,
@@ -44,7 +49,7 @@ class CanteenUrlOnboarding extends ConsumerWidget implements OnboardingStep {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: DividerWithText(text: context.l10n.or),
+            child: DividerWithText(text: l10n.or),
           ),
           ConstrainedBox(constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * .4), child: const CanteenUrlPicker()),
         ],
