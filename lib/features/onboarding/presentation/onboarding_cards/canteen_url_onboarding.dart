@@ -40,6 +40,9 @@ class CanteenUrlOnboarding extends StatelessWidget implements OnboardingStep {
   }
 
   @override
+  Future<bool> onPreviousPage(BuildContext context, WidgetRef ref) async => true;
+
+  @override
   Future<bool> onNextPage(BuildContext context, WidgetRef ref) async {
     final formKey = ref.read(formKeyProvider(FormKeys.url));
     final disableInteractionsNotifier = ref.read(disableInteractions.notifier);

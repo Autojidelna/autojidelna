@@ -27,6 +27,9 @@ class PermissionsOnboarding extends StatelessWidget implements OnboardingStep {
   }
 
   @override
+  Future<bool> onPreviousPage(BuildContext context, WidgetRef ref) async => true;
+
+  @override
   Future<bool> onNextPage(BuildContext context, WidgetRef ref) async => true;
 
   @override
