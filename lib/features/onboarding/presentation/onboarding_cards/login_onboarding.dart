@@ -71,6 +71,9 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
   }
 
   @override
+  Future<bool> onPreviousPage(BuildContext context, WidgetRef ref) async => true;
+
+  @override
   Future<bool> onNextPage(BuildContext context, WidgetRef ref) async => await ref.read(loginProvider).login(context);
 
   @override
