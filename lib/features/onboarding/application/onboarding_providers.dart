@@ -1,4 +1,6 @@
+import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/shared/config/hive.dart';
+import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/text_fields/text_field_state.dart';
 
 import 'package:flutter/widgets.dart';
@@ -28,3 +30,5 @@ class TextFieldNotifier extends StateNotifier<TextFieldState> {
   void setError(String? error) => state = state.copyWith(error: error);
   void toggleObscure() => state = state.copyWith(obscureText: !state.obscureText);
 }
+
+final selectedSafeAccount = StateProvider.autoDispose<SafeAccount>((ref) => ref.read(userProvider).loggedInAccounts.first);

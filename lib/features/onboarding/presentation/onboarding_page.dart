@@ -1,15 +1,15 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/account_picker_onboarding.dart';
-import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/features/auth/data/login.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
-import 'package:expandable_page_view/expandable_page_view.dart';
+import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/account_picker_onboarding.dart';
+import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:expandable_page_view/expandable_page_view.dart';
 
 @RoutePage()
 class OnboardingPage extends ConsumerStatefulWidget {
@@ -115,10 +115,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
               const SizedBox(width: 8),
               Expanded(
                 child: FilledButton(
-                  onPressed: ref.watch(disableInteractions) ||
-                          (_stepFlow.pages.last is AccountPickerOnboarding && _stepFlow.isLastPage && ref.watch(loginProvider).pickedAccount == null)
-                      ? null
-                      : _nextPage,
+                  onPressed:
+                      ref.watch(disableInteractions) || (_stepFlow.pages.last is AccountPickerOnboarding && _stepFlow.isLastPage) ? null : _nextPage,
                   child: Text(_stepFlow.currentPage.buttonText(context)),
                 ),
               ),
