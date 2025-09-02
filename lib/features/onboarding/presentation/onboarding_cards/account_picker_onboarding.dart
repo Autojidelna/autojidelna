@@ -54,7 +54,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
             title: Text(context.l10n.addAccount),
             onTap: () async {
               StepFlowController.instance.setLoginFlow();
-              context.router.replaceAll([OnboardingRoute()]);
+              context.router.push(OnboardingRoute());
             },
           ),
         ],
