@@ -3,8 +3,9 @@ import 'package:autojidelna/shared/providers/disable_interactions_provider.dart'
 import 'package:autojidelna/shared/providers/text_fields/text_field_state.dart';
 import 'package:autojidelna/shared/widgets/divider_with_text.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
+import 'package:autojidelna/features/onboarding/onboarding.dart';
 import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
-import 'package:autojidelna/features/onboarding/application/onboarding.dart';
+import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/account_picker_onboarding.dart';
 import 'package:autojidelna/features/onboarding/presentation/widgets/canteen_url_picker.dart';
 
 import 'package:flutter/material.dart';
@@ -65,6 +66,12 @@ class CanteenUrlOnboarding extends ConsumerWidget implements OnboardingStep {
     ref.invalidate(formKeyProvider(FormKeys.url));
     ref.invalidate(textFieldControllerProvider(OnboardingFields.url));
     ref.invalidate(textFieldProvider(OnboardingFields.url));
+
+    if (ref.read(onboardingPagesProvider).any((step) => step.runtimeType == AccountPickerOnboarding)) {
+      // Delay so that the page is removed after the page changing animation is finished
+      Future.delayed(Durations.medium1, ref.read(onboardingPagesProvider.notifier).removeLoginPages);
+    }
+
     return true;
   }
 

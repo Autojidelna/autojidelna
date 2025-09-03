@@ -26,8 +26,8 @@ class OnboardingPage extends ConsumerStatefulWidget {
 class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   int _pageIndex = 0;
 
-  void updatePageIndex(int value) => setState(() {
-        _pageIndex = value;
+  void updatePageIndex(int value) => WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) setState(() => _pageIndex = value);
       });
 
   void _nextPage(OnboardingStep currentPage, bool isLastPage) async {
@@ -71,11 +71,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     ThemeData theme = Theme.of(context);
 
     final pages = ref.watch(onboardingPagesProvider);
-    final bool isFirstPage = _pageIndex == 0;
-    final bool isLastPage = _pageIndex == pages.length - 1;
-    final OnboardingStep currentPage = pages[_pageIndex];
-    print(pages);
-    print('Current page: $currentPage');
+    final int clampedIndex = _pageIndex.clamp(0, pages.length - 1);
+    final bool isFirstPage = clampedIndex == 0;
+    final bool isLastPage = clampedIndex == pages.length - 1;
+    final OnboardingStep currentPage = pages[clampedIndex];
 
     return PopScope(
       canPop: isFirstPage,
@@ -117,7 +116,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                   animationDuration: Durations.medium1,
                   physics: const NeverScrollableScrollPhysics(),
                   onPageChanged: updatePageIndex,
-                  children: ref.watch(onboardingPagesProvider).map((e) => e as Widget).toList(),
+                  children: pages.map((e) => e as Widget).toList(),
                 ),
               ),
             ],
