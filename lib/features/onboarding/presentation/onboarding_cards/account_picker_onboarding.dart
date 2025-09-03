@@ -1,4 +1,3 @@
-import 'package:autojidelna/features/onboarding/onboarding.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
@@ -8,8 +7,9 @@ import 'package:autojidelna/shared/providers/disable_interactions_provider.dart'
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:autojidelna/shared/widgets/divider_with_text.dart';
-import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
+import 'package:autojidelna/features/onboarding/onboarding.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
+import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

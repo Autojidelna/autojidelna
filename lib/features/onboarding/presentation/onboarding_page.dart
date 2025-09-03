@@ -1,7 +1,7 @@
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
-import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';

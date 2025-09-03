@@ -40,9 +40,7 @@ class DebugPage extends StatelessWidget {
           ),
           ListTile(
             title: const Text('Onboarding guide'),
-            onTap: () async => context.router.push(
-              OnboardingRoute(onCompletedCallback: (p0) => context.router.navigate(const RouterRoute())),
-            ),
+            onTap: () async => context.router.push(OnboardingRoute()),
           ),
           ListTile(
             title: const Text('Set AppState.firstTime to true'),
