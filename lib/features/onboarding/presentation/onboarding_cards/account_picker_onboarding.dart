@@ -9,10 +9,11 @@ import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.
 import 'package:autojidelna/shared/widgets/divider_with_text.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
-import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final _selectedSafeAccount = StateProvider.autoDispose<SafeAccount>((ref) => ref.read(userProvider).loggedInAccounts.first);
 
 class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
   const AccountPickerOnboarding({super.key});
@@ -36,9 +37,9 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
                 return ListTile(
                   title: Text(account.username),
                   subtitle: Text(account.url),
-                  enabled: ref.watch(selectedSafeAccount) == account || !ref.watch(disableInteractions),
-                  trailing: ref.watch(selectedSafeAccount) == account ? const Icon(Icons.check) : null,
-                  onTap: ref.watch(disableInteractions) ? null : () => ref.read(selectedSafeAccount.notifier).state = account,
+                  enabled: ref.watch(_selectedSafeAccount) == account || !ref.watch(disableInteractions),
+                  trailing: ref.watch(_selectedSafeAccount) == account ? const Icon(Icons.check) : null,
+                  onTap: ref.watch(disableInteractions) ? null : () => ref.read(_selectedSafeAccount.notifier).state = account,
                 );
               },
             ),
@@ -72,7 +73,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
 
     bool allowNextPage = true;
     try {
-      await userProv.changeUser(ref.read(selectedSafeAccount));
+      await userProv.changeUser(ref.read(_selectedSafeAccount));
       await userProv.loadUser();
     } catch (e) {
       if (!context.mounted) return false;
