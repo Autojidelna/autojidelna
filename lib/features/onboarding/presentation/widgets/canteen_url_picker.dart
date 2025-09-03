@@ -34,7 +34,7 @@ class CanteenUrlPicker extends ConsumerWidget {
     }
 
     return ValueListenableBuilder<TextEditingValue>(
-      valueListenable: ref.read(textFieldControllerProvider(OnboardingFields.url)),
+      valueListenable: ref.read(textFieldControllerProvider(OnboardingTextFields.url)),
       builder: (_, urlController, ___) {
         final query = urlController.text.trim().toLowerCase();
         final allEntries = urls.entries.toList();
@@ -60,7 +60,7 @@ class CanteenUrlPicker extends ConsumerWidget {
               title: RichText(text: highlightText(title, query, listTileTheme.titleTextStyle), textScaler: MediaQuery.of(context).textScaler),
               subtitle: RichText(text: highlightText(url, query, listTileTheme.subtitleTextStyle), textScaler: MediaQuery.of(context).textScaler),
               trailing: Url.clean(urlController.text) == url ? const Icon(Icons.check) : null,
-              onTap: () => ref.read(textFieldControllerProvider(OnboardingFields.url)).text = url,
+              onTap: () => ref.read(textFieldControllerProvider(OnboardingTextFields.url)).text = url,
             );
           },
         );
