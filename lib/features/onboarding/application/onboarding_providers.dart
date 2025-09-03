@@ -1,6 +1,4 @@
-import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/shared/config/hive.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/text_fields/text_field_state.dart';
 
 import 'package:flutter/widgets.dart';
@@ -21,14 +19,14 @@ final textFieldControllerProvider = Provider.family<TextEditingController, Onboa
   return controller;
 });
 
-final isAnyFocusedProvider = Provider<bool>((ref) {
-  return OnboardingTextFields.values.any((field) => ref.watch(focusNodeProvider(field)).hasFocus);
-});
-
 final focusNodeProvider = ChangeNotifierProvider.family<FocusNode, OnboardingTextFields>((ref, field) {
   final node = FocusNode();
   ref.onDispose(node.dispose);
   return node;
+});
+
+final isAnyFocusedProvider = Provider<bool>((ref) {
+  return OnboardingTextFields.values.any((field) => ref.watch(focusNodeProvider(field)).hasFocus);
 });
 
 final textFieldProvider =
@@ -41,5 +39,3 @@ class TextFieldNotifier extends StateNotifier<TextFieldState> {
   void setError(String? error) => state = state.copyWith(error: error);
   void toggleObscure() => state = state.copyWith(obscureText: !state.obscureText);
 }
-
-final selectedSafeAccount = StateProvider.autoDispose<SafeAccount>((ref) => ref.read(userProvider).loggedInAccounts.first);
