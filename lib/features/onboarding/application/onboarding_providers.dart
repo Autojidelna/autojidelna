@@ -7,14 +7,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
-enum FormKeys { url, credentials }
+enum OnboardingFormKeys { url, credentials }
 
-enum OnboardingFields { url, username, password }
+enum OnboardingTextFields { url, username, password }
 
-final formKeyProvider = Provider.family<GlobalKey<FormState>, FormKeys>((ref, formName) => GlobalKey<FormState>());
+final formKeyProvider = Provider.family<GlobalKey<FormState>, OnboardingFormKeys>((ref, formName) => GlobalKey<FormState>());
 
-final textFieldControllerProvider = Provider.family<TextEditingController, OnboardingFields>((ref, fieldKey) {
-  String? initialValue = fieldKey == OnboardingFields.url ? Hive.box(Boxes.appState).get(HiveKeys.appState.url) : null;
+final textFieldControllerProvider = Provider.family<TextEditingController, OnboardingTextFields>((ref, fieldKey) {
+  String? initialValue = fieldKey == OnboardingTextFields.url ? Hive.box(Boxes.appState).get(HiveKeys.appState.url) : null;
   final controller = TextEditingController(text: initialValue);
   ref.onDispose(controller.dispose);
 
@@ -22,16 +22,17 @@ final textFieldControllerProvider = Provider.family<TextEditingController, Onboa
 });
 
 final isAnyFocusedProvider = Provider<bool>((ref) {
-  return OnboardingFields.values.any((field) => ref.watch(focusNodeProvider(field)).hasFocus);
+  return OnboardingTextFields.values.any((field) => ref.watch(focusNodeProvider(field)).hasFocus);
 });
 
-final focusNodeProvider = ChangeNotifierProvider.family<FocusNode, OnboardingFields>((ref, field) {
+final focusNodeProvider = ChangeNotifierProvider.family<FocusNode, OnboardingTextFields>((ref, field) {
   final node = FocusNode();
   ref.onDispose(node.dispose);
   return node;
 });
 
-final textFieldProvider = StateNotifierProvider.family<TextFieldNotifier, TextFieldState, OnboardingFields>((ref, fieldKey) => TextFieldNotifier());
+final textFieldProvider =
+    StateNotifierProvider.family<TextFieldNotifier, TextFieldState, OnboardingTextFields>((ref, fieldKey) => TextFieldNotifier());
 
 class TextFieldNotifier extends StateNotifier<TextFieldState> {
   TextFieldNotifier({String? initialValue}) : super(TextFieldState(value: initialValue ?? ''));
