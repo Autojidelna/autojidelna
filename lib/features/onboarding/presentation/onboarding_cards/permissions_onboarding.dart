@@ -3,7 +3,6 @@ import 'package:autojidelna/shared/analytics/presentation/analytics_switches.dar
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/features/onboarding/presentation/widgets/request_notification_permission.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
-import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,7 +32,7 @@ class PermissionsOnboarding extends StatelessWidget implements OnboardingStep {
   Future<bool> onNextPage(BuildContext context, WidgetRef ref) async => true;
 
   @override
-  String buttonText(BuildContext context) => StepFlowController.instance.isLastPage ? context.l10n.getStarted : context.l10n.next;
+  String buttonText(BuildContext context) => context.l10n.next;
 
   @override
   String description(BuildContext context) => context.l10n.onboardingSubtitle;

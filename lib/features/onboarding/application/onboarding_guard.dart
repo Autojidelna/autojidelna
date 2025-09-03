@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
+import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
+import 'package:autojidelna/features/onboarding/onboarding.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
@@ -26,15 +27,16 @@ class OnboardingGuard extends AutoRouteGuard {
       return;
     }
 
-    final stepFlow = StepFlowController.instance..reset();
-
     await ref.read(userProvider).updateLoggedSafeAccounts();
-    int loggedInAccounts = ref.read(userProvider).loggedInAccounts.length;
+    List<SafeAccount> loggedInAccounts = ref.read(userProvider).loggedInAccounts;
 
-    if (loggedInAccounts >= 1) {
-      stepFlow.addSteps(stepFlow.accountPickerFlowPages);
-    } else if (1 > loggedInAccounts) {
-      stepFlow.addSteps(stepFlow.loginFlowPage);
+    final onboardingPagesNotifier = ref.read(onboardingPagesProvider.notifier);
+    onboardingPagesNotifier.reset();
+
+    if (loggedInAccounts.isNotEmpty) {
+      onboardingPagesNotifier.addAccountPickerPages();
+    } else {
+      onboardingPagesNotifier.addLoginPages();
     }
 
     resolver.redirect(

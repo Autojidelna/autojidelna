@@ -1,11 +1,12 @@
 import 'package:autojidelna/app/routing/app_router.gr.dart';
+import 'package:autojidelna/features/onboarding/onboarding.dart';
+import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
-import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
 import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:flutter/material.dart';
@@ -23,18 +24,15 @@ class OnboardingPage extends ConsumerStatefulWidget {
 }
 
 class _OnboardingPageState extends ConsumerState<OnboardingPage> {
-  late final PageController _pageController;
-  late final StepFlowController _stepFlow;
+  int _pageIndex = 0;
 
-  void _nextPage() async {
-    if (!await _stepFlow.currentPage.onNextPage(context, ref)) return;
-    if (!_stepFlow.isLastPage) {
-      _pageController.nextPage(
-        duration: Durations.medium1,
-        curve: Curves.easeInOut,
-      );
-      return;
-    }
+  void updatePageIndex(int value) => setState(() {
+        _pageIndex = value;
+      });
+
+  void _nextPage(OnboardingStep currentPage, bool isLastPage) async {
+    if (!await currentPage.onNextPage(context, ref)) return;
+    if (!isLastPage) return Onboarding.nextPage();
 
     if (!mounted) return;
     if (widget.onCompletedCallback == null) {
@@ -42,34 +40,28 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     } else {
       widget.onCompletedCallback!(true);
     }
+    ref.read(onboardingPagesProvider.notifier).reset();
   }
 
-  void _previousPage() async {
-    if (!await _stepFlow.currentPage.onPreviousPage(context, ref)) return;
-
-    if (!_stepFlow.isFirstPage) {
-      _pageController.previousPage(
-        duration: Durations.medium1,
-        curve: Curves.easeInOut,
-      );
-      return;
-    }
+  void _previousPage(OnboardingStep currentPage, bool isFirstPage) async {
+    if (!await currentPage.onPreviousPage(context, ref)) return;
+    if (!isFirstPage) return Onboarding.previousPage();
 
     if (!mounted) return;
     context.router.maybePop();
+    ref.read(onboardingPagesProvider.notifier).reset();
   }
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
-    _stepFlow = StepFlowController.instance;
+    Onboarding.pageController = PageController();
   }
 
   @override
   void dispose() {
     super.dispose();
-    _stepFlow.reset();
+    Onboarding.pageController.dispose();
   }
 
   @override
@@ -78,8 +70,15 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     bool canNavigateBack = ref.read(userProvider).user != null;
     ThemeData theme = Theme.of(context);
 
+    final pages = ref.watch(onboardingPagesProvider);
+    final bool isFirstPage = _pageIndex == 0;
+    final bool isLastPage = _pageIndex == pages.length - 1;
+    final OnboardingStep currentPage = pages[_pageIndex];
+    print(pages);
+    print('Current page: $currentPage');
+
     return PopScope(
-      canPop: _stepFlow.isFirstPage,
+      canPop: isFirstPage,
       child: Scaffold(
         appBar: AppBar(forceMaterialTransparency: true, automaticallyImplyLeading: false),
         body: SingleChildScrollView(
@@ -109,16 +108,16 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
               ),
               ListTile(
                 title: Text(l10n.welcome, style: theme.textTheme.displaySmall),
-                subtitle: Text(_stepFlow.currentPage.description(context), style: theme.textTheme.titleMedium),
+                subtitle: Text(currentPage.description(context), style: theme.textTheme.titleMedium),
               ),
               const CustomDivider(height: 32),
               Card(
                 child: ExpandablePageView(
-                  controller: _pageController,
+                  controller: Onboarding.pageController,
                   animationDuration: Durations.medium1,
                   physics: const NeverScrollableScrollPhysics(),
-                  onPageChanged: (value) => setState(() => _stepFlow.setCurrentPageIndex(value)),
-                  children: _stepFlow.pages.map((e) => e as Widget).toList(),
+                  onPageChanged: updatePageIndex,
+                  children: ref.watch(onboardingPagesProvider).map((e) => e as Widget).toList(),
                 ),
               ),
             ],
@@ -129,7 +128,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           child: Row(
             children: [
               TweenAnimationBuilder<double>(
-                tween: Tween<double>(begin: 0, end: (canNavigateBack || !_stepFlow.isFirstPage) ? 1 : 0), // 0 = hidden, 1 = visible
+                tween: Tween<double>(begin: 0, end: (canNavigateBack || !isFirstPage) ? 1 : 0), // 0 = hidden, 1 = visible
                 duration: Durations.medium1,
                 curve: Curves.easeOut,
                 builder: (context, value, child) {
@@ -153,15 +152,15 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                       ),
                     ),
                   ),
-                  onPressed: ref.watch(disableInteractions) ? null : _previousPage,
+                  onPressed: ref.watch(disableInteractions) ? null : () => _previousPage(currentPage, isFirstPage),
                   child: const Icon(Icons.arrow_back_outlined),
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: FilledButton(
-                  onPressed: ref.watch(disableInteractions) ? null : _nextPage,
-                  child: Text(_stepFlow.currentPage.buttonText(context)),
+                  onPressed: ref.watch(disableInteractions) ? null : () => _nextPage(currentPage, isLastPage),
+                  child: Text(currentPage.buttonText(context)),
                 ),
               ),
             ],
