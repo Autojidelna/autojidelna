@@ -2,6 +2,12 @@ import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
+import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
+import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/account_picker_onboarding.dart';
+import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/canteen_url_onboarding.dart';
+import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/login_onboarding.dart';
+import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/permissions_onboarding.dart';
+import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/theme_onboarding.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/config/hive.dart';
@@ -13,8 +19,27 @@ import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'onboarding.g.dart';
 
 class Onboarding {
+  static late PageController pageController;
+
+  static void nextPage() async {
+    pageController.nextPage(
+      duration: Durations.medium1,
+      curve: Curves.easeInOut,
+    );
+  }
+
+  static void previousPage() async {
+    pageController.previousPage(
+      duration: Durations.medium1,
+      curve: Curves.easeInOut,
+    );
+  }
+
   static Future<bool> login(BuildContext context, WidgetRef ref, FormKeys formKeyEnum) async {
     final formKey = ref.read(formKeyProvider(formKeyEnum));
     final disableInteractionsNotifier = ref.read(disableInteractions.notifier);
@@ -66,5 +91,55 @@ class Onboarding {
         : AnalyticsService.instance.logCanteenUrl(ref.read(textFieldProvider(OnboardingFields.url)).value!, ref.read(currentCanteen).verze);
     disableInteractionsNotifier.state = false;
     return allowNextPage;
+  }
+}
+
+@Riverpod(keepAlive: true)
+class OnboardingPages extends _$OnboardingPages {
+  @override
+  List<OnboardingStep> build() => _defaultPages;
+
+  final List<OnboardingStep> _defaultPages = [
+    const ThemeOnboarding(),
+    const PermissionsOnboarding(),
+  ];
+
+  final List<OnboardingStep> _loginFlowPages = [
+    const CanteenUrlOnboarding(),
+    const LoginOnboarding(),
+  ];
+
+  final List<OnboardingStep> _accountPickerFlowPages = [
+    const AccountPickerOnboarding(),
+  ];
+
+  void reset() {
+    state = _defaultPages;
+    ref.notifyListeners();
+  }
+
+  void addLoginPages() {
+    state.addAll(_loginFlowPages);
+    ref.notifyListeners();
+  }
+
+  void addAccountPickerPages() {
+    state.addAll(_accountPickerFlowPages);
+    ref.notifyListeners();
+  }
+
+  void setLoginFlow() {
+    state = _loginFlowPages;
+    ref.notifyListeners();
+  }
+
+  void setAccountPickerFlow() {
+    state = _accountPickerFlowPages;
+    ref.notifyListeners();
+  }
+
+  void removeLoginPages() {
+    state = state.where((step) => !_loginFlowPages.contains(step)).toList();
+    ref.notifyListeners();
   }
 }

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/features/onboarding/application/step_flow_controller.dart';
+import 'package:autojidelna/features/onboarding/onboarding.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
@@ -46,20 +46,25 @@ class SwitchAccountPanel extends StatelessWidget {
           },
         ),
         const CustomDivider(height: 0, isTransparent: false),
-        addAccountButton(context),
+        addAccountButton(),
       ],
     );
   }
 
-  Widget addAccountButton(BuildContext context) {
-    final L10n l10n = context.l10n;
-    return ListTile(
-      leading: const Icon(Icons.add),
-      title: Text(l10n.addAccount),
-      onTap: () async {
-        StepFlowController.instance.setLoginFlow();
-        context.router.navigate(OnboardingRoute());
+  Widget addAccountButton() {
+    return Consumer(
+      builder: (context, ref, child) {
+        final L10n l10n = context.l10n;
+        return ListTile(
+          leading: child,
+          title: Text(l10n.addAccount),
+          onTap: () async {
+            ref.read(onboardingPagesProvider.notifier).setLoginFlow();
+            context.router.navigate(OnboardingRoute());
+          },
+        );
       },
+      child: const Icon(Icons.add),
     );
   }
 
