@@ -56,7 +56,7 @@ class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent>
     } else {
       widget.onCompletedCallback!(true);
     }
-    ref.read(onboardingPagesProvider.notifier).reset();
+    Future.delayed(Durations.medium1, ref.read(onboardingPagesProvider.notifier).reset);
   }
 
   void _previousPage(OnboardingStep currentPage, bool isFirstPage) async {
@@ -65,7 +65,7 @@ class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent>
 
     if (!mounted) return;
     context.router.maybePop();
-    ref.read(onboardingPagesProvider.notifier).reset();
+    Future.delayed(Durations.medium1, ref.read(onboardingPagesProvider.notifier).reset);
   }
 
   @override
