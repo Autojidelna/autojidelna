@@ -1,7 +1,7 @@
 import 'package:autojidelna/core/remote-config/remote_config.dart';
 import 'package:autojidelna/core/utils/url.dart';
-import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
+import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
