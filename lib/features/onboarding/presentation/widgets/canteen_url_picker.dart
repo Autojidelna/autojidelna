@@ -1,13 +1,13 @@
 import 'package:autojidelna/core/remote-config/remote_config.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
-import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CanteenUrlPicker extends ConsumerWidget {
-  const CanteenUrlPicker({super.key});
+  const CanteenUrlPicker({super.key, required this.controller});
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,7 +35,7 @@ class CanteenUrlPicker extends ConsumerWidget {
     }
 
     return ValueListenableBuilder<TextEditingValue>(
-      valueListenable: ref.read(onboardingTextFieldControllerProvider(OnboardingTextFields.url)),
+      valueListenable: controller,
       builder: (_, urlController, ___) {
         final query = urlController.text.trim().toLowerCase();
         final allEntries = urls.entries.toList();
@@ -64,7 +64,7 @@ class CanteenUrlPicker extends ConsumerWidget {
               title: Text.rich(highlightText(title, query, listTileTheme.titleTextStyle, enabled)),
               subtitle: Text.rich(highlightText(url, query, listTileTheme.subtitleTextStyle, enabled)),
               trailing: Url.clean(urlController.text) == url ? const Icon(Icons.check) : null,
-              onTap: () => ref.read(onboardingTextFieldControllerProvider(OnboardingTextFields.url)).text = url,
+              onTap: () => controller.text = url,
             );
           },
         );

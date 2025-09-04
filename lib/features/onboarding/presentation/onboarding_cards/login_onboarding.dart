@@ -10,11 +10,63 @@ import 'package:autojidelna/features/onboarding/application/onboarding_providers
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
+class LoginOnboarding extends ConsumerStatefulWidget implements OnboardingStep {
   const LoginOnboarding({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LoginOnboarding> createState() => _LoginOnboardingState();
+
+  @override
+  Future<bool> onPreviousPage(BuildContext context, WidgetRef ref) async {
+    ref.invalidate(onboardingFormKeyProvider(OnboardingFormKeys.credentials));
+    ref.invalidate(onboardingTextFieldStateProvider(OnboardingTextFields.username));
+    ref.invalidate(onboardingTextFieldStateProvider(OnboardingTextFields.password));
+    return true;
+  }
+
+  @override
+  Future<bool> onNextPage(BuildContext context, WidgetRef ref) async => await Onboarding.login(context, ref, OnboardingFormKeys.credentials);
+
+  @override
+  String buttonText(BuildContext context) => context.l10n.login;
+
+  @override
+  String description(BuildContext context) => context.l10n.loginSubtitle;
+}
+
+class _LoginOnboardingState extends ConsumerState<LoginOnboarding> {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final FocusNode usernameFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
+
+  void updateUsernameFocusNotifier() {
+    ref.read(onboardingFocusNodeFocusProvider(OnboardingTextFields.username).notifier).state = usernameFocusNode.hasFocus;
+  }
+
+  void updatePasswordFocusNotifier() {
+    ref.read(onboardingFocusNodeFocusProvider(OnboardingTextFields.password).notifier).state = passwordFocusNode.hasFocus;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    usernameFocusNode.addListener(updateUsernameFocusNotifier);
+    passwordFocusNode.addListener(updatePasswordFocusNotifier);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
+    usernameFocusNode.removeListener(updateUsernameFocusNotifier);
+    passwordFocusNode.removeListener(updatePasswordFocusNotifier);
+    usernameFocusNode.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final L10n l10n = context.l10n;
 
     final usernameNotifier = ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.username).notifier);
@@ -33,8 +85,8 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 child: TextFormField(
-                  controller: ref.watch(onboardingTextFieldControllerProvider(OnboardingTextFields.username)),
-                  focusNode: ref.watch(onboardingFocusNodeProvider(OnboardingTextFields.username)),
+                  controller: usernameController,
+                  focusNode: usernameFocusNode,
                   autocorrect: false,
                   enabled: !ref.watch(disableInteractions),
                   textInputAction: TextInputAction.next,
@@ -52,8 +104,8 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 child: TextFormField(
-                  controller: ref.watch(onboardingTextFieldControllerProvider(OnboardingTextFields.password)),
-                  focusNode: ref.watch(onboardingFocusNodeProvider(OnboardingTextFields.password)),
+                  controller: passwordController,
+                  focusNode: passwordFocusNode,
                   autocorrect: false,
                   enabled: !ref.watch(disableInteractions),
                   obscureText: passwordProvider.obscureText,
@@ -79,25 +131,6 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
       ),
     );
   }
-
-  @override
-  Future<bool> onPreviousPage(BuildContext context, WidgetRef ref) async {
-    ref.invalidate(onboardingFormKeyProvider(OnboardingFormKeys.credentials));
-    ref.invalidate(onboardingTextFieldControllerProvider(OnboardingTextFields.username));
-    ref.invalidate(onboardingTextFieldControllerProvider(OnboardingTextFields.password));
-    ref.invalidate(onboardingTextFieldStateProvider(OnboardingTextFields.username));
-    ref.invalidate(onboardingTextFieldStateProvider(OnboardingTextFields.password));
-    return true;
-  }
-
-  @override
-  Future<bool> onNextPage(BuildContext context, WidgetRef ref) async => await Onboarding.login(context, ref, OnboardingFormKeys.credentials);
-
-  @override
-  String buttonText(BuildContext context) => context.l10n.login;
-
-  @override
-  String description(BuildContext context) => context.l10n.loginSubtitle;
 }
 
 class _UrlListTile extends ConsumerWidget {

@@ -15,15 +15,31 @@ import 'package:auto_route/auto_route.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 
 @RoutePage()
-class OnboardingPage extends ConsumerStatefulWidget {
+class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key, this.onCompletedCallback});
   final void Function(bool onSuccess)? onCompletedCallback;
 
   @override
-  ConsumerState<OnboardingPage> createState() => _OnboardingPageState();
+  Widget build(BuildContext context) => ProviderScope(
+        overrides: [
+          onboardingFormKeyProvider,
+          onboardingFocusNodeFocusProvider,
+          onboardingHasFocusProvider,
+          onboardingTextFieldStateProvider,
+        ],
+        child: _OnboardingPageContent(onCompletedCallback: onCompletedCallback),
+      );
 }
 
-class _OnboardingPageState extends ConsumerState<OnboardingPage> {
+class _OnboardingPageContent extends ConsumerStatefulWidget {
+  const _OnboardingPageContent({required this.onCompletedCallback});
+  final void Function(bool onSuccess)? onCompletedCallback;
+
+  @override
+  ConsumerState<_OnboardingPageContent> createState() => __OnboardingPageContentState();
+}
+
+class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent> {
   int _pageIndex = 0;
 
   void updatePageIndex(int value) => WidgetsBinding.instance.addPostFrameCallback((_) {
