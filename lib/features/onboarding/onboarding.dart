@@ -20,12 +20,23 @@ import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/th
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'onboarding.g.dart';
 
 class Onboarding {
   static late PageController pageController;
+
+  static final List<OnboardingStep> defaultSteps = [
+    const ThemeOnboarding(),
+    const PermissionsOnboarding(),
+  ];
+
+  static final List<OnboardingStep> loginSteps = [
+    const CanteenUrlOnboarding(),
+    const LoginOnboarding(),
+  ];
+
+  static final List<OnboardingStep> accountPickerSteps = [
+    const AccountPickerOnboarding(),
+  ];
 
   static void nextPage() async {
     pageController.nextPage(
@@ -94,55 +105,5 @@ class Onboarding {
         : AnalyticsService.instance.logCanteenUrl(url, ref.read(currentCanteen).verze);
     disableInteractionsNotifier.state = false;
     return allowNextPage;
-  }
-}
-
-@Riverpod(keepAlive: true)
-class OnboardingPages extends _$OnboardingPages {
-  @override
-  List<OnboardingStep> build() => _defaultPages;
-
-  final List<OnboardingStep> _defaultPages = [
-    const ThemeOnboarding(),
-    const PermissionsOnboarding(),
-  ];
-
-  final List<OnboardingStep> _loginFlowPages = [
-    const CanteenUrlOnboarding(),
-    const LoginOnboarding(),
-  ];
-
-  final List<OnboardingStep> _accountPickerFlowPages = [
-    const AccountPickerOnboarding(),
-  ];
-
-  void reset() {
-    state = _defaultPages;
-    ref.notifyListeners();
-  }
-
-  void addLoginPages() {
-    state.addAll(_loginFlowPages);
-    ref.notifyListeners();
-  }
-
-  void addAccountPickerPages() {
-    state.addAll(_accountPickerFlowPages);
-    ref.notifyListeners();
-  }
-
-  void setLoginFlow() {
-    state = _loginFlowPages;
-    ref.notifyListeners();
-  }
-
-  void setAccountPickerFlow() {
-    state = _accountPickerFlowPages;
-    ref.notifyListeners();
-  }
-
-  void removeLoginPages() {
-    state = state.where((step) => !_loginFlowPages.contains(step)).toList();
-    ref.notifyListeners();
   }
 }

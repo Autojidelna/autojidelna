@@ -181,6 +181,24 @@ final onboardingHasFocusProvider = AutoDisposeProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef OnboardingHasFocusRef = AutoDisposeProviderRef<bool>;
+String _$onboardingInitialStepsHash() =>
+    r'831b02ad64738a6f21220f27b7617fc65d494997';
+
+/// See also [onboardingInitialSteps].
+@ProviderFor(onboardingInitialSteps)
+final onboardingInitialStepsProvider = Provider<List<OnboardingStep>>.internal(
+  onboardingInitialSteps,
+  name: r'onboardingInitialStepsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$onboardingInitialStepsHash,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef OnboardingInitialStepsRef = ProviderRef<List<OnboardingStep>>;
 String _$onboardingFocusNodeFocusHash() =>
     r'5ba3e443105f903f88d01a27cb810484705e91ad';
 
@@ -482,5 +500,25 @@ class _OnboardingTextFieldStateProviderElement
   OnboardingTextFields get fieldKey =>
       (origin as OnboardingTextFieldStateProvider).fieldKey;
 }
+
+String _$onboardingStepsHash() => r'fa27a6a5271aa0c646972cfdba61c9abf2dbfa91';
+
+/// See also [OnboardingSteps].
+@ProviderFor(OnboardingSteps)
+final onboardingStepsProvider =
+    NotifierProvider<OnboardingSteps, List<OnboardingStep>>.internal(
+  OnboardingSteps.new,
+  name: r'onboardingStepsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$onboardingStepsHash,
+  dependencies: <ProviderOrFamily>[onboardingInitialStepsProvider],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    onboardingInitialStepsProvider,
+    ...?onboardingInitialStepsProvider.allTransitiveDependencies
+  },
+);
+
+typedef _$OnboardingSteps = Notifier<List<OnboardingStep>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -16,12 +16,15 @@ import 'package:expandable_page_view/expandable_page_view.dart';
 
 @RoutePage()
 class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({super.key, this.onCompletedCallback});
+  const OnboardingPage({super.key, this.steps, this.onCompletedCallback});
+  final List<OnboardingStep>? steps;
   final void Function(bool onSuccess)? onCompletedCallback;
 
   @override
   Widget build(BuildContext context) => ProviderScope(
         overrides: [
+          onboardingInitialStepsProvider.overrideWithValue(steps ?? Onboarding.defaultSteps),
+          onboardingStepsProvider,
           onboardingFormKeyProvider,
           onboardingFocusNodeFocusProvider,
           onboardingHasFocusProvider,
@@ -56,7 +59,6 @@ class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent>
     } else {
       widget.onCompletedCallback!(true);
     }
-    Future.delayed(Durations.medium1, ref.read(onboardingPagesProvider.notifier).reset);
   }
 
   void _previousPage(OnboardingStep currentPage, bool isFirstPage) async {
@@ -65,7 +67,6 @@ class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent>
 
     if (!mounted) return;
     context.router.maybePop();
-    Future.delayed(Durations.medium1, ref.read(onboardingPagesProvider.notifier).reset);
   }
 
   @override
@@ -86,11 +87,11 @@ class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent>
     bool canNavigateBack = ref.read(userProvider).user != null;
     ThemeData theme = Theme.of(context);
 
-    final pages = ref.watch(onboardingPagesProvider);
-    final int clampedIndex = _pageIndex.clamp(0, pages.length - 1);
+    final steps = ref.watch(onboardingStepsProvider);
+    final int clampedIndex = _pageIndex.clamp(0, steps.length - 1);
     final bool isFirstPage = clampedIndex == 0;
-    final bool isLastPage = clampedIndex == pages.length - 1;
-    final OnboardingStep currentPage = pages[clampedIndex];
+    final bool isLastPage = clampedIndex == steps.length - 1;
+    final OnboardingStep currentPage = steps[clampedIndex];
 
     return PopScope(
       canPop: isFirstPage,
@@ -132,7 +133,7 @@ class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent>
                   animationDuration: Durations.medium1,
                   physics: const NeverScrollableScrollPhysics(),
                   onPageChanged: updatePageIndex,
-                  children: pages.map((e) => e as Widget).toList(),
+                  children: steps.map((e) => e as Widget).toList(),
                 ),
               ),
             ],

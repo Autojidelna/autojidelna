@@ -19,6 +19,8 @@ import 'package:autojidelna/features/canteen/presentation/pages/dish_detail_page
 import 'package:autojidelna/features/canteen/presentation/pages/menu_page.dart'
     as _i8;
 import 'package:autojidelna/features/more/presentation/more_page.dart' as _i9;
+import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart'
+    as _i18;
 import 'package:autojidelna/features/onboarding/presentation/onboarding_page.dart'
     as _i10;
 import 'package:autojidelna/features/settings/presentation/pages/analytics_page.dart'
@@ -238,12 +240,14 @@ class MoreRoute extends _i15.PageRouteInfo<void> {
 class OnboardingRoute extends _i15.PageRouteInfo<OnboardingRouteArgs> {
   OnboardingRoute({
     _i16.Key? key,
+    List<_i18.OnboardingStep>? steps,
     void Function(bool)? onCompletedCallback,
     List<_i15.PageRouteInfo>? children,
   }) : super(
           OnboardingRoute.name,
           args: OnboardingRouteArgs(
             key: key,
+            steps: steps,
             onCompletedCallback: onCompletedCallback,
           ),
           initialChildren: children,
@@ -258,6 +262,7 @@ class OnboardingRoute extends _i15.PageRouteInfo<OnboardingRouteArgs> {
           orElse: () => const OnboardingRouteArgs());
       return _i10.OnboardingPage(
         key: args.key,
+        steps: args.steps,
         onCompletedCallback: args.onCompletedCallback,
       );
     },
@@ -267,16 +272,19 @@ class OnboardingRoute extends _i15.PageRouteInfo<OnboardingRouteArgs> {
 class OnboardingRouteArgs {
   const OnboardingRouteArgs({
     this.key,
+    this.steps,
     this.onCompletedCallback,
   });
 
   final _i16.Key? key;
 
+  final List<_i18.OnboardingStep>? steps;
+
   final void Function(bool)? onCompletedCallback;
 
   @override
   String toString() {
-    return 'OnboardingRouteArgs{key: $key, onCompletedCallback: $onCompletedCallback}';
+    return 'OnboardingRouteArgs{key: $key, steps: $steps, onCompletedCallback: $onCompletedCallback}';
   }
 }
 
