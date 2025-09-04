@@ -13,7 +13,16 @@ import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final _selectedSafeAccount = StateProvider.autoDispose<SafeAccount>((ref) => ref.read(userProvider).loggedInAccounts.first);
+class _SelectedSafeAccountNotifier extends Notifier<SafeAccount> {
+  @override
+  SafeAccount build() => ref.read(userProvider).loggedInAccounts.first;
+
+  @override
+  set state(SafeAccount newState) => super.state = newState;
+  SafeAccount update(SafeAccount Function(SafeAccount state) cb) => state = cb(state);
+}
+
+final _selectedSafeAccount = NotifierProvider<_SelectedSafeAccountNotifier, SafeAccount>(_SelectedSafeAccountNotifier.new);
 
 class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
   const AccountPickerOnboarding({super.key});

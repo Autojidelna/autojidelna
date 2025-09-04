@@ -42,23 +42,25 @@ class Onboarding {
   }
 
   static Future<bool> login(BuildContext context, WidgetRef ref, OnboardingFormKeys formKeyEnum) async {
-    final formKey = ref.read(formKeyProvider(formKeyEnum));
+    final formKey = ref.read(onboardingFormKeyProvider(formKeyEnum));
     final disableInteractionsNotifier = ref.read(disableInteractions.notifier);
 
     if (!formKey.currentState!.validate()) return false;
     formKey.currentState!.save();
 
     for (OnboardingTextFields field in OnboardingTextFields.values) {
-      ref.read(textFieldProvider(field).notifier).setError(null);
+      ref.read(onboardingTextFieldStateProvider(field).notifier).setError(null);
     }
 
     disableInteractionsNotifier.state = true;
     bool allowNextPage = false;
 
+    String url = ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.url)).value ?? '';
+
     final Account account = Account(
-      username: ref.read(textFieldProvider(OnboardingTextFields.username)).value!,
-      password: ref.read(textFieldProvider(OnboardingTextFields.password)).value!,
-      url: ref.read(textFieldProvider(OnboardingTextFields.url)).value!,
+      username: ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.username)).value ?? '',
+      password: ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.password)).value ?? '',
+      url: url,
     );
 
     try {
@@ -74,12 +76,12 @@ class Onboarding {
           break;
         case AuthErrors.wrongUrl:
           if (context.mounted && formKeyEnum == OnboardingFormKeys.url) {
-            ref.read(textFieldProvider(OnboardingTextFields.url).notifier).setError(context.l10n.errorsWrongUrl);
+            ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.url).notifier).setError(context.l10n.errorsWrongUrl);
           }
           break;
         case AuthErrors.wrongCredentials:
           if (context.mounted && formKeyEnum == OnboardingFormKeys.credentials) {
-            ref.read(textFieldProvider(OnboardingTextFields.password).notifier).setError(context.l10n.errorsWrongCredentialsTextField);
+            ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.password).notifier).setError(context.l10n.errorsWrongCredentialsTextField);
           }
           if (formKeyEnum == OnboardingFormKeys.url) allowNextPage = true;
           break;
@@ -88,8 +90,8 @@ class Onboarding {
     }
 
     formKeyEnum == OnboardingFormKeys.credentials
-        ? Hive.box(Boxes.appState).put(HiveKeys.appState.url, ref.read(textFieldProvider(OnboardingTextFields.url)).value)
-        : AnalyticsService.instance.logCanteenUrl(ref.read(textFieldProvider(OnboardingTextFields.url)).value!, ref.read(currentCanteen).verze);
+        ? Hive.box(Boxes.appState).put(HiveKeys.appState.url, url)
+        : AnalyticsService.instance.logCanteenUrl(url, ref.read(currentCanteen).verze);
     disableInteractionsNotifier.state = false;
     return allowNextPage;
   }
