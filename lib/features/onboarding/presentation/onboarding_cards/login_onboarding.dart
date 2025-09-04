@@ -17,10 +17,14 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
   Widget build(BuildContext context, WidgetRef ref) {
     final L10n l10n = context.l10n;
 
+    final usernameNotifier = ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.username).notifier);
+    final passwordNotifier = ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.password).notifier);
+    final passwordProvider = ref.watch(onboardingTextFieldStateProvider(OnboardingTextFields.password));
+
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Form(
-        key: ref.read(formKeyProvider(OnboardingFormKeys.credentials)),
+        key: ref.read(onboardingFormKeyProvider(OnboardingFormKeys.credentials)),
         child: AutofillGroup(
           child: Column(
             children: [
@@ -29,43 +33,43 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 child: TextFormField(
-                  controller: ref.watch(textFieldControllerProvider(OnboardingTextFields.username)),
-                  focusNode: ref.watch(focusNodeProvider(OnboardingTextFields.username)),
+                  controller: ref.watch(onboardingTextFieldControllerProvider(OnboardingTextFields.username)),
+                  focusNode: ref.watch(onboardingFocusNodeProvider(OnboardingTextFields.username)),
                   autocorrect: false,
                   enabled: !ref.watch(disableInteractions),
                   textInputAction: TextInputAction.next,
                   autofillHints: const [AutofillHints.username],
                   decoration: InputDecoration(
                     labelText: l10n.loginUserFieldLabel,
-                    errorText: ref.watch(textFieldProvider(OnboardingTextFields.password)).error != null ? '' : null,
+                    errorText: passwordProvider.error != null ? '' : null,
                   ),
                   onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                   validator: (value) => (value?.isEmpty ?? true) ? l10n.loginUserFieldHint : null,
-                  onSaved: ref.read(textFieldProvider(OnboardingTextFields.username).notifier).setValue,
+                  onSaved: usernameNotifier.setValue,
                 ),
               ),
               const CustomDivider(),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                 child: TextFormField(
-                  controller: ref.watch(textFieldControllerProvider(OnboardingTextFields.password)),
-                  focusNode: ref.watch(focusNodeProvider(OnboardingTextFields.password)),
+                  controller: ref.watch(onboardingTextFieldControllerProvider(OnboardingTextFields.password)),
+                  focusNode: ref.watch(onboardingFocusNodeProvider(OnboardingTextFields.password)),
                   autocorrect: false,
                   enabled: !ref.watch(disableInteractions),
-                  obscureText: ref.watch(textFieldProvider(OnboardingTextFields.password)).obscureText,
+                  obscureText: passwordProvider.obscureText,
                   textInputAction: TextInputAction.done,
                   autofillHints: const [AutofillHints.password],
                   decoration: InputDecoration(
                     labelText: l10n.password,
-                    errorText: ref.watch(textFieldProvider(OnboardingTextFields.password)).error,
+                    errorText: passwordProvider.error,
                     suffixIcon: IconButton(
-                      onPressed: ref.read(textFieldProvider(OnboardingTextFields.password).notifier).toggleObscure,
-                      icon: Icon(ref.watch(textFieldProvider(OnboardingTextFields.password)).obscureText ? Icons.visibility_off : Icons.visibility),
+                      onPressed: passwordNotifier.toggleObscure,
+                      icon: Icon(passwordProvider.obscureText ? Icons.visibility_off : Icons.visibility),
                     ),
                   ),
                   onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                   validator: (value) => (value?.isEmpty ?? true) ? l10n.loginPasswordFieldHint : null,
-                  onSaved: ref.read(textFieldProvider(OnboardingTextFields.password).notifier).setValue,
+                  onSaved: passwordNotifier.setValue,
                 ),
               ),
               const CustomDivider(),
@@ -78,11 +82,11 @@ class LoginOnboarding extends ConsumerWidget implements OnboardingStep {
 
   @override
   Future<bool> onPreviousPage(BuildContext context, WidgetRef ref) async {
-    ref.invalidate(formKeyProvider(OnboardingFormKeys.credentials));
-    ref.invalidate(textFieldControllerProvider(OnboardingTextFields.username));
-    ref.invalidate(textFieldControllerProvider(OnboardingTextFields.password));
-    ref.invalidate(textFieldProvider(OnboardingTextFields.username));
-    ref.invalidate(textFieldProvider(OnboardingTextFields.password));
+    ref.invalidate(onboardingFormKeyProvider(OnboardingFormKeys.credentials));
+    ref.invalidate(onboardingTextFieldControllerProvider(OnboardingTextFields.username));
+    ref.invalidate(onboardingTextFieldControllerProvider(OnboardingTextFields.password));
+    ref.invalidate(onboardingTextFieldStateProvider(OnboardingTextFields.username));
+    ref.invalidate(onboardingTextFieldStateProvider(OnboardingTextFields.password));
     return true;
   }
 
@@ -101,7 +105,7 @@ class _UrlListTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String? urlFieldValue = ref.read(textFieldProvider(OnboardingTextFields.url)).value;
+    final String? urlFieldValue = ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.url)).value;
 
     final Map<String, String> urls = Map<String, String>.from(ref.read(remoteConfigValues)[RemoteConfig.canteenUrls]);
     final MapEntry<String, String> url = urls.entries.firstWhere(

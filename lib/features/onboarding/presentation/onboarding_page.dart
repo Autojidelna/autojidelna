@@ -87,7 +87,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             children: [
               TweenAnimationBuilder<double>(
                 // visible -> collapsed
-                tween: Tween<double>(begin: 1, end: ref.watch(isAnyFocusedProvider) ? 0 : 1),
+                tween: Tween<double>(begin: 1, end: ref.watch(onboardingHasFocusProvider) ? 0 : 1),
                 duration: Durations.medium1,
                 curve: Curves.easeOut,
                 builder: (_, value, child) {
