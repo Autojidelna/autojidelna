@@ -59,8 +59,7 @@ class SwitchAccountPanel extends StatelessWidget {
           leading: child,
           title: Text(l10n.addAccount),
           onTap: () async {
-            ref.read(onboardingPagesProvider.notifier).setLoginFlow();
-            context.router.navigate(OnboardingRoute());
+            context.router.navigate(OnboardingRoute(steps: Onboarding.loginSteps));
           },
         );
       },

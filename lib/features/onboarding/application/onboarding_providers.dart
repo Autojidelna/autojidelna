@@ -1,4 +1,6 @@
 import 'package:autojidelna/shared/providers/text_fields/text_field_state.dart';
+import 'package:autojidelna/features/onboarding/onboarding.dart';
+import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,4 +39,38 @@ class OnboardingTextFieldState extends _$OnboardingTextFieldState {
   void setValue(String? value) => state = state.copyWith(value: value);
   void setError(String? error) => state = state.copyWith(error: error);
   void toggleObscure() => state = state.copyWith(obscureText: !state.obscureText);
+}
+
+@Riverpod(keepAlive: true, dependencies: [])
+List<OnboardingStep> onboardingInitialSteps(Ref ref) => Onboarding.defaultSteps;
+
+@Riverpod(keepAlive: true, dependencies: [onboardingInitialSteps])
+class OnboardingSteps extends _$OnboardingSteps {
+  @override
+  List<OnboardingStep> build() => ref.read(onboardingInitialStepsProvider);
+
+  void addLoginPages() {
+    state.addAll(Onboarding.loginSteps);
+    ref.notifyListeners();
+  }
+
+  void addAccountPickerPages() {
+    state.addAll(Onboarding.accountPickerSteps);
+    ref.notifyListeners();
+  }
+
+  void setLoginFlow() {
+    state = Onboarding.loginSteps;
+    ref.notifyListeners();
+  }
+
+  void setAccountPickerFlow() {
+    state = Onboarding.accountPickerSteps;
+    ref.notifyListeners();
+  }
+
+  void removeLoginPages() {
+    state = state.where((step) => !Onboarding.loginSteps.contains(step)).toList();
+    ref.notifyListeners();
+  }
 }
