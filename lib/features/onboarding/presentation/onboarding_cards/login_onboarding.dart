@@ -143,7 +143,23 @@ class _UrlListTile extends ConsumerWidget {
     final Map<String, String> urls = Map<String, String>.from(ref.read(remoteConfigValues)[RemoteConfig.canteenUrls]);
     final MapEntry<String, String> url = urls.entries.firstWhere(
       (e) => e.value == urlFieldValue,
-      orElse: () => MapEntry('${Url.clean(urlFieldValue!).split('.').reversed.elementAt(1)}.cz', urlFieldValue),
+      orElse: () {
+        if (urlFieldValue == null || urlFieldValue.isEmpty) {
+          // fallback if null or empty
+          return MapEntry(urlFieldValue ?? '', urlFieldValue ?? '');
+        }
+
+        final parts = Url.clean(urlFieldValue).split('.');
+        String domain;
+
+        if (parts.length >= 2) {
+          domain = '${parts[parts.length - 2]}.${parts[parts.length - 1]}';
+        } else {
+          domain = parts.first;
+        }
+
+        return MapEntry(domain, urlFieldValue);
+      },
     );
 
     return ListTile(title: Text(url.key), subtitle: Text(url.value));
