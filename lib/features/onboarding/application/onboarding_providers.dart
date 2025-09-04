@@ -23,44 +23,16 @@ Raw<TextEditingController> onboardingTextFieldController(Ref ref, OnboardingText
   return controller;
 }
 
+// TODO: think of a nice way to update this to 2.0.0+ annotation
 final onboardingFocusNodeProvider = ChangeNotifierProvider.family<FocusNode, OnboardingTextFields>((ref, field) {
   final node = FocusNode();
   ref.onDispose(node.dispose);
   return node;
 });
 
-final onboardingHasFocus = Provider<bool>((Ref ref) {
+final onboardingHasFocusProvider = Provider<bool>((Ref ref) {
   return OnboardingTextFields.values.any((field) => ref.watch(onboardingFocusNodeProvider(field)).hasFocus);
 });
-
-@riverpod
-class OnboardingHasFocus extends _$OnboardingHasFocus {
-  @override
-  bool build() {
-    // Listen to each FocusNode provider and update state on changes
-    for (final field in OnboardingTextFields.values) {
-      ref.listen<FocusNode>(
-        onboardingFocusNodeProvider(field),
-        (_, node) {
-          // When any FocusNode changes, check if it has focus and update state
-          if (node.hasFocus) {
-            state = true;
-          } else {
-            // Re-check all to see if any still has focus
-            state = OnboardingTextFields.values.any(
-              (f) => ref.read(onboardingFocusNodeProvider(f)).hasFocus,
-            );
-          }
-        },
-      );
-    }
-
-    // Initial state: Check if any has focus at build time
-    return OnboardingTextFields.values.any(
-      (field) => ref.read(onboardingFocusNodeProvider(field)).hasFocus,
-    );
-  }
-}
 
 @Riverpod(keepAlive: true)
 class OnboardingTextFieldState extends _$OnboardingTextFieldState {

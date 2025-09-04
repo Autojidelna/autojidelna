@@ -212,7 +212,7 @@ class AppThemes {
         dense: false,
         selectedColor: colorScheme.primary,
         iconColor: colorScheme.primary.withValues(alpha: .75),
-        titleTextStyle: textTheme.titleMedium!.copyWith(color: colorScheme.onSurface),
+        titleTextStyle: textTheme.titleMedium!,
         subtitleTextStyle: textTheme.bodyMedium!.copyWith(color: colorScheme.onSurfaceVariant),
         visualDensity: VisualDensity.comfortable,
       ),

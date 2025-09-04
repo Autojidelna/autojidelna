@@ -1,6 +1,7 @@
 import 'package:autojidelna/core/remote-config/remote_config.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
+import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,20 +16,20 @@ class CanteenUrlPicker extends ConsumerWidget {
     final rawUrls = ref.read(remoteConfigValues)[RemoteConfig.canteenUrls];
     Map<String, String> urls = rawUrls is Map ? Map<String, String>.from(rawUrls) : {};
 
-    TextSpan highlightText(String text, String query, TextStyle? textStyle) {
-      if (query.isEmpty) return TextSpan(text: text, style: textStyle);
+    TextSpan highlightText(String text, String query, TextStyle? textStyle, bool enabled) {
+      if (query.isEmpty) return TextSpan(text: text);
 
       final lowerText = text.toLowerCase();
       final start = lowerText.indexOf(query);
-      if (start == -1) return TextSpan(text: text, style: textStyle);
+      if (start == -1) return TextSpan(text: text);
 
       final end = start + query.length;
 
       return TextSpan(
         children: [
-          TextSpan(text: text.substring(0, start), style: textStyle),
-          TextSpan(text: text.substring(start, end), style: textStyle!.copyWith(color: theme.colorScheme.primary)),
-          TextSpan(text: text.substring(end), style: textStyle),
+          TextSpan(text: text.substring(0, start)),
+          TextSpan(text: text.substring(start, end), style: textStyle!.copyWith(color: theme.colorScheme.primary.withAlpha(enabled ? 255 : 100))),
+          TextSpan(text: text.substring(end)),
         ],
       );
     }
@@ -56,9 +57,12 @@ class CanteenUrlPicker extends ConsumerWidget {
             final title = entry.key;
             final url = entry.value;
 
+            bool enabled = !ref.watch(disableInteractions);
+
             return ListTile(
-              title: RichText(text: highlightText(title, query, listTileTheme.titleTextStyle), textScaler: MediaQuery.of(context).textScaler),
-              subtitle: RichText(text: highlightText(url, query, listTileTheme.subtitleTextStyle), textScaler: MediaQuery.of(context).textScaler),
+              enabled: enabled,
+              title: Text.rich(highlightText(title, query, listTileTheme.titleTextStyle, enabled)),
+              subtitle: Text.rich(highlightText(url, query, listTileTheme.subtitleTextStyle, enabled)),
               trailing: Url.clean(urlController.text) == url ? const Icon(Icons.check) : null,
               onTap: () => ref.read(onboardingTextFieldControllerProvider(OnboardingTextFields.url)).text = url,
             );
