@@ -298,23 +298,6 @@ class _OnboardingTextFieldControllerProviderElement
       (origin as OnboardingTextFieldControllerProvider).fieldKey;
 }
 
-String _$onboardingHasFocusHash() =>
-    r'105e4b975353161855e81293438bed328938b9a5';
-
-/// See also [OnboardingHasFocus].
-@ProviderFor(OnboardingHasFocus)
-final onboardingHasFocusProvider =
-    AutoDisposeNotifierProvider<OnboardingHasFocus, bool>.internal(
-  OnboardingHasFocus.new,
-  name: r'onboardingHasFocusProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$onboardingHasFocusHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$OnboardingHasFocus = AutoDisposeNotifier<bool>;
 String _$onboardingTextFieldStateHash() =>
     r'035cdafbe31636c1c03b9e157b2f32ec45783602';
 
