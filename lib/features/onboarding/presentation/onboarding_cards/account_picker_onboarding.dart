@@ -30,7 +30,11 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<SafeAccount> accounts = ref.read(userProvider).loggedInAccounts;
+    List<Widget> accounts = [];
+
+    for (SafeAccount account in ref.read(userProvider).loggedInAccounts) {
+      accounts.add(accountRow(account));
+    }
 
     return Padding(
       padding: const EdgeInsets.all(8),
@@ -41,17 +45,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
             child: ListView.builder(
               shrinkWrap: true,
               itemCount: accounts.length,
-              itemBuilder: (context, index) {
-                SafeAccount account = accounts[index];
-
-                return ListTile(
-                  title: Text(account.username),
-                  subtitle: Text(account.url),
-                  enabled: ref.watch(_selectedSafeAccount) == account || !ref.watch(disableInteractions),
-                  trailing: ref.watch(_selectedSafeAccount) == account ? const Icon(Icons.check) : null,
-                  onTap: ref.watch(disableInteractions) ? null : () => ref.read(_selectedSafeAccount.notifier).state = account,
-                );
-              },
+              itemBuilder: (context, index) => accounts[index],
             ),
           ),
           Padding(
@@ -71,6 +65,18 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
       ),
     );
   }
+
+  Widget accountRow(SafeAccount account) => Consumer(
+        builder: (_, ref, ___) {
+          return ListTile(
+            title: Text(account.username),
+            subtitle: Text(account.url),
+            enabled: ref.watch(_selectedSafeAccount) == account || !ref.watch(disableInteractions),
+            trailing: ref.watch(_selectedSafeAccount) == account ? const Icon(Icons.check) : null,
+            onTap: ref.watch(disableInteractions) ? null : () => ref.read(_selectedSafeAccount.notifier).state = account,
+          );
+        },
+      );
 
   @override
   Future<bool> onPreviousPage(BuildContext context, WidgetRef ref) async => true;

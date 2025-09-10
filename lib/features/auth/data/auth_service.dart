@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:autojidelna/core/notifications/notification_channel_service.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/core/types/errors.dart';
@@ -7,8 +5,8 @@ import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/logged_accounts/logged_accounts.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
-import 'package:autojidelna/shared/config/secure_storage.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
+import 'package:autojidelna/shared/services/credentials_service.dart';
 
 import 'package:canteenlib/canteenlib.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -72,10 +70,8 @@ class AuthService {
       rethrow;
     }
 
-    if (!await _hasDuplicates(account)) {
-      await _saveAccountToStorage(account);
-      NotificationChannelService().createChannelsForUser(SafeAccount.fromAccount(account));
-    }
+    await CredentialsService.save(account);
+    NotificationChannelService().createChannelsForUser(SafeAccount.fromAccount(account));
 
     return user;
   }
@@ -99,35 +95,24 @@ class AuthService {
   ///
   /// [AuthErrors.missingCredentials] - Secure storage doesn't contain any credentials
   Future<User?> loginFromStorage() async {
-    final LoggedAccounts loginData = await _getDataFromStorage();
+    final LoggedAccounts loginData = await CredentialsService.read();
 
     if (loginData.accounts.isEmpty) return Future.error(AuthErrors.missingCredentials);
     if (loginData.loggedInAccount == null) return Future.error(AuthErrors.accountNotSelected);
     return await loginBySafeAccount(loginData.loggedInAccount!);
   }
 
-  /// Sets [LoggedAccounts.loggedInAccount] to null. Doesn't delete user credentials
-  Future<void> ghostLogout() async {
-    final LoggedAccounts loginData = await _getDataFromStorage();
-    loginData.loggedInAccount = null;
-    await _saveDataToStorage(loginData);
-  }
-
-  Future<List<SafeAccount>> getLimitedAccounts() async {
-    return (await _getDataFromStorage()).accounts.map(SafeAccount.fromAccount).toList();
-  }
-
   /// Changes [LoggedAccounts.loggedInAccount] to the provided [saveAccount]
   ///
   /// [AuthService.loginFromStorage] NEEDS TO BE CALLED AFTER THIS
   Future<void> changeAccount(SafeAccount saveAccount) async {
-    LoggedAccounts loginData = await _getDataFromStorage();
+    LoggedAccounts loginData = await CredentialsService.read();
 
     bool accountFound = loginData.accounts.any((account) => SafeAccount.fromAccount(account) == saveAccount);
     if (!accountFound) return Future.error(AuthErrors.accountNotFound);
 
     LoggedAccounts updatedData = LoggedAccounts(accounts: loginData.accounts, loggedInAccount: saveAccount);
-    await _saveDataToStorage(updatedData);
+    await CredentialsService.write(updatedData);
   }
 
   Future<Uzivatel> fetchUserData(String username) async {
@@ -144,61 +129,16 @@ class AuthService {
     Account? account = await _findBySafeAccount(safeAccount);
     if (account == null) return Future.error(AuthErrors.accountNotFound);
 
-    await _removeAccountFromStorage(account);
+    await CredentialsService.remove(account);
     NotificationChannelService().removeChannelsForUser(safeAccount);
-  }
-
-  /// Checks for duplicates in logged accounts.
-  ///
-  /// Compares [Account.url] and [Account.username]
-  Future<bool> _hasDuplicates(Account account) async {
-    LoggedAccounts loginData = await _getDataFromStorage();
-    for (Account loggedAccount in loginData.accounts) {
-      if (loggedAccount.isSame(account)) return true;
-    }
-    return false;
   }
 
   /// Finds user in [LoggedAccounts], returns null if a matching account isn't found.
   Future<Account?> _findBySafeAccount(SafeAccount safeAccount) async {
-    LoggedAccounts loginData = await _getDataFromStorage();
+    LoggedAccounts loginData = await CredentialsService.read();
     for (Account account in loginData.accounts) {
       if (safeAccount.matches(account)) return account;
     }
     return null;
-  }
-
-  /// Reads [LoggedAccounts] from Secure storage.
-  Future<LoggedAccounts> _getDataFromStorage() async {
-    const secureStorage = SecureStorage.instance;
-    String? value = await secureStorage.read(key: SecureStorage.keys.loginData);
-    if (value == null || value.trim().isEmpty) return LoggedAccounts();
-    return LoggedAccounts.fromJson(jsonDecode(value));
-  }
-
-  /// Saves [LoggedAccounts] to Secure storage.
-  Future<void> _saveDataToStorage(LoggedAccounts loginData) async {
-    const secureStorage = SecureStorage.instance;
-    await secureStorage.write(key: SecureStorage.keys.loginData, value: jsonEncode(loginData.toJson()));
-  }
-
-  /// Saves an [Account] to Secure storage.
-  Future<void> _saveAccountToStorage(Account account) async {
-    LoggedAccounts loginData = await _getDataFromStorage();
-    LoggedAccounts updatedData = LoggedAccounts(
-      loggedInAccount: SafeAccount.fromAccount(account),
-      accounts: [...loginData.accounts, account],
-    );
-    await _saveDataToStorage(updatedData);
-  }
-
-  /// Removes an [Account] from Secure storage.
-  Future<void> _removeAccountFromStorage(Account account) async {
-    LoggedAccounts loginData = await _getDataFromStorage();
-    LoggedAccounts updatedData = LoggedAccounts(
-      loggedInAccount: loginData.loggedInAccount!.matches(account) ? null : loginData.loggedInAccount,
-      accounts: List.from(loginData.accounts)..remove(account),
-    );
-    await _saveDataToStorage(updatedData);
   }
 }

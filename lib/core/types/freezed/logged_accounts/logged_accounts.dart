@@ -1,4 +1,3 @@
-// This file is "main.dart"
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,7 +10,7 @@ part 'logged_accounts.g.dart';
 class LoggedAccounts with _$LoggedAccounts {
   factory LoggedAccounts({
     @JsonKey(name: 'logged_in_account') SafeAccount? loggedInAccount,
-    @JsonKey(name: 'accounts') @Default([]) List<Account> accounts,
+    @JsonKey(name: 'accounts') @Default(<Account>{}) Set<Account> accounts,
   }) = _LoggedAccounts;
 
   factory LoggedAccounts.fromJson(Map<String, Object?> json) => _$LoggedAccountsFromJson(json);

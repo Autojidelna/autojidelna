@@ -14,8 +14,8 @@ _$LoggedAccountsImpl _$$LoggedAccountsImplFromJson(Map<String, dynamic> json) =>
               json['logged_in_account'] as Map<String, dynamic>),
       accounts: (json['accounts'] as List<dynamic>?)
               ?.map((e) => Account.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+              .toSet() ??
+          const <Account>{},
     );
 
 Map<String, dynamic> _$$LoggedAccountsImplToJson(

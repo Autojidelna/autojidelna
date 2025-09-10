@@ -33,8 +33,8 @@ class SwitchAccountPanel extends StatelessWidget {
 
             List<Widget> accounts = [];
 
-            for (int i = 0; i < user.loggedInAccounts.length; i++) {
-              accounts.add(accountRow(context, ref, user.loggedInAccounts[i]));
+            for (SafeAccount account in user.loggedInAccounts) {
+              accounts.add(accountRow(account));
             }
 
             return Flexible(
@@ -67,37 +67,40 @@ class SwitchAccountPanel extends StatelessWidget {
     );
   }
 
-  Widget accountRow(BuildContext context, WidgetRef ref, SafeAccount safeAccount) {
-    UserProvider prov = ref.read(userProvider);
-    bool currentAccount = safeAccount == prov.user!.accountData;
-
-    return ListTile(
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(safeAccount.username, style: currentAccount ? Theme.of(context).textTheme.titleMedium : null),
-          if (currentAccount) const Icon(Icons.check, size: 30),
-        ],
-      ),
-      trailing: IconButton(
-        padding: EdgeInsets.zero,
-        icon: Icon(Icons.logout, size: 30, color: Theme.of(context).colorScheme.onSurface),
-        onPressed: () async {
-          if (!context.mounted) return;
-          if (!currentAccount) {
-            prov.logout(safeAccount);
-          } else {
-            configuredDialog(
-              context,
-              builder: (BuildContext context) => logoutDialog(safeAccount),
-            );
-          }
-        },
-      ),
-      onTap: () async {
-        if (currentAccount) return;
-        await prov.changeUser(safeAccount);
-        if (context.mounted) context.router.replaceAll([const RouterRoute()], updateExistingRoutes: false);
+  Widget accountRow(SafeAccount safeAccount) {
+    return Consumer(
+      builder: (context, ref, child) {
+        UserProvider prov = ref.read(userProvider);
+        bool currentAccount = safeAccount == prov.user!.accountData;
+        return ListTile(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(safeAccount.username, style: currentAccount ? Theme.of(context).textTheme.titleMedium : null),
+              if (currentAccount) const Icon(Icons.check, size: 30),
+            ],
+          ),
+          trailing: IconButton(
+            padding: EdgeInsets.zero,
+            icon: Icon(Icons.logout, size: 30, color: Theme.of(context).colorScheme.onSurface),
+            onPressed: () async {
+              if (!context.mounted) return;
+              if (!currentAccount) {
+                prov.logout(safeAccount);
+              } else {
+                configuredDialog(
+                  context,
+                  builder: (BuildContext context) => logoutDialog(safeAccount),
+                );
+              }
+            },
+          ),
+          onTap: () async {
+            if (currentAccount) return;
+            await prov.changeUser(safeAccount);
+            if (context.mounted) context.router.replaceAll([const RouterRoute()], updateExistingRoutes: false);
+          },
+        );
       },
     );
   }

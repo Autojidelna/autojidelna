@@ -25,9 +25,9 @@ mixin _$LoggedAccounts {
   @JsonKey(name: 'logged_in_account')
   set loggedInAccount(SafeAccount? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'accounts')
-  List<Account> get accounts => throw _privateConstructorUsedError;
+  Set<Account> get accounts => throw _privateConstructorUsedError;
   @JsonKey(name: 'accounts')
-  set accounts(List<Account> value) => throw _privateConstructorUsedError;
+  set accounts(Set<Account> value) => throw _privateConstructorUsedError;
 
   /// Serializes this LoggedAccounts to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +47,7 @@ abstract class $LoggedAccountsCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'logged_in_account') SafeAccount? loggedInAccount,
-      @JsonKey(name: 'accounts') List<Account> accounts});
+      @JsonKey(name: 'accounts') Set<Account> accounts});
 
   $SafeAccountCopyWith<$Res>? get loggedInAccount;
 }
@@ -78,7 +78,7 @@ class _$LoggedAccountsCopyWithImpl<$Res, $Val extends LoggedAccounts>
       accounts: null == accounts
           ? _value.accounts
           : accounts // ignore: cast_nullable_to_non_nullable
-              as List<Account>,
+              as Set<Account>,
     ) as $Val);
   }
 
@@ -107,7 +107,7 @@ abstract class _$$LoggedAccountsImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'logged_in_account') SafeAccount? loggedInAccount,
-      @JsonKey(name: 'accounts') List<Account> accounts});
+      @JsonKey(name: 'accounts') Set<Account> accounts});
 
   @override
   $SafeAccountCopyWith<$Res>? get loggedInAccount;
@@ -137,7 +137,7 @@ class __$$LoggedAccountsImplCopyWithImpl<$Res>
       accounts: null == accounts
           ? _value.accounts
           : accounts // ignore: cast_nullable_to_non_nullable
-              as List<Account>,
+              as Set<Account>,
     ));
   }
 }
@@ -149,7 +149,7 @@ class _$LoggedAccountsImpl
     implements _LoggedAccounts {
   _$LoggedAccountsImpl(
       {@JsonKey(name: 'logged_in_account') this.loggedInAccount,
-      @JsonKey(name: 'accounts') this.accounts = const []});
+      @JsonKey(name: 'accounts') this.accounts = const <Account>{}});
 
   factory _$LoggedAccountsImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoggedAccountsImplFromJson(json);
@@ -159,7 +159,7 @@ class _$LoggedAccountsImpl
   SafeAccount? loggedInAccount;
   @override
   @JsonKey(name: 'accounts')
-  List<Account> accounts;
+  Set<Account> accounts;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -194,9 +194,8 @@ class _$LoggedAccountsImpl
 
 abstract class _LoggedAccounts implements LoggedAccounts {
   factory _LoggedAccounts(
-          {@JsonKey(name: 'logged_in_account') SafeAccount? loggedInAccount,
-          @JsonKey(name: 'accounts') List<Account> accounts}) =
-      _$LoggedAccountsImpl;
+      {@JsonKey(name: 'logged_in_account') SafeAccount? loggedInAccount,
+      @JsonKey(name: 'accounts') Set<Account> accounts}) = _$LoggedAccountsImpl;
 
   factory _LoggedAccounts.fromJson(Map<String, dynamic> json) =
       _$LoggedAccountsImpl.fromJson;
@@ -208,9 +207,9 @@ abstract class _LoggedAccounts implements LoggedAccounts {
   set loggedInAccount(SafeAccount? value);
   @override
   @JsonKey(name: 'accounts')
-  List<Account> get accounts;
+  Set<Account> get accounts;
   @JsonKey(name: 'accounts')
-  set accounts(List<Account> value);
+  set accounts(Set<Account> value);
 
   /// Create a copy of LoggedAccounts
   /// with the given fields replaced by the non-null parameter values.

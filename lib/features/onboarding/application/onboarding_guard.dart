@@ -24,7 +24,7 @@ class OnboardingGuard extends AutoRouteGuard {
     }
 
     await ref.read(userProvider).updateLoggedSafeAccounts();
-    List<SafeAccount> loggedInAccounts = ref.read(userProvider).loggedInAccounts;
+    Set<SafeAccount> loggedInAccounts = ref.read(userProvider).loggedInAccounts;
 
     List<OnboardingStep> steps = Onboarding.defaultSteps;
     if (loggedInAccounts.isNotEmpty) {
