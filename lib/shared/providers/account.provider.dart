@@ -24,6 +24,7 @@ class UserProvider extends ChangeNotifier {
     final user = await _authService.login(account);
     if (user == null) return; // error
     _user = user;
+    _ref.read(savedAccountsProvider.notifier).add(account);
     notifyListeners();
   }
 

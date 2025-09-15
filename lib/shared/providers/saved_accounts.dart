@@ -1,7 +1,6 @@
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/shared/services/credentials_service.dart';
-import 'package:autojidelna/features/auth/data/auth_service.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -22,7 +21,7 @@ class SavedAccounts extends _$SavedAccounts {
   }
 
   Future<void> remove(SafeAccount safeAccount) async {
-    AuthService(ref).logout(safeAccount);
+    await CredentialsService.remove(safeAccount);
     final current = state.value ?? <SafeAccount>{};
     final updated = {...current}..remove(safeAccount);
     state = AsyncData(updated);

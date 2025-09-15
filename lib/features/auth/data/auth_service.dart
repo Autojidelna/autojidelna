@@ -60,8 +60,6 @@ class AuthService {
       rethrow;
     }
 
-    // TODO: use savedAccountsProvider.add instead
-    await CredentialsService.save(account);
     NotificationChannelService().createChannelsForUser(SafeAccount.fromAccount(account));
     return user;
   }
@@ -93,7 +91,6 @@ class AuthService {
   }
 
   Future<void> logout(SafeAccount safeAccount) async {
-    await CredentialsService.remove(safeAccount);
     NotificationChannelService().removeChannelsForUser(safeAccount);
   }
 }
