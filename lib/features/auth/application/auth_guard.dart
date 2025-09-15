@@ -17,15 +17,16 @@ class AuthGuard extends AutoRouteGuard {
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
+    // Don't guard the onboarding route itself
+    if (resolver.route.name == OnboardingRoute.name) {
+      resolver.next(true);
+      return;
+    }
+
     final UserProvider provider = ref.read(userProvider);
     final L10n l10n = lookupL10n(ref.read(currentLocaleProvider));
 
-    if (provider.user != null) {
-      try {
-        await ref.read(canteenProvider).preIndexMenus();
-      } catch (_) {} // Just QoL
-      return resolver.next(true); // if logged in during onboarding
-    }
+    if (provider.user != null) return resolver.next(true);
 
     try {
       await provider.loadUser();

@@ -20,7 +20,7 @@ class AppRouter extends RootStackRouter {
       );
 
   @override
-  List<AutoRouteGuard> get guards => [OnboardingGuard(ref)];
+  List<AutoRouteGuard> get guards => [OnboardingGuard(ref), AuthGuard(ref)];
 
   @override
   List<AutoRoute> get routes => [
@@ -28,7 +28,6 @@ class AppRouter extends RootStackRouter {
           page: RouterRoute.page,
           path: '/',
           initial: true,
-          guards: [AuthGuard(ref)],
           children: <AutoRoute>[
             AutoRoute(page: MenuRoute.page, path: 'menu', initial: true),
             AutoRoute(page: MoreRoute.page, path: 'more'),
