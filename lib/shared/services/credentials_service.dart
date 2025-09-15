@@ -31,8 +31,12 @@ class CredentialsService {
     return read();
   }
 
-  static Future<LoggedAccounts> remove(Account account) async {
+  static Future<LoggedAccounts> remove(SafeAccount safeAccount) async {
     LoggedAccounts loginData = await read();
+
+    final account = await _findBySafeAccount(safeAccount);
+    if (account == null) return loginData;
+
     LoggedAccounts updatedData = LoggedAccounts(
       loggedInAccount: loginData.loggedInAccount!.matches(account) ? null : loginData.loggedInAccount,
       accounts: loginData.accounts..remove(account),
@@ -41,7 +45,7 @@ class CredentialsService {
     return await read();
   }
 
-  static Future<LoggedAccounts> setCurrentlyUsed(SafeAccount? safeAccount) async {
+  static Future<LoggedAccounts> setLastUsed(SafeAccount? safeAccount) async {
     LoggedAccounts loginData = await read();
 
     bool accountFound = safeAccount == null ? true : loginData.accounts.any((account) => SafeAccount.fromAccount(account) == safeAccount);
@@ -50,5 +54,22 @@ class CredentialsService {
     LoggedAccounts updatedData = LoggedAccounts(loggedInAccount: safeAccount, accounts: loginData.accounts);
     await _write(updatedData);
     return await read();
+  }
+
+  static Future<Account?> getLastUsed() async {
+    LoggedAccounts loginData = await read();
+
+    if (loginData.accounts.isEmpty || loginData.loggedInAccount == null) return null;
+    final SafeAccount? safeAccount = loginData.loggedInAccount;
+    return loginData.accounts.firstWhere((account) => SafeAccount.fromAccount(account) == safeAccount);
+  }
+
+  /// Finds user in [LoggedAccounts], returns null if a matching account isn't found.
+  static Future<Account?> _findBySafeAccount(SafeAccount safeAccount) async {
+    LoggedAccounts loginData = await read();
+    for (Account account in loginData.accounts) {
+      if (safeAccount.matches(account)) return account;
+    }
+    return null;
   }
 }

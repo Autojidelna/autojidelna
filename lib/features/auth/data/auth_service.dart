@@ -66,17 +66,6 @@ class AuthService {
     return user;
   }
 
-  /// Logs in by provided [safeAccount]
-  /// Can throw:
-  ///
-  /// [AuthErrors.accountNotFound] - A matching [Account] was not found
-  Future<User?> loginBySafeAccount(SafeAccount safeAccount) async {
-    Account? account = await _findBySafeAccount(safeAccount);
-    if (account == null) return Future.error(AuthErrors.accountNotFound);
-
-    return login(account);
-  }
-
   /// Logs in using data saved in Secure storage
   ///
   /// Can throw:
@@ -85,18 +74,17 @@ class AuthService {
   ///
   /// [AuthErrors.missingCredentials] - Secure storage doesn't contain any credentials
   Future<User?> loginFromStorage() async {
-    final LoggedAccounts loginData = await CredentialsService.read();
+    Account? account = await CredentialsService.getLastUsed();
+    if (account == null) return Future.error(AuthErrors.accountNotFound);
 
-    if (loginData.accounts.isEmpty) return Future.error(AuthErrors.missingCredentials);
-    if (loginData.loggedInAccount == null) return Future.error(AuthErrors.accountNotSelected);
-    return await loginBySafeAccount(loginData.loggedInAccount!);
+    return await login(account);
   }
 
   /// Changes [LoggedAccounts.loggedInAccount] to the provided [saveAccount]
   ///
   /// [AuthService.loginFromStorage] NEEDS TO BE CALLED AFTER THIS
   Future<void> changeAccount(SafeAccount saveAccount) async {
-    CredentialsService.setCurrentlyUsed(saveAccount);
+    CredentialsService.setLastUsed(saveAccount);
   }
 
   Future<Uzivatel> fetchUserData(String username) async {
@@ -104,26 +92,8 @@ class AuthService {
     return instance.missingFeatures.contains(Features.ziskatUzivatele) ? Uzivatel(uzivatelskeJmeno: username) : await instance.ziskejUzivatele();
   }
 
-  /// Logs out a specific user
-  ///
-  /// Can throw:
-  ///
-  /// [AuthErrors.accountNotFound] - A matching [Account] was not found
   Future<void> logout(SafeAccount safeAccount) async {
-    Account? account = await _findBySafeAccount(safeAccount);
-    if (account == null) return Future.error(AuthErrors.accountNotFound);
-
-    // TODO: use savedAccountsProvider.remove instead
-    await CredentialsService.remove(account);
+    await CredentialsService.remove(safeAccount);
     NotificationChannelService().removeChannelsForUser(safeAccount);
-  }
-
-  /// Finds user in [LoggedAccounts], returns null if a matching account isn't found.
-  Future<Account?> _findBySafeAccount(SafeAccount safeAccount) async {
-    LoggedAccounts loginData = await CredentialsService.read();
-    for (Account account in loginData.accounts) {
-      if (safeAccount.matches(account)) return account;
-    }
-    return null;
   }
 }

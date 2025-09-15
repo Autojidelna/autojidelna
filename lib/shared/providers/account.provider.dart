@@ -46,7 +46,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> unloadUser() async {
-    await CredentialsService.setCurrentlyUsed(null);
+    await CredentialsService.setLastUsed(null);
     _user = null;
     _ref.read(canteenProvider).clear();
     notifyListeners();
