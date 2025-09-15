@@ -1,5 +1,5 @@
 class Url {
-  static final RegExp _cleanUrlRegExp = RegExp(r'(?:https?:\/\/)?([^\/]+)');
+  static final RegExp _cleanUrlRegExp = RegExp(r'^(?:https?:\/\/)?([^\/:]+)(?::(\d+))?(\/.*)?$');
   static bool isSame(String url, String url2) {
     final RegExp regex = _cleanUrlRegExp;
     final RegExpMatch? match = regex.firstMatch(url);
@@ -14,6 +14,11 @@ class Url {
     final RegExpMatch? match = regex.firstMatch(url);
 
     if (match == null || match.group(1) == null) return '';
-    return match.group(1)!;
+
+    final host = match.group(1)!;
+    final port = match.group(2) != null ? ':${match.group(2)}' : '';
+    final path = match.group(3) ?? '';
+
+    return '$host$port$path';
   }
 }
