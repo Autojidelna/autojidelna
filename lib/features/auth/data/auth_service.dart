@@ -37,28 +37,18 @@ class AuthService {
       if (!await instance.login(account.username, account.password)) {
         return Future.error(AuthErrors.wrongCredentials);
       }
-    } catch (_) {
-      // Second login attempt
-      url = account.url;
-      instance = Canteen(url);
-
-      try {
-        if (!await instance.login(account.username, account.password)) {
-          return Future.error(AuthErrors.wrongCredentials);
-        }
-      } catch (e) {
-        // Check for internet connectivity
-        if (!await InternetConnectionChecker.instance.hasConnection) {
-          return Future.error(AuthErrors.noInternetConnection);
-        }
-
-        if (e == CanteenLibExceptions.neplatneUrl) return Future.error(AuthErrors.wrongUrl);
-
-        return Future.error(AuthErrors.connectionFailed);
+    } catch (e) {
+      // Check for internet connectivity
+      if (!await InternetConnectionChecker.instance.hasConnection) {
+        return Future.error(AuthErrors.noInternetConnection);
       }
+
+      if (e == CanteenLibExceptions.neplatneUrl) return Future.error(AuthErrors.wrongUrl);
+
+      return Future.error(AuthErrors.connectionFailed);
     }
 
-    _ref.read(currentCanteen.notifier).state = instance;
+    _ref.read(currentCanteenProvider.notifier).state = instance;
 
     try {
       user = User(
@@ -116,7 +106,7 @@ class AuthService {
   }
 
   Future<Uzivatel> fetchUserData(String username) async {
-    Canteen instance = _ref.read(currentCanteen);
+    Canteen instance = _ref.read(currentCanteenProvider)!;
     return instance.missingFeatures.contains(Features.ziskatUzivatele) ? Uzivatel(uzivatelskeJmeno: username) : await instance.ziskejUzivatele();
   }
 

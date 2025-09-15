@@ -7,4 +7,7 @@ part 'current_canteen.g.dart';
 class CurrentCanteen extends _$CurrentCanteen {
   @override
   Canteen? build() => null;
+
+  @override
+  set state(Canteen? newState) => super.state = newState;
 }
