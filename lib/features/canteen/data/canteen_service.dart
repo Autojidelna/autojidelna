@@ -12,7 +12,7 @@ class CanteenService {
 
   /// Sets how many max lunches are expected. The higher the worse performance but less missing lunches. This is a fix for the api sometimes not sending all the lunches
   static const int numberOfLunches = 3;
-  Canteen get _canteen => _ref.read(currentCanteen);
+  Canteen get _canteen => _ref.read(currentCanteenProvider)!;
 
   void changeLocation(int id) {
     _canteen.vydejna = id;

@@ -40,7 +40,7 @@ class CanteenProvider with ChangeNotifier {
   Future<void> getMenu(DateTime date) async {
     try {
       if (_dishMarketplace.isEmpty) _dishMarketplace = List.from(await _canteenService.getMarketplace());
-      if (_ref.read(currentCanteen).missingFeatures.contains(Features.jidelnicekMesic)) {
+      if (_ref.read(currentCanteenProvider)!.missingFeatures.contains(Features.jidelnicekMesic)) {
         if (await _getMonthlyMenu()) {
           notifyListeners();
         }
@@ -74,7 +74,7 @@ class CanteenProvider with ChangeNotifier {
   Future<void> preIndexMenus({DateTime? targetDate}) async {
     try {
       // If monthly menu fetching is available, use it
-      if (_ref.read(currentCanteen).missingFeatures.contains(Features.jidelnicekMesic)) {
+      if (_ref.read(currentCanteenProvider)!.missingFeatures.contains(Features.jidelnicekMesic)) {
         await _getMonthlyMenu();
         notifyListeners();
         return;

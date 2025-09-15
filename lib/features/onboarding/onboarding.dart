@@ -102,7 +102,7 @@ class Onboarding {
 
     formKeyEnum == OnboardingFormKeys.credentials
         ? Hive.box(Boxes.appState).put(HiveKeys.appState.url, url)
-        : AnalyticsService.instance.logCanteenUrl(url, ref.read(currentCanteen).verze);
+        : AnalyticsService.instance.logCanteenUrl(url, ref.read(currentCanteenProvider)?.verze);
     disableInteractionsNotifier.state = false;
     return allowNextPage;
   }

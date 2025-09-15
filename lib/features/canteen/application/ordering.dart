@@ -18,7 +18,7 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
   final ProviderContainer container = ProviderScope.containerOf(context);
   final CanteenProvider prov = container.read(canteenProvider);
   final Uzivatel uzivatel = container.read(userProvider).user!.data;
-  final Canteen canteen = container.read(currentCanteen);
+  final Canteen canteen = container.read(currentCanteenProvider)!;
   final L10n l10n = context.l10n;
   final DateTime date = dish.den;
 
