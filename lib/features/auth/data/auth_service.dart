@@ -96,13 +96,7 @@ class AuthService {
   ///
   /// [AuthService.loginFromStorage] NEEDS TO BE CALLED AFTER THIS
   Future<void> changeAccount(SafeAccount saveAccount) async {
-    LoggedAccounts loginData = await CredentialsService.read();
-
-    bool accountFound = loginData.accounts.any((account) => SafeAccount.fromAccount(account) == saveAccount);
-    if (!accountFound) return Future.error(AuthErrors.accountNotFound);
-
-    LoggedAccounts updatedData = LoggedAccounts(accounts: loginData.accounts, loggedInAccount: saveAccount);
-    await CredentialsService.write(updatedData);
+    CredentialsService.setCurrentlyUsed(saveAccount);
   }
 
   Future<Uzivatel> fetchUserData(String username) async {

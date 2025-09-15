@@ -12,7 +12,7 @@ class CredentialsService {
     return LoggedAccounts.fromJson(jsonDecode(value));
   }
 
-  static Future<LoggedAccounts> write(LoggedAccounts loginData) async {
+  static Future<LoggedAccounts> _write(LoggedAccounts loginData) async {
     await SecureStorage.instance.write(key: SecureStorage.keys.loginData, value: jsonEncode(loginData.toJson()));
     return await read();
   }
@@ -27,7 +27,7 @@ class CredentialsService {
       loggedInAccount: SafeAccount.fromAccount(account),
       accounts: loginData.accounts..add(account),
     );
-    await write(updatedData);
+    await _write(updatedData);
     return read();
   }
 
@@ -37,17 +37,18 @@ class CredentialsService {
       loggedInAccount: loginData.loggedInAccount!.matches(account) ? null : loginData.loggedInAccount,
       accounts: loginData.accounts..remove(account),
     );
-    await write(updatedData);
+    await _write(updatedData);
     return await read();
   }
 
-  static Future<LoggedAccounts> setCurrentlyUsed(Account? account) async {
+  static Future<LoggedAccounts> setCurrentlyUsed(SafeAccount? safeAccount) async {
     LoggedAccounts loginData = await read();
-    LoggedAccounts updatedData = LoggedAccounts(
-      loggedInAccount: account == null ? null : SafeAccount.fromAccount(account),
-      accounts: loginData.accounts,
-    );
-    await write(updatedData);
+
+    bool accountFound = safeAccount == null ? true : loginData.accounts.any((account) => SafeAccount.fromAccount(account) == safeAccount);
+    if (!accountFound) return loginData;
+
+    LoggedAccounts updatedData = LoggedAccounts(loggedInAccount: safeAccount, accounts: loginData.accounts);
+    await _write(updatedData);
     return await read();
   }
 }
