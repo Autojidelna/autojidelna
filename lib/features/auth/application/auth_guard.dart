@@ -1,14 +1,16 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/features/onboarding/onboarding.dart';
+import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/localization/current_locale.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
-import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/shared/providers/saved_accounts.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
-import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
+import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
+import 'package:autojidelna/features/onboarding/onboarding.dart';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthGuard extends AutoRouteGuard {
@@ -56,8 +58,8 @@ class AuthGuard extends AutoRouteGuard {
           break;
         default:
       }
-      await provider.updateLoggedSafeAccounts();
-      if (provider.loggedInAccounts.isNotEmpty) {
+
+      if ((await ref.read(savedAccountsProvider.future)).isNotEmpty) {
         resolver.redirect(OnboardingRoute(steps: Onboarding.accountPickerSteps, onCompletedCallback: resolver.next), replace: true);
         return;
       }

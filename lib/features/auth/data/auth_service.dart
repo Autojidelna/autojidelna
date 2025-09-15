@@ -60,9 +60,9 @@ class AuthService {
       rethrow;
     }
 
+    // TODO: use savedAccountsProvider.add instead
     await CredentialsService.save(account);
     NotificationChannelService().createChannelsForUser(SafeAccount.fromAccount(account));
-
     return user;
   }
 
@@ -119,6 +119,7 @@ class AuthService {
     Account? account = await _findBySafeAccount(safeAccount);
     if (account == null) return Future.error(AuthErrors.accountNotFound);
 
+    // TODO: use savedAccountsProvider.remove instead
     await CredentialsService.remove(account);
     NotificationChannelService().removeChannelsForUser(safeAccount);
   }

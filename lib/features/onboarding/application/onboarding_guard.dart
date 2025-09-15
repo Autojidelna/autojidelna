@@ -1,8 +1,7 @@
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
-import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/shared/config/hive.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
+import 'package:autojidelna/shared/providers/saved_accounts.dart';
+import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
 
 import 'package:auto_route/auto_route.dart';
@@ -23,11 +22,8 @@ class OnboardingGuard extends AutoRouteGuard {
       return;
     }
 
-    await ref.read(userProvider).updateLoggedSafeAccounts();
-    Set<SafeAccount> loggedInAccounts = ref.read(userProvider).loggedInAccounts;
-
     List<OnboardingStep> steps = Onboarding.defaultSteps;
-    if (loggedInAccounts.isNotEmpty) {
+    if ((await ref.read(savedAccountsProvider.future)).isNotEmpty) {
       steps.addAll(Onboarding.accountPickerSteps);
     } else {
       steps.addAll(Onboarding.loginSteps);

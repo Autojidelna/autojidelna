@@ -1,16 +1,19 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/features/onboarding/onboarding.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/app/routing/app_router.gr.dart';
+import 'package:autojidelna/core/crashlytics/crashlytics_service.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/shared/providers/account.provider.dart';
+import 'package:autojidelna/shared/providers/saved_accounts.dart';
 import 'package:autojidelna/shared/widgets/configured_bottom_sheet.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';
-import 'package:autojidelna/features/auth/presentation/logout_dialog.dart';
 import 'package:autojidelna/shared/widgets/section_title.dart';
+import 'package:autojidelna/features/auth/presentation/logout_dialog.dart';
+import 'package:autojidelna/features/onboarding/onboarding.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:auto_route/auto_route.dart';
 
 class SwitchAccountPanel extends StatelessWidget {
   const SwitchAccountPanel({super.key});
@@ -28,21 +31,23 @@ class SwitchAccountPanel extends StatelessWidget {
         SectionTitle(l10n.accounts),
         Consumer(
           builder: (context, ref, ___) {
-            final UserProvider user = ref.watch(userProvider);
-            if (user.user == null) return const Flexible(child: SizedBox());
+            return ref.watch(savedAccountsProvider).when(
+                  data: (savedAccounts) {
+                    List<Widget> accounts = [for (SafeAccount account in savedAccounts) (accountRow(account))];
 
-            List<Widget> accounts = [];
-
-            for (SafeAccount account in user.loggedInAccounts) {
-              accounts.add(accountRow(account));
-            }
-
-            return Flexible(
-              child: ListView.builder(
-                itemCount: accounts.length,
-                itemBuilder: (_, index) => accounts[index],
-              ),
-            );
+                    return Flexible(
+                      child: ListView.builder(
+                        itemCount: accounts.length,
+                        itemBuilder: (_, index) => accounts[index],
+                      ),
+                    );
+                  },
+                  loading: () => const Center(child: CircularProgressIndicator()),
+                  error: (e, st) {
+                    CrashlyticsService.error(e, st);
+                    return Center(child: Text('Error: $e'));
+                  },
+                );
           },
         ),
         const CustomDivider(height: 0, isTransparent: false),
