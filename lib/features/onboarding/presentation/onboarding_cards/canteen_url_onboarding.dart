@@ -5,7 +5,6 @@ import 'package:autojidelna/shared/providers/text_fields/text_field_state.dart';
 import 'package:autojidelna/shared/widgets/divider_with_text.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
-import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/account_picker_onboarding.dart';
 import 'package:autojidelna/features/onboarding/presentation/widgets/canteen_url_picker.dart';
 
@@ -49,7 +48,7 @@ class _CanteenUrlOnboardingState extends ConsumerState<CanteenUrlOnboarding> {
   final FocusNode focusNode = FocusNode();
 
   void updateFocusNotifier() {
-    ref.read(onboardingFocusNodeFocusProvider(OnboardingTextFields.url).notifier).state = focusNode.hasFocus;
+    ref.read(onboardingFocusNodeFocusProvider(OnboardingTextFields.url).notifier).set(focusNode.hasFocus);
   }
 
   @override

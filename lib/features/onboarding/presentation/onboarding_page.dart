@@ -7,7 +7,6 @@ import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
-import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +14,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';
 
-@Dependencies([OnboardingSteps, onboardingFormKey, OnboardingFocusNodeFocus, onboardingHasFocus, OnboardingTextFieldState])
+@Dependencies([onboardingFormKey, OnboardingSteps, OnboardingFocusNodeFocus, onboardingHasFocus, OnboardingTextFieldState])
 @RoutePage()
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key, this.steps, this.onCompletedCallback});

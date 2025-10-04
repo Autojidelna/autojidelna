@@ -3,7 +3,6 @@ import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/providers/saved_accounts.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
-import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

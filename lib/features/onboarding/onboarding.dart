@@ -22,6 +22,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';
 
+export 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
+
 @Dependencies([onboardingFormKey, OnboardingTextFieldState, OnboardingSteps, OnboardingFocusNodeFocus])
 class Onboarding {
   static late PageController pageController;

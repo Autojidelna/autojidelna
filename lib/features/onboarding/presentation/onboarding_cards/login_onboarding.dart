@@ -5,7 +5,6 @@ import 'package:autojidelna/shared/providers/disable_interactions_provider.dart'
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
-import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,11 +42,11 @@ class _LoginOnboardingState extends ConsumerState<LoginOnboarding> {
   final FocusNode passwordFocusNode = FocusNode();
 
   void updateUsernameFocusNotifier() {
-    ref.read(onboardingFocusNodeFocusProvider(OnboardingTextFields.username).notifier).state = usernameFocusNode.hasFocus;
+    ref.read(onboardingFocusNodeFocusProvider(OnboardingTextFields.username).notifier).set(usernameFocusNode.hasFocus);
   }
 
   void updatePasswordFocusNotifier() {
-    ref.read(onboardingFocusNodeFocusProvider(OnboardingTextFields.password).notifier).state = passwordFocusNode.hasFocus;
+    ref.read(onboardingFocusNodeFocusProvider(OnboardingTextFields.password).notifier).set(passwordFocusNode.hasFocus);
   }
 
   @override

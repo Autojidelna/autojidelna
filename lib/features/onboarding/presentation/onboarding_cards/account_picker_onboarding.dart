@@ -11,7 +11,6 @@ import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.
 import 'package:autojidelna/shared/widgets/divider_with_text.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
-import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

@@ -18,6 +18,8 @@ GlobalKey<FormState> onboardingFormKey(Ref ref, OnboardingFormKeys formKey) => G
 class OnboardingFocusNodeFocus extends _$OnboardingFocusNodeFocus {
   @override
   bool build(OnboardingTextFields fieldKey) => false;
+
+  void set(bool hasFocus) => state = hasFocus;
 }
 
 @Riverpod(dependencies: [OnboardingFocusNodeFocus])
