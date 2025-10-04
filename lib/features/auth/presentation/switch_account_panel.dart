@@ -10,11 +10,14 @@ import 'package:autojidelna/shared/widgets/configured_dialog.dart';
 import 'package:autojidelna/shared/widgets/section_title.dart';
 import 'package:autojidelna/features/auth/presentation/logout_dialog.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
+import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
+@Dependencies([onboardingFormKey, OnboardingTextFieldState, OnboardingSteps, OnboardingFocusNodeFocus])
 class SwitchAccountPanel extends StatelessWidget {
   const SwitchAccountPanel({super.key});
 

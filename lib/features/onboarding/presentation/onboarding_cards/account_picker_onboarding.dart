@@ -29,7 +29,7 @@ class _SelectedSafeAccountNotifier extends Notifier<SafeAccount?> {
 
 final _selectedSafeAccount = NotifierProvider<_SelectedSafeAccountNotifier, SafeAccount?>(_SelectedSafeAccountNotifier.new);
 
-@Dependencies([OnboardingSteps, onboardingFormKey, OnboardingTextFieldState])
+@Dependencies([onboardingFormKey, OnboardingSteps, OnboardingTextFieldState, OnboardingFocusNodeFocus])
 class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
   const AccountPickerOnboarding({super.key});
 

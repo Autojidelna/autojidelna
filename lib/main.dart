@@ -16,7 +16,7 @@ void main() async {
   runApp(
     UncontrolledProviderScope(
       container: App.globalContainer,
-      child: EagerInitialization(providers: [packageInfoProvider], child: const MyApp()),
+      child: const EagerInitialization(providers: [packageInfoProvider], child: MyApp()),
     ),
   );
 }

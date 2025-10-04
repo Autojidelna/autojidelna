@@ -9,13 +9,14 @@ import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
+import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-@Dependencies([])
+@Dependencies([onboardingFormKey, OnboardingTextFieldState, OnboardingSteps, OnboardingFocusNodeFocus])
 class AuthGuard extends AutoRouteGuard {
   AuthGuard(this.ref);
   Ref ref;

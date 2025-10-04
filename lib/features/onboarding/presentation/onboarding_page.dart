@@ -15,7 +15,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';
 
-@Dependencies([onboardingInitialSteps, onboardingFormKey, OnboardingTextFieldState, OnboardingSteps, OnboardingFocusNodeFocus, onboardingHasFocus])
+@Dependencies([OnboardingSteps, onboardingFormKey, OnboardingFocusNodeFocus, onboardingHasFocus, OnboardingTextFieldState])
 @RoutePage()
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key, this.steps, this.onCompletedCallback});

@@ -389,15 +389,9 @@ final class OnboardingStepsProvider
           retry: null,
           name: r'onboardingStepsProvider',
           isAutoDispose: false,
-          dependencies: const <ProviderOrFamily>[
-            onboardingInitialStepsProvider
-          ],
-          $allTransitiveDependencies: const <ProviderOrFamily>[
-            OnboardingStepsProvider.$allTransitiveDependencies0,
-          ],
+          dependencies: const <ProviderOrFamily>[],
+          $allTransitiveDependencies: const <ProviderOrFamily>[],
         );
-
-  static const $allTransitiveDependencies0 = onboardingInitialStepsProvider;
 
   @override
   String debugGetCreateSourceHash() => _$onboardingStepsHash();
@@ -415,7 +409,7 @@ final class OnboardingStepsProvider
   }
 }
 
-String _$onboardingStepsHash() => r'fa27a6a5271aa0c646972cfdba61c9abf2dbfa91';
+String _$onboardingStepsHash() => r'3f3cb029f3fca5a2e3abe80c94fb29bf72ca66be';
 
 abstract class _$OnboardingSteps extends $Notifier<List<OnboardingStep>> {
   List<OnboardingStep> build();

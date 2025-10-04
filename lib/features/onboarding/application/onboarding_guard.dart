@@ -11,7 +11,7 @@ import 'package:hive/hive.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-@Dependencies([onboardingFormKey, OnboardingTextFieldState])
+@Dependencies([onboardingFormKey, OnboardingTextFieldState, OnboardingSteps, OnboardingFocusNodeFocus])
 class OnboardingGuard extends AutoRouteGuard {
   OnboardingGuard(this.ref);
   final Ref ref;

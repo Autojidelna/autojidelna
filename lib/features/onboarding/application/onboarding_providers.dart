@@ -39,7 +39,7 @@ class OnboardingTextFieldState extends _$OnboardingTextFieldState {
 @Riverpod(keepAlive: true, dependencies: [])
 List<OnboardingStep> onboardingInitialSteps(Ref ref) => Onboarding.defaultSteps;
 
-@Riverpod(keepAlive: true, dependencies: [onboardingInitialSteps])
+@Riverpod(keepAlive: true, dependencies: [])
 class OnboardingSteps extends _$OnboardingSteps {
   @override
   List<OnboardingStep> build() => ref.read(onboardingInitialStepsProvider);
