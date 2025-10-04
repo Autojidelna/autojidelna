@@ -1,7 +1,7 @@
 import 'package:autojidelna/core/types/freezed/user/user.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/features/auth/presentation/switch_account_panel.dart';
+import 'package:autojidelna/shared/providers/current_user.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,7 +17,8 @@ class MoreService {
 
 @Dependencies([onboardingFormKey, OnboardingTextFieldState, OnboardingSteps, OnboardingFocusNodeFocus])
 final moreServiceProvider = Provider<MoreService>((ref) {
-  final user = ref.watch(userProvider.select((it) => (it.user)));
+  // TODO
+  final user = ref.watch(currentUserProvider).value;
 
   return MoreService(user);
 });

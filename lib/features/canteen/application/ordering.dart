@@ -3,8 +3,8 @@ import 'package:autojidelna/core/analytics/statistic_type.dart';
 import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/shared/config/errors.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
+import 'package:autojidelna/shared/providers/current_user.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
@@ -17,7 +17,8 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
   final ProviderContainer container = ProviderScope.containerOf(context);
   final CanteenProvider prov = container.read(canteenProvider);
-  final Uzivatel uzivatel = container.read(userProvider).user!.data;
+  // TODO
+  final Uzivatel uzivatel = container.read(currentUserProvider).value!.data;
   final Canteen canteen = container.read(currentCanteenProvider)!;
   final L10n l10n = context.l10n;
   final DateTime date = dish.den;
@@ -101,6 +102,6 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
       }
       break;
   }
-  container.read(userProvider).updateUserData();
+  container.refresh(currentUserProvider);
   prov.ordering = false;
 }

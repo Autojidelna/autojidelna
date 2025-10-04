@@ -2,7 +2,8 @@ import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/core/crashlytics/crashlytics_service.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
+import 'package:autojidelna/shared/providers/current_user.dart';
 import 'package:autojidelna/shared/providers/saved_accounts.dart';
 import 'package:autojidelna/shared/widgets/configured_bottom_sheet.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
@@ -77,8 +78,8 @@ class SwitchAccountPanel extends StatelessWidget {
   Widget accountRow(SafeAccount safeAccount) {
     return Consumer(
       builder: (context, ref, child) {
-        UserProvider prov = ref.read(userProvider);
-        bool currentAccount = safeAccount == prov.user!.accountData;
+        final prov = ref.read(currentUserProvider);
+        bool currentAccount = safeAccount == prov.value!.accountData;
         return ListTile(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,18 +94,18 @@ class SwitchAccountPanel extends StatelessWidget {
             onPressed: () async {
               if (!context.mounted) return;
               if (!currentAccount) {
-                prov.logout(safeAccount);
+                ref.read(currentCanteenProvider.notifier).logout(safeAccount);
               } else {
                 configuredDialog(
                   context,
-                  builder: (BuildContext context) => logoutDialog(safeAccount),
+                  builder: (BuildContext context) => logoutDialog(ref, safeAccount),
                 );
               }
             },
           ),
           onTap: () async {
             if (currentAccount) return;
-            await prov.changeUser(safeAccount);
+            await ref.read(currentCanteenProvider.notifier).changeAccount(safeAccount);
             if (context.mounted) context.router.replaceAll([const RouterRoute()], updateExistingRoutes: false);
           },
         );

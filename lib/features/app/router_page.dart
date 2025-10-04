@@ -1,6 +1,6 @@
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
+import 'package:autojidelna/shared/providers/current_user.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/features/canteen/presentation/appbar/menu_appbar.dart';
 import 'package:autojidelna/features/more/presentation/more_appbar.dart';
@@ -22,7 +22,8 @@ class _RouterPageState extends ConsumerState<RouterPage> {
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((_) => showLoginSuccessSnackBar(ref.read(userProvider).user!.accountData.username));
+    // TODO
+    SchedulerBinding.instance.addPostFrameCallback((_) => showLoginSuccessSnackBar(ref.read(currentUserProvider).value!.accountData.username));
   }
 
   @override

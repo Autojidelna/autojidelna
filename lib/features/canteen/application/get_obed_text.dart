@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/shared/config/errors.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
+import 'package:autojidelna/shared/providers/current_user.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 
 import 'package:icanteenlib/canteenlib.dart';
@@ -52,7 +52,8 @@ String getObedText(BuildContext context, Jidlo dish, StavJidla stavJidla) {
         unawaited(FirebaseCrashlytics.instance.recordError(e, StackTrace.current));
         //hope it's not important
       }
-      Uzivatel uzivatel = container.read(userProvider).user!.data;
+      // TODO
+      Uzivatel uzivatel = container.read(currentUserProvider).value!.data;
       if (uzivatel.kredit < dish.cena! && !date.isBefore(DateTime.now())) {
         return l10n.errorsInsufficientCredit;
       } else {

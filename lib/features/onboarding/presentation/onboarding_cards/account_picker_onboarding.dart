@@ -3,7 +3,7 @@ import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/shared/config/errors.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/providers/saved_accounts.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
@@ -99,14 +99,13 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
   @override
   Future<bool> onNextPage(BuildContext context, WidgetRef ref) async {
     if (ref.read(_selectedSafeAccount) == null) return false;
-    final userProv = ref.read(userProvider);
+    final userProv = ref.read(currentCanteenProvider.notifier);
 
     ref.read(disableInteractions.notifier).state = true;
 
     bool allowNextPage = true;
     try {
-      await userProv.changeUser(ref.read(_selectedSafeAccount)!);
-      await userProv.loadUser();
+      await userProv.changeAccount(ref.read(_selectedSafeAccount)!);
     } catch (e) {
       if (!context.mounted) return false;
       final L10n l10n = context.l10n;

@@ -3,7 +3,8 @@ import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/localization/current_locale.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
+import 'package:autojidelna/shared/providers/current_user.dart';
 import 'package:autojidelna/shared/providers/saved_accounts.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
@@ -28,13 +29,14 @@ class AuthGuard extends AutoRouteGuard {
       return;
     }
 
-    final UserProvider provider = ref.read(userProvider);
+    // TODO
+    final provider = ref.read(currentUserProvider);
     final L10n l10n = lookupL10n(ref.read(currentLocaleProvider));
 
-    if (provider.user != null) return resolver.next(true);
+    if (provider.value != null) return resolver.next(true);
 
     try {
-      await provider.loadUser();
+      await ref.read(currentCanteenProvider.notifier).loginFromStorage();
       try {
         await ref.read(canteenProvider).preIndexMenus();
       } catch (_) {} // Just QoL

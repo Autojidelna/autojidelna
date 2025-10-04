@@ -1,5 +1,6 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/config/hive.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/providers/text_fields/text_field_state.dart';
 import 'package:autojidelna/shared/widgets/divider_with_text.dart';
@@ -34,7 +35,9 @@ class CanteenUrlOnboarding extends ConsumerStatefulWidget implements OnboardingS
   }
 
   @override
-  Future<bool> onNextPage(BuildContext context, WidgetRef ref) async => await Onboarding.login(context, ref, OnboardingFormKeys.url);
+  Future<bool> onNextPage(BuildContext context, WidgetRef ref) async => ref.read(currentCanteenProvider.notifier).testCanteenUrl(
+        ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.url)).value ?? '',
+      );
 
   @override
   String buttonText(BuildContext context) => context.l10n.next;

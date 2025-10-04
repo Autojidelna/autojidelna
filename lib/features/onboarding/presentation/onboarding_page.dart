@@ -1,6 +1,6 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
+import 'package:autojidelna/shared/providers/current_user.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
@@ -86,7 +86,8 @@ class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent>
   @override
   Widget build(BuildContext context) {
     final L10n l10n = context.l10n;
-    bool canNavigateBack = ref.read(userProvider).user != null;
+    // TODO
+    bool canNavigateBack = ref.read(currentUserProvider) != null;
     ThemeData theme = Theme.of(context);
 
     final steps = ref.watch(onboardingStepsProvider);

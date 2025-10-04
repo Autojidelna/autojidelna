@@ -1,10 +1,8 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/config/hive.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
@@ -56,8 +54,8 @@ class Onboarding {
     );
   }
 
-  static Future<bool> login(BuildContext context, WidgetRef ref, OnboardingFormKeys formKeyEnum) async {
-    final formKey = ref.read(onboardingFormKeyProvider(formKeyEnum));
+  static Future<bool> login(BuildContext context, WidgetRef ref) async {
+    final formKey = ref.read(onboardingFormKeyProvider(OnboardingFormKeys.credentials));
     final disableInteractionsNotifier = ref.read(disableInteractions.notifier);
 
     if (!formKey.currentState!.validate()) return false;
@@ -79,34 +77,26 @@ class Onboarding {
     );
 
     try {
-      await ref.read(userProvider).login(account);
+      await ref.read(currentCanteenProvider.notifier).login(account);
       allowNextPage = true;
     } catch (e) {
       switch (e) {
         case AuthErrors.noInternetConnection:
-          if (await showInternetConnectionSnackBar() && context.mounted) login(context, ref, formKeyEnum);
+          if (await showInternetConnectionSnackBar() && context.mounted) login(context, ref);
           break;
         case AuthErrors.connectionFailed:
           if (context.mounted) showErrorSnackBar(SnackBarAuthErrors.connectionFailed(context.l10n));
           break;
-        case AuthErrors.wrongUrl:
-          if (context.mounted && formKeyEnum == OnboardingFormKeys.url) {
-            ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.url).notifier).setError(context.l10n.errorsWrongUrl);
-          }
-          break;
         case AuthErrors.wrongCredentials:
-          if (context.mounted && formKeyEnum == OnboardingFormKeys.credentials) {
+          if (context.mounted) {
             ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.password).notifier).setError(context.l10n.errorsWrongCredentialsTextField);
           }
-          if (formKeyEnum == OnboardingFormKeys.url) allowNextPage = true;
           break;
         default:
       }
     }
 
-    formKeyEnum == OnboardingFormKeys.credentials
-        ? Hive.box(Boxes.appState).put(HiveKeys.appState.url, url)
-        : AnalyticsService.instance.logCanteenUrl(url, ref.read(currentCanteenProvider)?.verze);
+    Hive.box(Boxes.appState).put(HiveKeys.appState.url, url);
     disableInteractionsNotifier.state = false;
     return allowNextPage;
   }

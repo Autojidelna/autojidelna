@@ -1,12 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
+
+import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-Widget logoutDialog(SafeAccount safeAccount) {
+Widget logoutDialog(WidgetRef ref, SafeAccount safeAccount) {
   return Builder(
     builder: (context) {
       final L10n l10n = context.l10n;
@@ -17,7 +18,7 @@ Widget logoutDialog(SafeAccount safeAccount) {
         actions: <Widget>[
           TextButton(
             onPressed: () async {
-              await ProviderScope.containerOf(context).read(userProvider).logout(safeAccount);
+              ref.read(currentCanteenProvider.notifier).logout(safeAccount);
               if (context.mounted) context.router.replaceAll([const RouterRoute()], updateExistingRoutes: false);
             },
             child: Text(l10n.logoutConfirm),

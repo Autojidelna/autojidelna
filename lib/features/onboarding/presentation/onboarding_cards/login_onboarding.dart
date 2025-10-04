@@ -26,7 +26,7 @@ class LoginOnboarding extends ConsumerStatefulWidget implements OnboardingStep {
   }
 
   @override
-  Future<bool> onNextPage(BuildContext context, WidgetRef ref) async => await Onboarding.login(context, ref, OnboardingFormKeys.credentials);
+  Future<bool> onNextPage(BuildContext context, WidgetRef ref) async => await Onboarding.login(context, ref);
 
   @override
   String buttonText(BuildContext context) => context.l10n.login;

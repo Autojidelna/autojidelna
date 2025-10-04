@@ -1,8 +1,8 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
+import 'package:autojidelna/shared/providers/current_user.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/config/hive.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/widgets/configured_alert_dialog.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';
 import 'package:autojidelna/shared/widgets/lined_card.dart';
@@ -23,7 +23,8 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
   @override
   Widget build(BuildContext context) {
     final L10n l10n = context.l10n;
-    User? user = ref.watch(userProvider.select((it) => (it.user)));
+    // TODO
+    User? user = ref.watch(currentUserProvider).requireValue;
     final Map<int, String> locations = user?.canteenLocations ?? {};
     return Stack(
       alignment: AlignmentDirectional.center,
@@ -67,7 +68,8 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
                 provider.preIndexMenus();
 
                 Navigator.of(context).popUntil((route) => route.isFirst);
-                User user = ref.read(userProvider).user!;
+                // TODO
+                User user = ref.read(currentUserProvider).value!;
                 Hive.box(Boxes.appState).put(HiveKeys.account.location(user.accountData), i);
               },
             ),

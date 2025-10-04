@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/core/types/errors.dart';
-import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
@@ -205,9 +204,9 @@ class CanteenProvider with ChangeNotifier {
     switch (e) {
       case CanteenErrors.needToLogin:
         try {
-          await _ref.read(userProvider).loadUser();
+          // TODO await _ref.read(userProvider).loadUser();
         } catch (e) {
-          await _ref.read(userProvider).unloadUser();
+          // TODO await _ref.read(userProvider).unloadUser();
           _ref.read(appRouterProvider).replaceAll([const RouterRoute()], updateExistingRoutes: false);
         }
         break;

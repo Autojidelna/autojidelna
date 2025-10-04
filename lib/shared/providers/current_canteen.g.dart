@@ -41,7 +41,7 @@ final class CurrentCanteenProvider
   }
 }
 
-String _$currentCanteenHash() => r'cbba8b47d12801b57ac2d52ea374c9e8dda19d77';
+String _$currentCanteenHash() => r'477f1fa3291cb42193c94a48f79c3a1f1ef3b593';
 
 abstract class _$CurrentCanteen extends $Notifier<Canteen?> {
   Canteen? build();
