@@ -1,12 +1,14 @@
-import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
-import 'package:autojidelna/features/auth/data/auth_service.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
 import 'package:autojidelna/shared/providers/saved_accounts.dart';
 import 'package:autojidelna/shared/services/credentials_service.dart';
+import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
+import 'package:autojidelna/features/auth/data/auth_service.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 final userProvider = ChangeNotifierProvider<UserProvider>((ref) => UserProvider(ref, AuthService(ref)));
 

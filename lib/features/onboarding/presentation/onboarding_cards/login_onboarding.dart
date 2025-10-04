@@ -9,7 +9,9 @@ import 'package:autojidelna/features/onboarding/application/onboarding_providers
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
+@Dependencies([onboardingFormKey, OnboardingTextFieldState, OnboardingSteps, OnboardingFocusNodeFocus])
 class LoginOnboarding extends ConsumerStatefulWidget implements OnboardingStep {
   const LoginOnboarding({super.key});
 
@@ -133,6 +135,7 @@ class _LoginOnboardingState extends ConsumerState<LoginOnboarding> {
   }
 }
 
+@Dependencies([OnboardingTextFieldState])
 class _UrlListTile extends ConsumerWidget {
   const _UrlListTile();
 

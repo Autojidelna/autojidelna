@@ -8,7 +8,7 @@ import 'package:autojidelna/core/types/freezed/user/user.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/services/credentials_service.dart';
 
-import 'package:canteenlib/canteenlib.dart';
+import 'package:icanteenlib/canteenlib.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 

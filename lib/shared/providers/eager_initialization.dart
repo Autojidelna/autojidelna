@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class EagerInitialization extends ConsumerWidget {
   const EagerInitialization({super.key, required this.providers, required this.child});

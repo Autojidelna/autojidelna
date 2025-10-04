@@ -16,6 +16,7 @@ import 'package:autojidelna/features/onboarding/application/onboarding_providers
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 class _SelectedSafeAccountNotifier extends Notifier<SafeAccount?> {
   @override
@@ -28,6 +29,7 @@ class _SelectedSafeAccountNotifier extends Notifier<SafeAccount?> {
 
 final _selectedSafeAccount = NotifierProvider<_SelectedSafeAccountNotifier, SafeAccount?>(_SelectedSafeAccountNotifier.new);
 
+@Dependencies([OnboardingSteps, onboardingFormKey, OnboardingTextFieldState])
 class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
   const AccountPickerOnboarding({super.key});
 

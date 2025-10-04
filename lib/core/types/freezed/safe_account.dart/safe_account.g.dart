@@ -6,13 +6,12 @@ part of 'safe_account.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SafeAccountImpl _$$SafeAccountImplFromJson(Map<String, dynamic> json) =>
-    _$SafeAccountImpl(
+_SafeAccount _$SafeAccountFromJson(Map<String, dynamic> json) => _SafeAccount(
       username: json['username'] as String,
       url: json['url'] as String,
     );
 
-Map<String, dynamic> _$$SafeAccountImplToJson(_$SafeAccountImpl instance) =>
+Map<String, dynamic> _$SafeAccountToJson(_SafeAccount instance) =>
     <String, dynamic>{
       'username': instance.username,
       'url': instance.url,

@@ -13,8 +13,8 @@ class ThemeModePicker extends ConsumerWidget {
       width: MediaQuery.sizeOf(context).width * .9,
       child: SegmentedButton<ThemeMode>(
         showSelectedIcon: false,
-        selected: {ref.watch(themeNotifierProvider.select((data) => data.themeMode))},
-        onSelectionChanged: (Set<ThemeMode> selected) => ref.read(themeNotifierProvider.notifier).setThemeMode(selected.first),
+        selected: {ref.watch(themeProvider.select((data) => data.themeMode))},
+        onSelectionChanged: (Set<ThemeMode> selected) => ref.read(themeProvider.notifier).setThemeMode(selected.first),
         segments: [
           ButtonSegment<ThemeMode>(value: ThemeMode.system, label: Text(l10n.themeModeSystem)),
           ButtonSegment<ThemeMode>(value: ThemeMode.light, label: Text(l10n.themeModeLight)),

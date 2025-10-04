@@ -20,7 +20,9 @@ import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/th
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
+@Dependencies([onboardingFormKey, OnboardingTextFieldState, OnboardingSteps, OnboardingFocusNodeFocus])
 class Onboarding {
   static late PageController pageController;
 

@@ -64,6 +64,6 @@ class ThemeNotifier extends _$ThemeNotifier {
 
 @riverpod
 bool isBright(Ref ref, Brightness brightness) {
-  final ThemeMode themeMode = ref.watch(themeNotifierProvider.select((data) => data.themeMode));
+  final ThemeMode themeMode = ref.watch(themeProvider.select((data) => data.themeMode));
   return (themeMode == ThemeMode.system && brightness == Brightness.light) || themeMode == ThemeMode.light;
 }

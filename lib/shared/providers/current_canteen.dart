@@ -1,4 +1,4 @@
-import 'package:canteenlib/canteenlib.dart';
+import 'package:icanteenlib/canteenlib.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'current_canteen.g.dart';

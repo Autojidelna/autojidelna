@@ -6,21 +6,48 @@ part of 'saved_accounts.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$savedAccountsHash() => r'89281e246503bfc42113202490240eecfcaa9001';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [SavedAccounts].
 @ProviderFor(SavedAccounts)
-final savedAccountsProvider =
-    AsyncNotifierProvider<SavedAccounts, Set<SafeAccount>>.internal(
-  SavedAccounts.new,
-  name: r'savedAccountsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$savedAccountsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const savedAccountsProvider = SavedAccountsProvider._();
 
-typedef _$SavedAccounts = AsyncNotifier<Set<SafeAccount>>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class SavedAccountsProvider
+    extends $AsyncNotifierProvider<SavedAccounts, Set<SafeAccount>> {
+  const SavedAccountsProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'savedAccountsProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$savedAccountsHash();
+
+  @$internal
+  @override
+  SavedAccounts create() => SavedAccounts();
+}
+
+String _$savedAccountsHash() => r'354d1dcd2ca94aa9423f98996c06329bdf323202';
+
+abstract class _$SavedAccounts extends $AsyncNotifier<Set<SafeAccount>> {
+  FutureOr<Set<SafeAccount>> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref =
+        this.ref as $Ref<AsyncValue<Set<SafeAccount>>, Set<SafeAccount>>;
+    final element = ref.element as $ClassProviderElement<
+        AnyNotifier<AsyncValue<Set<SafeAccount>>, Set<SafeAccount>>,
+        AsyncValue<Set<SafeAccount>>,
+        Object?,
+        Object?>;
+    element.handleValue(ref, created);
+  }
+}

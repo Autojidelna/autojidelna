@@ -1,4 +1,5 @@
 import 'package:autojidelna/core/types/freezed/account/account.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -6,7 +7,7 @@ part 'safe_account.freezed.dart';
 part 'safe_account.g.dart';
 
 @freezed
-class SafeAccount with _$SafeAccount {
+sealed class SafeAccount with _$SafeAccount {
   const SafeAccount._();
 
   const factory SafeAccount({

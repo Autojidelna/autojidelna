@@ -3,11 +3,15 @@ import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/providers/saved_accounts.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
+import 'package:autojidelna/features/onboarding/application/onboarding_providers.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+@Dependencies([onboardingFormKey, OnboardingTextFieldState])
 class OnboardingGuard extends AutoRouteGuard {
   OnboardingGuard(this.ref);
   final Ref ref;
@@ -29,7 +33,7 @@ class OnboardingGuard extends AutoRouteGuard {
       steps.addAll(Onboarding.loginSteps);
     }
 
-    resolver.redirect(
+    resolver.redirectUntil(
       OnboardingRoute(
         steps: steps,
         onCompletedCallback: (onSuccess) async {

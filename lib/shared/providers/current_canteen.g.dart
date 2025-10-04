@@ -6,21 +6,52 @@ part of 'current_canteen.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentCanteenHash() => r'727b7e542087d94ddbf43060b6ab335aeb502278';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [CurrentCanteen].
 @ProviderFor(CurrentCanteen)
-final currentCanteenProvider =
-    NotifierProvider<CurrentCanteen, Canteen?>.internal(
-  CurrentCanteen.new,
-  name: r'currentCanteenProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentCanteenHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const currentCanteenProvider = CurrentCanteenProvider._();
 
-typedef _$CurrentCanteen = Notifier<Canteen?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class CurrentCanteenProvider
+    extends $NotifierProvider<CurrentCanteen, Canteen?> {
+  const CurrentCanteenProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'currentCanteenProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentCanteenHash();
+
+  @$internal
+  @override
+  CurrentCanteen create() => CurrentCanteen();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Canteen? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<Canteen?>(value),
+    );
+  }
+}
+
+String _$currentCanteenHash() => r'cbba8b47d12801b57ac2d52ea374c9e8dda19d77';
+
+abstract class _$CurrentCanteen extends $Notifier<Canteen?> {
+  Canteen? build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<Canteen?, Canteen?>;
+    final element = ref.element as $ClassProviderElement<
+        AnyNotifier<Canteen?, Canteen?>, Canteen?, Object?, Object?>;
+    element.handleValue(ref, created);
+  }
+}

@@ -13,7 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
+@Dependencies([onboardingInitialSteps, onboardingFormKey, OnboardingTextFieldState, OnboardingSteps, OnboardingFocusNodeFocus, onboardingHasFocus])
 @RoutePage()
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key, this.steps, this.onCompletedCallback});
@@ -34,6 +36,7 @@ class OnboardingPage extends StatelessWidget {
       );
 }
 
+@Dependencies([onboardingFormKey, OnboardingTextFieldState, OnboardingSteps, onboardingHasFocus, OnboardingFocusNodeFocus])
 class _OnboardingPageContent extends ConsumerStatefulWidget {
   const _OnboardingPageContent({required this.onCompletedCallback});
   final void Function(bool onSuccess)? onCompletedCallback;
@@ -163,7 +166,7 @@ class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent>
                       (states) => AppThemes.backgroundColorWidgetState(
                         states,
                         theme.colorScheme,
-                        ref.read(themeNotifierProvider).amoledMode,
+                        ref.read(themeProvider).amoledMode,
                         primaryColor: theme.colorScheme.secondary,
                       ),
                     ),

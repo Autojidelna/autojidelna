@@ -12,7 +12,10 @@ import 'package:autojidelna/features/onboarding/onboarding.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+@Dependencies([])
 class AuthGuard extends AutoRouteGuard {
   AuthGuard(this.ref);
   Ref ref;
@@ -60,10 +63,10 @@ class AuthGuard extends AutoRouteGuard {
       }
 
       if ((await ref.read(savedAccountsProvider.future)).isNotEmpty) {
-        resolver.redirect(OnboardingRoute(steps: Onboarding.accountPickerSteps, onCompletedCallback: resolver.next), replace: true);
+        resolver.redirectUntil(OnboardingRoute(steps: Onboarding.accountPickerSteps, onCompletedCallback: resolver.next), replace: true);
         return;
       }
-      resolver.redirect(OnboardingRoute(steps: Onboarding.loginSteps, onCompletedCallback: resolver.next), replace: true);
+      resolver.redirectUntil(OnboardingRoute(steps: Onboarding.loginSteps, onCompletedCallback: resolver.next), replace: true);
     }
   }
 }

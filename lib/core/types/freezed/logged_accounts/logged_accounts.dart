@@ -1,5 +1,6 @@
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -7,7 +8,7 @@ part 'logged_accounts.freezed.dart';
 part 'logged_accounts.g.dart';
 
 @unfreezed
-class LoggedAccounts with _$LoggedAccounts {
+sealed class LoggedAccounts with _$LoggedAccounts {
   factory LoggedAccounts({
     @JsonKey(name: 'logged_in_account') SafeAccount? loggedInAccount,
     @JsonKey(name: 'accounts') @Default(<Account>{}) Set<Account> accounts,

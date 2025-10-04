@@ -18,15 +18,15 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appRouter = ref.read(appRouterProvider);
-    final ThemeNotifier themeNotifier = ref.read(themeNotifierProvider.notifier);
-    final ThemeState themeProvider = ref.watch(themeNotifierProvider);
+    final ThemeNotifier themeNotifier = ref.read(themeProvider.notifier);
+    final ThemeState themeProv = ref.watch(themeProvider);
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: ref.read(scaffoldMessengerProvider),
-      themeMode: themeProvider.themeMode,
+      themeMode: themeProv.themeMode,
       theme: AppThemes.theme(themeNotifier.colorSchemeLight()),
-      darkTheme: AppThemes.theme(themeNotifier.colorSchemeDark(), amoledMode: themeProvider.amoledMode),
+      darkTheme: AppThemes.theme(themeNotifier.colorSchemeDark(), amoledMode: themeProv.amoledMode),
       locale: ref.watch(currentLocaleProvider),
       supportedLocales: L10n.supportedLocales,
       localizationsDelegates: L10n.localizationsDelegates,

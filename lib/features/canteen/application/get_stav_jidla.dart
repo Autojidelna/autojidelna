@@ -1,7 +1,7 @@
 import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 
-import 'package:canteenlib/canteenlib.dart';
+import 'package:icanteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
