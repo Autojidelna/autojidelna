@@ -142,7 +142,7 @@ class AppThemes {
         elevation: amoledMode ? 0 : 4,
         actionsIconTheme: IconThemeData(color: colorScheme.onSurfaceVariant),
       ),
-      bottomAppBarTheme: BottomAppBarTheme(
+      bottomAppBarTheme: BottomAppBarThemeData(
         color: amoledMode ? Colors.transparent : null,
         elevation: amoledMode ? 0 : 4,
       ),
