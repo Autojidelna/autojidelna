@@ -18,7 +18,7 @@ import 'package:intl/intl.dart';
 import 'package:icanteenlib/canteenlib.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-showCustomDatePicker(BuildContext context) => configuredDialog(context, builder: (_) => const _CustomDatePicker());
+void showCustomDatePicker(BuildContext context) => configuredDialog(context, builder: (_) => const _CustomDatePicker());
 
 class _CustomDatePicker extends ConsumerStatefulWidget {
   const _CustomDatePicker();

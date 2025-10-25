@@ -57,10 +57,10 @@ class AuthGuard extends AutoRouteGuard {
       }
       await provider.updateLoggedSafeAccounts();
       if (provider.loggedInAccounts.isNotEmpty) {
-        resolver.redirect(OnboardingRoute(steps: Onboarding.accountPickerSteps, onCompletedCallback: resolver.next), replace: true);
+        resolver.redirectUntil(OnboardingRoute(steps: Onboarding.accountPickerSteps, onCompletedCallback: resolver.next), replace: true);
         return;
       }
-      resolver.redirect(OnboardingRoute(steps: Onboarding.loginSteps, onCompletedCallback: resolver.next), replace: true);
+      resolver.redirectUntil(OnboardingRoute(steps: Onboarding.loginSteps, onCompletedCallback: resolver.next), replace: true);
     }
   }
 }

@@ -99,14 +99,14 @@ class AppThemes {
     onInverseSurface: Colors.black,
   );
 
-  static backgroundColorWidgetState(Set<WidgetState> states, ColorScheme colorScheme, bool amoledMode, {Color? primaryColor}) {
+  static Color backgroundColorWidgetState(Set<WidgetState> states, ColorScheme colorScheme, bool amoledMode, {Color? primaryColor}) {
     if (states.contains(WidgetState.disabled)) {
       return amoledMode ? colorScheme.surfaceContainerHighest.withAlpha(16) : colorScheme.surfaceContainerHighest;
     } // Disabled color
     return primaryColor ?? colorScheme.primary; // Regular color
   }
 
-  static foregroundColorWidgetState(Set<WidgetState> states, ColorScheme colorScheme, bool amoledMode, {Color? onPrimaryColor}) {
+  static Color foregroundColorWidgetState(Set<WidgetState> states, ColorScheme colorScheme, bool amoledMode, {Color? onPrimaryColor}) {
     if (states.contains(WidgetState.disabled)) return colorScheme.onSurfaceVariant; // Disabled color
     return onPrimaryColor ?? colorScheme.onPrimary; // Regular color
   }
