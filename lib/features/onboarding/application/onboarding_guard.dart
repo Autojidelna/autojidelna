@@ -33,7 +33,7 @@ class OnboardingGuard extends AutoRouteGuard {
       steps.addAll(Onboarding.loginSteps);
     }
 
-    resolver.redirect(
+    resolver.redirectUntil(
       OnboardingRoute(
         steps: steps,
         onCompletedCallback: (onSuccess) async {
