@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:autojidelna/app/app_init.dart';
 import 'package:autojidelna/core/firebase/firebase_options.dart';
 
@@ -21,13 +23,15 @@ class App {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await AppInit.hive();
     await AppInit.firebaseCrashlytics();
-    await Future.wait([
-      AppInit.firebaseAnalytics(),
-      AppInit.firebaseRemoteConfig(),
-      AppInit.firebaseMessaging(),
-      AppInit.awesomeNotifications(),
-      AppInit.codePush(),
-    ]);
+    unawaited(
+      Future.wait([
+        AppInit.firebaseAnalytics(),
+        AppInit.firebaseRemoteConfig(),
+        AppInit.firebaseMessaging(),
+        AppInit.awesomeNotifications(),
+        AppInit.codePush(),
+      ]),
+    );
 
     SystemChrome.setPreferredOrientations(_defaultRotations);
 
