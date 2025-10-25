@@ -7,7 +7,7 @@ import 'package:autojidelna/features/onboarding/onboarding.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 
 class OnboardingGuard extends AutoRouteGuard {
   OnboardingGuard(this.ref);

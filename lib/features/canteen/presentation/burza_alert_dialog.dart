@@ -9,7 +9,7 @@ import 'package:autojidelna/features/canteen/application/ordering.dart';
 import 'package:icanteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 
 void burzaAlertDialog(BuildContext context, Jidlo updatedDish, StavJidla stav) {
   if (stav != StavJidla.objednanoPouzeNaBurzu || Hive.box(Boxes.appState).get(HiveKeys.appState.hideBurzaAlertDialog, defaultValue: false)) {

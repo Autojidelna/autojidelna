@@ -10,7 +10,7 @@ import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 
 class LocationPickerCard extends ConsumerStatefulWidget {
   const LocationPickerCard({super.key});

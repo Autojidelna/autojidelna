@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 
 final Provider<Map<dynamic, dynamic>> remoteConfigValues =
     Provider<Map<dynamic, dynamic>>((ref) => Hive.box(Boxes.appState).get(HiveKeys.appState.remoteConfigValues));
