@@ -4,7 +4,7 @@ import 'package:autojidelna/core/analytics/statistic_type.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 
 class AnalyticsService {
   AnalyticsService._();

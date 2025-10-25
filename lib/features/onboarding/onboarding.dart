@@ -19,7 +19,7 @@ import 'package:autojidelna/features/onboarding/presentation/onboarding_cards/th
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 
 // ignore: provider_dependencies
 class Onboarding {

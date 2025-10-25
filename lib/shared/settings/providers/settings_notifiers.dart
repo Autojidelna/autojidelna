@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:autojidelna/shared/config/date_format_options.dart';
 import 'package:autojidelna/shared/config/hive.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'settings_notifiers.g.dart';

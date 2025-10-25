@@ -8,7 +8,7 @@ import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 
 @RoutePage()
 class DebugPage extends StatelessWidget {

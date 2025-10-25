@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class MigrationManager {
