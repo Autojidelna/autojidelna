@@ -13,8 +13,8 @@ allprojects {
 val newBuildDir: Directory = rootProject.layout.buildDirectory.dir("../../build").get()
 rootProject.layout.buildDirectory.set(newBuildDir)
 
-extra["compileSdkVersion"] = 35     // or higher / as desired    
-extra["targetSdkVersion"] = 35      // or higher / as desired
+extra["compileSdkVersion"] = 36     // or higher / as desired    
+extra["targetSdkVersion"] = 36      // or higher / as desired
 
 
 rootProject.buildDir = file("../build")
