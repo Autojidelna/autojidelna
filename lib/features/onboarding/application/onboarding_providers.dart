@@ -3,7 +3,6 @@ import 'package:autojidelna/features/onboarding/onboarding.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'onboarding_providers.g.dart';

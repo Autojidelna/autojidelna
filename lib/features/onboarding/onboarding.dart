@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
+// ignore: provider_dependencies
 class Onboarding {
   static late PageController pageController;
 
