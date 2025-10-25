@@ -1,17 +1,24 @@
-# Autojidelna
+# Autojídelna
 
-Aplikace pro objednávání ze systému Icanteen. Cíl této aplikace je zjednodušit, zrychlit, (případně i zautomatizovat) objednávání obědů.
+Aplikace pro objednávání ze systému Icanteen. Cíl této aplikace je zjednodušit a zrychlit (případně i zautomatizovat) objednávání obědů.
 
 ## Kód pro přistup do Icanteen
 
-Aplikace používá package [canteenlib](https://github.com/App-Elevate/AUT.canteenlib), ve které se nachází všechen kód ohledně přihlašování.
+Aplikace používá package [icanteenlib][icanteenlib] ve které se nachází všechen kód ohledně interakcí s instancí Icanteen.
 
 ## Podporované platformy
 
-Aktuálně je podporován pouze Android, ale je v plánu podporovat i IOS. Ostatní systémy není v plánu podporovat.
+Aktuálně je podporován pouze Android, ale je v plánu podporovat i IOS. Ostatní platformy není v plánu podporovat.
 
 ## Kompilování
 
-Odstraňte klíče originálního autora tím, že přepíšete ['signingConfig signingConfigs.release'](https://github.com/App-Elevate/AUT.aplikace/blob/28096713e958f0e1e4f3cf8e49aaefbeeedbb5f2/android/app/build.gradle.kts#L71-L72) na `signingConfig signingConfigs.debug`, odstraněním [signing Keys](https://github.com/tpkowastaken/autojidelna/blob/5d0587befd74fd58315ccc131894feb8588b09fe/android/app/build.gradle#L27-L31) a odstraněním [signing Configs](https://github.com/tpkowastaken/autojidelna/blob/5d0587befd74fd58315ccc131894feb8588b09fe/android/app/build.gradle#L60-L67).
+Stáhněte [Flutter][flutter-install] a poté spusťte `flutter build apk -PuseDebugSigningConfig=true`
 
-Pro systém android stačí mít nainstalovaný [Flutter](https://docs.flutter.dev/get-started/install) a poté `flutter build apk` pro android na windows nebo `flutter build ipa` pro ios na macbooku. Aplikaci na IOS můžete nainstalovat pomocí [tohoto návodu](https://chrunos.com/install-ipa-on-iphone/)
+> [!IMPORTANT]
+> APK kompilováno tímto způsobem je podepsáno **výchozím Android debug klíčem**. Je plně instalovatelné na zařízeních pro testování a používání, ale **nelze jej nahrát na Google Play** ani použít jako oficiální release klíč.
+>
+> Pro více informací si přečtěte oficiální Flutter dokumentaci o [podepisování aplikace pro vydání][flutter-app-signing]
+
+[icanteenlib]: https://github.com/Autojidelna/icanteenlib
+[flutter-install]: https://github.com/Autojidelna/autojidelna/blob/main/android/app/build.gradle.kts#L65-L78
+[flutter-app-signing]: https://docs.flutter.dev/deployment/android#sign-the-app
