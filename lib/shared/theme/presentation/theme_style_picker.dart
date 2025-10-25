@@ -35,10 +35,10 @@ class ThemeStylePicker extends ConsumerWidget {
             backgroundColor: theme.scaffoldBackgroundColor,
             shape: RoundedRectangleBorder(borderRadius: radius),
             fixedSize: const Size.fromWidth(125),
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.all(0),
             side: BorderSide(
               width: 3,
-              strokeAlign: BorderSide.strokeAlignInside,
+              strokeAlign: BorderSide.strokeAlignOutside,
               color: ThemeStyle.values[index] == provider.themeStyle ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant,
             ),
           );
@@ -46,20 +46,22 @@ class ThemeStylePicker extends ConsumerWidget {
           return Theme(
             data: theme,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               child: OutlinedButton(
                 style: style,
-                clipBehavior: Clip.hardEdge,
                 onPressed: () => notifier.setThemeStyle(ThemeStyle.values[index]),
-                child: Column(
-                  children: [
-                    SizedBox(height: 35, child: AppBar(automaticallyImplyLeading: false)),
-                    const CustomDivider(height: 6),
-                    foodTileColorSchemePreview(theme, theme.colorScheme.primary),
-                    foodTileColorSchemePreview(theme, theme.colorScheme.secondary),
-                    const Expanded(child: SizedBox()),
-                    fakeNavigationBar(theme),
-                  ],
+                child: ClipRRect(
+                  borderRadius: radius,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 35, child: AppBar(automaticallyImplyLeading: false)),
+                      const CustomDivider(height: 6),
+                      foodTileColorSchemePreview(theme, theme.colorScheme.primary),
+                      foodTileColorSchemePreview(theme, theme.colorScheme.secondary),
+                      const Expanded(child: SizedBox()),
+                      fakeNavigationBar(theme),
+                    ],
+                  ),
                 ),
               ),
             ),
