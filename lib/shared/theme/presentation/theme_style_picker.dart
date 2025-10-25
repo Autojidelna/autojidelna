@@ -11,8 +11,8 @@ class ThemeStylePicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ThemeNotifier notifier = ref.read(themeNotifierProvider.notifier);
-    final ThemeState provider = ref.watch(themeNotifierProvider);
+    final ThemeNotifier notifier = ref.read(themeProvider.notifier);
+    final ThemeState provider = ref.watch(themeProvider);
 
     return SizedBox(
       height: 225,

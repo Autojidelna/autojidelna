@@ -12,7 +12,7 @@ import 'package:autojidelna/shared/config/secure_storage.dart';
 import 'package:autojidelna/shared/localization/current_locale.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:canteenlib/canteenlib.dart';
+import 'package:icanteenlib/canteenlib.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';

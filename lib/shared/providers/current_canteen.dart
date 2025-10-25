@@ -1,4 +1,4 @@
-import 'package:canteenlib/canteenlib.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icanteenlib/canteenlib.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 final currentCanteen = StateProvider<Canteen>((ref) => Canteen('url'));

@@ -163,7 +163,7 @@ class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent>
                       (states) => AppThemes.backgroundColorWidgetState(
                         states,
                         theme.colorScheme,
-                        ref.read(themeNotifierProvider).amoledMode,
+                        ref.read(themeProvider).amoledMode,
                         primaryColor: theme.colorScheme.secondary,
                       ),
                     ),

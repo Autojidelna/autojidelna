@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:canteenlib/canteenlib.dart';
+import 'package:icanteenlib/canteenlib.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -8,7 +8,7 @@ part 'canteen_data.freezed.dart';
 
 /// Třída pro kešování dat Canteeny
 @unfreezed
-class CanteenData with _$CanteenData {
+sealed class CanteenData with _$CanteenData {
   factory CanteenData({
     /// id, aby se nám neindexovaly špatně jídelníčky
     @Default(0) int id,

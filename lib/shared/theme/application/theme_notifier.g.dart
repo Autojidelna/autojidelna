@@ -6,171 +6,132 @@ part of 'theme_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isBrightHash() => r'69c1be64e904f5b1231917f642b6571d890789aa';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
+@ProviderFor(ThemeNotifier)
+const themeProvider = ThemeNotifierProvider._();
 
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-/// See also [isBright].
-@ProviderFor(isBright)
-const isBrightProvider = IsBrightFamily();
-
-/// See also [isBright].
-class IsBrightFamily extends Family<bool> {
-  /// See also [isBright].
-  const IsBrightFamily();
-
-  /// See also [isBright].
-  IsBrightProvider call(
-    Brightness brightness,
-  ) {
-    return IsBrightProvider(
-      brightness,
-    );
-  }
-
-  @override
-  IsBrightProvider getProviderOverride(
-    covariant IsBrightProvider provider,
-  ) {
-    return call(
-      provider.brightness,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'isBrightProvider';
-}
-
-/// See also [isBright].
-class IsBrightProvider extends AutoDisposeProvider<bool> {
-  /// See also [isBright].
-  IsBrightProvider(
-    Brightness brightness,
-  ) : this._internal(
-          (ref) => isBright(
-            ref as IsBrightRef,
-            brightness,
-          ),
-          from: isBrightProvider,
-          name: r'isBrightProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$isBrightHash,
-          dependencies: IsBrightFamily._dependencies,
-          allTransitiveDependencies: IsBrightFamily._allTransitiveDependencies,
-          brightness: brightness,
+final class ThemeNotifierProvider
+    extends $NotifierProvider<ThemeNotifier, ThemeState> {
+  const ThemeNotifierProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'themeProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
         );
 
-  IsBrightProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.brightness,
-  }) : super.internal();
-
-  final Brightness brightness;
-
   @override
-  Override overrideWith(
-    bool Function(IsBrightRef provider) create,
-  ) {
-    return ProviderOverride(
+  String debugGetCreateSourceHash() => _$themeNotifierHash();
+
+  @$internal
+  @override
+  ThemeNotifier create() => ThemeNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ThemeState value) {
+    return $ProviderOverride(
       origin: this,
-      override: IsBrightProvider._internal(
-        (ref) => create(ref as IsBrightRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        brightness: brightness,
-      ),
+      providerOverride: $SyncValueProvider<ThemeState>(value),
     );
   }
-
-  @override
-  AutoDisposeProviderElement<bool> createElement() {
-    return _IsBrightProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is IsBrightProvider && other.brightness == brightness;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, brightness.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin IsBrightRef on AutoDisposeProviderRef<bool> {
-  /// The parameter `brightness` of this provider.
-  Brightness get brightness;
-}
-
-class _IsBrightProviderElement extends AutoDisposeProviderElement<bool>
-    with IsBrightRef {
-  _IsBrightProviderElement(super.provider);
-
-  @override
-  Brightness get brightness => (origin as IsBrightProvider).brightness;
 }
 
 String _$themeNotifierHash() => r'462836ef773c65018fa717e3c0bfdb801408270b';
 
-/// See also [ThemeNotifier].
-@ProviderFor(ThemeNotifier)
-final themeNotifierProvider =
-    AutoDisposeNotifierProvider<ThemeNotifier, ThemeState>.internal(
-  ThemeNotifier.new,
-  name: r'themeNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$themeNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+abstract class _$ThemeNotifier extends $Notifier<ThemeState> {
+  ThemeState build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<ThemeState, ThemeState>;
+    final element = ref.element as $ClassProviderElement<
+        AnyNotifier<ThemeState, ThemeState>, ThemeState, Object?, Object?>;
+    element.handleValue(ref, created);
+  }
+}
 
-typedef _$ThemeNotifier = AutoDisposeNotifier<ThemeState>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+@ProviderFor(isBright)
+const isBrightProvider = IsBrightFamily._();
+
+final class IsBrightProvider extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const IsBrightProvider._(
+      {required IsBrightFamily super.from, required Brightness super.argument})
+      : super(
+          retry: null,
+          name: r'isBrightProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$isBrightHash();
+
+  @override
+  String toString() {
+    return r'isBrightProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    final argument = this.argument as Brightness;
+    return isBright(
+      ref,
+      argument,
+    );
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is IsBrightProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$isBrightHash() => r'c50ae5149368b9be153ea568f85b067aa01b1bbd';
+
+final class IsBrightFamily extends $Family
+    with $FunctionalFamilyOverride<bool, Brightness> {
+  const IsBrightFamily._()
+      : super(
+          retry: null,
+          name: r'isBrightProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
+
+  IsBrightProvider call(
+    Brightness brightness,
+  ) =>
+      IsBrightProvider._(argument: brightness, from: this);
+
+  @override
+  String toString() => r'isBrightProvider';
+}
