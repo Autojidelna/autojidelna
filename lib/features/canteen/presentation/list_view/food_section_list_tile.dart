@@ -50,21 +50,22 @@ class _DishListTile extends ConsumerWidget {
     bool ordering = ref.watch(canteenProvider.select((it) => it.ordering));
 
     final StavJidla stav = getStavJidla(context, dish);
-    final bool enabled = ordering || !isButtonEnabled(stav);
+    final bool enabled = !ordering && isButtonEnabled(stav);
     final bool selected = getPrimaryState(stav);
     const onTap = burzaAlertDialog;
 
     return ListTile(
-      enabled: !enabled,
+      enabled: enabled,
       selected: selected,
       contentPadding: EdgeInsets.zero,
       selectedColor: theme.colorScheme.primary,
       titleTextStyle: theme.textTheme.bodyMedium,
-      onTap: enabled ? null : () => onTap(context, dish, stav),
+      onTap: !enabled ? null : () => onTap(context, dish, stav),
       leading: RadioGroup(
         groupValue: true,
-        onChanged: enabled ? (_) {} : (_) => onTap(context, dish, stav),
+        onChanged: (_) => onTap(context, dish, stav),
         child: Radio<bool>(
+          enabled: enabled,
           toggleable: true,
           value: selected,
           activeColor: theme.colorScheme.primary,
