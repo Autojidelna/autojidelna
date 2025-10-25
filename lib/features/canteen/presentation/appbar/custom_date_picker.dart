@@ -15,7 +15,7 @@ import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:canteenlib/canteenlib.dart';
+import 'package:icanteenlib/canteenlib.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 showCustomDatePicker(BuildContext context) => configuredDialog(context, builder: (_) => const _CustomDatePicker());

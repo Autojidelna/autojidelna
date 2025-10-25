@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'text_field_state.freezed.dart';
 
 @freezed
-class TextFieldState with _$TextFieldState {
+sealed class TextFieldState with _$TextFieldState {
   const factory TextFieldState({
     String? value,
     String? error,

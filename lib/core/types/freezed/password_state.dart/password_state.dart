@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 part 'password_state.freezed.dart';
 
 @freezed
-class PasswordState with _$PasswordState {
+sealed class PasswordState with _$PasswordState {
   const factory PasswordState({
     String? errorText,
     @Default(false) bool isVisible,

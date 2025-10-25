@@ -1,7 +1,7 @@
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/features/canteen/presentation/page_view/page_view_food_card.dart';
-import 'package:canteenlib/canteenlib.dart';
+import 'package:icanteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

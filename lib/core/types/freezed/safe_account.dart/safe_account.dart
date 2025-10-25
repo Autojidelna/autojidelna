@@ -6,7 +6,7 @@ part 'safe_account.freezed.dart';
 part 'safe_account.g.dart';
 
 @freezed
-class SafeAccount with _$SafeAccount {
+sealed class SafeAccount with _$SafeAccount {
   const SafeAccount._();
 
   const factory SafeAccount({

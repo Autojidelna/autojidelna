@@ -6,8 +6,8 @@ part of 'logged_accounts.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LoggedAccountsImpl _$$LoggedAccountsImplFromJson(Map<String, dynamic> json) =>
-    _$LoggedAccountsImpl(
+_LoggedAccounts _$LoggedAccountsFromJson(Map<String, dynamic> json) =>
+    _LoggedAccounts(
       loggedInAccount: json['logged_in_account'] == null
           ? null
           : SafeAccount.fromJson(
@@ -18,8 +18,7 @@ _$LoggedAccountsImpl _$$LoggedAccountsImplFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$LoggedAccountsImplToJson(
-        _$LoggedAccountsImpl instance) =>
+Map<String, dynamic> _$LoggedAccountsToJson(_LoggedAccounts instance) =>
     <String, dynamic>{
       'logged_in_account': instance.loggedInAccount?.toJson(),
       'accounts': instance.accounts.map((e) => e.toJson()).toList(),

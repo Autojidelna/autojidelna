@@ -11,7 +11,7 @@ import 'package:autojidelna/features/more/presentation/account_overview_card.dar
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:canteenlib/canteenlib.dart';
+import 'package:icanteenlib/canteenlib.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()

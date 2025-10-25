@@ -6,57 +6,125 @@ part of 'app_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(scaffoldMessenger)
+const scaffoldMessengerProvider = ScaffoldMessengerProvider._();
+
+final class ScaffoldMessengerProvider extends $FunctionalProvider<
+        GlobalKey<ScaffoldMessengerState>,
+        GlobalKey<ScaffoldMessengerState>,
+        GlobalKey<ScaffoldMessengerState>>
+    with $Provider<GlobalKey<ScaffoldMessengerState>> {
+  const ScaffoldMessengerProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'scaffoldMessengerProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$scaffoldMessengerHash();
+
+  @$internal
+  @override
+  $ProviderElement<GlobalKey<ScaffoldMessengerState>> $createElement(
+          $ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  GlobalKey<ScaffoldMessengerState> create(Ref ref) {
+    return scaffoldMessenger(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GlobalKey<ScaffoldMessengerState> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride:
+          $SyncValueProvider<GlobalKey<ScaffoldMessengerState>>(value),
+    );
+  }
+}
+
 String _$scaffoldMessengerHash() => r'5cfbc23cb0ff38ab348a69c0eea13ee75688f4de';
 
-/// See also [scaffoldMessenger].
-@ProviderFor(scaffoldMessenger)
-final scaffoldMessengerProvider =
-    Provider<GlobalKey<ScaffoldMessengerState>>.internal(
-  scaffoldMessenger,
-  name: r'scaffoldMessengerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$scaffoldMessengerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+@ProviderFor(packageInfo)
+const packageInfoProvider = PackageInfoProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef ScaffoldMessengerRef = ProviderRef<GlobalKey<ScaffoldMessengerState>>;
+final class PackageInfoProvider extends $FunctionalProvider<
+        AsyncValue<PackageInfo>, PackageInfo, FutureOr<PackageInfo>>
+    with $FutureModifier<PackageInfo>, $FutureProvider<PackageInfo> {
+  const PackageInfoProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'packageInfoProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$packageInfoHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<PackageInfo> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<PackageInfo> create(Ref ref) {
+    return packageInfo(ref);
+  }
+}
+
 String _$packageInfoHash() => r'5fd12e5a46daf085d283c70a7608ea667979e1a4';
 
-/// See also [packageInfo].
-@ProviderFor(packageInfo)
-final packageInfoProvider = FutureProvider<PackageInfo>.internal(
-  packageInfo,
-  name: r'packageInfoProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$packageInfoHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+@ProviderFor(currentPatchNumber)
+const currentPatchNumberProvider = CurrentPatchNumberProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef PackageInfoRef = FutureProviderRef<PackageInfo>;
+final class CurrentPatchNumberProvider
+    extends $FunctionalProvider<int?, int?, int?> with $Provider<int?> {
+  const CurrentPatchNumberProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'currentPatchNumberProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentPatchNumberHash();
+
+  @$internal
+  @override
+  $ProviderElement<int?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  int? create(Ref ref) {
+    return currentPatchNumber(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(int? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<int?>(value),
+    );
+  }
+}
+
 String _$currentPatchNumberHash() =>
     r'9e5375d76c322730ac2bae263a52919f49104ccd';
-
-/// See also [currentPatchNumber].
-@ProviderFor(currentPatchNumber)
-final currentPatchNumberProvider = Provider<int?>.internal(
-  currentPatchNumber,
-  name: r'currentPatchNumberProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentPatchNumberHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef CurrentPatchNumberRef = ProviderRef<int?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

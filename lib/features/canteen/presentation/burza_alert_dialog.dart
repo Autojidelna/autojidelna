@@ -6,7 +6,7 @@ import 'package:autojidelna/shared/widgets/configured_dialog.dart';
 import 'package:autojidelna/features/canteen/application/get_obed_text.dart';
 import 'package:autojidelna/features/canteen/application/ordering.dart';
 
-import 'package:canteenlib/canteenlib.dart';
+import 'package:icanteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
