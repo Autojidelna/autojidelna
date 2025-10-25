@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/core/crashlytics/crashlytics_service.dart';
 import 'package:autojidelna/core/notifications/notification_topics.dart';
@@ -17,7 +16,6 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:awesome_notifications/awesome_notifications.dart' hide NotificationHandler;
 
 class AppInit {
@@ -27,7 +25,6 @@ class AppInit {
   static bool _firebaseRemoteConfigExecuted = false;
   static bool _firebaseMessagingExecuted = false;
   static bool _awesomeNotificationsExecuted = false;
-  static bool _codePushExecuted = false;
 
   static Future<void> hive() async {
     assert(_hiveExecuted == false, 'AppInit.hive() must be called only once');
@@ -161,20 +158,5 @@ class AppInit {
     );
 
     _awesomeNotificationsExecuted = true;
-  }
-
-  static Future<void> codePush() async {
-    assert(_codePushExecuted == false, 'AppInit.codePush() must be called only once');
-    if (_codePushExecuted) return;
-
-    int? currentPatchNumber = (await ShorebirdUpdater().readCurrentPatch())?.number;
-    if (!kIsWeb && kReleaseMode) {
-      FirebaseCrashlytics.instance.setCustomKey(
-        'shorebird_patch_number',
-        '$currentPatchNumber',
-      );
-    }
-    App.initProviderOverrides.add(currentPatchNumberProvider.overrideWithValue(currentPatchNumber));
-    _codePushExecuted = true;
   }
 }
