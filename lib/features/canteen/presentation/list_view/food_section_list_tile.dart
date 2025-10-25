@@ -61,12 +61,14 @@ class _DishListTile extends ConsumerWidget {
       selectedColor: theme.colorScheme.primary,
       titleTextStyle: theme.textTheme.bodyMedium,
       onTap: enabled ? null : () => onTap(context, dish, stav),
-      leading: Radio<bool>(
-        toggleable: true,
+      leading: RadioGroup(
         groupValue: true,
-        value: selected,
-        onChanged: enabled ? null : (_) => onTap(context, dish, stav),
-        activeColor: theme.colorScheme.primary,
+        onChanged: enabled ? (_) {} : (_) => onTap(context, dish, stav),
+        child: Radio<bool>(
+          toggleable: true,
+          value: selected,
+          activeColor: theme.colorScheme.primary,
+        ),
       ),
       title: Text(title),
       subtitle: _subtitle(context, dish.cena),
