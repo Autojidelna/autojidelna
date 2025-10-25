@@ -13,8 +13,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 @RoutePage()
+@Dependencies([OnboardingSteps, onboardingFormKey, OnboardingFocusNodeFocus, onboardingHasFocus, OnboardingTextFieldState])
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key, this.steps, this.onCompletedCallback});
   final List<OnboardingStep>? steps;
@@ -34,6 +36,7 @@ class OnboardingPage extends StatelessWidget {
       );
 }
 
+@Dependencies([OnboardingSteps, onboardingHasFocus])
 class _OnboardingPageContent extends ConsumerStatefulWidget {
   const _OnboardingPageContent({required this.onCompletedCallback});
   final void Function(bool onSuccess)? onCompletedCallback;
