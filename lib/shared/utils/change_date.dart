@@ -59,5 +59,5 @@ DateTime _jumpToWeekDay(DateTime prevDate, DateTime newDate) {
   while (adjustedDate.isWeekend) {
     adjustedDate = adjustedDate.add(Duration(days: direction));
   }
-  return adjustedDate;
+  return adjustedDate.toLocal().normalize;
 }
