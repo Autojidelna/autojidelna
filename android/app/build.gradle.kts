@@ -30,14 +30,6 @@ var keystoreProperties = Properties().apply {
     }
 }
 
-// Load debug keystore properties
-val keystorePropertiesDebug = Properties().apply {
-    val file = rootProject.file("keyDebug.properties")
-    if (file.exists()) {
-        file.inputStream().use { load(it) }
-    }
-}
-
 android {
     namespace = "cz.appelevate.autojidelna"
     compileSdk = rootProject.extra["compileSdkVersion"] as Int
@@ -69,12 +61,7 @@ android {
             storeFile = (keystoreProperties["storeFile"] as? String)?.let { file(it) }
             storePassword = keystoreProperties["storePassword"] as? String
         }
-        getByName("debug") {
-            keyAlias = keystorePropertiesDebug["keyAlias"] as? String
-            keyPassword = keystorePropertiesDebug["keyPassword"] as? String
-            storeFile = (keystorePropertiesDebug["storeFile"] as? String)?.let { file(it) }
-            storePassword = keystorePropertiesDebug["storePassword"] as? String
-        }
+        getByName("debug") {}
     }
     
     buildTypes {
