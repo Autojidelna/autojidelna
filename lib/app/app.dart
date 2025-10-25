@@ -29,7 +29,6 @@ class App {
         AppInit.firebaseRemoteConfig(),
         AppInit.firebaseMessaging(),
         AppInit.awesomeNotifications(),
-        AppInit.codePush(),
       ]),
     );
 
