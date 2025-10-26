@@ -5,17 +5,11 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_ce/hive.dart';
 
-final Provider<Map<dynamic, dynamic>> remoteConfigValues =
-    Provider<Map<dynamic, dynamic>>((ref) => Hive.box(Boxes.appState).get(HiveKeys.appState.remoteConfigValues));
+final Provider<Map<dynamic, dynamic>> remoteConfigValues = Provider<Map<dynamic, dynamic>>(
+  (ref) => Hive.box(Boxes.appState).get(HiveKeys.appState.remoteConfigValues),
+);
 
-enum RemoteConfigValueType {
-  string,
-  bool,
-  int,
-  double,
-  json,
-  dateTime,
-}
+enum RemoteConfigValueType { string, bool, int, double, json, dateTime }
 
 class RemoteConfig {
   static final FirebaseRemoteConfig instance = FirebaseRemoteConfig.instance;
@@ -81,14 +75,16 @@ class RemoteConfig {
     // json: {'key': 'value'},
     // integer: 42,
     // doubleNum: 42.5,
-
     canteenUrls: {
       'Arcibiskupské gymnázium v Kroměříži': 'strava.agkm.cz',
       'Česká zemědělská akademie v Humpolci, střední škola': 'jidelna.cza-hu.cz',
+      'Gymnázium a Střední odborná škola, Rokycany, Mládežníků 1115': 'jidelna.gasos.cz',
       'Gymnázium Boskovice, příspěvková organizace': 'stravne.gymbos.cz:8080',
       'Gymnázium J. K. Tyla': 'jidelna.gjkt.cz',
       'Hotelová škola, Ostrava, příspěvková organizace': 'strava.ssss.cz',
       'Obědy v Brně': 'objednavky.obedyvbrne.cz',
+      'Střední odborná škola stavební a Střední odborné učiliště stavební, Kolín II, Pražská 112': 'obedy.stavebkakolin.cz',
+      'Střední odborné učiliště stavební, Opava, příspěvková organizace': 'jidelna.soustop.cz:8448',
       'Střední průmyslová škola a Gymnázium Na Třebešíně': 'jidelna.trebesin.cz',
       'Střední průmyslová škola Chrudim': 'strava.sps-chrudim.cz',
       'Střední škola Edvarda Beneše Břeclav, příspěvková organizace': 'jidelnicek.sseb.cz',
@@ -100,6 +96,7 @@ class RemoteConfig {
       'Základní škola a mateřská škola, Praha 2, Na Smetance 1': 'obedy.nasmetance.cz',
       'Základní škola Ostrava, Matiční 5, příspěvková organizace': 'obedy.zs-mat5.cz',
       'Základní škola Přibyslav': 'mail.zspribyslav.cz:8443',
+      'Základní škola Svitavy, Felberova 2': 'jidelna.zsfelberova.svitavy.cz',
       'Základní škola Třešť': 'strava.zs-trest.cz:8088',
       'Základní škola Velká Bíteš, příspěvková organizace': 'strava.zsbites.cz:8443',
     },

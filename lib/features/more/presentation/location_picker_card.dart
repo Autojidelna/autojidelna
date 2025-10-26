@@ -56,11 +56,7 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
             locations.length,
             (i) => ListTile(
               visualDensity: VisualDensity.compact,
-              title: Text(
-                locations[i + 1]!,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
+              title: Text(locations[i + 1]!, maxLines: 1, overflow: TextOverflow.ellipsis),
               trailing: provider.locationId == i ? const Icon(Icons.check) : null,
               onTap: () async {
                 provider.changeLocation(i);

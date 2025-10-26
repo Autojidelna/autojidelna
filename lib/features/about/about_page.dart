@@ -43,10 +43,7 @@ class AboutPage extends ConsumerWidget {
           Padding(padding: const EdgeInsets.symmetric(vertical: 85.0), child: logo),
           const CustomDivider(isTransparent: false),
           // version list tile
-          ListTile(
-            title: Text(l10n.version),
-            subtitle: Text(appVersion),
-          ),
+          ListTile(title: Text(l10n.version), subtitle: Text(appVersion)),
           // licenses list tile
           ListTile(
             title: Text(l10n.licenses),
@@ -54,8 +51,8 @@ class AboutPage extends ConsumerWidget {
               Navigator.of(context).push(
                 PageRouteBuilder(
                   transitionDuration: Durations.short3,
-                  transitionsBuilder: (_, animation, __, child) => FadeTransition(opacity: animation, child: child),
-                  pageBuilder: (_, __, ___) => LicensePage(
+                  transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
+                  pageBuilder: (_, _, _) => LicensePage(
                     applicationName: l10n.appName,
                     applicationVersion: appVersion,
                     applicationIcon: Padding(padding: const EdgeInsets.symmetric(vertical: 24), child: logo),
@@ -66,27 +63,18 @@ class AboutPage extends ConsumerWidget {
             ),
           ),
           // privacy policy
-          ListTile(
-            title: Text(l10n.privacyPolicy),
-            onTap: () => unawaited(launchUrl(Uri.parse(Links.privacyPolicy))),
-          ),
+          ListTile(title: Text(l10n.privacyPolicy), onTap: () => unawaited(launchUrl(Uri.parse(Links.privacyPolicy)))),
           const CustomDivider(isTransparent: false),
           // links
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              IconButton(onPressed: () => unawaited(launchUrl(Uri.parse(Links.autojidelna))), icon: const Icon(Icons.public_outlined)),
+              IconButton(onPressed: () => unawaited(launchUrl(Uri.parse(Links.repo))), icon: const Icon(OctIcons.mark_github_24)),
               IconButton(
-                onPressed: () => unawaited(launchUrl(Uri.parse(Links.autojidelna))),
-                icon: const Icon(Icons.public_outlined),
-              ),
-              IconButton(
-                onPressed: () => unawaited(launchUrl(Uri.parse(Links.repo))),
-                icon: const Icon(OctIcons.mark_github_24),
-              ),
-              /*IconButton(
                 onPressed: () => unawaited(launchUrl(Uri(scheme: 'mailto', path: Links.email))),
                 icon: const Icon(Icons.email_outlined),
-              ),*/
+              ),
             ],
           ),
         ],

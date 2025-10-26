@@ -29,14 +29,11 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish, StavJidla stav) {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(l10n.burzaAlertDialogContent),
-              ),
+              Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: Text(l10n.burzaAlertDialogContent)),
               const SizedBox(height: 2),
               ValueListenableBuilder(
                 valueListenable: checkbox,
-                builder: (_, value, ___) => CheckboxListTile(
+                builder: (_, value, _) => CheckboxListTile(
                   value: value,
                   onChanged: (data) async {
                     checkbox.value = data!; // Checkbox isn't tristate so it's save
