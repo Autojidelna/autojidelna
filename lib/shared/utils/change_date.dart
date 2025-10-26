@@ -1,7 +1,7 @@
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
-import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
+import 'package:autojidelna/features/canteen/application/selected_date.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -17,12 +17,11 @@ void changeDate(DateTime newDate) async {
   // If we're in the middle of a programmatic change, ignore further callbacks.
   if (container.read(_pageChangeLockProvider)) return;
 
-  final canteen = container.read(canteenProvider);
-  final prevDate = canteen.selectedDate;
+  final prevDate = container.read(selectedDateProvider);
 
   if (container.read(skipWeekendsProvider)) newDate = _jumpToWeekDay(prevDate, newDate);
   final bool animate = prevDate.difference(newDate).inDays.abs() <= 7;
-  canteen.setSelectedDate(newDate);
+  container.read(selectedDateProvider.notifier).state = newDate;
 
   final int dayIndex = newDate.toIndex();
   final bool listUi = container.read(listUiProvider);
@@ -51,8 +50,8 @@ DateTime _jumpToWeekDay(DateTime prevDate, DateTime newDate) {
   final int direction = newDate.isAfter(prevDate)
       ? 1
       : newDate.isBefore(prevDate)
-          ? -1
-          : 0;
+      ? -1
+      : 0;
 
   DateTime adjustedDate = newDate.normalize;
 

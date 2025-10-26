@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/utils/string_extension.dart';
 import 'package:autojidelna/core/types/stav_jidla.dart';
@@ -90,7 +91,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
   void initState() {
     super.initState();
     bigMarkersEnabled = ref.read(bigCalendarMarkersProvider);
-    selectedDate = ref.read(canteenProvider).selectedDate;
+    selectedDate = ref.read(selectedDateProvider);
 
     defaultDecoration = const BoxDecoration(shape: BoxShape.circle);
 
