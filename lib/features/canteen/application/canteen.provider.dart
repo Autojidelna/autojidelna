@@ -27,9 +27,6 @@ class CanteenProvider with ChangeNotifier {
   /// Store menus by day index
   Map<DateTime, Jidelnicek> _menus = {};
 
-  /// Stores number of dishes per day index
-  Map<DateTime, int> _numberOfDishes = {};
-
   List<Burza> _dishMarketplace = [];
 
   /// DayIndex
@@ -128,10 +125,7 @@ class CanteenProvider with ChangeNotifier {
   }
 
   void updateMenu(Jidelnicek menu) {
-    Jidelnicek tempMenu = _menus[menu.den.normalize]!;
     setMenu(menu, notify: false);
-    setNumberOfDishes(tempMenu, notify: false);
-    notifyListeners();
   }
 
   void setMenu(Jidelnicek menu, {bool notify = true}) {
@@ -139,15 +133,6 @@ class CanteenProvider with ChangeNotifier {
     if (_menus[tempDate] == menu) return;
     _menus.update(tempDate, (_) => menu, ifAbsent: () => menu);
     _menus = Map.from(_menus);
-    if (notify) notifyListeners();
-  }
-
-  void setNumberOfDishes(Jidelnicek menu, {bool notify = true}) {
-    DateTime temp = menu.den.normalize;
-    int numberOfDishes = menu.jidla.length;
-    if (_numberOfDishes[temp] == numberOfDishes) return;
-    _numberOfDishes.update(temp, (_) => numberOfDishes, ifAbsent: () => numberOfDishes);
-    _numberOfDishes = Map.from(_numberOfDishes);
     if (notify) notifyListeners();
   }
 
@@ -162,7 +147,6 @@ class CanteenProvider with ChangeNotifier {
     _canteenService.changeLocation(id);
     _locationId = id;
     _menus = Map.from({});
-    _numberOfDishes = Map.from({});
     notifyListeners();
   }
 
@@ -222,7 +206,6 @@ class CanteenProvider with ChangeNotifier {
 
   void clear() {
     _menus = Map.from({});
-    _numberOfDishes = Map.from({});
     _dishMarketplace = List.from([]);
     _selectedDate = DateTime.now().normalize;
     _locationId = 1;
