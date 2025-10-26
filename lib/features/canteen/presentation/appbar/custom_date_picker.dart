@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:autojidelna/features/canteen/application/is_button_enabled.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/utils/string_extension.dart';
 import 'package:autojidelna/core/types/stav_jidla.dart';
@@ -8,8 +7,7 @@ import 'package:autojidelna/shared/config/dates.dart';
 import 'package:autojidelna/shared/utils/change_date.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';
-import 'package:autojidelna/features/canteen/application/get_primary_state.dart';
-import 'package:autojidelna/features/canteen/application/get_stav_jidla.dart';
+import 'package:autojidelna/features/canteen/application/helpers.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 
 import 'package:flutter/material.dart';
