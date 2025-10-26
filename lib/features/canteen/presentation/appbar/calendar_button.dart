@@ -1,7 +1,8 @@
 import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
-import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/shared/utils/get_correct_date_string.dart';
+import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/features/canteen/presentation/appbar/custom_date_picker.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +29,7 @@ class CalendarButton extends StatelessWidget {
             const SizedBox(width: 8),
             Consumer(
               builder: (context, ref, _) {
-                final DateTime selectedDate = ref.watch(canteenProvider.select((it) => it.selectedDate));
+                final DateTime selectedDate = ref.watch(selectedDateProvider);
                 String day = DateFormat(DateFormat.ABBR_WEEKDAY, Localizations.localeOf(context).toLanguageTag()).format(selectedDate);
                 String date = getCorrectDateString(ref.watch(dateFormatOptionProvider), date: selectedDate);
                 return Text('$day - $date');

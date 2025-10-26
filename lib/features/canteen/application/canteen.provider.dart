@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/core/types/errors.dart';
+import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
@@ -14,7 +15,6 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:icanteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 final canteenProvider = ChangeNotifierProvider<CanteenProvider>((ref) => CanteenProvider(ref, CanteenService(ref)));
 
@@ -28,9 +28,6 @@ class CanteenProvider with ChangeNotifier {
   Map<DateTime, Jidelnicek> _menus = {};
 
   List<Burza> _dishMarketplace = [];
-
-  /// DayIndex
-  DateTime _selectedDate = DateTime.now().normalize;
 
   int _locationId = 1;
 
@@ -73,7 +70,6 @@ class CanteenProvider with ChangeNotifier {
 
   Jidelnicek? getCachedMenu(DateTime selectedDate) => _menus[selectedDate.normalize];
 
-  DateTime get selectedDate => _selectedDate.normalize;
   int get locationId => _locationId;
 
   Future<void> preIndexMenus({DateTime? targetDate}) async {
@@ -86,8 +82,8 @@ class CanteenProvider with ChangeNotifier {
       }
 
       // Otherwise, use smart pre-indexing around the target date
-      targetDate ??= _selectedDate;
-      await _smartPreIndexing(targetDate.normalize);
+      targetDate ??= _ref.read(selectedDateProvider) ?? DateTime.now().normalize;
+      await _smartPreIndexing(targetDate);
     } catch (e) {
       await handleErrors(e);
     }
@@ -136,21 +132,12 @@ class CanteenProvider with ChangeNotifier {
     if (notify) notifyListeners();
   }
 
-  void setSelectedDate(DateTime selectedDate) async {
-    if (_selectedDate == selectedDate.normalize) return;
-    _selectedDate = selectedDate.normalize;
-    if (await InternetConnectionChecker.instance.hasConnection) preIndexMenus(targetDate: selectedDate);
-    notifyListeners();
-  }
-
   void changeLocation(int id) {
     _canteenService.changeLocation(id);
     _locationId = id;
     _menus = Map.from({});
     notifyListeners();
   }
-
-  void setDayIndex(int dayIndex) => setSelectedDate(dayIndex.toDateTime());
 
   /// Checks if a dish is on the market
   bool dishOnMarketplace(Jidlo dish) {
@@ -170,15 +157,15 @@ class CanteenProvider with ChangeNotifier {
     return null;
   }
 
-  Future<void> refreshCurrentPage() async => getMenu(selectedDate.normalize);
+  Future<void> refreshCurrentPage() async => getMenu(_ref.read(selectedDateProvider));
 
   Future<void> refreshList() async {
-    List<DateTime> closest = [selectedDate]; // Add the middle date first
+    List<DateTime> closest = [_ref.read(selectedDateProvider)]; // Add the middle date first
 
     // Generate the 5 closest dates before and after the middle date
     for (int i = 1; i <= 5; i++) {
-      closest.add(selectedDate.add(Duration(days: i))); // Dates after
-      if (i < 2) closest.add(selectedDate.subtract(Duration(days: i))); // Dates before
+      closest.add(closest[0].add(Duration(days: i))); // Dates after
+      if (i < 2) closest.add(closest[0].subtract(Duration(days: i))); // Dates before
     }
 
     for (DateTime date in closest) {
@@ -207,7 +194,6 @@ class CanteenProvider with ChangeNotifier {
   void clear() {
     _menus = Map.from({});
     _dishMarketplace = List.from([]);
-    _selectedDate = DateTime.now().normalize;
     _locationId = 1;
     notifyListeners();
   }
