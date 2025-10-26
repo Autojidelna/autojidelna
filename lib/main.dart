@@ -1,5 +1,4 @@
 import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/app/migration/migration_manager.dart';
 import 'package:autojidelna/app/material_app.dart';
 

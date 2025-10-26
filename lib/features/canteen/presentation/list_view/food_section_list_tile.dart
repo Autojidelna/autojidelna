@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/core/types/stav_jidla.dart';
-import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
+import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/features/canteen/application/get_primary_state.dart';
 import 'package:autojidelna/features/canteen/application/get_stav_jidla.dart';
 import 'package:autojidelna/features/canteen/application/is_button_enabled.dart';
@@ -47,7 +47,7 @@ class _DishListTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ThemeData theme = Theme.of(context);
-    bool ordering = ref.watch(canteenProvider.select((it) => it.ordering));
+    bool ordering = ref.watch(disableInteractions);
 
     final StavJidla stav = getStavJidla(context, dish);
     final bool enabled = !ordering && isButtonEnabled(stav);
@@ -64,12 +64,7 @@ class _DishListTile extends ConsumerWidget {
       leading: RadioGroup(
         groupValue: true,
         onChanged: (_) => onTap(context, dish, stav),
-        child: Radio<bool>(
-          enabled: enabled,
-          toggleable: true,
-          value: selected,
-          activeColor: theme.colorScheme.primary,
-        ),
+        child: Radio<bool>(enabled: enabled, toggleable: true, value: selected, activeColor: theme.colorScheme.primary),
       ),
       title: Text(title),
       subtitle: _subtitle(context, dish.cena),
@@ -85,11 +80,7 @@ class _DishListTile extends ConsumerWidget {
   IconButton _detailButton(BuildContext context) {
     return IconButton(
       onPressed: () async => context.router.navigate(DishDetailRoute(dish: dish)),
-      icon: Icon(
-        Icons.info_outline,
-        color: Theme.of(context).listTileTheme.subtitleTextStyle!.color,
-        size: 24,
-      ),
+      icon: Icon(Icons.info_outline, color: Theme.of(context).listTileTheme.subtitleTextStyle!.color, size: 24),
     );
   }
 }
