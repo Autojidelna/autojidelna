@@ -1,5 +1,6 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
@@ -36,7 +37,7 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
           child: ListTile(
             contentPadding: EdgeInsets.zero,
             visualDensity: const VisualDensity(vertical: -4),
-            title: Text(locations[ref.read(canteenProvider).locationId + 1] ?? locations[1] ?? l10n.locationsUnknown),
+            title: Text(locations[ref.read(currentCanteen).vydejna + 1] ?? locations[1] ?? l10n.locationsUnknown),
           ),
         ),
         if (locations.isEmpty) lockedCover(context),
@@ -57,7 +58,7 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
             (i) => ListTile(
               visualDensity: VisualDensity.compact,
               title: Text(locations[i + 1]!, maxLines: 1, overflow: TextOverflow.ellipsis),
-              trailing: provider.locationId == i ? const Icon(Icons.check) : null,
+              trailing: ref.read(currentCanteen).vydejna == i ? const Icon(Icons.check) : null,
               onTap: () async {
                 provider.changeLocation(i);
                 provider.preIndexMenus();

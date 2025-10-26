@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:autojidelna/app/app.dart';
+import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/shared/config/dates.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
@@ -27,9 +28,9 @@ class _ListViewCanteenState extends ConsumerState<ListViewCanteen> {
 
     _debounceTimer?.cancel();
     _debounceTimer = Timer(Durations.short1, () {
-      final canteen = ref.read(canteenProvider);
-      if (canteen.selectedDate != visibleDate) {
-        canteen.setSelectedDate(visibleDate);
+      final selectedDate = ref.read(selectedDateProvider);
+      if (selectedDate != visibleDate) {
+        ref.read(selectedDateProvider.notifier).state = visibleDate;
       }
     });
   }
