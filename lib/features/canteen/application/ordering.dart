@@ -5,6 +5,7 @@ import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
+import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
@@ -22,8 +23,8 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
   final L10n l10n = context.l10n;
   final DateTime date = dish.den;
 
-  if (prov.ordering) return;
-  prov.ordering = true;
+  if (container.read(disableInteractions)) return;
+  container.read(disableInteractions.notifier).state = true;
 
   if (!await InternetConnectionChecker.instance.hasConnection) {
     final bool value = await showInternetConnectionSnackBar();
@@ -102,5 +103,5 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
       break;
   }
   container.read(userProvider).updateUserData();
-  prov.ordering = false;
+  container.read(disableInteractions.notifier).state = false;
 }

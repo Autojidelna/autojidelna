@@ -5,6 +5,7 @@ import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
+import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:autojidelna/features/canteen/data/canteen_service.dart';
@@ -23,8 +24,6 @@ class CanteenProvider with ChangeNotifier {
   final CanteenService _canteenService;
   final Ref _ref;
 
-  bool _ordering = false;
-
   /// Store menus by day index
   Map<DateTime, Jidelnicek> _menus = {};
 
@@ -40,28 +39,37 @@ class CanteenProvider with ChangeNotifier {
 
   Future<void> getMenu(DateTime date) async {
     try {
-      if (_dishMarketplace.isEmpty) _dishMarketplace = List.from(await _canteenService.getMarketplace());
-      if (_ref.read(currentCanteen).missingFeatures.contains(Features.jidelnicekMesic)) {
-        if (await _getMonthlyMenu()) {
-          notifyListeners();
-        }
+      final futures = <Future>[];
+
+      if (!_ref.read(currentCanteen).missingFeatures.contains(Features.burza) && _dishMarketplace.isEmpty) {
+        futures.add(_canteenService.getMarketplace().then((m) => _dishMarketplace = List.from(m)));
+      }
+      if (!_ref.read(currentCanteen).missingFeatures.contains(Features.jidelnicekMesic)) {
+        futures.add(_getMonthlyMenu());
+      } else {
+        futures.add(_getDailyMenu(date));
       }
 
-      Jidelnicek? menu = await _canteenService.getDailyMenu(date.normalize);
-      if (menu == null) return;
-      _menus[date] = menu;
-      notifyListeners();
+      await Future.wait(futures);
     } catch (e) {
       await handleErrors(e);
-      getMenu(date);
+    } finally {
+      notifyListeners();
     }
+  }
+
+  Future<bool> _getDailyMenu(DateTime date) async {
+    Jidelnicek? menu = await _canteenService.getDailyMenu(date.normalize);
+    if (menu == null) return false;
+    setMenu(menu);
+    return true;
   }
 
   Future<bool> _getMonthlyMenu() async {
     List<Jidelnicek>? menuList = await _canteenService.getMonthlyMenu();
     if (menuList == null || menuList.isEmpty) return false;
     for (Jidelnicek m in menuList) {
-      _menus[m.den.normalize] = m;
+      setMenu(m);
     }
     return true;
   }
@@ -69,7 +77,6 @@ class CanteenProvider with ChangeNotifier {
   Jidelnicek? getCachedMenu(DateTime selectedDate) => _menus[selectedDate.normalize];
 
   DateTime get selectedDate => _selectedDate.normalize;
-  bool get ordering => _ordering;
   int get locationId => _locationId;
 
   Future<void> preIndexMenus({DateTime? targetDate}) async {
@@ -161,12 +168,6 @@ class CanteenProvider with ChangeNotifier {
 
   void setDayIndex(int dayIndex) => setSelectedDate(dayIndex.toDateTime());
 
-  set ordering(bool ordering) {
-    if (_ordering == ordering) return;
-    _ordering = ordering;
-    notifyListeners();
-  }
-
   /// Checks if a dish is on the market
   bool dishOnMarketplace(Jidlo dish) {
     for (Burza jidloNaBurze in _dishMarketplace) {
@@ -212,15 +213,14 @@ class CanteenProvider with ChangeNotifier {
         }
         break;
       case CanteenErrors.noInternetConnection:
-        ordering = true;
+        _ref.read(disableInteractions.notifier).state = true;
         await showInternetConnectionSnackBar();
-        ordering = false;
+        _ref.read(disableInteractions.notifier).state = false;
       default:
     }
   }
 
   void clear() {
-    _ordering = false;
     _menus = Map.from({});
     _numberOfDishes = Map.from({});
     _dishMarketplace = List.from([]);

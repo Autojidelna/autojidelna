@@ -5,6 +5,7 @@ import 'package:autojidelna/features/canteen/application/get_primary_state.dart'
 import 'package:autojidelna/features/canteen/application/get_stav_jidla.dart';
 import 'package:autojidelna/features/canteen/application/is_button_enabled.dart';
 import 'package:autojidelna/features/canteen/presentation/burza_alert_dialog.dart';
+import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 
 import 'package:icanteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class OrderDishButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     CanteenProvider canteen = ref.watch(canteenProvider);
+    bool enabled = !ref.watch(disableInteractions);
 
     Jidelnicek? menu = canteen.getCachedMenu(dish.den);
     Jidlo updatedDish = menu!.jidla.firstWhere((j) => j.varianta == dish.varianta);
@@ -31,7 +33,7 @@ class OrderDishButton extends ConsumerWidget {
           backgroundColor: isPrimary ? colorScheme.primary : colorScheme.secondary,
           foregroundColor: isPrimary ? colorScheme.onPrimary : colorScheme.onSecondary,
         ),
-        onPressed: canteen.ordering || !isButtonEnabled(stav) ? null : () => burzaAlertDialog(context, updatedDish, stav),
+        onPressed: enabled || !isButtonEnabled(stav) ? null : () => burzaAlertDialog(context, updatedDish, stav),
         child: Text(getObedText(context, updatedDish, stav)),
       ),
     );
