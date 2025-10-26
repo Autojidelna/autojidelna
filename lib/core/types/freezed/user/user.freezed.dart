@@ -11,405 +11,315 @@ part of 'user.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$User implements DiagnosticableTreeMixin {
-  SafeAccount get accountData;
-  Uzivatel get data;
-  Map<int, String> get canteenLocations;
 
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<User> get copyWith =>
-      _$UserCopyWithImpl<User>(this as User, _$identity);
+ SafeAccount get accountData; Uzivatel get data; Map<int, String> get canteenLocations;
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$identity);
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    properties
-      ..add(DiagnosticsProperty('type', 'User'))
-      ..add(DiagnosticsProperty('accountData', accountData))
-      ..add(DiagnosticsProperty('data', data))
-      ..add(DiagnosticsProperty('canteenLocations', canteenLocations));
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is User &&
-            (identical(other.accountData, accountData) ||
-                other.accountData == accountData) &&
-            (identical(other.data, data) || other.data == data) &&
-            const DeepCollectionEquality()
-                .equals(other.canteenLocations, canteenLocations));
-  }
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'User'))
+    ..add(DiagnosticsProperty('accountData', accountData))..add(DiagnosticsProperty('data', data))..add(DiagnosticsProperty('canteenLocations', canteenLocations));
+}
 
-  @override
-  int get hashCode => Object.hash(runtimeType, accountData, data,
-      const DeepCollectionEquality().hash(canteenLocations));
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.accountData, accountData) || other.accountData == accountData)&&(identical(other.data, data) || other.data == data)&&const DeepCollectionEquality().equals(other.canteenLocations, canteenLocations));
+}
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(accountData: $accountData, data: $data, canteenLocations: $canteenLocations)';
-  }
+
+@override
+int get hashCode => Object.hash(runtimeType,accountData,data,const DeepCollectionEquality().hash(canteenLocations));
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'User(accountData: $accountData, data: $data, canteenLocations: $canteenLocations)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) _then) =
-      _$UserCopyWithImpl;
-  @useResult
-  $Res call(
-      {SafeAccount accountData,
-      Uzivatel data,
-      Map<int, String> canteenLocations});
+abstract mixin class $UserCopyWith<$Res>  {
+  factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
+@useResult
+$Res call({
+ SafeAccount accountData, Uzivatel data, Map<int, String> canteenLocations
+});
 
-  $SafeAccountCopyWith<$Res> get accountData;
-  $UzivatelCopyWith<$Res> get data;
+
+$SafeAccountCopyWith<$Res> get accountData;$UzivatelCopyWith<$Res> get data;
+
 }
-
 /// @nodoc
-class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
+class _$UserCopyWithImpl<$Res>
+    implements $UserCopyWith<$Res> {
   _$UserCopyWithImpl(this._self, this._then);
 
   final User _self;
   final $Res Function(User) _then;
 
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? accountData = null,
-    Object? data = null,
-    Object? canteenLocations = null,
-  }) {
-    return _then(_self.copyWith(
-      accountData: null == accountData
-          ? _self.accountData
-          : accountData // ignore: cast_nullable_to_non_nullable
-              as SafeAccount,
-      data: null == data
-          ? _self.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as Uzivatel,
-      canteenLocations: null == canteenLocations
-          ? _self.canteenLocations
-          : canteenLocations // ignore: cast_nullable_to_non_nullable
-              as Map<int, String>,
-    ));
-  }
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $SafeAccountCopyWith<$Res> get accountData {
-    return $SafeAccountCopyWith<$Res>(_self.accountData, (value) {
-      return _then(_self.copyWith(accountData: value));
-    });
-  }
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $UzivatelCopyWith<$Res> get data {
-    return $UzivatelCopyWith<$Res>(_self.data, (value) {
-      return _then(_self.copyWith(data: value));
-    });
-  }
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? accountData = null,Object? data = null,Object? canteenLocations = null,}) {
+  return _then(_self.copyWith(
+accountData: null == accountData ? _self.accountData : accountData // ignore: cast_nullable_to_non_nullable
+as SafeAccount,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as Uzivatel,canteenLocations: null == canteenLocations ? _self.canteenLocations : canteenLocations // ignore: cast_nullable_to_non_nullable
+as Map<int, String>,
+  ));
 }
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SafeAccountCopyWith<$Res> get accountData {
+  
+  return $SafeAccountCopyWith<$Res>(_self.accountData, (value) {
+    return _then(_self.copyWith(accountData: value));
+  });
+}/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UzivatelCopyWith<$Res> get data {
+  
+  return $UzivatelCopyWith<$Res>(_self.data, (value) {
+    return _then(_self.copyWith(data: value));
+  });
+}
+}
+
 
 /// Adds pattern-matching-related methods to [User].
 extension UserPatterns on User {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_User value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _User() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _User value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _User() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_User value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _User():
-        return $default(_that);
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _User value)  $default,){
+final _that = this;
+switch (_that) {
+case _User():
+return $default(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _User value)?  $default,){
+final _that = this;
+switch (_that) {
+case _User() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_User value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _User() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SafeAccount accountData,  Uzivatel data,  Map<int, String> canteenLocations)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _User() when $default != null:
+return $default(_that.accountData,_that.data,_that.canteenLocations);case _:
+  return orElse();
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(SafeAccount accountData, Uzivatel data,
-            Map<int, String> canteenLocations)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _User() when $default != null:
-        return $default(_that.accountData, _that.data, _that.canteenLocations);
-      case _:
-        return orElse();
-    }
-  }
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SafeAccount accountData,  Uzivatel data,  Map<int, String> canteenLocations)  $default,) {final _that = this;
+switch (_that) {
+case _User():
+return $default(_that.accountData,_that.data,_that.canteenLocations);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(SafeAccount accountData, Uzivatel data,
-            Map<int, String> canteenLocations)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _User():
-        return $default(_that.accountData, _that.data, _that.canteenLocations);
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SafeAccount accountData,  Uzivatel data,  Map<int, String> canteenLocations)?  $default,) {final _that = this;
+switch (_that) {
+case _User() when $default != null:
+return $default(_that.accountData,_that.data,_that.canteenLocations);case _:
+  return null;
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(SafeAccount accountData, Uzivatel data,
-            Map<int, String> canteenLocations)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _User() when $default != null:
-        return $default(_that.accountData, _that.data, _that.canteenLocations);
-      case _:
-        return null;
-    }
-  }
 }
 
 /// @nodoc
 
+
 class _User with DiagnosticableTreeMixin implements User {
-  const _User(
-      {required this.accountData,
-      required this.data,
-      required final Map<int, String> canteenLocations})
-      : _canteenLocations = canteenLocations;
+  const _User({required this.accountData, required this.data, required final  Map<int, String> canteenLocations}): _canteenLocations = canteenLocations;
+  
 
-  @override
-  final SafeAccount accountData;
-  @override
-  final Uzivatel data;
-  final Map<int, String> _canteenLocations;
-  @override
-  Map<int, String> get canteenLocations {
-    if (_canteenLocations is EqualUnmodifiableMapView) return _canteenLocations;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_canteenLocations);
-  }
+@override final  SafeAccount accountData;
+@override final  Uzivatel data;
+ final  Map<int, String> _canteenLocations;
+@override Map<int, String> get canteenLocations {
+  if (_canteenLocations is EqualUnmodifiableMapView) return _canteenLocations;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_canteenLocations);
+}
 
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$UserCopyWith<_User> get copyWith =>
-      __$UserCopyWithImpl<_User>(this, _$identity);
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    properties
-      ..add(DiagnosticsProperty('type', 'User'))
-      ..add(DiagnosticsProperty('accountData', accountData))
-      ..add(DiagnosticsProperty('data', data))
-      ..add(DiagnosticsProperty('canteenLocations', canteenLocations));
-  }
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$UserCopyWith<_User> get copyWith => __$UserCopyWithImpl<_User>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _User &&
-            (identical(other.accountData, accountData) ||
-                other.accountData == accountData) &&
-            (identical(other.data, data) || other.data == data) &&
-            const DeepCollectionEquality()
-                .equals(other._canteenLocations, _canteenLocations));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, accountData, data,
-      const DeepCollectionEquality().hash(_canteenLocations));
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'User'))
+    ..add(DiagnosticsProperty('accountData', accountData))..add(DiagnosticsProperty('data', data))..add(DiagnosticsProperty('canteenLocations', canteenLocations));
+}
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(accountData: $accountData, data: $data, canteenLocations: $canteenLocations)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.accountData, accountData) || other.accountData == accountData)&&(identical(other.data, data) || other.data == data)&&const DeepCollectionEquality().equals(other._canteenLocations, _canteenLocations));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,accountData,data,const DeepCollectionEquality().hash(_canteenLocations));
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'User(accountData: $accountData, data: $data, canteenLocations: $canteenLocations)';
+}
+
+
 }
 
 /// @nodoc
 abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$UserCopyWith(_User value, $Res Function(_User) _then) =
-      __$UserCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {SafeAccount accountData,
-      Uzivatel data,
-      Map<int, String> canteenLocations});
+  factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
+@override @useResult
+$Res call({
+ SafeAccount accountData, Uzivatel data, Map<int, String> canteenLocations
+});
 
-  @override
-  $SafeAccountCopyWith<$Res> get accountData;
-  @override
-  $UzivatelCopyWith<$Res> get data;
+
+@override $SafeAccountCopyWith<$Res> get accountData;@override $UzivatelCopyWith<$Res> get data;
+
 }
-
 /// @nodoc
-class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
+class __$UserCopyWithImpl<$Res>
+    implements _$UserCopyWith<$Res> {
   __$UserCopyWithImpl(this._self, this._then);
 
   final _User _self;
   final $Res Function(_User) _then;
 
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? accountData = null,
-    Object? data = null,
-    Object? canteenLocations = null,
-  }) {
-    return _then(_User(
-      accountData: null == accountData
-          ? _self.accountData
-          : accountData // ignore: cast_nullable_to_non_nullable
-              as SafeAccount,
-      data: null == data
-          ? _self.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as Uzivatel,
-      canteenLocations: null == canteenLocations
-          ? _self._canteenLocations
-          : canteenLocations // ignore: cast_nullable_to_non_nullable
-              as Map<int, String>,
-    ));
-  }
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? accountData = null,Object? data = null,Object? canteenLocations = null,}) {
+  return _then(_User(
+accountData: null == accountData ? _self.accountData : accountData // ignore: cast_nullable_to_non_nullable
+as SafeAccount,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as Uzivatel,canteenLocations: null == canteenLocations ? _self._canteenLocations : canteenLocations // ignore: cast_nullable_to_non_nullable
+as Map<int, String>,
+  ));
+}
 
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $SafeAccountCopyWith<$Res> get accountData {
-    return $SafeAccountCopyWith<$Res>(_self.accountData, (value) {
-      return _then(_self.copyWith(accountData: value));
-    });
-  }
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $UzivatelCopyWith<$Res> get data {
-    return $UzivatelCopyWith<$Res>(_self.data, (value) {
-      return _then(_self.copyWith(data: value));
-    });
-  }
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SafeAccountCopyWith<$Res> get accountData {
+  
+  return $SafeAccountCopyWith<$Res>(_self.accountData, (value) {
+    return _then(_self.copyWith(accountData: value));
+  });
+}/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UzivatelCopyWith<$Res> get data {
+  
+  return $UzivatelCopyWith<$Res>(_self.data, (value) {
+    return _then(_self.copyWith(data: value));
+  });
+}
 }
 
 // dart format on

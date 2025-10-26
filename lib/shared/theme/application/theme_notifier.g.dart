@@ -15,15 +15,15 @@ const themeProvider = ThemeNotifierProvider._();
 final class ThemeNotifierProvider
     extends $NotifierProvider<ThemeNotifier, ThemeState> {
   const ThemeNotifierProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'themeProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'themeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$themeNotifierHash();
@@ -50,8 +50,14 @@ abstract class _$ThemeNotifier extends $Notifier<ThemeState> {
   void runBuild() {
     final created = build();
     final ref = this.ref as $Ref<ThemeState, ThemeState>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<ThemeState, ThemeState>, ThemeState, Object?, Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<ThemeState, ThemeState>,
+              ThemeState,
+              Object?,
+              Object?
+            >;
     element.handleValue(ref, created);
   }
 }
@@ -61,15 +67,16 @@ const isBrightProvider = IsBrightFamily._();
 
 final class IsBrightProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsBrightProvider._(
-      {required IsBrightFamily super.from, required Brightness super.argument})
-      : super(
-          retry: null,
-          name: r'isBrightProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+  const IsBrightProvider._({
+    required IsBrightFamily super.from,
+    required Brightness super.argument,
+  }) : super(
+         retry: null,
+         name: r'isBrightProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
   @override
   String debugGetCreateSourceHash() => _$isBrightHash();
@@ -89,10 +96,7 @@ final class IsBrightProvider extends $FunctionalProvider<bool, bool, bool>
   @override
   bool create(Ref ref) {
     final argument = this.argument as Brightness;
-    return isBright(
-      ref,
-      argument,
-    );
+    return isBright(ref, argument);
   }
 
   /// {@macro riverpod.override_with_value}
@@ -119,17 +123,15 @@ String _$isBrightHash() => r'c50ae5149368b9be153ea568f85b067aa01b1bbd';
 final class IsBrightFamily extends $Family
     with $FunctionalFamilyOverride<bool, Brightness> {
   const IsBrightFamily._()
-      : super(
-          retry: null,
-          name: r'isBrightProvider',
-          dependencies: null,
-          $allTransitiveDependencies: null,
-          isAutoDispose: true,
-        );
+    : super(
+        retry: null,
+        name: r'isBrightProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
 
-  IsBrightProvider call(
-    Brightness brightness,
-  ) =>
+  IsBrightProvider call(Brightness brightness) =>
       IsBrightProvider._(argument: brightness, from: this);
 
   @override

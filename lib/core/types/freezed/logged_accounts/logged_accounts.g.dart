@@ -11,8 +11,10 @@ _LoggedAccounts _$LoggedAccountsFromJson(Map<String, dynamic> json) =>
       loggedInAccount: json['logged_in_account'] == null
           ? null
           : SafeAccount.fromJson(
-              json['logged_in_account'] as Map<String, dynamic>),
-      accounts: (json['accounts'] as List<dynamic>?)
+              json['logged_in_account'] as Map<String, dynamic>,
+            ),
+      accounts:
+          (json['accounts'] as List<dynamic>?)
               ?.map((e) => Account.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],

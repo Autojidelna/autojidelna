@@ -12,21 +12,24 @@ part of 'app_providers.dart';
 @ProviderFor(scaffoldMessenger)
 const scaffoldMessengerProvider = ScaffoldMessengerProvider._();
 
-final class ScaffoldMessengerProvider extends $FunctionalProvider<
-        GlobalKey<ScaffoldMessengerState>,
-        GlobalKey<ScaffoldMessengerState>,
-        GlobalKey<ScaffoldMessengerState>>
+final class ScaffoldMessengerProvider
+    extends
+        $FunctionalProvider<
+          GlobalKey<ScaffoldMessengerState>,
+          GlobalKey<ScaffoldMessengerState>,
+          GlobalKey<ScaffoldMessengerState>
+        >
     with $Provider<GlobalKey<ScaffoldMessengerState>> {
   const ScaffoldMessengerProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'scaffoldMessengerProvider',
-          isAutoDispose: false,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'scaffoldMessengerProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$scaffoldMessengerHash();
@@ -34,8 +37,8 @@ final class ScaffoldMessengerProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<GlobalKey<ScaffoldMessengerState>> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   GlobalKey<ScaffoldMessengerState> create(Ref ref) {
@@ -46,44 +49,11 @@ final class ScaffoldMessengerProvider extends $FunctionalProvider<
   Override overrideWithValue(GlobalKey<ScaffoldMessengerState> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride:
-          $SyncValueProvider<GlobalKey<ScaffoldMessengerState>>(value),
+      providerOverride: $SyncValueProvider<GlobalKey<ScaffoldMessengerState>>(
+        value,
+      ),
     );
   }
 }
 
 String _$scaffoldMessengerHash() => r'5cfbc23cb0ff38ab348a69c0eea13ee75688f4de';
-
-@ProviderFor(packageInfo)
-const packageInfoProvider = PackageInfoProvider._();
-
-final class PackageInfoProvider extends $FunctionalProvider<
-        AsyncValue<PackageInfo>, PackageInfo, FutureOr<PackageInfo>>
-    with $FutureModifier<PackageInfo>, $FutureProvider<PackageInfo> {
-  const PackageInfoProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'packageInfoProvider',
-          isAutoDispose: false,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
-
-  @override
-  String debugGetCreateSourceHash() => _$packageInfoHash();
-
-  @$internal
-  @override
-  $FutureProviderElement<PackageInfo> $createElement(
-          $ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<PackageInfo> create(Ref ref) {
-    return packageInfo(ref);
-  }
-}
-
-String _$packageInfoHash() => r'5fd12e5a46daf085d283c70a7608ea667979e1a4';
