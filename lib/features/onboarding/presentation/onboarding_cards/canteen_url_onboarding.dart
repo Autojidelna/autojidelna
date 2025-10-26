@@ -92,12 +92,9 @@ class _CanteenUrlOnboardingState extends ConsumerState<CanteenUrlOnboarding> {
                   errorText: provider.error,
                   suffixIcon: ValueListenableBuilder<TextEditingValue>(
                     valueListenable: controller,
-                    builder: (_, urlController, ___) => urlController.text.isEmpty
+                    builder: (_, urlController, _) => urlController.text.isEmpty
                         ? const Icon(Icons.edit_rounded)
-                        : IconButton(
-                            onPressed: controller.clear,
-                            icon: const Icon(Icons.close),
-                          ),
+                        : IconButton(onPressed: controller.clear, icon: const Icon(Icons.close)),
                   ),
                 ),
                 onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),

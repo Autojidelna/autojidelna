@@ -27,7 +27,7 @@ class SwitchAccountPanel extends StatelessWidget {
       children: [
         SectionTitle(l10n.accounts),
         Consumer(
-          builder: (context, ref, ___) {
+          builder: (context, ref, _) {
             final UserProvider user = ref.watch(userProvider);
             if (user.user == null) return const Flexible(child: SizedBox());
 
@@ -38,10 +38,7 @@ class SwitchAccountPanel extends StatelessWidget {
             }
 
             return Flexible(
-              child: ListView.builder(
-                itemCount: accounts.length,
-                itemBuilder: (_, index) => accounts[index],
-              ),
+              child: ListView.builder(itemCount: accounts.length, itemBuilder: (_, index) => accounts[index]),
             );
           },
         ),
@@ -87,10 +84,7 @@ class SwitchAccountPanel extends StatelessWidget {
           if (!currentAccount) {
             prov.logout(safeAccount);
           } else {
-            configuredDialog(
-              context,
-              builder: (BuildContext context) => logoutDialog(safeAccount),
-            );
+            configuredDialog(context, builder: (BuildContext context) => logoutDialog(safeAccount));
           }
         },
       ),

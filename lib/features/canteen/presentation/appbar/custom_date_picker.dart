@@ -150,10 +150,10 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
             eventLoader: eventLoader,
             calendarBuilders: CalendarBuilders(
               headerTitleBuilder: (context, day) => _headerTitle(locale, day, context),
-              singleMarkerBuilder: !bigMarkersEnabled ? (context, __, dish) => _markerTemplate(context, dish as Jidlo) : null,
-              selectedBuilder: (context, day, ___) => _cellTemplate(context, userFocusedDate, state: CellState.selected),
-              todayBuilder: (context, day, ___) => _cellTemplate(context, day, state: CellState.today),
-              defaultBuilder: (context, day, ___) {
+              singleMarkerBuilder: !bigMarkersEnabled ? (context, _, dish) => _markerTemplate(context, dish as Jidlo) : null,
+              selectedBuilder: (context, day, _) => _cellTemplate(context, userFocusedDate, state: CellState.selected),
+              todayBuilder: (context, day, _) => _cellTemplate(context, day, state: CellState.today),
+              defaultBuilder: (context, day, _) {
                 if (!bigMarkersEnabled) return null;
                 if (orderedFoodDays.contains(day)) return _cellTemplate(context, day, state: CellState.ordered);
                 if (availableFoodDays.contains(day)) return _cellTemplate(context, day, state: CellState.available);
@@ -170,12 +170,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
 }
 
 Center _headerTitle(String locale, DateTime day, BuildContext context) {
-  return Center(
-    child: Text(
-      DateFormat(DateFormat.YEAR_MONTH, locale).format(day).capitalize(),
-      style: Theme.of(context).textTheme.headlineSmall!,
-    ),
-  );
+  return Center(child: Text(DateFormat(DateFormat.YEAR_MONTH, locale).format(day).capitalize(), style: Theme.of(context).textTheme.headlineSmall!));
 }
 
 Center _cellTemplate(BuildContext context, DateTime date, {CellState? state}) {
@@ -245,23 +240,12 @@ Row _actionButtons(BuildContext context, void Function() onConfirm) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
     children: [
-      TextButton(
-        onPressed: () => context.router.popUntil((route) => route.isFirst),
-        child: Text(l10n.cancel),
-      ),
-      TextButton(
-        onPressed: onConfirm,
-        child: Text(l10n.ok),
-      ),
+      TextButton(onPressed: () => context.router.popUntil((route) => route.isFirst), child: Text(l10n.cancel)),
+      TextButton(onPressed: onConfirm, child: Text(l10n.ok)),
       const SizedBox(width: 10),
     ],
   );
 }
 
 /// Used by custom date picker to decide how to render a cell
-enum CellState {
-  today,
-  selected,
-  ordered,
-  available,
-}
+enum CellState { today, selected, ordered, available }

@@ -402,16 +402,13 @@ class L10nCs extends L10n {
 
   @override
   String tabletUiOptions(String arg) {
-    String _temp0 = intl.Intl.selectLogic(
-      arg,
-      {
-        'other': 'error',
-        'auto': 'Automaticky',
-        'always': 'Vždy',
-        'landscape': 'Na šířku',
-        'never': 'Nikdy',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(arg, {
+      'other': 'error',
+      'auto': 'Automaticky',
+      'always': 'Vždy',
+      'landscape': 'Na šířku',
+      'never': 'Nikdy',
+    });
     return '$_temp0';
   }
 
@@ -438,13 +435,10 @@ class L10nCs extends L10n {
 
   @override
   String versionSubtitle(String arg, String version) {
-    String _temp0 = intl.Intl.selectLogic(
-      arg,
-      {
-        'true': 'Debug',
-        'other': 'Stable',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(arg, {
+      'true': 'Debug',
+      'other': 'Stable',
+    });
     return '$_temp0 $version';
   }
 

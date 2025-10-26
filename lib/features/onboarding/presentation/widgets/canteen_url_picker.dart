@@ -28,7 +28,10 @@ class CanteenUrlPicker extends ConsumerWidget {
       return TextSpan(
         children: [
           TextSpan(text: text.substring(0, start)),
-          TextSpan(text: text.substring(start, end), style: textStyle!.copyWith(color: theme.colorScheme.primary.withAlpha(enabled ? 255 : 100))),
+          TextSpan(
+            text: text.substring(start, end),
+            style: textStyle!.copyWith(color: theme.colorScheme.primary.withAlpha(enabled ? 255 : 100)),
+          ),
           TextSpan(text: text.substring(end)),
         ],
       );
@@ -36,14 +39,12 @@ class CanteenUrlPicker extends ConsumerWidget {
 
     return ValueListenableBuilder<TextEditingValue>(
       valueListenable: controller,
-      builder: (_, urlController, ___) {
+      builder: (_, urlController, _) {
         final query = urlController.text.trim().toLowerCase();
         final allEntries = urls.entries.toList();
 
         // check if query perfectly matches any key or value
-        final hasPerfectMatch = allEntries.any(
-          (entry) => entry.key.toLowerCase() == query || entry.value.toLowerCase() == query,
-        );
+        final hasPerfectMatch = allEntries.any((entry) => entry.key.toLowerCase() == query || entry.value.toLowerCase() == query);
 
         final filteredUrls = query.isEmpty || hasPerfectMatch
             ? allEntries
