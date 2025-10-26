@@ -29,8 +29,6 @@ class CanteenProvider with ChangeNotifier {
 
   List<Burza> _dishMarketplace = [];
 
-  int _locationId = 1;
-
   Future<void> getMenu(DateTime date) async {
     try {
       final futures = <Future>[];
@@ -69,8 +67,6 @@ class CanteenProvider with ChangeNotifier {
   }
 
   Jidelnicek? getCachedMenu(DateTime selectedDate) => _menus[selectedDate.normalize];
-
-  int get locationId => _locationId;
 
   Future<void> preIndexMenus({DateTime? targetDate}) async {
     try {
@@ -134,7 +130,6 @@ class CanteenProvider with ChangeNotifier {
 
   void changeLocation(int id) {
     _canteenService.changeLocation(id);
-    _locationId = id;
     _menus = Map.from({});
     notifyListeners();
   }
@@ -194,7 +189,6 @@ class CanteenProvider with ChangeNotifier {
   void clear() {
     _menus = Map.from({});
     _dishMarketplace = List.from([]);
-    _locationId = 1;
     notifyListeners();
   }
 }
