@@ -43,7 +43,7 @@ import 'package:icanteenlib/canteenlib.dart' as _i17;
 /// [_i1.AboutPage]
 class AboutRoute extends _i15.PageRouteInfo<void> {
   const AboutRoute({List<_i15.PageRouteInfo>? children})
-      : super(AboutRoute.name, initialChildren: children);
+    : super(AboutRoute.name, initialChildren: children);
 
   static const String name = 'AboutRoute';
 
@@ -59,7 +59,7 @@ class AboutRoute extends _i15.PageRouteInfo<void> {
 /// [_i2.AccountPage]
 class AccountRoute extends _i15.PageRouteInfo<void> {
   const AccountRoute({List<_i15.PageRouteInfo>? children})
-      : super(AccountRoute.name, initialChildren: children);
+    : super(AccountRoute.name, initialChildren: children);
 
   static const String name = 'AccountRoute';
 
@@ -75,7 +75,7 @@ class AccountRoute extends _i15.PageRouteInfo<void> {
 /// [_i3.AnalyticsPage]
 class AnalyticsRoute extends _i15.PageRouteInfo<void> {
   const AnalyticsRoute({List<_i15.PageRouteInfo>? children})
-      : super(AnalyticsRoute.name, initialChildren: children);
+    : super(AnalyticsRoute.name, initialChildren: children);
 
   static const String name = 'AnalyticsRoute';
 
@@ -91,7 +91,7 @@ class AnalyticsRoute extends _i15.PageRouteInfo<void> {
 /// [_i4.AppearancePage]
 class AppearanceRoute extends _i15.PageRouteInfo<void> {
   const AppearanceRoute({List<_i15.PageRouteInfo>? children})
-      : super(AppearanceRoute.name, initialChildren: children);
+    : super(AppearanceRoute.name, initialChildren: children);
 
   static const String name = 'AppearanceRoute';
 
@@ -107,7 +107,7 @@ class AppearanceRoute extends _i15.PageRouteInfo<void> {
 /// [_i5.ConveniencePage]
 class ConvenienceRoute extends _i15.PageRouteInfo<void> {
   const ConvenienceRoute({List<_i15.PageRouteInfo>? children})
-      : super(ConvenienceRoute.name, initialChildren: children);
+    : super(ConvenienceRoute.name, initialChildren: children);
 
   static const String name = 'ConvenienceRoute';
 
@@ -123,7 +123,7 @@ class ConvenienceRoute extends _i15.PageRouteInfo<void> {
 /// [_i6.DebugPage]
 class DebugRoute extends _i15.PageRouteInfo<void> {
   const DebugRoute({List<_i15.PageRouteInfo>? children})
-      : super(DebugRoute.name, initialChildren: children);
+    : super(DebugRoute.name, initialChildren: children);
 
   static const String name = 'DebugRoute';
 
@@ -143,10 +143,10 @@ class DishDetailRoute extends _i15.PageRouteInfo<DishDetailRouteArgs> {
     required _i17.Jidlo dish,
     List<_i15.PageRouteInfo>? children,
   }) : super(
-          DishDetailRoute.name,
-          args: DishDetailRouteArgs(key: key, dish: dish),
-          initialChildren: children,
-        );
+         DishDetailRoute.name,
+         args: DishDetailRouteArgs(key: key, dish: dish),
+         initialChildren: children,
+       );
 
   static const String name = 'DishDetailRoute';
 
@@ -186,7 +186,7 @@ class DishDetailRouteArgs {
 /// [_i8.MenuPage]
 class MenuRoute extends _i15.PageRouteInfo<void> {
   const MenuRoute({List<_i15.PageRouteInfo>? children})
-      : super(MenuRoute.name, initialChildren: children);
+    : super(MenuRoute.name, initialChildren: children);
 
   static const String name = 'MenuRoute';
 
@@ -202,7 +202,7 @@ class MenuRoute extends _i15.PageRouteInfo<void> {
 /// [_i9.MorePage]
 class MoreRoute extends _i15.PageRouteInfo<void> {
   const MoreRoute({List<_i15.PageRouteInfo>? children})
-      : super(MoreRoute.name, initialChildren: children);
+    : super(MoreRoute.name, initialChildren: children);
 
   static const String name = 'MoreRoute';
 
@@ -223,14 +223,14 @@ class OnboardingRoute extends _i15.PageRouteInfo<OnboardingRouteArgs> {
     void Function(bool)? onCompletedCallback,
     List<_i15.PageRouteInfo>? children,
   }) : super(
-          OnboardingRoute.name,
-          args: OnboardingRouteArgs(
-            key: key,
-            steps: steps,
-            onCompletedCallback: onCompletedCallback,
-          ),
-          initialChildren: children,
-        );
+         OnboardingRoute.name,
+         args: OnboardingRouteArgs(
+           key: key,
+           steps: steps,
+           onCompletedCallback: onCompletedCallback,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'OnboardingRoute';
 
@@ -283,7 +283,7 @@ class OnboardingRouteArgs {
 /// [_i11.RouterPage]
 class RouterRoute extends _i15.PageRouteInfo<void> {
   const RouterRoute({List<_i15.PageRouteInfo>? children})
-      : super(RouterRoute.name, initialChildren: children);
+    : super(RouterRoute.name, initialChildren: children);
 
   static const String name = 'RouterRoute';
 
@@ -299,7 +299,7 @@ class RouterRoute extends _i15.PageRouteInfo<void> {
 /// [_i12.SettingsPage]
 class SettingsRoute extends _i15.PageRouteInfo<void> {
   const SettingsRoute({List<_i15.PageRouteInfo>? children})
-      : super(SettingsRoute.name, initialChildren: children);
+    : super(SettingsRoute.name, initialChildren: children);
 
   static const String name = 'SettingsRoute';
 
@@ -315,7 +315,7 @@ class SettingsRoute extends _i15.PageRouteInfo<void> {
 /// [_i13.SplashPage]
 class SplashRoute extends _i15.PageRouteInfo<void> {
   const SplashRoute({List<_i15.PageRouteInfo>? children})
-      : super(SplashRoute.name, initialChildren: children);
+    : super(SplashRoute.name, initialChildren: children);
 
   static const String name = 'SplashRoute';
 
@@ -331,7 +331,7 @@ class SplashRoute extends _i15.PageRouteInfo<void> {
 /// [_i14.StatisticsPage]
 class StatisticsRoute extends _i15.PageRouteInfo<void> {
   const StatisticsRoute({List<_i15.PageRouteInfo>? children})
-      : super(StatisticsRoute.name, initialChildren: children);
+    : super(StatisticsRoute.name, initialChildren: children);
 
   static const String name = 'StatisticsRoute';
 

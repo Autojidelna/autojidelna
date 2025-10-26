@@ -14,15 +14,15 @@ const listUiProvider = ListUiProvider._();
 
 final class ListUiProvider extends $NotifierProvider<ListUi, bool> {
   const ListUiProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'listUiProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'listUiProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$listUiHash();
@@ -49,8 +49,14 @@ abstract class _$ListUi extends $Notifier<bool> {
   void runBuild() {
     final created = build();
     final ref = this.ref as $Ref<bool, bool>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<bool, bool>, bool, Object?, Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
     element.handleValue(ref, created);
   }
 }
@@ -61,15 +67,15 @@ const bigCalendarMarkersProvider = BigCalendarMarkersProvider._();
 final class BigCalendarMarkersProvider
     extends $NotifierProvider<BigCalendarMarkers, bool> {
   const BigCalendarMarkersProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'bigCalendarMarkersProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'bigCalendarMarkersProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$bigCalendarMarkersHash();
@@ -97,8 +103,14 @@ abstract class _$BigCalendarMarkers extends $Notifier<bool> {
   void runBuild() {
     final created = build();
     final ref = this.ref as $Ref<bool, bool>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<bool, bool>, bool, Object?, Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
     element.handleValue(ref, created);
   }
 }
@@ -108,15 +120,15 @@ const skipWeekendsProvider = SkipWeekendsProvider._();
 
 final class SkipWeekendsProvider extends $NotifierProvider<SkipWeekends, bool> {
   const SkipWeekendsProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'skipWeekendsProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'skipWeekendsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$skipWeekendsHash();
@@ -143,8 +155,14 @@ abstract class _$SkipWeekends extends $Notifier<bool> {
   void runBuild() {
     final created = build();
     final ref = this.ref as $Ref<bool, bool>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<bool, bool>, bool, Object?, Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
     element.handleValue(ref, created);
   }
 }
@@ -155,15 +173,15 @@ const relativeTimeStampsProvider = RelativeTimeStampsProvider._();
 final class RelativeTimeStampsProvider
     extends $NotifierProvider<RelativeTimeStamps, bool> {
   const RelativeTimeStampsProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'relativeTimeStampsProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'relativeTimeStampsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$relativeTimeStampsHash();
@@ -191,8 +209,14 @@ abstract class _$RelativeTimeStamps extends $Notifier<bool> {
   void runBuild() {
     final created = build();
     final ref = this.ref as $Ref<bool, bool>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<bool, bool>, bool, Object?, Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
     element.handleValue(ref, created);
   }
 }
@@ -203,15 +227,15 @@ const dateFormatOptionProvider = DateFormatOptionProvider._();
 final class DateFormatOptionProvider
     extends $NotifierProvider<DateFormatOption, DateFormatOptions> {
   const DateFormatOptionProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'dateFormatOptionProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'dateFormatOptionProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$dateFormatOptionHash();
@@ -238,11 +262,14 @@ abstract class _$DateFormatOption extends $Notifier<DateFormatOptions> {
   void runBuild() {
     final created = build();
     final ref = this.ref as $Ref<DateFormatOptions, DateFormatOptions>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<DateFormatOptions, DateFormatOptions>,
-        DateFormatOptions,
-        Object?,
-        Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<DateFormatOptions, DateFormatOptions>,
+              DateFormatOptions,
+              Object?,
+              Object?
+            >;
     element.handleValue(ref, created);
   }
 }

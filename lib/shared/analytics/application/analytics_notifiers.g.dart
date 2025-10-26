@@ -15,15 +15,15 @@ const allowAnalyticsProvider = AllowAnalyticsProvider._();
 final class AllowAnalyticsProvider
     extends $NotifierProvider<AllowAnalytics, bool> {
   const AllowAnalyticsProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'allowAnalyticsProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'allowAnalyticsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$allowAnalyticsHash();
@@ -50,8 +50,14 @@ abstract class _$AllowAnalytics extends $Notifier<bool> {
   void runBuild() {
     final created = build();
     final ref = this.ref as $Ref<bool, bool>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<bool, bool>, bool, Object?, Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
     element.handleValue(ref, created);
   }
 }
@@ -62,15 +68,15 @@ const sendCrashLogsProvider = SendCrashLogsProvider._();
 final class SendCrashLogsProvider
     extends $NotifierProvider<SendCrashLogs, bool> {
   const SendCrashLogsProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'sendCrashLogsProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'sendCrashLogsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$sendCrashLogsHash();
@@ -97,8 +103,14 @@ abstract class _$SendCrashLogs extends $Notifier<bool> {
   void runBuild() {
     final created = build();
     final ref = this.ref as $Ref<bool, bool>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<bool, bool>, bool, Object?, Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
     element.handleValue(ref, created);
   }
 }

@@ -11,57 +11,53 @@ part of 'password_state.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$PasswordState implements DiagnosticableTreeMixin {
-  String? get errorText;
-  bool get isVisible;
 
-  /// Create a copy of PasswordState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $PasswordStateCopyWith<PasswordState> get copyWith =>
-      _$PasswordStateCopyWithImpl<PasswordState>(
-          this as PasswordState, _$identity);
+ String? get errorText; bool get isVisible;
+/// Create a copy of PasswordState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PasswordStateCopyWith<PasswordState> get copyWith => _$PasswordStateCopyWithImpl<PasswordState>(this as PasswordState, _$identity);
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    properties
-      ..add(DiagnosticsProperty('type', 'PasswordState'))
-      ..add(DiagnosticsProperty('errorText', errorText))
-      ..add(DiagnosticsProperty('isVisible', isVisible));
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is PasswordState &&
-            (identical(other.errorText, errorText) ||
-                other.errorText == errorText) &&
-            (identical(other.isVisible, isVisible) ||
-                other.isVisible == isVisible));
-  }
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'PasswordState'))
+    ..add(DiagnosticsProperty('errorText', errorText))..add(DiagnosticsProperty('isVisible', isVisible));
+}
 
-  @override
-  int get hashCode => Object.hash(runtimeType, errorText, isVisible);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PasswordState&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.isVisible, isVisible) || other.isVisible == isVisible));
+}
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PasswordState(errorText: $errorText, isVisible: $isVisible)';
-  }
+
+@override
+int get hashCode => Object.hash(runtimeType,errorText,isVisible);
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'PasswordState(errorText: $errorText, isVisible: $isVisible)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $PasswordStateCopyWith<$Res> {
-  factory $PasswordStateCopyWith(
-          PasswordState value, $Res Function(PasswordState) _then) =
-      _$PasswordStateCopyWithImpl;
-  @useResult
-  $Res call({String? errorText, bool isVisible});
-}
+abstract mixin class $PasswordStateCopyWith<$Res>  {
+  factory $PasswordStateCopyWith(PasswordState value, $Res Function(PasswordState) _then) = _$PasswordStateCopyWithImpl;
+@useResult
+$Res call({
+ String? errorText, bool isVisible
+});
 
+
+
+
+}
 /// @nodoc
 class _$PasswordStateCopyWithImpl<$Res>
     implements $PasswordStateCopyWith<$Res> {
@@ -70,238 +66,196 @@ class _$PasswordStateCopyWithImpl<$Res>
   final PasswordState _self;
   final $Res Function(PasswordState) _then;
 
-  /// Create a copy of PasswordState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? errorText = freezed,
-    Object? isVisible = null,
-  }) {
-    return _then(_self.copyWith(
-      errorText: freezed == errorText
-          ? _self.errorText
-          : errorText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isVisible: null == isVisible
-          ? _self.isVisible
-          : isVisible // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Create a copy of PasswordState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? errorText = freezed,Object? isVisible = null,}) {
+  return _then(_self.copyWith(
+errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
+as String?,isVisible: null == isVisible ? _self.isVisible : isVisible // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [PasswordState].
 extension PasswordStatePatterns on PasswordState {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_PasswordState value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _PasswordState() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _PasswordState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _PasswordState() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_PasswordState value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _PasswordState():
-        return $default(_that);
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _PasswordState value)  $default,){
+final _that = this;
+switch (_that) {
+case _PasswordState():
+return $default(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _PasswordState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _PasswordState() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_PasswordState value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _PasswordState() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? errorText,  bool isVisible)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _PasswordState() when $default != null:
+return $default(_that.errorText,_that.isVisible);case _:
+  return orElse();
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String? errorText, bool isVisible)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _PasswordState() when $default != null:
-        return $default(_that.errorText, _that.isVisible);
-      case _:
-        return orElse();
-    }
-  }
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? errorText,  bool isVisible)  $default,) {final _that = this;
+switch (_that) {
+case _PasswordState():
+return $default(_that.errorText,_that.isVisible);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(String? errorText, bool isVisible) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _PasswordState():
-        return $default(_that.errorText, _that.isVisible);
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? errorText,  bool isVisible)?  $default,) {final _that = this;
+switch (_that) {
+case _PasswordState() when $default != null:
+return $default(_that.errorText,_that.isVisible);case _:
+  return null;
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String? errorText, bool isVisible)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _PasswordState() when $default != null:
-        return $default(_that.errorText, _that.isVisible);
-      case _:
-        return null;
-    }
-  }
 }
 
 /// @nodoc
+
 
 class _PasswordState with DiagnosticableTreeMixin implements PasswordState {
   const _PasswordState({this.errorText, this.isVisible = false});
+  
 
-  @override
-  final String? errorText;
-  @override
-  @JsonKey()
-  final bool isVisible;
+@override final  String? errorText;
+@override@JsonKey() final  bool isVisible;
 
-  /// Create a copy of PasswordState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$PasswordStateCopyWith<_PasswordState> get copyWith =>
-      __$PasswordStateCopyWithImpl<_PasswordState>(this, _$identity);
+/// Create a copy of PasswordState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PasswordStateCopyWith<_PasswordState> get copyWith => __$PasswordStateCopyWithImpl<_PasswordState>(this, _$identity);
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    properties
-      ..add(DiagnosticsProperty('type', 'PasswordState'))
-      ..add(DiagnosticsProperty('errorText', errorText))
-      ..add(DiagnosticsProperty('isVisible', isVisible));
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _PasswordState &&
-            (identical(other.errorText, errorText) ||
-                other.errorText == errorText) &&
-            (identical(other.isVisible, isVisible) ||
-                other.isVisible == isVisible));
-  }
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'PasswordState'))
+    ..add(DiagnosticsProperty('errorText', errorText))..add(DiagnosticsProperty('isVisible', isVisible));
+}
 
-  @override
-  int get hashCode => Object.hash(runtimeType, errorText, isVisible);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PasswordState&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.isVisible, isVisible) || other.isVisible == isVisible));
+}
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PasswordState(errorText: $errorText, isVisible: $isVisible)';
-  }
+
+@override
+int get hashCode => Object.hash(runtimeType,errorText,isVisible);
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'PasswordState(errorText: $errorText, isVisible: $isVisible)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$PasswordStateCopyWith<$Res>
-    implements $PasswordStateCopyWith<$Res> {
-  factory _$PasswordStateCopyWith(
-          _PasswordState value, $Res Function(_PasswordState) _then) =
-      __$PasswordStateCopyWithImpl;
-  @override
-  @useResult
-  $Res call({String? errorText, bool isVisible});
-}
+abstract mixin class _$PasswordStateCopyWith<$Res> implements $PasswordStateCopyWith<$Res> {
+  factory _$PasswordStateCopyWith(_PasswordState value, $Res Function(_PasswordState) _then) = __$PasswordStateCopyWithImpl;
+@override @useResult
+$Res call({
+ String? errorText, bool isVisible
+});
 
+
+
+
+}
 /// @nodoc
 class __$PasswordStateCopyWithImpl<$Res>
     implements _$PasswordStateCopyWith<$Res> {
@@ -310,25 +264,17 @@ class __$PasswordStateCopyWithImpl<$Res>
   final _PasswordState _self;
   final $Res Function(_PasswordState) _then;
 
-  /// Create a copy of PasswordState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? errorText = freezed,
-    Object? isVisible = null,
-  }) {
-    return _then(_PasswordState(
-      errorText: freezed == errorText
-          ? _self.errorText
-          : errorText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isVisible: null == isVisible
-          ? _self.isVisible
-          : isVisible // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Create a copy of PasswordState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? errorText = freezed,Object? isVisible = null,}) {
+  return _then(_PasswordState(
+errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
+as String?,isVisible: null == isVisible ? _self.isVisible : isVisible // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
 }
 
 // dart format on

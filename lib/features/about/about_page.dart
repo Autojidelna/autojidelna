@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/app/app_providers.dart';
 import 'package:autojidelna/shared/config/assets.dart';
 import 'package:autojidelna/shared/config/links.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
@@ -16,18 +15,17 @@ import 'package:auto_route/auto_route.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+final _packageInfoProvider = FutureProvider<PackageInfo>((ref) async {
+  return await PackageInfo.fromPlatform();
+});
+
 @RoutePage()
-class AboutPage extends ConsumerWidget {
+class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final L10n l10n = context.l10n;
-
-    final AsyncValue<PackageInfo> packageInfo = ref.watch(packageInfoProvider);
-    String version = '';
-    if (packageInfo.hasValue) version = packageInfo.value!.version;
-    String appVersion = l10n.versionSubtitle(kDebugMode.toString(), version);
 
     Widget logo = SvgPicture.asset(
       Assets.logo,
@@ -42,26 +40,41 @@ class AboutPage extends ConsumerWidget {
           // logo
           Padding(padding: const EdgeInsets.symmetric(vertical: 85.0), child: logo),
           const CustomDivider(isTransparent: false),
-          // version list tile
-          ListTile(title: Text(l10n.version), subtitle: Text(appVersion)),
-          // licenses list tile
-          ListTile(
-            title: Text(l10n.licenses),
-            onTap: () => unawaited(
-              Navigator.of(context).push(
-                PageRouteBuilder(
-                  transitionDuration: Durations.short3,
-                  transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
-                  pageBuilder: (_, _, _) => LicensePage(
-                    applicationName: l10n.appName,
-                    applicationVersion: appVersion,
-                    applicationIcon: Padding(padding: const EdgeInsets.symmetric(vertical: 24), child: logo),
-                    applicationLegalese: l10n.appLegalese(DateTime.now()),
+          Consumer(
+            builder: (context, ref, child) {
+              final AsyncValue<PackageInfo> packageInfo = ref.watch(_packageInfoProvider);
+              String version = '';
+              if (packageInfo.value != null) version = packageInfo.value!.version;
+              String appVersion = l10n.versionSubtitle(kDebugMode.toString(), version);
+
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // version list tile
+                  ListTile(title: Text(l10n.version), subtitle: Text(appVersion)),
+                  // licenses list tile
+                  ListTile(
+                    title: Text(l10n.licenses),
+                    onTap: () => unawaited(
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          transitionDuration: Durations.short3,
+                          transitionsBuilder: (_, animation, _, child) => FadeTransition(opacity: animation, child: child),
+                          pageBuilder: (_, _, _) => LicensePage(
+                            applicationName: l10n.appName,
+                            applicationVersion: appVersion,
+                            applicationIcon: Padding(padding: const EdgeInsets.symmetric(vertical: 24), child: logo),
+                            applicationLegalese: l10n.appLegalese(packageInfo.value?.updateTime ?? packageInfo.value?.installTime ?? DateTime.now()),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
+                ],
+              );
+            },
           ),
+
           // privacy policy
           ListTile(title: Text(l10n.privacyPolicy), onTap: () => unawaited(launchUrl(Uri.parse(Links.privacyPolicy)))),
           const CustomDivider(isTransparent: false),

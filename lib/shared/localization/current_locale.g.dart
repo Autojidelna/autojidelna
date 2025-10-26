@@ -15,15 +15,15 @@ const currentLocaleProvider = CurrentLocaleProvider._();
 final class CurrentLocaleProvider
     extends $NotifierProvider<CurrentLocale, Locale> {
   const CurrentLocaleProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'currentLocaleProvider',
-          isAutoDispose: false,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentLocaleProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$currentLocaleHash();
@@ -50,8 +50,14 @@ abstract class _$CurrentLocale extends $Notifier<Locale> {
   void runBuild() {
     final created = build();
     final ref = this.ref as $Ref<Locale, Locale>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<Locale, Locale>, Locale, Object?, Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<Locale, Locale>,
+              Locale,
+              Object?,
+              Object?
+            >;
     element.handleValue(ref, created);
   }
 }

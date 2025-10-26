@@ -12,23 +12,5 @@ void main() async {
   await App.init();
   await MigrationManager.runMigrations();
 
-  runApp(
-    UncontrolledProviderScope(
-      container: App.globalContainer,
-      child: const _EagerInitialization(child: MyApp()),
-    ),
-  );
-}
-
-class _EagerInitialization extends ConsumerWidget {
-  const _EagerInitialization({required this.child});
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // Eagerly initialize providers by watching them.
-    // By using "watch", the provider will stay alive and not be disposed.
-    ref.watch(packageInfoProvider);
-    return child;
-  }
+  runApp(UncontrolledProviderScope(container: App.globalContainer, child: const MyApp()));
 }
