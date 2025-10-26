@@ -1,9 +1,19 @@
 import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
-
-import 'package:icanteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icanteenlib/canteenlib.dart';
+
+bool getPrimaryState(StavJidla stavJidla) {
+  switch (stavJidla) {
+    case StavJidla.objednano:
+    case StavJidla.objednanoPouzeNaBurzu:
+    case StavJidla.objednanoVyprsenaPlatnost:
+      return true;
+    default:
+      return false;
+  }
+}
 
 StavJidla getStavJidla(BuildContext context, Jidlo dish) {
   final ProviderContainer container = ProviderScope.containerOf(context);
@@ -23,4 +33,18 @@ StavJidla getStavJidla(BuildContext context, Jidlo dish) {
     return StavJidla.dostupneNaBurze;
   }
   return StavJidla.nedostupne;
+}
+
+bool isButtonEnabled(StavJidla stavJidla) {
+  switch (stavJidla) {
+    case StavJidla.nedostupne:
+    case StavJidla.objednanoVyprsenaPlatnost:
+      return false;
+    case StavJidla.objednano:
+    case StavJidla.objednanoPouzeNaBurzu:
+    case StavJidla.vlozenoNaBurze:
+    case StavJidla.dostupneNaBurze:
+    case StavJidla.neobjednano:
+      return true;
+  }
 }
