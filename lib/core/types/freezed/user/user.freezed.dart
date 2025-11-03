@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User implements DiagnosticableTreeMixin {
 
- SafeAccount get accountData; UzivatelskeUdaje? get data; Stream<StavUctu?> get stavUctuStream;
+ SafeAccount get accountData; UzivatelskeUdaje? get data;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,21 +26,21 @@ $UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$ide
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'User'))
-    ..add(DiagnosticsProperty('accountData', accountData))..add(DiagnosticsProperty('data', data))..add(DiagnosticsProperty('stavUctuStream', stavUctuStream));
+    ..add(DiagnosticsProperty('accountData', accountData))..add(DiagnosticsProperty('data', data));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.accountData, accountData) || other.accountData == accountData)&&(identical(other.data, data) || other.data == data)&&(identical(other.stavUctuStream, stavUctuStream) || other.stavUctuStream == stavUctuStream));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.accountData, accountData) || other.accountData == accountData)&&(identical(other.data, data) || other.data == data));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,accountData,data,stavUctuStream);
+int get hashCode => Object.hash(runtimeType,accountData,data);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'User(accountData: $accountData, data: $data, stavUctuStream: $stavUctuStream)';
+  return 'User(accountData: $accountData, data: $data)';
 }
 
 
@@ -51,7 +51,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- SafeAccount accountData, UzivatelskeUdaje? data, Stream<StavUctu?> stavUctuStream
+ SafeAccount accountData, UzivatelskeUdaje? data
 });
 
 
@@ -68,12 +68,11 @@ class _$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? accountData = null,Object? data = freezed,Object? stavUctuStream = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? accountData = null,Object? data = freezed,}) {
   return _then(_self.copyWith(
 accountData: null == accountData ? _self.accountData : accountData // ignore: cast_nullable_to_non_nullable
 as SafeAccount,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as UzivatelskeUdaje?,stavUctuStream: null == stavUctuStream ? _self.stavUctuStream : stavUctuStream // ignore: cast_nullable_to_non_nullable
-as Stream<StavUctu?>,
+as UzivatelskeUdaje?,
   ));
 }
 /// Create a copy of User
@@ -176,10 +175,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SafeAccount accountData,  UzivatelskeUdaje? data,  Stream<StavUctu?> stavUctuStream)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SafeAccount accountData,  UzivatelskeUdaje? data)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
-return $default(_that.accountData,_that.data,_that.stavUctuStream);case _:
+return $default(_that.accountData,_that.data);case _:
   return orElse();
 
 }
@@ -197,10 +196,10 @@ return $default(_that.accountData,_that.data,_that.stavUctuStream);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SafeAccount accountData,  UzivatelskeUdaje? data,  Stream<StavUctu?> stavUctuStream)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SafeAccount accountData,  UzivatelskeUdaje? data)  $default,) {final _that = this;
 switch (_that) {
 case _User():
-return $default(_that.accountData,_that.data,_that.stavUctuStream);}
+return $default(_that.accountData,_that.data);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -214,10 +213,10 @@ return $default(_that.accountData,_that.data,_that.stavUctuStream);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SafeAccount accountData,  UzivatelskeUdaje? data,  Stream<StavUctu?> stavUctuStream)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SafeAccount accountData,  UzivatelskeUdaje? data)?  $default,) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
-return $default(_that.accountData,_that.data,_that.stavUctuStream);case _:
+return $default(_that.accountData,_that.data);case _:
   return null;
 
 }
@@ -229,12 +228,11 @@ return $default(_that.accountData,_that.data,_that.stavUctuStream);case _:
 
 
 class _User with DiagnosticableTreeMixin implements User {
-  const _User({required this.accountData, required this.data, required this.stavUctuStream});
+  const _User({required this.accountData, required this.data});
   
 
 @override final  SafeAccount accountData;
 @override final  UzivatelskeUdaje? data;
-@override final  Stream<StavUctu?> stavUctuStream;
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
@@ -247,21 +245,21 @@ _$UserCopyWith<_User> get copyWith => __$UserCopyWithImpl<_User>(this, _$identit
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'User'))
-    ..add(DiagnosticsProperty('accountData', accountData))..add(DiagnosticsProperty('data', data))..add(DiagnosticsProperty('stavUctuStream', stavUctuStream));
+    ..add(DiagnosticsProperty('accountData', accountData))..add(DiagnosticsProperty('data', data));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.accountData, accountData) || other.accountData == accountData)&&(identical(other.data, data) || other.data == data)&&(identical(other.stavUctuStream, stavUctuStream) || other.stavUctuStream == stavUctuStream));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.accountData, accountData) || other.accountData == accountData)&&(identical(other.data, data) || other.data == data));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,accountData,data,stavUctuStream);
+int get hashCode => Object.hash(runtimeType,accountData,data);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'User(accountData: $accountData, data: $data, stavUctuStream: $stavUctuStream)';
+  return 'User(accountData: $accountData, data: $data)';
 }
 
 
@@ -272,7 +270,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- SafeAccount accountData, UzivatelskeUdaje? data, Stream<StavUctu?> stavUctuStream
+ SafeAccount accountData, UzivatelskeUdaje? data
 });
 
 
@@ -289,12 +287,11 @@ class __$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? accountData = null,Object? data = freezed,Object? stavUctuStream = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? accountData = null,Object? data = freezed,}) {
   return _then(_User(
 accountData: null == accountData ? _self.accountData : accountData // ignore: cast_nullable_to_non_nullable
 as SafeAccount,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as UzivatelskeUdaje?,stavUctuStream: null == stavUctuStream ? _self.stavUctuStream : stavUctuStream // ignore: cast_nullable_to_non_nullable
-as Stream<StavUctu?>,
+as UzivatelskeUdaje?,
   ));
 }
 
