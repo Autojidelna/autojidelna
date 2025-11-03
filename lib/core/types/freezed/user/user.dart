@@ -7,5 +7,5 @@ part 'user.freezed.dart';
 
 @freezed
 sealed class User with _$User {
-  const factory User({required SafeAccount accountData, required UzivatelskeUdaje data, required Stream<StavUctu?> stavUctuStream}) = _User;
+  const factory User({required SafeAccount accountData, required UzivatelskeUdaje? data, required Stream<StavUctu?> stavUctuStream}) = _User;
 }

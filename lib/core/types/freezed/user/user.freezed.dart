@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User implements DiagnosticableTreeMixin {
 
- SafeAccount get accountData; UzivatelskeUdaje get data; Stream<StavUctu?> get stavUctuStream;
+ SafeAccount get accountData; UzivatelskeUdaje? get data; Stream<StavUctu?> get stavUctuStream;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -51,11 +51,11 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- SafeAccount accountData, UzivatelskeUdaje data, Stream<StavUctu?> stavUctuStream
+ SafeAccount accountData, UzivatelskeUdaje? data, Stream<StavUctu?> stavUctuStream
 });
 
 
-$SafeAccountCopyWith<$Res> get accountData;$UzivatelskeUdajeCopyWith<$Res> get data;
+$SafeAccountCopyWith<$Res> get accountData;$UzivatelskeUdajeCopyWith<$Res>? get data;
 
 }
 /// @nodoc
@@ -68,11 +68,11 @@ class _$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? accountData = null,Object? data = null,Object? stavUctuStream = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? accountData = null,Object? data = freezed,Object? stavUctuStream = null,}) {
   return _then(_self.copyWith(
 accountData: null == accountData ? _self.accountData : accountData // ignore: cast_nullable_to_non_nullable
-as SafeAccount,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as UzivatelskeUdaje,stavUctuStream: null == stavUctuStream ? _self.stavUctuStream : stavUctuStream // ignore: cast_nullable_to_non_nullable
+as SafeAccount,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as UzivatelskeUdaje?,stavUctuStream: null == stavUctuStream ? _self.stavUctuStream : stavUctuStream // ignore: cast_nullable_to_non_nullable
 as Stream<StavUctu?>,
   ));
 }
@@ -89,9 +89,12 @@ $SafeAccountCopyWith<$Res> get accountData {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$UzivatelskeUdajeCopyWith<$Res> get data {
-  
-  return $UzivatelskeUdajeCopyWith<$Res>(_self.data, (value) {
+$UzivatelskeUdajeCopyWith<$Res>? get data {
+    if (_self.data == null) {
+    return null;
+  }
+
+  return $UzivatelskeUdajeCopyWith<$Res>(_self.data!, (value) {
     return _then(_self.copyWith(data: value));
   });
 }
@@ -173,7 +176,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SafeAccount accountData,  UzivatelskeUdaje data,  Stream<StavUctu?> stavUctuStream)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SafeAccount accountData,  UzivatelskeUdaje? data,  Stream<StavUctu?> stavUctuStream)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
 return $default(_that.accountData,_that.data,_that.stavUctuStream);case _:
@@ -194,7 +197,7 @@ return $default(_that.accountData,_that.data,_that.stavUctuStream);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SafeAccount accountData,  UzivatelskeUdaje data,  Stream<StavUctu?> stavUctuStream)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SafeAccount accountData,  UzivatelskeUdaje? data,  Stream<StavUctu?> stavUctuStream)  $default,) {final _that = this;
 switch (_that) {
 case _User():
 return $default(_that.accountData,_that.data,_that.stavUctuStream);}
@@ -211,7 +214,7 @@ return $default(_that.accountData,_that.data,_that.stavUctuStream);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SafeAccount accountData,  UzivatelskeUdaje data,  Stream<StavUctu?> stavUctuStream)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SafeAccount accountData,  UzivatelskeUdaje? data,  Stream<StavUctu?> stavUctuStream)?  $default,) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
 return $default(_that.accountData,_that.data,_that.stavUctuStream);case _:
@@ -230,7 +233,7 @@ class _User with DiagnosticableTreeMixin implements User {
   
 
 @override final  SafeAccount accountData;
-@override final  UzivatelskeUdaje data;
+@override final  UzivatelskeUdaje? data;
 @override final  Stream<StavUctu?> stavUctuStream;
 
 /// Create a copy of User
@@ -269,11 +272,11 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- SafeAccount accountData, UzivatelskeUdaje data, Stream<StavUctu?> stavUctuStream
+ SafeAccount accountData, UzivatelskeUdaje? data, Stream<StavUctu?> stavUctuStream
 });
 
 
-@override $SafeAccountCopyWith<$Res> get accountData;@override $UzivatelskeUdajeCopyWith<$Res> get data;
+@override $SafeAccountCopyWith<$Res> get accountData;@override $UzivatelskeUdajeCopyWith<$Res>? get data;
 
 }
 /// @nodoc
@@ -286,11 +289,11 @@ class __$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? accountData = null,Object? data = null,Object? stavUctuStream = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? accountData = null,Object? data = freezed,Object? stavUctuStream = null,}) {
   return _then(_User(
 accountData: null == accountData ? _self.accountData : accountData // ignore: cast_nullable_to_non_nullable
-as SafeAccount,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as UzivatelskeUdaje,stavUctuStream: null == stavUctuStream ? _self.stavUctuStream : stavUctuStream // ignore: cast_nullable_to_non_nullable
+as SafeAccount,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as UzivatelskeUdaje?,stavUctuStream: null == stavUctuStream ? _self.stavUctuStream : stavUctuStream // ignore: cast_nullable_to_non_nullable
 as Stream<StavUctu?>,
   ));
 }
@@ -308,9 +311,12 @@ $SafeAccountCopyWith<$Res> get accountData {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$UzivatelskeUdajeCopyWith<$Res> get data {
-  
-  return $UzivatelskeUdajeCopyWith<$Res>(_self.data, (value) {
+$UzivatelskeUdajeCopyWith<$Res>? get data {
+    if (_self.data == null) {
+    return null;
+  }
+
+  return $UzivatelskeUdajeCopyWith<$Res>(_self.data!, (value) {
     return _then(_self.copyWith(data: value));
   });
 }

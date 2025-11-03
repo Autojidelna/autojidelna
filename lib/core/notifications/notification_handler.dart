@@ -7,6 +7,7 @@ import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/logged_accounts/logged_accounts.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/core/utils/url.dart';
+import 'package:autojidelna/features/canteen/application/helpers.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/config/secure_storage.dart';
 import 'package:autojidelna/shared/localization/current_locale.dart';
@@ -63,7 +64,7 @@ class NotificationHandler {
         final canteen = await _loginBySafeAccount(safeAccount);
         final menu = await _getDailyMenu(canteen, now);
 
-        if (menu == null || menu.jidla.isEmpty) {
+        if (menu == null || menu.nabidka.isEmpty) {
           AwesomeNotifications().createNotification(
             content: NotificationContent(
               id: 1024 - i,
@@ -77,8 +78,8 @@ class NotificationHandler {
           continue;
         }
 
-        for (var k = 0; k < menu.jidla.length; k++) {
-          if (!menu.jidla[k].objednano) continue;
+        for (var k = 0; k < menu.nabidka.length; k++) {
+          if (!getPrimaryState(menu.nabidka[k].stav)) continue;
           AwesomeNotifications().createNotification(
             content: NotificationContent(
               id: 1024 - i,
@@ -86,7 +87,7 @@ class NotificationHandler {
               groupKey: NotificationChannelService.userIdGen(safeAccount),
               summary: safeAccount.username,
               title: l10n.notificationFoodTodayYesTitle,
-              body: menu.jidla[k].kategorizovano?.hlavniJidlo ?? menu.jidla[k].nazev,
+              body: menu.nabidka[k].slozeniJidla?.hlavniChod ?? menu.nabidka[k].nazev,
             ),
           );
           break;
@@ -115,9 +116,9 @@ class NotificationHandler {
 
       try {
         final canteen = await _loginBySafeAccount(safeAccount);
-        final user = await canteen.ziskejUzivatele();
+        final user = canteen.stavUctu;
 
-        if (user.kredit < 500) {
+        if (user!.kredit < 500) {
           AwesomeNotifications().createNotification(
             content: NotificationContent(
               id: 512 - i,
@@ -160,9 +161,9 @@ class NotificationHandler {
         for (var i = 0; i < 7; i++) {
           now = now.add(const Duration(days: 1));
           final menu = await _getDailyMenu(canteen, now);
-          if (menu == null || menu.jidla.isEmpty) continue;
-          for (var k = 0; k < menu.jidla.length; k++) {
-            if (!menu.jidla[k].objednano) continue;
+          if (menu == null || menu.nabidka.isEmpty) continue;
+          for (var k = 0; k < menu.nabidka.length; k++) {
+            if (!getPrimaryState(menu.nabidka[k].stav)) continue;
             orderedDays++;
             break;
           }
@@ -210,20 +211,17 @@ class NotificationHandler {
     if (value == null || value.trim().isEmpty) throw AuthErrors.accountNotFound;
 
     final data = LoggedAccounts.fromJson(jsonDecode(value));
-    final account = data.accounts.firstWhere(
-      (acc) => safeAccount.matches(acc),
-      orElse: () => throw AuthErrors.accountNotFound,
-    );
+    final account = data.accounts.firstWhere((acc) => safeAccount.matches(acc), orElse: () => throw AuthErrors.accountNotFound);
 
     var url = Url.clean(account.url);
-    var canteen = Canteen(url);
+    var canteen = await Canteen.create(url);
     try {
       if (!await canteen.login(account.username, account.password)) {
         throw AuthErrors.wrongCredentials;
       }
     } catch (_) {
       url = account.url;
-      canteen = Canteen(url);
+      canteen = await Canteen.create(url);
       if (!await canteen.login(account.username, account.password)) {
         throw AuthErrors.wrongCredentials;
       }
@@ -236,7 +234,7 @@ class NotificationHandler {
       throw CanteenErrors.noInternetConnection;
     }
     try {
-      return await canteen.jidelnicekDen(den: date.normalize);
+      return await canteen.specifickyJidelnicek(date.normalize);
     } catch (e) {
       if (!await InternetConnectionChecker.instance.hasConnection) {
         throw CanteenErrors.noInternetConnection;

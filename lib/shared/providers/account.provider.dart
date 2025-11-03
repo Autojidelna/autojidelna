@@ -64,7 +64,7 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> updateUserData() async {
     if (_user == null) return;
-    _user = _user!.copyWith(data: await _authService.fetchUserData(_user!.accountData.username));
+    _user = _user!.copyWith(data: await _authService.fetchUserData());
     notifyListeners();
   }
 

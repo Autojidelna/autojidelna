@@ -15,7 +15,7 @@ class DishList extends ConsumerWidget {
 
     Jidelnicek? menu = canteen.getCachedMenu(date);
     if (menu == null) return const Center(child: CircularProgressIndicator());
-    List<Jidlo> dishList = menu.jidla;
+    List<Jidlo> dishList = menu.nabidka;
 
     if (dishList.isEmpty) return emptyList(context);
 
@@ -30,12 +30,12 @@ class DishList extends ConsumerWidget {
   }
 
   Widget emptyList(BuildContext context) => SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: MediaQuery.sizeOf(context).height / 2 - 100),
-            child: Text(context.l10n.noFood),
-          ),
-        ),
-      );
+    physics: const AlwaysScrollableScrollPhysics(),
+    child: Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: MediaQuery.sizeOf(context).height / 2 - 100),
+        child: Text(context.l10n.noFood),
+      ),
+    ),
+  );
 }

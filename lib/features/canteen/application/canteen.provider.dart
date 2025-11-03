@@ -5,7 +5,6 @@ import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
@@ -33,10 +32,7 @@ class CanteenProvider with ChangeNotifier {
     try {
       final futures = <Future>[];
 
-      if (!_ref.read(currentCanteen).missingFeatures.contains(Features.burza) && _dishMarketplace.isEmpty) {
-        futures.add(_canteenService.getMarketplace().then((m) => _dishMarketplace = List.from(m)));
-      }
-      if (!_ref.read(currentCanteen).missingFeatures.contains(Features.jidelnicekMesic)) {
+      if (date.normalize.isBefore(DateTime.now().normalize)) {
         futures.add(_getMonthlyMenu());
       } else {
         futures.add(_getDailyMenu(date));
@@ -70,15 +66,16 @@ class CanteenProvider with ChangeNotifier {
 
   Future<void> preIndexMenus({DateTime? targetDate}) async {
     try {
+      targetDate ??= _ref.read(selectedDateProvider) ?? DateTime.now().normalize;
+
       // If monthly menu fetching is available, use it
-      if (_ref.read(currentCanteen).missingFeatures.contains(Features.jidelnicekMesic)) {
+      if (targetDate.normalize.isBefore(DateTime.now().normalize)) {
         await _getMonthlyMenu();
         notifyListeners();
         return;
       }
 
       // Otherwise, use smart pre-indexing around the target date
-      targetDate ??= _ref.read(selectedDateProvider) ?? DateTime.now().normalize;
       await _smartPreIndexing(targetDate);
     } catch (e) {
       await handleErrors(e);
@@ -121,7 +118,7 @@ class CanteenProvider with ChangeNotifier {
   }
 
   void setMenu(Jidelnicek menu, {bool notify = true}) {
-    DateTime tempDate = menu.den.normalize;
+    DateTime tempDate = menu.datum.normalize;
     if (_menus[tempDate] == menu) return;
     _menus.update(tempDate, (_) => menu, ifAbsent: () => menu);
     _menus = Map.from(_menus);
@@ -137,7 +134,7 @@ class CanteenProvider with ChangeNotifier {
   /// Checks if a dish is on the market
   bool dishOnMarketplace(Jidlo dish) {
     for (Burza jidloNaBurze in _dishMarketplace) {
-      if (jidloNaBurze.den == dish.den && jidloNaBurze.varianta == dish.varianta) return true;
+      if (jidloNaBurze.datum == dish.datum && jidloNaBurze.varianta == dish.varianta) return true;
     }
 
     return false;
@@ -147,7 +144,7 @@ class CanteenProvider with ChangeNotifier {
   /// Should be called after [dishOnMarketplace].
   Burza? getMarketplaceTypeDish(Jidlo dish) {
     for (Burza marketplaceDish in _dishMarketplace) {
-      if (marketplaceDish.den == dish.den && marketplaceDish.varianta == dish.varianta) return marketplaceDish;
+      if (marketplaceDish.datum == dish.datum && marketplaceDish.varianta == dish.varianta) return marketplaceDish;
     }
     return null;
   }

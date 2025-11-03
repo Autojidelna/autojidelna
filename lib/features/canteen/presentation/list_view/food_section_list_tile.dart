@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/features/canteen/application/helpers.dart';
 import 'package:autojidelna/features/canteen/presentation/burza_alert_dialog.dart';
@@ -24,9 +23,9 @@ class FoodSectionListTile extends StatelessWidget {
           int index = data.key;
           Jidlo dish = data.value;
 
-          String title = (selection[index].kategorizovano?.hlavniJidlo ?? selection[index].nazev) == ''
+          String title = (selection[index].slozeniJidla?.hlavniChod ?? selection[index].nazev) == ''
               ? selection[index].nazev
-              : (selection[index].kategorizovano?.hlavniJidlo ?? selection[index].nazev);
+              : (selection[index].slozeniJidla?.hlavniChod ?? selection[index].nazev);
 
           return _DishListTile(dish: dish, title: title);
         }).toList(),
@@ -47,9 +46,8 @@ class _DishListTile extends ConsumerWidget {
     ThemeData theme = Theme.of(context);
     bool ordering = ref.watch(disableInteractions);
 
-    final StavJidla stav = getStavJidla(context, dish);
-    final bool enabled = !ordering && isButtonEnabled(stav);
-    final bool selected = getPrimaryState(stav);
+    final bool enabled = !ordering && isButtonEnabled(dish.stav);
+    final bool selected = getPrimaryState(dish.stav);
     const onTap = burzaAlertDialog;
 
     return ListTile(
@@ -58,10 +56,10 @@ class _DishListTile extends ConsumerWidget {
       contentPadding: EdgeInsets.zero,
       selectedColor: theme.colorScheme.primary,
       titleTextStyle: theme.textTheme.bodyMedium,
-      onTap: !enabled ? null : () => onTap(context, dish, stav),
+      onTap: !enabled ? null : () => onTap(context, ref, dish),
       leading: RadioGroup(
         groupValue: true,
-        onChanged: (_) => onTap(context, dish, stav),
+        onChanged: (_) => onTap(context, ref, dish),
         child: Radio<bool>(enabled: enabled, toggleable: true, value: selected, activeColor: theme.colorScheme.primary),
       ),
       title: Text(title),

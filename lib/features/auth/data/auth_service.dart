@@ -130,7 +130,7 @@ class AuthService {
     await _saveDataToStorage(updatedData);
   }
 
-  Future<UzivatelskeUdaje?> fetchUserData(String username) async {
+  Future<UzivatelskeUdaje?> fetchUserData() async {
     Canteen? instance = _ref.read(currentCanteen);
     if (instance == null) return null;
     return await instance.ziskejUzivatelskeUdaje();

@@ -1,6 +1,5 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/analytics/statistic_type.dart';
-import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
@@ -15,61 +14,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
-  final ProviderContainer container = ProviderScope.containerOf(context);
-  final CanteenProvider prov = container.read(canteenProvider);
-  final Uzivatel uzivatel = container.read(userProvider).user!.data;
-  final Canteen canteen = container.read(currentCanteen);
+void pressed(BuildContext context, WidgetRef ref, Jidlo dish) async {
+  final CanteenProvider prov = ref.read(canteenProvider);
+  final Canteen canteen = ref.read(currentCanteen)!;
   final L10n l10n = context.l10n;
-  final DateTime date = dish.den;
+  final DateTime date = dish.datum;
 
-  if (container.read(disableInteractions)) return;
-  container.read(disableInteractions.notifier).state = true;
+  if (ref.read(disableInteractions)) return;
+  ref.read(disableInteractions.notifier).state = true;
 
   if (!await InternetConnectionChecker.instance.hasConnection) {
     final bool value = await showInternetConnectionSnackBar();
-    if (value && context.mounted) pressed(context, dish, stavJidla);
+    if (value && context.mounted) pressed(context, ref, dish);
   }
 
-  switch (stavJidla) {
+  switch (dish.stav) {
+    case StavJidla.objednano:
     case StavJidla.neobjednano:
-      try {
-        Jidelnicek menu = await canteen.objednat(dish);
-        prov.updateMenu(menu);
-        AnalyticsService.instance.addStatistic(StatisticType.order);
-      } catch (e) {
-        showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(l10n));
-      }
-      break;
-
     case StavJidla.dostupneNaBurze:
-      Burza? burza = prov.getMarketplaceTypeDish(dish);
-
-      if (burza == null) {
-        showErrorSnackBar(SnackBarOrderingErrors.dishNotInMarketplace(l10n));
-        break;
-      }
-
+    case StavJidla.objednanoPouzeNaBurzu:
+    case StavJidla.vlozenoNaBurze:
       try {
-        Jidelnicek menu = await canteen.objednatZBurzy(burza);
+        Jidelnicek menu = await canteen.provedObjednavku(dish);
         prov.updateMenu(menu);
         AnalyticsService.instance.addStatistic(StatisticType.order);
       } catch (e) {
         showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(l10n));
       }
       break;
-
     case StavJidla.objednanoVyprsenaPlatnost:
       showErrorSnackBar(SnackBarOrderingErrors.dishCancellationExpired(l10n));
-      break;
-
-    case StavJidla.objednanoPouzeNaBurzu:
-      try {
-        Jidelnicek menu = await canteen.doBurzy(dish);
-        prov.updateMenu(menu);
-      } catch (e) {
-        showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(l10n));
-      }
       break;
 
     case StavJidla.nedostupne:
@@ -77,31 +51,15 @@ void pressed(BuildContext context, Jidlo dish, StavJidla stavJidla) async {
         showErrorSnackBar(SnackBarOrderingErrors.dishCannotBeOrdered(l10n));
         break;
       }
-      if (uzivatel.kredit < dish.cena!) {
+      if (canteen.stavUctu!.kredit < dish.cena!) {
         showErrorSnackBar(SnackBarOrderingErrors.insufficientCredit(l10n));
         break;
       }
       showErrorSnackBar(SnackBarOrderingErrors.dishCannotBeOrdered(l10n));
       break;
-
-    case StavJidla.objednano:
-      try {
-        Jidelnicek jidelnicek = await canteen.objednat(dish);
-        prov.updateMenu(jidelnicek);
-      } catch (e) {
-        showErrorSnackBar(SnackBarOrderingErrors.cancelingOrder(l10n));
-      }
-      break;
-
-    case StavJidla.vlozenoNaBurze:
-      try {
-        Jidelnicek jidelnicek = await canteen.doBurzy(dish);
-        prov.updateMenu(jidelnicek);
-      } catch (e) {
-        showErrorSnackBar(SnackBarOrderingErrors.addingToMarketplace(l10n));
-      }
+    case StavJidla.verejne:
       break;
   }
-  container.read(userProvider).updateUserData();
-  container.read(disableInteractions.notifier).state = false;
+  ref.read(userProvider).updateUserData();
+  ref.read(disableInteractions.notifier).state = false;
 }

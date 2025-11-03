@@ -25,32 +25,18 @@ import 'package:hive_ce/hive.dart';
 class Onboarding {
   static late PageController pageController;
 
-  static final List<OnboardingStep> defaultSteps = [
-    const ThemeOnboarding(),
-    const PermissionsOnboarding(),
-  ];
+  static final List<OnboardingStep> defaultSteps = [const ThemeOnboarding(), const PermissionsOnboarding()];
 
-  static final List<OnboardingStep> loginSteps = [
-    const CanteenUrlOnboarding(),
-    const LoginOnboarding(),
-  ];
+  static final List<OnboardingStep> loginSteps = [const CanteenUrlOnboarding(), const LoginOnboarding()];
 
-  static final List<OnboardingStep> accountPickerSteps = [
-    const AccountPickerOnboarding(),
-  ];
+  static final List<OnboardingStep> accountPickerSteps = [const AccountPickerOnboarding()];
 
   static void nextPage() async {
-    pageController.nextPage(
-      duration: Durations.medium1,
-      curve: Curves.easeInOut,
-    );
+    pageController.nextPage(duration: Durations.medium1, curve: Curves.easeInOut);
   }
 
   static void previousPage() async {
-    pageController.previousPage(
-      duration: Durations.medium1,
-      curve: Curves.easeInOut,
-    );
+    pageController.previousPage(duration: Durations.medium1, curve: Curves.easeInOut);
   }
 
   static Future<bool> login(BuildContext context, WidgetRef ref, OnboardingFormKeys formKeyEnum) async {
@@ -103,7 +89,7 @@ class Onboarding {
 
     formKeyEnum == OnboardingFormKeys.credentials
         ? Hive.box(Boxes.appState).put(HiveKeys.appState.url, url)
-        : AnalyticsService.instance.logCanteenUrl(url, ref.read(currentCanteen).verze);
+        : AnalyticsService.instance.logCanteenUrl(url, ref.read(currentCanteen)?.webVerze);
     disableInteractionsNotifier.state = false;
     return allowNextPage;
   }
