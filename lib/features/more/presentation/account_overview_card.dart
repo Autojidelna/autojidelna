@@ -1,5 +1,6 @@
 import 'package:autojidelna/core/types/freezed/user/user.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
+import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/widgets/lined_card.dart';
 import 'package:autojidelna/features/more/application/more_service.dart';
 
@@ -28,7 +29,8 @@ class AccountOverviewCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               StreamBuilder(
-                stream: user?.stavUctuStream,
+                initialData: ref.watch(currentCanteen)!.stavUctu,
+                stream: ref.watch(currentCanteen)!.stavUctuStream,
                 builder: (context, asyncSnapshot) {
                   return Text(l10n.credit(asyncSnapshot.data?.kredit ?? 0), style: Theme.of(context).textTheme.titleMedium);
                 },

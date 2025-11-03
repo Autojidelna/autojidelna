@@ -59,15 +59,11 @@ class AuthService {
         return Future.error(AuthErrors.connectionFailed);
       }
     }
-
+    await instance.aktualizujStavUctu();
     _ref.read(currentCanteen.notifier).state = instance;
 
     try {
-      user = User(
-        accountData: SafeAccount.fromAccount(account),
-        data: await instance.ziskejUzivatelskeUdaje(),
-        stavUctuStream: instance.stavUctuStream,
-      );
+      user = User(accountData: SafeAccount.fromAccount(account), data: await instance.ziskejUzivatelskeUdaje());
     } catch (e) {
       rethrow;
     }
