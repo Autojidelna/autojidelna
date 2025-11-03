@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User implements DiagnosticableTreeMixin {
 
- SafeAccount get accountData; Uzivatel get data; Map<int, String> get canteenLocations;
+ SafeAccount get accountData; UzivatelskeUdaje get data; Stream<StavUctu?> get stavUctuStream;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,21 +26,21 @@ $UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$ide
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'User'))
-    ..add(DiagnosticsProperty('accountData', accountData))..add(DiagnosticsProperty('data', data))..add(DiagnosticsProperty('canteenLocations', canteenLocations));
+    ..add(DiagnosticsProperty('accountData', accountData))..add(DiagnosticsProperty('data', data))..add(DiagnosticsProperty('stavUctuStream', stavUctuStream));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.accountData, accountData) || other.accountData == accountData)&&(identical(other.data, data) || other.data == data)&&const DeepCollectionEquality().equals(other.canteenLocations, canteenLocations));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.accountData, accountData) || other.accountData == accountData)&&(identical(other.data, data) || other.data == data)&&(identical(other.stavUctuStream, stavUctuStream) || other.stavUctuStream == stavUctuStream));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,accountData,data,const DeepCollectionEquality().hash(canteenLocations));
+int get hashCode => Object.hash(runtimeType,accountData,data,stavUctuStream);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'User(accountData: $accountData, data: $data, canteenLocations: $canteenLocations)';
+  return 'User(accountData: $accountData, data: $data, stavUctuStream: $stavUctuStream)';
 }
 
 
@@ -51,11 +51,11 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- SafeAccount accountData, Uzivatel data, Map<int, String> canteenLocations
+ SafeAccount accountData, UzivatelskeUdaje data, Stream<StavUctu?> stavUctuStream
 });
 
 
-$SafeAccountCopyWith<$Res> get accountData;$UzivatelCopyWith<$Res> get data;
+$SafeAccountCopyWith<$Res> get accountData;$UzivatelskeUdajeCopyWith<$Res> get data;
 
 }
 /// @nodoc
@@ -68,12 +68,12 @@ class _$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? accountData = null,Object? data = null,Object? canteenLocations = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? accountData = null,Object? data = null,Object? stavUctuStream = null,}) {
   return _then(_self.copyWith(
 accountData: null == accountData ? _self.accountData : accountData // ignore: cast_nullable_to_non_nullable
 as SafeAccount,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as Uzivatel,canteenLocations: null == canteenLocations ? _self.canteenLocations : canteenLocations // ignore: cast_nullable_to_non_nullable
-as Map<int, String>,
+as UzivatelskeUdaje,stavUctuStream: null == stavUctuStream ? _self.stavUctuStream : stavUctuStream // ignore: cast_nullable_to_non_nullable
+as Stream<StavUctu?>,
   ));
 }
 /// Create a copy of User
@@ -89,9 +89,9 @@ $SafeAccountCopyWith<$Res> get accountData {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$UzivatelCopyWith<$Res> get data {
+$UzivatelskeUdajeCopyWith<$Res> get data {
   
-  return $UzivatelCopyWith<$Res>(_self.data, (value) {
+  return $UzivatelskeUdajeCopyWith<$Res>(_self.data, (value) {
     return _then(_self.copyWith(data: value));
   });
 }
@@ -173,10 +173,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SafeAccount accountData,  Uzivatel data,  Map<int, String> canteenLocations)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SafeAccount accountData,  UzivatelskeUdaje data,  Stream<StavUctu?> stavUctuStream)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
-return $default(_that.accountData,_that.data,_that.canteenLocations);case _:
+return $default(_that.accountData,_that.data,_that.stavUctuStream);case _:
   return orElse();
 
 }
@@ -194,10 +194,10 @@ return $default(_that.accountData,_that.data,_that.canteenLocations);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SafeAccount accountData,  Uzivatel data,  Map<int, String> canteenLocations)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SafeAccount accountData,  UzivatelskeUdaje data,  Stream<StavUctu?> stavUctuStream)  $default,) {final _that = this;
 switch (_that) {
 case _User():
-return $default(_that.accountData,_that.data,_that.canteenLocations);}
+return $default(_that.accountData,_that.data,_that.stavUctuStream);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -211,10 +211,10 @@ return $default(_that.accountData,_that.data,_that.canteenLocations);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SafeAccount accountData,  Uzivatel data,  Map<int, String> canteenLocations)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SafeAccount accountData,  UzivatelskeUdaje data,  Stream<StavUctu?> stavUctuStream)?  $default,) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
-return $default(_that.accountData,_that.data,_that.canteenLocations);case _:
+return $default(_that.accountData,_that.data,_that.stavUctuStream);case _:
   return null;
 
 }
@@ -226,18 +226,12 @@ return $default(_that.accountData,_that.data,_that.canteenLocations);case _:
 
 
 class _User with DiagnosticableTreeMixin implements User {
-  const _User({required this.accountData, required this.data, required final  Map<int, String> canteenLocations}): _canteenLocations = canteenLocations;
+  const _User({required this.accountData, required this.data, required this.stavUctuStream});
   
 
 @override final  SafeAccount accountData;
-@override final  Uzivatel data;
- final  Map<int, String> _canteenLocations;
-@override Map<int, String> get canteenLocations {
-  if (_canteenLocations is EqualUnmodifiableMapView) return _canteenLocations;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_canteenLocations);
-}
-
+@override final  UzivatelskeUdaje data;
+@override final  Stream<StavUctu?> stavUctuStream;
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
@@ -250,21 +244,21 @@ _$UserCopyWith<_User> get copyWith => __$UserCopyWithImpl<_User>(this, _$identit
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'User'))
-    ..add(DiagnosticsProperty('accountData', accountData))..add(DiagnosticsProperty('data', data))..add(DiagnosticsProperty('canteenLocations', canteenLocations));
+    ..add(DiagnosticsProperty('accountData', accountData))..add(DiagnosticsProperty('data', data))..add(DiagnosticsProperty('stavUctuStream', stavUctuStream));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.accountData, accountData) || other.accountData == accountData)&&(identical(other.data, data) || other.data == data)&&const DeepCollectionEquality().equals(other._canteenLocations, _canteenLocations));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.accountData, accountData) || other.accountData == accountData)&&(identical(other.data, data) || other.data == data)&&(identical(other.stavUctuStream, stavUctuStream) || other.stavUctuStream == stavUctuStream));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,accountData,data,const DeepCollectionEquality().hash(_canteenLocations));
+int get hashCode => Object.hash(runtimeType,accountData,data,stavUctuStream);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'User(accountData: $accountData, data: $data, canteenLocations: $canteenLocations)';
+  return 'User(accountData: $accountData, data: $data, stavUctuStream: $stavUctuStream)';
 }
 
 
@@ -275,11 +269,11 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- SafeAccount accountData, Uzivatel data, Map<int, String> canteenLocations
+ SafeAccount accountData, UzivatelskeUdaje data, Stream<StavUctu?> stavUctuStream
 });
 
 
-@override $SafeAccountCopyWith<$Res> get accountData;@override $UzivatelCopyWith<$Res> get data;
+@override $SafeAccountCopyWith<$Res> get accountData;@override $UzivatelskeUdajeCopyWith<$Res> get data;
 
 }
 /// @nodoc
@@ -292,12 +286,12 @@ class __$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? accountData = null,Object? data = null,Object? canteenLocations = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? accountData = null,Object? data = null,Object? stavUctuStream = null,}) {
   return _then(_User(
 accountData: null == accountData ? _self.accountData : accountData // ignore: cast_nullable_to_non_nullable
 as SafeAccount,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as Uzivatel,canteenLocations: null == canteenLocations ? _self._canteenLocations : canteenLocations // ignore: cast_nullable_to_non_nullable
-as Map<int, String>,
+as UzivatelskeUdaje,stavUctuStream: null == stavUctuStream ? _self.stavUctuStream : stavUctuStream // ignore: cast_nullable_to_non_nullable
+as Stream<StavUctu?>,
   ));
 }
 
@@ -314,9 +308,9 @@ $SafeAccountCopyWith<$Res> get accountData {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$UzivatelCopyWith<$Res> get data {
+$UzivatelskeUdajeCopyWith<$Res> get data {
   
-  return $UzivatelCopyWith<$Res>(_self.data, (value) {
+  return $UzivatelskeUdajeCopyWith<$Res>(_self.data, (value) {
     return _then(_self.copyWith(data: value));
   });
 }

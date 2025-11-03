@@ -22,54 +22,43 @@ class AccountPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final L10n l10n = context.l10n;
     final User provUser = ref.read(userProvider).user!;
-    final Uzivatel user = provUser.data;
+    final UzivatelskeUdaje user = provUser.data;
 
     bool firstName = user.jmeno != null && user.jmeno!.trim().isNotEmpty;
     bool lastName = user.prijmeni != null && user.prijmeni!.trim().isNotEmpty;
     bool category = user.kategorie != null && user.kategorie!.trim().isNotEmpty;
-    bool bankAccount = user.ucetProPlatby != null && user.ucetProPlatby!.trim().isNotEmpty;
-    bool varSymbol = user.varSymbol != null && user.varSymbol!.trim().isNotEmpty;
-    bool specSymbol = user.specSymbol != null && user.specSymbol!.trim().isNotEmpty;
+    bool bankAccount = user.ucetProPlatbyDoJidelny != null && user.ucetProPlatbyDoJidelny!.trim().isNotEmpty;
+    bool varSymbol = user.variabilniSymbol != null && user.variabilniSymbol!.trim().isNotEmpty;
+    bool specSymbol = user.specifickySymbol != null && user.specifickySymbol!.trim().isNotEmpty;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.account),
-        actions: [_appBarLogoutButton(context, provUser.accountData)],
-      ),
+      appBar: AppBar(title: Text(l10n.account), actions: [_appBarLogoutButton(context, provUser.accountData)]),
       body: ListView(
         children: [
           const CustomDivider(height: 30),
           const AccountOverviewCard(),
           const CustomDivider(height: 38),
           if ((firstName && lastName) || category) SectionTitle(l10n.personalInfo),
-          if (firstName && lastName)
-            ListTile(
-              title: Text('${user.jmeno!} ${user.prijmeni!}'),
-              subtitle: Text(l10n.name),
-            ),
-          if (lastName)
-            ListTile(
-              title: Text(user.kategorie!),
-              subtitle: Text(l10n.category),
-            ),
+          if (firstName && lastName) ListTile(title: Text('${user.jmeno!} ${user.prijmeni!}'), subtitle: Text(l10n.name)),
+          if (lastName) ListTile(title: Text(user.kategorie!), subtitle: Text(l10n.category)),
           if (bankAccount || varSymbol || specSymbol) SectionTitle(l10n.paymentInfo),
           if (bankAccount)
             ListTile(
-              title: Text(user.ucetProPlatby!),
+              title: Text(user.ucetProPlatbyDoJidelny!),
               subtitle: Text(l10n.paymentAccountNumber),
-              onLongPress: () => _copyToClipboard(user.ucetProPlatby!),
+              onLongPress: () => _copyToClipboard(user.ucetProPlatbyDoJidelny!),
             ),
           if (varSymbol)
             ListTile(
-              title: Text(user.varSymbol!),
+              title: Text(user.variabilniSymbol!),
               subtitle: Text(l10n.variableSymbol),
-              onLongPress: () => _copyToClipboard(user.varSymbol!),
+              onLongPress: () => _copyToClipboard(user.variabilniSymbol!),
             ),
           if (specSymbol)
             ListTile(
-              title: Text(user.specSymbol!),
+              title: Text(user.specifickySymbol!),
               subtitle: Text(l10n.specificSymbol),
-              onLongPress: () => _copyToClipboard(user.specSymbol!),
+              onLongPress: () => _copyToClipboard(user.specifickySymbol!),
             ),
         ],
       ),
