@@ -721,11 +721,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      resolved-ref: "9f2bd13bad4ff8bc2da0131065e51761d5c4d7e9"
+      resolved-ref: "4d8bda824d62d787887b970c99a2fcabdcf0ba6a"
       tag-pattern: "v{{version}}"
       url: "git@github.com:Autojidelna/icanteenlib.git"
     source: git
-    version: "4.2.1"
+    version: "5.0.0"
   internet_connection_checker:
     dependency: "direct main"
     description:

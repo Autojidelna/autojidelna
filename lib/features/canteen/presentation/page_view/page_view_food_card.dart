@@ -24,7 +24,7 @@ class PageViewFoodCard extends StatelessWidget {
             ListTile(
               contentPadding: EdgeInsets.zero,
               visualDensity: const VisualDensity(vertical: -4),
-              title: Text(dish.kategorizovano!.hlavniJidlo!),
+              title: Text(dish.slozeniJidla!.hlavniChod!),
               subtitle: dish.cena == null
                   ? null
                   : Text(NumberFormat.simpleCurrency(locale: Localizations.localeOf(context).toLanguageTag()).format(dish.cena)),

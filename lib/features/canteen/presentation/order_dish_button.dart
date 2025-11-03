@@ -1,4 +1,3 @@
-import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/features/canteen/application/get_obed_text.dart';
 import 'package:autojidelna/features/canteen/application/helpers.dart';
@@ -19,10 +18,9 @@ class OrderDishButton extends ConsumerWidget {
     CanteenProvider canteen = ref.watch(canteenProvider);
     bool enabled = !ref.watch(disableInteractions);
 
-    Jidelnicek? menu = canteen.getCachedMenu(dish.den);
-    Jidlo updatedDish = menu!.jidla.firstWhere((j) => j.varianta == dish.varianta);
-    StavJidla stav = getStavJidla(context, updatedDish);
-    bool isPrimary = getPrimaryState(stav);
+    Jidelnicek? menu = canteen.getCachedMenu(dish.datum);
+    Jidlo updatedDish = menu!.nabidka.firstWhere((j) => j.varianta == dish.varianta);
+    bool isPrimary = getPrimaryState(dish.stav);
 
     return SizedBox(
       width: MediaQuery.sizeOf(context).width,
@@ -31,8 +29,8 @@ class OrderDishButton extends ConsumerWidget {
           backgroundColor: isPrimary ? colorScheme.primary : colorScheme.secondary,
           foregroundColor: isPrimary ? colorScheme.onPrimary : colorScheme.onSecondary,
         ),
-        onPressed: enabled || !isButtonEnabled(stav) ? null : () => burzaAlertDialog(context, updatedDish, stav),
-        child: Text(getObedText(context, updatedDish, stav)),
+        onPressed: enabled || !isButtonEnabled(dish.stav) ? null : () => burzaAlertDialog(context, ref, updatedDish),
+        child: Text(getObedText(context, ref, updatedDish)),
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
-import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
@@ -25,26 +24,32 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
   Widget build(BuildContext context) {
     final L10n l10n = context.l10n;
     User? user = ref.watch(userProvider.select((it) => (it.user)));
-    final Map<int, String> locations = user?.canteenLocations ?? {};
-    return Stack(
-      alignment: AlignmentDirectional.center,
-      children: [
-        LinedCard(
-          title: l10n.location,
-          footer: locations.length > 1 ? l10n.pickLocation : null,
-          footerTextAlign: TextAlign.end,
-          onPressed: locations.length < 2 ? null : () => pickerDialog(ref, locations),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            visualDensity: const VisualDensity(vertical: -4),
-            title: Text(locations[ref.read(currentCanteen).vydejna + 1] ?? locations[1] ?? l10n.locationsUnknown),
-          ),
-        ),
-        if (locations.isEmpty) lockedCover(context),
-      ],
+    return StreamBuilder(
+      stream: user?.stavUctuStream,
+      builder: (context, asyncSnapshot) {
+        final Map<int, String> locations = asyncSnapshot.data?.vydejny ?? {};
+        return Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            LinedCard(
+              title: l10n.location,
+              footer: locations.length > 1 ? l10n.pickLocation : null,
+              footerTextAlign: TextAlign.end,
+              onPressed: locations.length < 2 ? null : () => pickerDialog(ref, locations),
+              child: ListTile(
+                contentPadding: EdgeInsets.zero,
+                visualDensity: const VisualDensity(vertical: -4),
+                title: Text(asyncSnapshot.data?.vydejna?.$2 ?? l10n.locationsUnknown),
+              ),
+            ),
+            if (locations.isEmpty) lockedCover(context),
+          ],
+        );
+      },
     );
   }
 
+  // TODO
   void pickerDialog(WidgetRef ref, Map<int, String> locations) {
     final CanteenProvider provider = ref.read(canteenProvider);
     configuredDialog(
@@ -58,7 +63,7 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
             (i) => ListTile(
               visualDensity: VisualDensity.compact,
               title: Text(locations[i + 1]!, maxLines: 1, overflow: TextOverflow.ellipsis),
-              trailing: ref.read(currentCanteen).vydejna == i ? const Icon(Icons.check) : null,
+              trailing: locations == i ? const Icon(Icons.check) : null,
               onTap: () async {
                 provider.changeLocation(i);
                 provider.preIndexMenus();

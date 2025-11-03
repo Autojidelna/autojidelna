@@ -28,7 +28,7 @@ class DayCard extends ConsumerWidget {
         showInternetConnectionSnackBar();
       }
     } else {
-      sortedDishes = mapDishesByVarianta(menu.jidla);
+      sortedDishes = mapDishesByVarianta(menu.nabidka);
     }
 
     return Card(
@@ -36,7 +36,7 @@ class DayCard extends ConsumerWidget {
       child: Column(
         children: [
           DayCardheader(date: date),
-          if (menu != null && menu.jidla.isNotEmpty) ...[const CustomDivider(isTransparent: false, height: 0), const SizedBox(height: 8)],
+          if (menu != null && menu.nabidka.isNotEmpty) ...[const CustomDivider(isTransparent: false, height: 0), const SizedBox(height: 8)],
           ...sortedDishes.entries.map((e) => FoodSectionListTile(title: e.key.toUpperCase(), selection: e.value)),
         ],
       ),
@@ -74,10 +74,7 @@ class DayCardheader extends ConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Text(
-        '$day - ${getCorrectDateString(ref.watch(dateFormatOptionProvider), date: date)}',
-        style: Theme.of(context).textTheme.titleMedium,
-      ),
+      child: Text('$day - ${getCorrectDateString(ref.watch(dateFormatOptionProvider), date: date)}', style: Theme.of(context).textTheme.titleMedium),
     );
   }
 }

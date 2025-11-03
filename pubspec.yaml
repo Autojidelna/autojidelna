@@ -65,7 +65,7 @@ dependencies:
     git:
       url: git@github.com:Autojidelna/icanteenlib.git
       tag_pattern: v{{version}}
-    version: ^4.2.1
+    version: ^5.0.0
 
   flutter_svg: ^2.2.0
   flutter_octicons: ^1.54.0

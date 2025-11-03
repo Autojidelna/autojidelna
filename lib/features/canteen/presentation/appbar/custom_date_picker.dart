@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/utils/string_extension.dart';
-import 'package:autojidelna/core/types/stav_jidla.dart';
 import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
 import 'package:autojidelna/shared/config/dates.dart';
 import 'package:autojidelna/shared/utils/change_date.dart';
@@ -47,16 +46,16 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
     Jidelnicek? menu = ref.read(canteenProvider).getCachedMenu(day);
 
     if (menu == null) return [];
-    if (!bigMarkersEnabled) return menu.jidla;
+    if (!bigMarkersEnabled) return menu.nabidka;
 
     /// This for loop is used for [defaultBuilder]
-    for (Jidlo dish in menu.jidla) {
+    for (Jidlo dish in menu.nabidka) {
       if (orderedFoodDays.contains(day) || availableFoodDays.contains(day)) break;
-      if (dish.objednano) {
+      if (getPrimaryState(dish.stav)) {
         orderedFoodDays.add(day);
         break;
       }
-      if (dish.lzeObjednat || dish.naBurze) {
+      if (isButtonEnabled(dish.stav)) {
         availableFoodDays.add(day);
         break;
       }
@@ -218,10 +217,9 @@ Center _cellTemplate(BuildContext context, DateTime date, {CellState? state}) {
 Widget? _markerTemplate(BuildContext context, Jidlo dish) {
   final ColorScheme colorScheme = Theme.of(context).colorScheme;
   double size = 10;
-  final StavJidla stavJidla = getStavJidla(context, dish);
-  final bool ordered = getPrimaryState(stavJidla);
+  final bool ordered = getPrimaryState(dish.stav);
 
-  if (!isButtonEnabled(stavJidla) && !ordered) return const SizedBox();
+  if (!isButtonEnabled(dish.stav) && !ordered) return const SizedBox();
 
   Color color = ordered ? colorScheme.primary : colorScheme.secondary;
 

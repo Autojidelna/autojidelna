@@ -22,7 +22,7 @@ class AccountPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final L10n l10n = context.l10n;
     final User provUser = ref.read(userProvider).user!;
-    final UzivatelskeUdaje user = provUser.data;
+    final UzivatelskeUdaje user = provUser.data!;
 
     bool firstName = user.jmeno != null && user.jmeno!.trim().isNotEmpty;
     bool lastName = user.prijmeni != null && user.prijmeni!.trim().isNotEmpty;
