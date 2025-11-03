@@ -32,7 +32,7 @@ class AuthService {
     String url = Url.clean(account.url);
     User? user;
 
-    Canteen instance = Canteen(url);
+    Canteen instance = await Canteen.create(url);
 
     try {
       // First login attempt (with cleaned URL)
@@ -42,7 +42,7 @@ class AuthService {
     } catch (_) {
       // Second login attempt
       url = account.url;
-      instance = Canteen(url);
+      instance = await Canteen.create(url);
 
       try {
         if (!await instance.login(account.username, account.password)) {
@@ -65,8 +65,8 @@ class AuthService {
     try {
       user = User(
         accountData: SafeAccount.fromAccount(account),
-        canteenLocations: (await instance.jidelnicekDen()).vydejny,
-        data: await fetchUserData(account.username),
+        data: await instance.ziskejUzivatelskeUdaje(),
+        stavUctuStream: instance.stavUctuStream,
       );
     } catch (e) {
       rethrow;
@@ -130,9 +130,10 @@ class AuthService {
     await _saveDataToStorage(updatedData);
   }
 
-  Future<Uzivatel> fetchUserData(String username) async {
-    Canteen instance = _ref.read(currentCanteen);
-    return instance.missingFeatures.contains(Features.ziskatUzivatele) ? Uzivatel(uzivatelskeJmeno: username) : await instance.ziskejUzivatele();
+  Future<UzivatelskeUdaje?> fetchUserData(String username) async {
+    Canteen? instance = _ref.read(currentCanteen);
+    if (instance == null) return null;
+    return await instance.ziskejUzivatelskeUdaje();
   }
 
   /// Logs out a specific user
@@ -185,10 +186,7 @@ class AuthService {
   /// Saves an [Account] to Secure storage.
   Future<void> _saveAccountToStorage(Account account) async {
     LoggedAccounts loginData = await _getDataFromStorage();
-    LoggedAccounts updatedData = LoggedAccounts(
-      loggedInAccount: SafeAccount.fromAccount(account),
-      accounts: [...loginData.accounts, account],
-    );
+    LoggedAccounts updatedData = LoggedAccounts(loggedInAccount: SafeAccount.fromAccount(account), accounts: [...loginData.accounts, account]);
     await _saveDataToStorage(updatedData);
   }
 
