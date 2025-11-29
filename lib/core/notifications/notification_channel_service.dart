@@ -1,6 +1,6 @@
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/core/notifications/notification_topics.dart';
-import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account/safe_account.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/l10n/output/l10n.dart';
 import 'package:autojidelna/shared/localization/current_locale.dart';
@@ -47,14 +47,8 @@ class NotificationChannelService {
   };
 
   static List<NotificationChannelGroup> channelGroups = [
-    NotificationChannelGroup(
-      channelGroupKey: getGroup(NotificationTopics.foodToday),
-      channelGroupName: _l10n.notificationChannelNameFoodToday,
-    ),
-    NotificationChannelGroup(
-      channelGroupKey: getGroup(NotificationTopics.lowCredit),
-      channelGroupName: _l10n.notificationChannelNameLowCredit,
-    ),
+    NotificationChannelGroup(channelGroupKey: getGroup(NotificationTopics.foodToday), channelGroupName: _l10n.notificationChannelNameFoodToday),
+    NotificationChannelGroup(channelGroupKey: getGroup(NotificationTopics.lowCredit), channelGroupName: _l10n.notificationChannelNameLowCredit),
     NotificationChannelGroup(
       channelGroupKey: getGroup(NotificationTopics.nextWeekFoodCheck),
       channelGroupName: _l10n.notificationChannelNameNextWeekFoodCheck,
