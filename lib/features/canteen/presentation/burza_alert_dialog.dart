@@ -17,8 +17,6 @@ void burzaAlertDialog(BuildContext context, WidgetRef ref, Jidlo updatedDish) {
     return;
   }
 
-  print(updatedDish);
-
   final L10n l10n = context.l10n;
   ValueNotifier<bool> checkbox = ValueNotifier<bool>(false);
 
