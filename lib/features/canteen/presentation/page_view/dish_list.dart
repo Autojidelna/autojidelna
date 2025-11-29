@@ -1,3 +1,4 @@
+import 'package:autojidelna/features/canteen/presentation/error_loading_data.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/features/canteen/application/providers.dart';
 import 'package:autojidelna/features/canteen/presentation/page_view/page_view_food_card.dart';
@@ -12,16 +13,22 @@ class DishList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Jidelnicek? menu = ref.read(denniNabidkaProvider(date)).unwrapPrevious().value;
-    if (menu == null) return const Center(child: CircularProgressIndicator());
-    List<Jidlo> dishList = menu.nabidka;
+    final menuAsync = ref.watch(denniNabidkaProvider(date));
 
-    if (dishList.isEmpty) return emptyList(context);
+    return menuAsync.when(
+      data: (menu) {
+        List<Jidlo> dishList = menu.nabidka;
 
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(vertical: 24),
-      itemCount: dishList.length,
-      itemBuilder: (context, index) => PageViewFoodCard(dishList[index]),
+        if (dishList.isEmpty) return emptyList(context);
+
+        return ListView.builder(
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          itemCount: dishList.length,
+          itemBuilder: (context, index) => PageViewFoodCard(dishList[index]),
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => const ErrorLoadingData(),
     );
   }
 

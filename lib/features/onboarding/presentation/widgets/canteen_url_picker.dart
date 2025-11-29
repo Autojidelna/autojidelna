@@ -30,7 +30,7 @@ class CanteenUrlPicker extends ConsumerWidget {
           TextSpan(text: text.substring(0, start)),
           TextSpan(
             text: text.substring(start, end),
-            style: textStyle!.copyWith(color: theme.colorScheme.primary.withAlpha(enabled ? 255 : 100)),
+            style: (textStyle ?? const TextStyle()).copyWith(color: theme.colorScheme.primary.withAlpha(enabled ? 255 : 100)),
           ),
           TextSpan(text: text.substring(end)),
         ],

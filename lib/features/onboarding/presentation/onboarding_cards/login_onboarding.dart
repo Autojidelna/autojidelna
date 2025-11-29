@@ -59,12 +59,13 @@ class _LoginOnboardingState extends ConsumerState<LoginOnboarding> {
 
   @override
   void dispose() {
-    super.dispose();
     usernameController.dispose();
     passwordController.dispose();
     usernameFocusNode.removeListener(updateUsernameFocusNotifier);
     passwordFocusNode.removeListener(updatePasswordFocusNotifier);
     usernameFocusNode.dispose();
+    passwordFocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -93,10 +94,7 @@ class _LoginOnboardingState extends ConsumerState<LoginOnboarding> {
                   enabled: !ref.watch(disableInteractions),
                   textInputAction: TextInputAction.next,
                   autofillHints: const [AutofillHints.username],
-                  decoration: InputDecoration(
-                    labelText: l10n.loginUserFieldLabel,
-                    errorText: passwordProvider.error != null ? '' : null,
-                  ),
+                  decoration: InputDecoration(labelText: l10n.loginUserFieldLabel, errorText: passwordProvider.error != null ? '' : null),
                   onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                   validator: (value) => (value?.isEmpty ?? true) ? l10n.loginUserFieldHint : null,
                   onSaved: usernameNotifier.setValue,

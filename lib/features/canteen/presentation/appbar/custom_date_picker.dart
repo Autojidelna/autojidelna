@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/features/canteen/application/providers.dart';
 import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
@@ -237,7 +236,7 @@ Row _actionButtons(BuildContext context, void Function() onConfirm) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
     children: [
-      TextButton(onPressed: () => context.router.popUntil((route) => route.isFirst), child: Text(l10n.cancel)),
+      TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(l10n.cancel)),
       TextButton(onPressed: onConfirm, child: Text(l10n.ok)),
       const SizedBox(width: 10),
     ],

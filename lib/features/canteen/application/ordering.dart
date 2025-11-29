@@ -14,17 +14,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-void pressed(BuildContext context, WidgetRef ref, Jidlo dish) async {
+Future<void> pressed(BuildContext context, WidgetRef ref, Jidlo dish) async {
   final Canteen canteen = ref.read(currentCanteen)!;
   final L10n l10n = context.l10n;
   final DateTime date = dish.datum;
 
-  if (ref.read(disableInteractions)) return;
-  ref.read(disableInteractions.notifier).state = true;
+  final notifier = ref.read(disableInteractions.notifier);
+  if (notifier.state) return;
+  notifier.state = true;
 
   if (!await InternetConnectionChecker.instance.hasConnection) {
     final bool value = await showInternetConnectionSnackBar();
-    if (value && context.mounted) pressed(context, ref, dish);
+    if (value && context.mounted) {
+      await pressed(context, ref, dish);
+    }
+    return;
   }
 
   switch (dish.stav) {
@@ -59,5 +63,5 @@ void pressed(BuildContext context, WidgetRef ref, Jidlo dish) async {
       break;
   }
   ref.read(userProvider).updateUserData();
-  ref.read(disableInteractions.notifier).state = false;
+  notifier.state = false;
 }

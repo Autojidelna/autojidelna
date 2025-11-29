@@ -24,16 +24,16 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ProviderScope(
-        overrides: [
-          onboardingInitialStepsProvider.overrideWithValue(steps ?? Onboarding.defaultSteps),
-          onboardingStepsProvider,
-          onboardingFormKeyProvider,
-          onboardingFocusNodeFocusProvider,
-          onboardingHasFocusProvider,
-          onboardingTextFieldStateProvider,
-        ],
-        child: _OnboardingPageContent(onCompletedCallback: onCompletedCallback),
-      );
+    overrides: [
+      onboardingInitialStepsProvider.overrideWithValue(steps ?? Onboarding.defaultSteps),
+      onboardingStepsProvider,
+      onboardingFormKeyProvider,
+      onboardingFocusNodeFocusProvider,
+      onboardingHasFocusProvider,
+      onboardingTextFieldStateProvider,
+    ],
+    child: _OnboardingPageContent(onCompletedCallback: onCompletedCallback),
+  );
 }
 
 @Dependencies([OnboardingSteps, onboardingHasFocus])
@@ -49,8 +49,8 @@ class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent>
   int _pageIndex = 0;
 
   void updatePageIndex(int value) => WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) setState(() => _pageIndex = value);
-      });
+    if (mounted) setState(() => _pageIndex = value);
+  });
 
   void _nextPage(OnboardingStep currentPage, bool isLastPage) async {
     if (!await currentPage.onNextPage(context, ref)) return;
@@ -80,8 +80,8 @@ class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent>
 
   @override
   void dispose() {
-    super.dispose();
     Onboarding.pageController.dispose();
+    super.dispose();
   }
 
   @override

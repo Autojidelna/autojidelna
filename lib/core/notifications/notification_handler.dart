@@ -5,7 +5,7 @@ import 'package:autojidelna/core/notifications/notification_channel_service.dart
 import 'package:autojidelna/core/notifications/notification_topics.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/logged_accounts/logged_accounts.dart';
-import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account/safe_account.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/features/canteen/application/helpers.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
@@ -118,7 +118,7 @@ class NotificationHandler {
         final canteen = await _loginBySafeAccount(safeAccount);
         final user = canteen.stavUctu;
 
-        if (user!.kredit < 500) {
+        if (user == null || user.kredit < 500) {
           AwesomeNotifications().createNotification(
             content: NotificationContent(
               id: 512 - i,

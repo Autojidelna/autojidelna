@@ -20,5 +20,5 @@ Stáhněte [Flutter][flutter-install] a poté spusťte `flutter build apk -PuseD
 > Pro více informací si přečtěte oficiální Flutter dokumentaci o [podepisování aplikace pro vydání][flutter-app-signing]
 
 [icanteenlib]: https://github.com/Autojidelna/icanteenlib
-[flutter-install]: https://github.com/Autojidelna/autojidelna/blob/main/android/app/build.gradle.kts#L65-L78
+[flutter-install]: https://docs.flutter.dev/get-started/install
 [flutter-app-signing]: https://docs.flutter.dev/deployment/android#sign-the-app

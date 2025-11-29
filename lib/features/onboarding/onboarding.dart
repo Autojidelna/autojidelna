@@ -23,7 +23,7 @@ import 'package:hive_ce/hive.dart';
 
 // ignore: provider_dependencies
 class Onboarding {
-  static late PageController pageController;
+  static PageController pageController = PageController();
 
   static final List<OnboardingStep> defaultSteps = [const ThemeOnboarding(), const PermissionsOnboarding()];
 
@@ -31,18 +31,19 @@ class Onboarding {
 
   static final List<OnboardingStep> accountPickerSteps = [const AccountPickerOnboarding()];
 
-  static void nextPage() async {
-    pageController.nextPage(duration: Durations.medium1, curve: Curves.easeInOut);
+  static Future<void> nextPage() async {
+    await pageController.nextPage(duration: Durations.medium1, curve: Curves.easeInOut);
   }
 
-  static void previousPage() async {
-    pageController.previousPage(duration: Durations.medium1, curve: Curves.easeInOut);
+  static Future<void> previousPage() async {
+    await pageController.previousPage(duration: Durations.medium1, curve: Curves.easeInOut);
   }
 
   static Future<bool> login(BuildContext context, WidgetRef ref, OnboardingFormKeys formKeyEnum) async {
     final formKey = ref.read(onboardingFormKeyProvider(formKeyEnum));
     final disableInteractionsNotifier = ref.read(disableInteractions.notifier);
 
+    if (formKey.currentState == null) return false;
     if (!formKey.currentState!.validate()) return false;
     formKey.currentState!.save();
 
@@ -67,7 +68,7 @@ class Onboarding {
     } catch (e) {
       switch (e) {
         case AuthErrors.noInternetConnection:
-          if (await showInternetConnectionSnackBar() && context.mounted) login(context, ref, formKeyEnum);
+          if (await showInternetConnectionSnackBar() && context.mounted) await login(context, ref, formKeyEnum);
           break;
         case AuthErrors.connectionFailed:
           if (context.mounted) showErrorSnackBar(SnackBarAuthErrors.connectionFailed(context.l10n));
