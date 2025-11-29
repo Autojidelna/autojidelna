@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/shared/config/dates.dart';
-import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
+import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/features/canteen/presentation/list_view/day_card.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_list_view/flutter_list_view.dart';
@@ -50,17 +50,13 @@ class _ListViewCanteenState extends ConsumerState<ListViewCanteen> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: ref.read(canteenProvider).refreshList,
-      triggerMode: RefreshIndicatorTriggerMode.anywhere,
-      child: FlutterListView(
-        controller: App.listController,
-        scrollDirection: Axis.vertical,
-        delegate: FlutterListViewDelegate(
-          initIndex: DateTime.now().toIndex(),
-          childCount: Dates.maximalDate.difference(Dates.minimalDate).inDays,
-          (BuildContext context, int index) => DayCard(index.toDateTime()),
-        ),
+    return FlutterListView(
+      controller: App.listController,
+      scrollDirection: Axis.vertical,
+      delegate: FlutterListViewDelegate(
+        initIndex: DateTime.now().toIndex(),
+        childCount: Dates.maximalDate.difference(Dates.minimalDate).inDays,
+        (BuildContext context, int index) => DayCard(index.toDateTime()),
       ),
     );
   }

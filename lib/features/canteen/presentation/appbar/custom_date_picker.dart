@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/features/canteen/application/providers.dart';
 import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/utils/string_extension.dart';
@@ -8,7 +9,6 @@ import 'package:autojidelna/shared/utils/change_date.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';
 import 'package:autojidelna/features/canteen/application/helpers.dart';
-import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,7 +43,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
   List<DateTime> availableFoodDays = [];
 
   List<dynamic> eventLoader(DateTime day) {
-    Jidelnicek? menu = ref.read(canteenProvider).getCachedMenu(day);
+    Jidelnicek? menu = ref.read(denniNabidkaProvider(day)).unwrapPrevious().value;
 
     if (menu == null) return [];
     if (!bigMarkersEnabled) return menu.nabidka;
