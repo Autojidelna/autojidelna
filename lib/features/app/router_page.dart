@@ -70,7 +70,7 @@ class _RouterPageState extends ConsumerState<RouterPage> {
 
 class _Destination {
   _Destination({required this.appbar, required this.route, required this.navigationDestination});
-  PreferredSizeWidget appbar;
-  PageRouteInfo route;
-  NavigationDestination navigationDestination;
+  final PreferredSizeWidget appbar;
+  final PageRouteInfo route;
+  final NavigationDestination navigationDestination;
 }

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
@@ -40,7 +40,7 @@ class AccountPage extends ConsumerWidget {
           const CustomDivider(height: 38),
           if ((firstName && lastName) || category) SectionTitle(l10n.personalInfo),
           if (firstName && lastName) ListTile(title: Text('${user.jmeno!} ${user.prijmeni!}'), subtitle: Text(l10n.name)),
-          if (lastName) ListTile(title: Text(user.kategorie!), subtitle: Text(l10n.category)),
+          if (category) ListTile(title: Text(user.kategorie!), subtitle: Text(l10n.category)),
           if (bankAccount || varSymbol || specSymbol) SectionTitle(l10n.paymentInfo),
           if (bankAccount)
             ListTile(

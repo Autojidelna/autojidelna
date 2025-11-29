@@ -8,7 +8,11 @@ part 'providers.g.dart';
 class DenniNabidka extends _$DenniNabidka {
   @override
   FutureOr<Jidelnicek> build(DateTime date) async {
-    return await ref.read(currentCanteen)!.specifickyJidelnicek(date);
+    final canteen = ref.read(currentCanteen);
+    if (canteen == null) {
+      throw StateError('Žádná výdejna není vybrána');
+    }
+    return await canteen.specifickyJidelnicek(date);
   }
 
   Future<void> vsechnyJidelnicky() async {

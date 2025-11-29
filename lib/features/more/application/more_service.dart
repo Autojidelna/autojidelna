@@ -25,6 +25,6 @@ final moreServiceProvider = Provider<MoreService>((ref) {
 
 @riverpod
 Stream<StavUctu?> stavUctu(Ref ref) async* {
-  final canteen = ref.watch(currentCanteen)!;
-  yield* canteen.stavUctuStream;
+  final canteen = ref.watch(currentCanteen);
+  if (canteen != null) yield* canteen.stavUctuStream;
 }

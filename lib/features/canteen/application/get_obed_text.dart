@@ -23,7 +23,10 @@ String getObedText(BuildContext context, WidgetRef ref, Jidlo dish) {
     case StavJidla.vlozenoNaBurze:
       return l10n.odebratZBurzy;
     case StavJidla.nedostupne:
-      if (ref.read(currentCanteen)!.stavUctu!.kredit < dish.cena! && !date.normalize.isBefore(DateTime.now().normalize)) {
+      final Canteen? canteen = ref.read(currentCanteen);
+      final double? kredit = canteen?.stavUctu?.kredit;
+      final double? cena = dish.cena;
+      if (kredit != null && cena != null && kredit < cena && !date.normalize.isBefore(DateTime.now().normalize)) {
         return l10n.errorsInsufficientCredit;
       } else {
         return l10n.nelzeObjednat;

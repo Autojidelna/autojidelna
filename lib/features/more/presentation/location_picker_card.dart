@@ -85,7 +85,7 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
             (i) => ListTile(
               visualDensity: VisualDensity.compact,
               title: Text(stavUctu.vydejny[i + 1] ?? '', maxLines: 1, overflow: TextOverflow.ellipsis),
-              trailing: stavUctu.vydejna!.$1 == i + 1 ? const Icon(Icons.check) : null,
+              trailing: stavUctu.vydejna?.$1 == i + 1 ? const Icon(Icons.check) : null,
               onTap: () async {
                 ref.read(currentCanteen)!.zmenVydejnu = i;
                 await ref.read(currentCanteen)!.aktualizujStavUctu();

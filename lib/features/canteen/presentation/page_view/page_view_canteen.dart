@@ -22,6 +22,12 @@ class _PageViewCanteenState extends ConsumerState<PageViewCanteen> {
   }
 
   @override
+  void dispose() {
+    App.pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PageView.builder(
       controller: App.pageController,

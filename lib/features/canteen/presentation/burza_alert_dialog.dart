@@ -34,7 +34,7 @@ void burzaAlertDialog(BuildContext context, WidgetRef ref, Jidlo updatedDish) {
             builder: (_, value, _) => CheckboxListTile(
               value: value,
               onChanged: (data) async {
-                checkbox.value = data!; // Checkbox isn't tristate so it's save
+                checkbox.value = data!; // Checkbox isn't tristate so it's safe
                 Hive.box(Boxes.appState).put(HiveKeys.appState.hideBurzaAlertDialog, data);
               },
               controlAffinity: ListTileControlAffinity.leading,

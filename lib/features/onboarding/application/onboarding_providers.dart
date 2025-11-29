@@ -25,10 +25,7 @@ class OnboardingFocusNodeFocus extends _$OnboardingFocusNodeFocus {
 }
 
 @Riverpod(dependencies: [OnboardingFocusNodeFocus])
-bool onboardingHasFocus(Ref ref) => OnboardingTextFields.values.any((field) {
-      final hasFocus = OnboardingTextFields.values.any((field) => ref.watch(onboardingFocusNodeFocusProvider(field)));
-      return hasFocus;
-    });
+bool onboardingHasFocus(Ref ref) => OnboardingTextFields.values.any((field) => ref.watch(onboardingFocusNodeFocusProvider(field)));
 
 @Riverpod(keepAlive: true, dependencies: [])
 class OnboardingTextFieldState extends _$OnboardingTextFieldState {
@@ -49,27 +46,22 @@ class OnboardingSteps extends _$OnboardingSteps {
   List<OnboardingStep> build() => ref.read(onboardingInitialStepsProvider);
 
   void addLoginPages() {
-    state.addAll(Onboarding.loginSteps);
-    ref.notifyListeners();
+    state = [...state, ...Onboarding.loginSteps];
   }
 
   void addAccountPickerPages() {
-    state.addAll(Onboarding.accountPickerSteps);
-    ref.notifyListeners();
+    state = [...state, ...Onboarding.accountPickerSteps];
   }
 
   void setLoginFlow() {
     state = Onboarding.loginSteps;
-    ref.notifyListeners();
   }
 
   void setAccountPickerFlow() {
     state = Onboarding.accountPickerSteps;
-    ref.notifyListeners();
   }
 
   void removeLoginPages() {
     state = state.where((step) => !Onboarding.loginSteps.contains(step)).toList();
-    ref.notifyListeners();
   }
 }

@@ -28,13 +28,21 @@ class AccountOverviewCard extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              StreamBuilder(
-                initialData: ref.watch(currentCanteen)!.stavUctu,
-                stream: ref.watch(currentCanteen)!.stavUctuStream,
-                builder: (context, asyncSnapshot) {
-                  return Text(l10n.credit(asyncSnapshot.data?.kredit ?? 0), style: Theme.of(context).textTheme.titleMedium);
+              Builder(
+                builder: (context) {
+                  final canteen = ref.watch(currentCanteen);
+                  if (canteen == null) return Text(l10n.credit(0), style: Theme.of(context).textTheme.titleMedium);
+
+                  return StreamBuilder(
+                    initialData: canteen.stavUctu,
+                    stream: canteen.stavUctuStream,
+                    builder: (context, asyncSnapshot) {
+                      return Text(l10n.credit(asyncSnapshot.data?.kredit ?? 0), style: Theme.of(context).textTheme.titleMedium);
+                    },
+                  );
                 },
               ),
+
               if (user != null && user.data?.kategorie != null) Text(user.data!.kategorie!),
             ],
           ),
