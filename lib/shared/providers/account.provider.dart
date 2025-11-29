@@ -1,8 +1,9 @@
-import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
-import 'package:autojidelna/features/auth/data/auth_service.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
+import 'package:autojidelna/features/auth/data/auth_service.dart';
+import 'package:autojidelna/features/canteen/application/providers.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
@@ -35,7 +36,7 @@ class UserProvider extends ChangeNotifier {
     _loggedSafeAccounts = List.from(_loggedSafeAccounts)..remove(safeAccount);
     if (_user!.accountData.username == safeAccount.username) {
       _user = null;
-      _ref.read(canteenProvider).clear();
+      _ref.invalidate(denniNabidkaProvider);
     }
     notifyListeners();
   }
@@ -51,13 +52,13 @@ class UserProvider extends ChangeNotifier {
   Future<void> unloadUser() async {
     await _authService.ghostLogout();
     _user = null;
-    _ref.read(canteenProvider).clear();
+    _ref.invalidate(denniNabidkaProvider);
     notifyListeners();
   }
 
   Future<void> changeUser(SafeAccount safeAccount) async {
     _user = null;
-    _ref.read(canteenProvider).clear();
+    _ref.invalidate(denniNabidkaProvider);
     await _authService.changeAccount(safeAccount);
     notifyListeners();
   }

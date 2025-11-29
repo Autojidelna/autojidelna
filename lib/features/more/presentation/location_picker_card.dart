@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:autojidelna/features/more/application/more_service.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
@@ -9,7 +10,6 @@ import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/widgets/configured_alert_dialog.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';
 import 'package:autojidelna/shared/widgets/lined_card.dart';
-import 'package:autojidelna/features/canteen/application/canteen.provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,13 +27,31 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
   @override
   Widget build(BuildContext context) {
     final L10n l10n = context.l10n;
-    return StreamBuilder(
-      initialData: ref.watch(currentCanteen)!.stavUctu,
-      stream: ref.watch(currentCanteen)!.stavUctuStream,
-      builder: (context, asyncSnapshot) {
-        print(asyncSnapshot.data);
-        if (!asyncSnapshot.hasData) {
-          return Stack(
+    return ref
+        .watch(stavUctuProvider)
+        .maybeWhen(
+          data: (stav) {
+            final Map<int, String> locations = stav?.vydejny ?? {};
+            (int, String)? vydejna = stav?.vydejna;
+            return Stack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                LinedCard(
+                  title: l10n.location,
+                  footer: locations.isNotEmpty ? l10n.pickLocation : null,
+                  footerTextAlign: TextAlign.end,
+                  onPressed: locations.isEmpty ? null : () => pickerDialog(ref, stav),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity: const VisualDensity(vertical: -4),
+                    title: Text(vydejna?.$2 ?? l10n.locationsUnknown),
+                  ),
+                ),
+                if (vydejna == null) lockedCover(context),
+              ],
+            );
+          },
+          orElse: () => Stack(
             alignment: AlignmentDirectional.center,
             children: [
               LinedCard(
@@ -47,29 +65,8 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
               ),
               lockedCover(context),
             ],
-          );
-        }
-        final Map<int, String> locations = asyncSnapshot.data?.vydejny ?? {};
-        (int, String)? vydejna = asyncSnapshot.data?.vydejna;
-        return Stack(
-          alignment: AlignmentDirectional.center,
-          children: [
-            LinedCard(
-              title: l10n.location,
-              footer: locations.isNotEmpty ? l10n.pickLocation : null,
-              footerTextAlign: TextAlign.end,
-              onPressed: locations.isEmpty ? null : () => pickerDialog(ref, asyncSnapshot.data),
-              child: ListTile(
-                contentPadding: EdgeInsets.zero,
-                visualDensity: const VisualDensity(vertical: -4),
-                title: Text(vydejna?.$2 ?? l10n.locationsUnknown),
-              ),
-            ),
-            if (vydejna == null) lockedCover(context),
-          ],
+          ),
         );
-      },
-    );
   }
 
   void pickerDialog(WidgetRef ref, StavUctu? stavUctu) {
@@ -77,7 +74,6 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
       unawaited(ref.read(currentCanteen)?.aktualizujStavUctu());
       return;
     }
-    final CanteenProvider provider = ref.read(canteenProvider);
     configuredDialog(
       context,
       builder: (context) => ConfiguredAlertDialog(
@@ -91,8 +87,8 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
               title: Text(stavUctu.vydejny[i + 1] ?? '', maxLines: 1, overflow: TextOverflow.ellipsis),
               trailing: stavUctu.vydejna!.$1 == i + 1 ? const Icon(Icons.check) : null,
               onTap: () async {
-                provider.changeLocation(i);
-                provider.preIndexMenus();
+                ref.read(currentCanteen)!.zmenVydejnu = i;
+                await ref.read(currentCanteen)!.aktualizujStavUctu();
 
                 Navigator.of(context).popUntil((route) => route.isFirst);
                 User user = ref.read(userProvider).user!;
