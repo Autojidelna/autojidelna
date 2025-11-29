@@ -90,7 +90,7 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
                 ref.read(currentCanteen)!.zmenVydejnu = i;
                 await ref.read(currentCanteen)!.aktualizujStavUctu();
 
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                if (context.mounted) Navigator.of(context).popUntil((route) => route.isFirst);
                 User user = ref.read(userProvider).user!;
                 Hive.box(Boxes.appState).put(HiveKeys.account.location(user.accountData), i);
               },
