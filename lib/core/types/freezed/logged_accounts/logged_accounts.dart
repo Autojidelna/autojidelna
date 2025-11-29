@@ -1,6 +1,6 @@
 // This file is "main.dart"
 import 'package:autojidelna/core/types/freezed/account/account.dart';
-import 'package:autojidelna/core/types/freezed/safe_account.dart/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account/safe_account.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
