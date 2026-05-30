@@ -3,7 +3,6 @@ import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/utils/deep_link_transformer_logic.dart';
 import 'package:autojidelna/shared/localization/current_locale.dart';
-import 'package:autojidelna/shared/monitoring/firebase_tab_observer.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/theme/application/theme_notifier.dart';
 import 'package:autojidelna/shared/theme/domain/theme_state.dart';
@@ -32,7 +31,6 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: L10n.localizationsDelegates,
       routerConfig: appRouter.config(
         includePrefixMatches: true,
-        navigatorObservers: () => [FirebaseTabObserver()],
         deepLinkTransformer: deepLinkTransformer,
         placeholder: (context) => const SplashPage(),
       ),

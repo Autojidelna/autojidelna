@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:autojidelna/app/app_init.dart';
-import 'package:autojidelna/core/firebase/firebase_options.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_list_view/flutter_list_view.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -20,7 +18,6 @@ class App {
 
     // We're using Future.wait to run multiple Futures in parallel
     // These Futures must take less than 200 ms to run
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await AppInit.hive();
     unawaited(AppInit.awesomeNotifications());
 
@@ -35,7 +32,6 @@ class App {
   }
 
   static Future<void> backgroundInit() async {
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await AppInit.hive();
     await AppInit.awesomeNotifications();
   }
