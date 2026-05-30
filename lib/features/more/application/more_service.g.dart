@@ -41,4 +41,4 @@ final class StavUctuProvider
   }
 }
 
-String _$stavUctuHash() => r'9d7cbf9ee8246e83cd96558864335ebb059055fc';
+String _$stavUctuHash() => r'9e37f6807e9366291535c97a20570d6f0c16114d';

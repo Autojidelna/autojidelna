@@ -238,7 +238,7 @@ final class OnboardingHasFocusProvider
 }
 
 String _$onboardingHasFocusHash() =>
-    r'af0e441ed5dfcb57d4b5ce7bae2581097b42f41d';
+    r'7887a8eff8e7bc32e33283420074b651a7d83428';
 
 @ProviderFor(OnboardingTextFieldState)
 const onboardingTextFieldStateProvider = OnboardingTextFieldStateFamily._();
@@ -424,7 +424,7 @@ final class OnboardingStepsProvider
   }
 }
 
-String _$onboardingStepsHash() => r'fa27a6a5271aa0c646972cfdba61c9abf2dbfa91';
+String _$onboardingStepsHash() => r'a5c6d69b27ae291b6a1889641f04d215a21e7042';
 
 abstract class _$OnboardingSteps extends $Notifier<List<OnboardingStep>> {
   List<OnboardingStep> build();
