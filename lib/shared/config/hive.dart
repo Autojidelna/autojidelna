@@ -4,7 +4,6 @@ import 'package:autojidelna/core/types/freezed/safe_account/safe_account.dart';
 class Boxes {
   /// Box used to store everything related to an account
   static String account(SafeAccount account) => _AccountBox.boxName(account);
-  static const String analytics = _AnalyticsBox.boxName;
   static const String appState = _AppStateBox.boxName;
   static const String notifications = _NotificationsBox.boxName;
   static const String settings = _SettingsBox.boxName;
@@ -13,7 +12,6 @@ class Boxes {
 /// These are the keys used to store values in Hive.
 class HiveKeys {
   static final account = _AccountBox();
-  static final analytics = _AnalyticsBox();
   static final appState = _AppStateBox();
   static final notifications = _NotificationsBox();
   static final settings = _SettingsBox();
@@ -27,14 +25,6 @@ class _AccountBox {
   String nemateObjednanoNotifications(SafeAccount account) => 'ignore_objednat_${account.username}_${account.url}';
   String dailyFoodInfo(SafeAccount account) => 'send_dish_info_${account.username}_${account.url}';
   String kreditNotifications(SafeAccount account) => 'ignore_kredit_${account.username}_${account.url}';
-}
-
-class _AnalyticsBox {
-  static const String boxName = 'analytics';
-
-  final String statistikaObjednavka = 'order';
-  final String statistikaAuto = 'auto_order';
-  final String statistikaBurzaCatcher = 'burza_catcher';
 }
 
 class _AppStateBox {

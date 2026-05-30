@@ -23,7 +23,6 @@ class AppInit {
     Hive.registerAdapter(LocaleAdapter());
     await Hive.openBox(Boxes.settings);
     await Hive.openBox(Boxes.appState);
-    await Hive.openBox(Boxes.analytics);
     await Hive.openBox(Boxes.notifications);
 
     _hiveExecuted = true;
