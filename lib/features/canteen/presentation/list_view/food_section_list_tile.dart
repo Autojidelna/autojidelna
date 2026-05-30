@@ -59,7 +59,7 @@ class _DishListTile extends ConsumerWidget {
       onTap: !enabled ? null : () => onTap(context, ref, dish),
       leading: RadioGroup(
         groupValue: true,
-        onChanged: (_) => onTap(context, ref, dish),
+        onChanged: enabled ? (_) => onTap(context, ref, dish) : (_) {},
         child: Radio<bool>(enabled: enabled, toggleable: true, value: selected, activeColor: theme.colorScheme.primary),
       ),
       title: Text(title),

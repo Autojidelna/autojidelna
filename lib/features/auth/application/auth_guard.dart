@@ -5,6 +5,7 @@ import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/localization/current_locale.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
+import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
 import 'package:autojidelna/features/onboarding/onboarding.dart';
@@ -23,7 +24,7 @@ class AuthGuard extends AutoRouteGuard {
 
     if (provider.user != null) {
       try {
-        await ref.read(denniNabidkaProvider(DateTime.now()).notifier).vsechnyJidelnicky();
+        await ref.read(denniNabidkaProvider(DateTime.now().normalize).notifier).vsechnyJidelnicky();
       } catch (_) {} // Just QoL
       return resolver.next(true); // if logged in during onboarding
     }
