@@ -35,8 +35,6 @@ class _AnalyticsBox {
   final String statistikaObjednavka = 'order';
   final String statistikaAuto = 'auto_order';
   final String statistikaBurzaCatcher = 'burza_catcher';
-  final String allowAnalytics = 'allow_analytics';
-  final String sendCrashLogs = 'send_crash_logs';
 }
 
 class _AppStateBox {
