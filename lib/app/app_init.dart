@@ -2,8 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/core/notifications/notification_topics.dart';
-import 'package:autojidelna/core/notifications/notification_handler.dart';
 import 'package:autojidelna/core/notifications/notification_channel_service.dart';
 import 'package:autojidelna/core/remote-config/remote_config.dart';
 import 'package:autojidelna/shared/config/adapters.hive.dart';
@@ -11,14 +9,12 @@ import 'package:autojidelna/shared/config/hive.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:awesome_notifications/awesome_notifications.dart' hide NotificationHandler;
 
 class AppInit {
   static bool _hiveExecuted = false;
   static bool _firebaseRemoteConfigExecuted = false;
-  static bool _firebaseMessagingExecuted = false;
   static bool _awesomeNotificationsExecuted = false;
 
   static Future<void> hive() async {
@@ -73,25 +69,6 @@ class AppInit {
     } catch (_) {}
 
     _firebaseRemoteConfigExecuted = true;
-  }
-
-  static Future<void> firebaseMessaging() async {
-    assert(_firebaseMessagingExecuted == false, 'AppInit.firebaseMessaging() must be called only once');
-    if (_firebaseMessagingExecuted) return;
-
-    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-
-    // Foreground messages
-    FirebaseMessaging.onMessage.listen(NotificationHandler.handleIncomingMessage);
-
-    // When notification is tapped & app opens
-    FirebaseMessaging.onMessageOpenedApp.listen(NotificationHandler.handleIncomingMessage);
-
-    for (String topic in NotificationTopics.all) {
-      FirebaseMessaging.instance.subscribeToTopic(topic);
-    }
-
-    _firebaseMessagingExecuted = true;
   }
 
   static Future<void> awesomeNotifications() async {

@@ -14,19 +14,18 @@ import 'package:autojidelna/shared/localization/current_locale.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:icanteenlib/canteenlib.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 @pragma('vm:entry-point')
-Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+Future<void> firebaseMessagingBackgroundHandler(String message) async {
   await App.backgroundInit();
   //NotificationHandler.placeholderNotification(message.data['type']);
   NotificationHandler.handleIncomingMessage(message);
 }
 
 class NotificationHandler {
-  static void handleIncomingMessage(RemoteMessage message) async => _runTopicAction(message.data['type']);
+  static void handleIncomingMessage(String message) async => _runTopicAction(message);
 
   static void _runTopicAction(String? topic) {
     if (topic == null) return;
