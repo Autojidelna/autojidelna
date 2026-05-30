@@ -10,7 +10,7 @@ part of 'onboarding_providers.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(onboardingFormKey)
-const onboardingFormKeyProvider = OnboardingFormKeyFamily._();
+final onboardingFormKeyProvider = OnboardingFormKeyFamily._();
 
 final class OnboardingFormKeyProvider
     extends
@@ -20,7 +20,7 @@ final class OnboardingFormKeyProvider
           GlobalKey<FormState>
         >
     with $Provider<GlobalKey<FormState>> {
-  const OnboardingFormKeyProvider._({
+  OnboardingFormKeyProvider._({
     required OnboardingFormKeyFamily super.from,
     required OnboardingFormKeys super.argument,
   }) : super(
@@ -76,12 +76,12 @@ String _$onboardingFormKeyHash() => r'8986a8124ec65afd7aa67d00146a89becb48da20';
 
 final class OnboardingFormKeyFamily extends $Family
     with $FunctionalFamilyOverride<GlobalKey<FormState>, OnboardingFormKeys> {
-  const OnboardingFormKeyFamily._()
+  OnboardingFormKeyFamily._()
     : super(
         retry: null,
         name: r'onboardingFormKeyProvider',
-        dependencies: const <ProviderOrFamily>[],
-        $allTransitiveDependencies: const <ProviderOrFamily>[],
+        dependencies: <ProviderOrFamily>[],
+        $allTransitiveDependencies: <ProviderOrFamily>[],
         isAutoDispose: false,
       );
 
@@ -93,11 +93,11 @@ final class OnboardingFormKeyFamily extends $Family
 }
 
 @ProviderFor(OnboardingFocusNodeFocus)
-const onboardingFocusNodeFocusProvider = OnboardingFocusNodeFocusFamily._();
+final onboardingFocusNodeFocusProvider = OnboardingFocusNodeFocusFamily._();
 
 final class OnboardingFocusNodeFocusProvider
     extends $NotifierProvider<OnboardingFocusNodeFocus, bool> {
-  const OnboardingFocusNodeFocusProvider._({
+  OnboardingFocusNodeFocusProvider._({
     required OnboardingFocusNodeFocusFamily super.from,
     required OnboardingTextFields super.argument,
   }) : super(
@@ -154,12 +154,12 @@ final class OnboardingFocusNodeFocusFamily extends $Family
           bool,
           OnboardingTextFields
         > {
-  const OnboardingFocusNodeFocusFamily._()
+  OnboardingFocusNodeFocusFamily._()
     : super(
         retry: null,
         name: r'onboardingFocusNodeFocusProvider',
-        dependencies: const <ProviderOrFamily>[],
-        $allTransitiveDependencies: const <ProviderOrFamily>[],
+        dependencies: <ProviderOrFamily>[],
+        $allTransitiveDependencies: <ProviderOrFamily>[],
         isAutoDispose: true,
       );
 
@@ -178,7 +178,6 @@ abstract class _$OnboardingFocusNodeFocus extends $Notifier<bool> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build(_$args);
     final ref = this.ref as $Ref<bool, bool>;
     final element =
         ref.element
@@ -188,32 +187,30 @@ abstract class _$OnboardingFocusNodeFocus extends $Notifier<bool> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, () => build(_$args));
   }
 }
 
 @ProviderFor(onboardingHasFocus)
-const onboardingHasFocusProvider = OnboardingHasFocusProvider._();
+final onboardingHasFocusProvider = OnboardingHasFocusProvider._();
 
 final class OnboardingHasFocusProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const OnboardingHasFocusProvider._()
+  OnboardingHasFocusProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'onboardingHasFocusProvider',
         isAutoDispose: true,
-        dependencies: const <ProviderOrFamily>[
-          onboardingFocusNodeFocusProvider,
-        ],
-        $allTransitiveDependencies: const <ProviderOrFamily>[
+        dependencies: <ProviderOrFamily>[onboardingFocusNodeFocusProvider],
+        $allTransitiveDependencies: <ProviderOrFamily>[
           OnboardingHasFocusProvider.$allTransitiveDependencies0,
         ],
       );
 
-  static const $allTransitiveDependencies0 = onboardingFocusNodeFocusProvider;
+  static final $allTransitiveDependencies0 = onboardingFocusNodeFocusProvider;
 
   @override
   String debugGetCreateSourceHash() => _$onboardingHasFocusHash();
@@ -241,11 +238,11 @@ String _$onboardingHasFocusHash() =>
     r'7887a8eff8e7bc32e33283420074b651a7d83428';
 
 @ProviderFor(OnboardingTextFieldState)
-const onboardingTextFieldStateProvider = OnboardingTextFieldStateFamily._();
+final onboardingTextFieldStateProvider = OnboardingTextFieldStateFamily._();
 
 final class OnboardingTextFieldStateProvider
     extends $NotifierProvider<OnboardingTextFieldState, TextFieldState> {
-  const OnboardingTextFieldStateProvider._({
+  OnboardingTextFieldStateProvider._({
     required OnboardingTextFieldStateFamily super.from,
     required OnboardingTextFields super.argument,
   }) : super(
@@ -302,12 +299,12 @@ final class OnboardingTextFieldStateFamily extends $Family
           TextFieldState,
           OnboardingTextFields
         > {
-  const OnboardingTextFieldStateFamily._()
+  OnboardingTextFieldStateFamily._()
     : super(
         retry: null,
         name: r'onboardingTextFieldStateProvider',
-        dependencies: const <ProviderOrFamily>[],
-        $allTransitiveDependencies: const <ProviderOrFamily>[],
+        dependencies: <ProviderOrFamily>[],
+        $allTransitiveDependencies: <ProviderOrFamily>[],
         isAutoDispose: false,
       );
 
@@ -326,7 +323,6 @@ abstract class _$OnboardingTextFieldState extends $Notifier<TextFieldState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build(_$args);
     final ref = this.ref as $Ref<TextFieldState, TextFieldState>;
     final element =
         ref.element
@@ -336,12 +332,12 @@ abstract class _$OnboardingTextFieldState extends $Notifier<TextFieldState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, () => build(_$args));
   }
 }
 
 @ProviderFor(onboardingInitialSteps)
-const onboardingInitialStepsProvider = OnboardingInitialStepsProvider._();
+final onboardingInitialStepsProvider = OnboardingInitialStepsProvider._();
 
 final class OnboardingInitialStepsProvider
     extends
@@ -351,15 +347,15 @@ final class OnboardingInitialStepsProvider
           List<OnboardingStep>
         >
     with $Provider<List<OnboardingStep>> {
-  const OnboardingInitialStepsProvider._()
+  OnboardingInitialStepsProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'onboardingInitialStepsProvider',
         isAutoDispose: false,
-        dependencies: const <ProviderOrFamily>[],
-        $allTransitiveDependencies: const <ProviderOrFamily>[],
+        dependencies: <ProviderOrFamily>[],
+        $allTransitiveDependencies: <ProviderOrFamily>[],
       );
 
   @override
@@ -389,24 +385,24 @@ String _$onboardingInitialStepsHash() =>
     r'831b02ad64738a6f21220f27b7617fc65d494997';
 
 @ProviderFor(OnboardingSteps)
-const onboardingStepsProvider = OnboardingStepsProvider._();
+final onboardingStepsProvider = OnboardingStepsProvider._();
 
 final class OnboardingStepsProvider
     extends $NotifierProvider<OnboardingSteps, List<OnboardingStep>> {
-  const OnboardingStepsProvider._()
+  OnboardingStepsProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'onboardingStepsProvider',
         isAutoDispose: false,
-        dependencies: const <ProviderOrFamily>[onboardingInitialStepsProvider],
-        $allTransitiveDependencies: const <ProviderOrFamily>[
+        dependencies: <ProviderOrFamily>[onboardingInitialStepsProvider],
+        $allTransitiveDependencies: <ProviderOrFamily>[
           OnboardingStepsProvider.$allTransitiveDependencies0,
         ],
       );
 
-  static const $allTransitiveDependencies0 = onboardingInitialStepsProvider;
+  static final $allTransitiveDependencies0 = onboardingInitialStepsProvider;
 
   @override
   String debugGetCreateSourceHash() => _$onboardingStepsHash();
@@ -431,7 +427,6 @@ abstract class _$OnboardingSteps extends $Notifier<List<OnboardingStep>> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<List<OnboardingStep>, List<OnboardingStep>>;
     final element =
         ref.element
@@ -441,6 +436,6 @@ abstract class _$OnboardingSteps extends $Notifier<List<OnboardingStep>> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

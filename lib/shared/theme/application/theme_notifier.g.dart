@@ -10,11 +10,11 @@ part of 'theme_notifier.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(ThemeNotifier)
-const themeProvider = ThemeNotifierProvider._();
+final themeProvider = ThemeNotifierProvider._();
 
 final class ThemeNotifierProvider
     extends $NotifierProvider<ThemeNotifier, ThemeState> {
-  const ThemeNotifierProvider._()
+  ThemeNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -48,7 +48,6 @@ abstract class _$ThemeNotifier extends $Notifier<ThemeState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<ThemeState, ThemeState>;
     final element =
         ref.element
@@ -58,16 +57,16 @@ abstract class _$ThemeNotifier extends $Notifier<ThemeState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(isBright)
-const isBrightProvider = IsBrightFamily._();
+final isBrightProvider = IsBrightFamily._();
 
 final class IsBrightProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsBrightProvider._({
+  IsBrightProvider._({
     required IsBrightFamily super.from,
     required Brightness super.argument,
   }) : super(
@@ -122,7 +121,7 @@ String _$isBrightHash() => r'c50ae5149368b9be153ea568f85b067aa01b1bbd';
 
 final class IsBrightFamily extends $Family
     with $FunctionalFamilyOverride<bool, Brightness> {
-  const IsBrightFamily._()
+  IsBrightFamily._()
     : super(
         retry: null,
         name: r'isBrightProvider',

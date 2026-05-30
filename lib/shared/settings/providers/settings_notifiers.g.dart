@@ -10,10 +10,10 @@ part of 'settings_notifiers.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(ListUi)
-const listUiProvider = ListUiProvider._();
+final listUiProvider = ListUiProvider._();
 
 final class ListUiProvider extends $NotifierProvider<ListUi, bool> {
-  const ListUiProvider._()
+  ListUiProvider._()
     : super(
         from: null,
         argument: null,
@@ -47,7 +47,6 @@ abstract class _$ListUi extends $Notifier<bool> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<bool, bool>;
     final element =
         ref.element
@@ -57,16 +56,16 @@ abstract class _$ListUi extends $Notifier<bool> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(BigCalendarMarkers)
-const bigCalendarMarkersProvider = BigCalendarMarkersProvider._();
+final bigCalendarMarkersProvider = BigCalendarMarkersProvider._();
 
 final class BigCalendarMarkersProvider
     extends $NotifierProvider<BigCalendarMarkers, bool> {
-  const BigCalendarMarkersProvider._()
+  BigCalendarMarkersProvider._()
     : super(
         from: null,
         argument: null,
@@ -101,7 +100,6 @@ abstract class _$BigCalendarMarkers extends $Notifier<bool> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<bool, bool>;
     final element =
         ref.element
@@ -111,15 +109,15 @@ abstract class _$BigCalendarMarkers extends $Notifier<bool> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(SkipWeekends)
-const skipWeekendsProvider = SkipWeekendsProvider._();
+final skipWeekendsProvider = SkipWeekendsProvider._();
 
 final class SkipWeekendsProvider extends $NotifierProvider<SkipWeekends, bool> {
-  const SkipWeekendsProvider._()
+  SkipWeekendsProvider._()
     : super(
         from: null,
         argument: null,
@@ -153,7 +151,6 @@ abstract class _$SkipWeekends extends $Notifier<bool> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<bool, bool>;
     final element =
         ref.element
@@ -163,16 +160,16 @@ abstract class _$SkipWeekends extends $Notifier<bool> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(RelativeTimeStamps)
-const relativeTimeStampsProvider = RelativeTimeStampsProvider._();
+final relativeTimeStampsProvider = RelativeTimeStampsProvider._();
 
 final class RelativeTimeStampsProvider
     extends $NotifierProvider<RelativeTimeStamps, bool> {
-  const RelativeTimeStampsProvider._()
+  RelativeTimeStampsProvider._()
     : super(
         from: null,
         argument: null,
@@ -207,7 +204,6 @@ abstract class _$RelativeTimeStamps extends $Notifier<bool> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<bool, bool>;
     final element =
         ref.element
@@ -217,16 +213,16 @@ abstract class _$RelativeTimeStamps extends $Notifier<bool> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(DateFormatOption)
-const dateFormatOptionProvider = DateFormatOptionProvider._();
+final dateFormatOptionProvider = DateFormatOptionProvider._();
 
 final class DateFormatOptionProvider
     extends $NotifierProvider<DateFormatOption, DateFormatOptions> {
-  const DateFormatOptionProvider._()
+  DateFormatOptionProvider._()
     : super(
         from: null,
         argument: null,
@@ -260,7 +256,6 @@ abstract class _$DateFormatOption extends $Notifier<DateFormatOptions> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<DateFormatOptions, DateFormatOptions>;
     final element =
         ref.element
@@ -270,6 +265,6 @@ abstract class _$DateFormatOption extends $Notifier<DateFormatOptions> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

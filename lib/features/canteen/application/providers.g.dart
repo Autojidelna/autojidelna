@@ -10,11 +10,11 @@ part of 'providers.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(DenniNabidka)
-const denniNabidkaProvider = DenniNabidkaFamily._();
+final denniNabidkaProvider = DenniNabidkaFamily._();
 
 final class DenniNabidkaProvider
     extends $AsyncNotifierProvider<DenniNabidka, Jidelnicek> {
-  const DenniNabidkaProvider._({
+  DenniNabidkaProvider._({
     required DenniNabidkaFamily super.from,
     required DateTime super.argument,
   }) : super(
@@ -61,7 +61,7 @@ final class DenniNabidkaFamily extends $Family
           FutureOr<Jidelnicek>,
           DateTime
         > {
-  const DenniNabidkaFamily._()
+  DenniNabidkaFamily._()
     : super(
         retry: null,
         name: r'denniNabidkaProvider',
@@ -85,7 +85,6 @@ abstract class _$DenniNabidka extends $AsyncNotifier<Jidelnicek> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build(_$args);
     final ref = this.ref as $Ref<AsyncValue<Jidelnicek>, Jidelnicek>;
     final element =
         ref.element
@@ -95,6 +94,6 @@ abstract class _$DenniNabidka extends $AsyncNotifier<Jidelnicek> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, () => build(_$args));
   }
 }
