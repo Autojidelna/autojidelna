@@ -10,11 +10,11 @@ part of 'current_locale.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(CurrentLocale)
-const currentLocaleProvider = CurrentLocaleProvider._();
+final currentLocaleProvider = CurrentLocaleProvider._();
 
 final class CurrentLocaleProvider
     extends $NotifierProvider<CurrentLocale, Locale> {
-  const CurrentLocaleProvider._()
+  CurrentLocaleProvider._()
     : super(
         from: null,
         argument: null,
@@ -48,7 +48,6 @@ abstract class _$CurrentLocale extends $Notifier<Locale> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<Locale, Locale>;
     final element =
         ref.element
@@ -58,6 +57,6 @@ abstract class _$CurrentLocale extends $Notifier<Locale> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

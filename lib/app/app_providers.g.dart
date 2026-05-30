@@ -10,7 +10,7 @@ part of 'app_providers.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(scaffoldMessenger)
-const scaffoldMessengerProvider = ScaffoldMessengerProvider._();
+final scaffoldMessengerProvider = ScaffoldMessengerProvider._();
 
 final class ScaffoldMessengerProvider
     extends
@@ -20,7 +20,7 @@ final class ScaffoldMessengerProvider
           GlobalKey<ScaffoldMessengerState>
         >
     with $Provider<GlobalKey<ScaffoldMessengerState>> {
-  const ScaffoldMessengerProvider._()
+  ScaffoldMessengerProvider._()
     : super(
         from: null,
         argument: null,

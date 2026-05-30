@@ -10,13 +10,13 @@ part of 'more_service.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(stavUctu)
-const stavUctuProvider = StavUctuProvider._();
+final stavUctuProvider = StavUctuProvider._();
 
 final class StavUctuProvider
     extends
         $FunctionalProvider<AsyncValue<StavUctu?>, StavUctu?, Stream<StavUctu?>>
     with $FutureModifier<StavUctu?>, $StreamProvider<StavUctu?> {
-  const StavUctuProvider._()
+  StavUctuProvider._()
     : super(
         from: null,
         argument: null,
