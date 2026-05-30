@@ -31,6 +31,7 @@ untranslated_messages.json
 .pub-cache/
 .pub/
 /build/
+devtools_options.yaml
 
 # Symbolication related
 app.*.symbols
