@@ -45,7 +45,7 @@ class _AppStateBox {
   final String firstTime = 'first_time';
   final String url = 'last_used_icanteen_url';
   final String hideBurzaAlertDialog = 'hide_burza_alert_dialog';
-  final String remoteConfigValues = 'remote_config_values';
+  final String remoteConfigValues = 'remote_config_values'; // TODO: zmenit na seznam jidelen
 }
 
 class _NotificationsBox {
