@@ -1,75 +1,52 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
-    id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-import java.util.Properties
-import java.io.FileInputStream
-
-var localProperties = Properties().apply {
-    val file = rootProject.file("local.properties")
-    if(file.exists()) {
-        file.inputStream().use {load(it) }
-    }
-}
-
-var flutterVersionCode = localProperties.getProperty("flutter.versionCode") ?: "1"
-var flutterVersionName = localProperties.getProperty("flutter.versionName") ?: "1.0"
-
 // Load release keystore properties
-var keystoreProperties = Properties().apply {
-    val file = rootProject.file("key.properties")
-    if (file.exists()) {
-        file.inputStream().use { load(it) }
-    }
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
+
 
 android {
-    namespace = "cz.appelevate.autojidelna"
-    compileSdk = rootProject.extra["compileSdkVersion"] as Int
-    ndkVersion = "27.0.12077973"
+    namespace = "cz.autojidelna.app"
+    compileSdk = rootProject.extra["compileSdk"] as Int
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-
     defaultConfig {
-        applicationId = "cz.appelevate.autojidelna"
+        applicationId = "cz.autojidelna.app"
         // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdk = 24 // less than 24 breaks dex
-        targetSdk = rootProject.extra["targetSdkVersion"] as Int
-        versionCode = flutterVersionCode.toInt()
-        versionName = flutterVersionName
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        minSdk = rootProject.extra["minSdk"] as Int
+        targetSdk = rootProject.extra["targetSdk"] as Int
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
     }
 
     signingConfigs {
         create("release") {
             keyAlias = keystoreProperties["keyAlias"] as? String
             keyPassword = keystoreProperties["keyPassword"] as? String
-            storeFile = (keystoreProperties["storeFile"] as? String)?.let { file(it) }
+            storeFile = keystoreProperties["storeFile"]?.let { file(it) }
             storePassword = keystoreProperties["storePassword"] as? String
         }
-        getByName("debug") {}
     }
-    
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = true
             isShrinkResources = true
-            proguardFiles(
-                // Default file with automatically generated optimization rules.
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-
             signingConfig = if (
                 project.hasProperty("useDebugSigningConfig") &&
                 project.property("useDebugSigningConfig").toString().toBoolean()
@@ -78,11 +55,13 @@ android {
             } else {
                 signingConfigs.getByName("release")
             }
+        }
+    }
+}
 
-        }
-        getByName("debug") {
-            signingConfig = signingConfigs.getByName("debug")
-        }
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
 }
 

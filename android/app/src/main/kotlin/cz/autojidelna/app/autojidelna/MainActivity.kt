@@ -1,4 +1,4 @@
-package cz.appelevate.autojidelna
+package cz.autojidelna.app
 
 import io.flutter.embedding.android.FlutterActivity
 
