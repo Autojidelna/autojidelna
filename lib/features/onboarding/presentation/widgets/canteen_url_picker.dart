@@ -1,4 +1,3 @@
-import 'package:autojidelna/core/remote-config/remote_config.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 
@@ -13,8 +12,7 @@ class CanteenUrlPicker extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ThemeData theme = Theme.of(context);
     ListTileThemeData listTileTheme = theme.listTileTheme;
-    final rawUrls = ref.read(remoteConfigValues)[RemoteConfig.canteenUrls];
-    Map<String, String> urls = rawUrls is Map ? Map<String, String>.from(rawUrls) : {};
+    Map<String, String> urls = {}; // TODO: URL jidelen
 
     TextSpan highlightText(String text, String query, TextStyle? textStyle, bool enabled) {
       if (query.isEmpty) return TextSpan(text: text);

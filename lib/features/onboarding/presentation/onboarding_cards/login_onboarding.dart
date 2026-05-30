@@ -1,5 +1,4 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/core/remote-config/remote_config.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
@@ -141,7 +140,7 @@ class _UrlListTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final String? urlFieldValue = ref.read(onboardingTextFieldStateProvider(OnboardingTextFields.url)).value;
 
-    final Map<String, String> urls = Map<String, String>.from(ref.read(remoteConfigValues)[RemoteConfig.canteenUrls]);
+    final Map<String, String> urls = {}; // TODO: URL jidelen
     final MapEntry<String, String> url = urls.entries.firstWhere(
       (e) => e.value == urlFieldValue,
       orElse: () {

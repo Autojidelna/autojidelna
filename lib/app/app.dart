@@ -22,7 +22,7 @@ class App {
     // These Futures must take less than 200 ms to run
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await AppInit.hive();
-    unawaited(Future.wait([AppInit.firebaseRemoteConfig(), AppInit.awesomeNotifications()]));
+    unawaited(AppInit.awesomeNotifications());
 
     SystemChrome.setPreferredOrientations(_defaultRotations);
 
