@@ -18,9 +18,7 @@ class SettingsPage extends StatelessWidget {
     final StackRouter router = context.router;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.settings),
-      ),
+      appBar: AppBar(title: Text(l10n.settings)),
       body: ScrollViewColumn(
         children: [
           const CustomDivider(height: 4),
@@ -39,22 +37,9 @@ class SettingsPage extends StatelessWidget {
             title: Text(l10n.notifications),
             onTap: () async => AwesomeNotifications().showNotificationConfigPage(),
           ),
-          ListTile(
-            leading: const Icon(Icons.cookie_outlined),
-            title: Text(l10n.analytics),
-            onTap: () async => router.navigate(const AnalyticsRoute()),
-          ),
-          ListTile(
-            leading: const Icon(Icons.info_outline),
-            title: Text(l10n.about),
-            onTap: () async => router.navigate(const AboutRoute()),
-          ),
+          ListTile(leading: const Icon(Icons.info_outline), title: Text(l10n.about), onTap: () async => router.navigate(const AboutRoute())),
           if (!kReleaseMode)
-            ListTile(
-              leading: const Icon(Icons.bug_report_outlined),
-              title: Text(l10n.debug),
-              onTap: () async => router.navigate(const DebugRoute()),
-            ),
+            ListTile(leading: const Icon(Icons.bug_report_outlined), title: Text(l10n.debug), onTap: () async => router.navigate(const DebugRoute())),
         ],
       ),
     );

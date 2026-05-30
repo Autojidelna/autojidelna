@@ -23,14 +23,7 @@ class App {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await AppInit.hive();
     await AppInit.firebaseCrashlytics();
-    unawaited(
-      Future.wait([
-        AppInit.firebaseAnalytics(),
-        AppInit.firebaseRemoteConfig(),
-        AppInit.firebaseMessaging(),
-        AppInit.awesomeNotifications(),
-      ]),
-    );
+    unawaited(Future.wait([AppInit.firebaseRemoteConfig(), AppInit.firebaseMessaging(), AppInit.awesomeNotifications()]));
 
     SystemChrome.setPreferredOrientations(_defaultRotations);
 

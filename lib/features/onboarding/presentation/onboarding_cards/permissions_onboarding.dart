@@ -1,5 +1,4 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/shared/analytics/presentation/analytics_switches.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:autojidelna/features/onboarding/presentation/widgets/request_notification_permission.dart';
@@ -14,14 +13,7 @@ class PermissionsOnboarding extends StatelessWidget implements OnboardingStep {
   Widget build(BuildContext context) {
     return const Padding(
       padding: EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          RequestNotificationPermission(),
-          CustomDivider(isTransparent: false),
-          AnalyticsSwitches(),
-        ],
-      ),
+      child: Column(mainAxisSize: MainAxisSize.min, children: [RequestNotificationPermission(), CustomDivider(isTransparent: false)]),
     );
   }
 

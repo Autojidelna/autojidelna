@@ -1,7 +1,5 @@
 import 'package:autojidelna/features/canteen/application/providers.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/core/analytics/statistic_type.dart';
-import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
@@ -40,7 +38,6 @@ Future<void> pressed(BuildContext context, WidgetRef ref, Jidlo dish) async {
       case StavJidla.vlozenoNaBurze:
         try {
           ref.read(denniNabidkaProvider(dish.datum).notifier).provedObjednavku(jidlo: dish);
-          AnalyticsService.instance.addStatistic(StatisticType.order);
         } catch (e) {
           showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(l10n));
         }

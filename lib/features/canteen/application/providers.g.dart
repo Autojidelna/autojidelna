@@ -50,7 +50,7 @@ final class DenniNabidkaProvider
   }
 }
 
-String _$denniNabidkaHash() => r'8ef708fe0945f8a51d52577d496e3aa9ae05f6b4';
+String _$denniNabidkaHash() => r'027b951a4f98e65b1610b7f629b6716ee75f56d3';
 
 final class DenniNabidkaFamily extends $Family
     with

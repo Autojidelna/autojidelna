@@ -1,11 +1,9 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
-import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
 import 'package:autojidelna/shared/utils/show_snack_bar.dart';
 import 'package:autojidelna/shared/snackbars/show_internet_connection_snack_bar.dart';
@@ -88,9 +86,7 @@ class Onboarding {
       }
     }
 
-    formKeyEnum == OnboardingFormKeys.credentials
-        ? Hive.box(Boxes.appState).put(HiveKeys.appState.url, url)
-        : AnalyticsService.instance.logCanteenUrl(url, ref.read(currentCanteen)?.webVerze);
+    if (formKeyEnum == OnboardingFormKeys.credentials) Hive.box(Boxes.appState).put(HiveKeys.appState.url, url);
     disableInteractionsNotifier.state = false;
     return allowNextPage;
   }

@@ -69,7 +69,7 @@ dependencies:
 
   flutter_svg: ^2.2.0
   flutter_octicons: ^1.54.0
-  material_symbols_icons: ^4.2858.1
+  material_symbols_icons: ^4.2928.1
 
   table_calendar: ^3.2.0
   expandable_page_view: ^1.0.17

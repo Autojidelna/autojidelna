@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/core/analytics/analytics_service.dart';
 import 'package:autojidelna/core/crashlytics/crashlytics_service.dart';
 import 'package:autojidelna/core/notifications/notification_topics.dart';
 import 'package:autojidelna/core/notifications/notification_handler.dart';
@@ -21,7 +20,6 @@ import 'package:awesome_notifications/awesome_notifications.dart' hide Notificat
 class AppInit {
   static bool _hiveExecuted = false;
   static bool _firebaseCrashlyticsExecuted = false;
-  static bool _firebaseAnalyticsExecuted = false;
   static bool _firebaseRemoteConfigExecuted = false;
   static bool _firebaseMessagingExecuted = false;
   static bool _awesomeNotificationsExecuted = false;
@@ -67,35 +65,19 @@ class AppInit {
     _firebaseCrashlyticsExecuted = true;
   }
 
-  static Future<void> firebaseAnalytics() async {
-    assert(_firebaseAnalyticsExecuted == false, 'AppInit.firebaseCrashlytics() must be called only once');
-    if (_firebaseAnalyticsExecuted) return;
-
-    final box = Hive.box(Boxes.analytics);
-    bool allowAnalytics = box.get(HiveKeys.analytics.allowAnalytics, defaultValue: false);
-    AnalyticsService.instance.enabled(allowAnalytics);
-    box.put(HiveKeys.analytics.allowAnalytics, allowAnalytics);
-
-    _firebaseAnalyticsExecuted = true;
-  }
-
   static Future<void> firebaseRemoteConfig() async {
     assert(_firebaseRemoteConfigExecuted == false, 'AppInit.firebaseRemoteConfig() must be called only once');
     if (_firebaseRemoteConfigExecuted) return;
 
     final remoteConfig = RemoteConfig.instance;
     await remoteConfig.setConfigSettings(
-      RemoteConfigSettings(
-        fetchTimeout: const Duration(minutes: 1),
-        minimumFetchInterval: const Duration(days: 7),
-      ),
+      RemoteConfigSettings(fetchTimeout: const Duration(minutes: 1), minimumFetchInterval: const Duration(days: 7)),
     );
 
     // Load defaults from local storage (Hive)
-    final savedDefaults = Hive.box(Boxes.appState).get(
-      HiveKeys.appState.remoteConfigValues,
-      defaultValue: RemoteConfig.defaultValues[RemoteConfig.canteenUrls],
-    );
+    final savedDefaults = Hive.box(
+      Boxes.appState,
+    ).get(HiveKeys.appState.remoteConfigValues, defaultValue: RemoteConfig.defaultValues[RemoteConfig.canteenUrls]);
 
     if (savedDefaults != null) {
       // Ensure only supported types go into setDefaults()
@@ -145,14 +127,7 @@ class AppInit {
 
     await AwesomeNotifications().initialize(
       'resource://drawable/ic_launcher',
-      [
-        NotificationChannel(
-          channelKey: 'default',
-          channelName: 'Default',
-          channelDescription: 'Default',
-          importance: NotificationImportance.High,
-        ),
-      ],
+      [NotificationChannel(channelKey: 'default', channelName: 'Default', channelDescription: 'Default', importance: NotificationImportance.High)],
       channelGroups: NotificationChannelService.channelGroups,
       debug: kDebugMode,
     );
