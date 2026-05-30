@@ -17,8 +17,9 @@ import 'package:icanteenlib/canteenlib.dart';
 import 'package:flutter/foundation.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+// TODO: Working local notifications
 @pragma('vm:entry-point')
-Future<void> firebaseMessagingBackgroundHandler(String message) async {
+Future<void> notificationsBackgroundHandler(String message) async {
   await App.backgroundInit();
   //NotificationHandler.placeholderNotification(message.data['type']);
   NotificationHandler.handleIncomingMessage(message);
