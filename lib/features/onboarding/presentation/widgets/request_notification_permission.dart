@@ -1,7 +1,6 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 
 import 'package:flutter/material.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 
@@ -40,8 +39,6 @@ class _RequestNotificationPermissionState extends State<RequestNotificationPermi
       await AwesomeNotifications().showNotificationConfigPage();
     }
 
-    final apnsToken = await FirebaseMessaging.instance.getAPNSToken();
-    if (apnsToken != null) {}
     checkNotificationPermissions();
   }
 
@@ -63,8 +60,8 @@ class _RequestNotificationPermissionState extends State<RequestNotificationPermi
         child: notificationsEnabled
             ? const Icon(Icons.check, size: 25)
             : notificationsRefused
-                ? const Icon(Icons.settings, size: 25)
-                : Text(l10n.grant),
+            ? const Icon(Icons.settings, size: 25)
+            : Text(l10n.grant),
       ),
     );
   }
