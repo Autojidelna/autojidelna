@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'providers.g.dart';
 
 @Riverpod(keepAlive: true)
+// TODO: pridat chache/persistent storage
 class DenniNabidka extends _$DenniNabidka {
   @override
   FutureOr<Jidelnicek> build(DateTime date) async {
@@ -37,7 +38,7 @@ class DenniNabidka extends _$DenniNabidka {
     }
 
     try {
-      state = const AsyncLoading();
+      state = AsyncLoading<Jidelnicek>().unwrapPrevious();
       Jidelnicek refreshed = await canteen.provedObjednavku(jidlo);
       state = AsyncData(refreshed);
     } catch (e, st) {

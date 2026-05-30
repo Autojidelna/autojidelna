@@ -68,7 +68,7 @@ class Onboarding {
     } catch (e) {
       switch (e) {
         case AuthErrors.noInternetConnection:
-          if (await showInternetConnectionSnackBar() && context.mounted) await login(context, ref, formKeyEnum);
+          if (await showInternetConnectionSnackBar() && context.mounted) return login(context, ref, formKeyEnum);
           break;
         case AuthErrors.connectionFailed:
           if (context.mounted) showErrorSnackBar(SnackBarAuthErrors.connectionFailed(context.l10n));

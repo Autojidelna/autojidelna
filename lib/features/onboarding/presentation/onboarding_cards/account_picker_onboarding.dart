@@ -109,6 +109,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
           showErrorSnackBar(SnackBarAuthErrors.wrongUrl(l10n));
           break;
         default:
+          allowNextPage = false;
       }
       allowNextPage = false;
     }

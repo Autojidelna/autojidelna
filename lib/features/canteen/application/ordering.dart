@@ -26,42 +26,51 @@ Future<void> pressed(BuildContext context, WidgetRef ref, Jidlo dish) async {
   if (!await InternetConnectionChecker.instance.hasConnection) {
     final bool value = await showInternetConnectionSnackBar();
     if (value && context.mounted) {
+      notifier.state = false;
       await pressed(context, ref, dish);
     }
     return;
   }
+  try {
+    switch (dish.stav) {
+      case StavJidla.objednano:
+      case StavJidla.neobjednano:
+      case StavJidla.dostupneNaBurze:
+      case StavJidla.objednanoPouzeNaBurzu:
+      case StavJidla.vlozenoNaBurze:
+        try {
+          ref.read(denniNabidkaProvider(dish.datum).notifier).provedObjednavku(jidlo: dish);
+          AnalyticsService.instance.addStatistic(StatisticType.order);
+        } catch (e) {
+          showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(l10n));
+        }
+        break;
+      case StavJidla.objednanoVyprsenaPlatnost:
+        showErrorSnackBar(SnackBarOrderingErrors.dishCancellationExpired(l10n));
+        break;
 
-  switch (dish.stav) {
-    case StavJidla.objednano:
-    case StavJidla.neobjednano:
-    case StavJidla.dostupneNaBurze:
-    case StavJidla.objednanoPouzeNaBurzu:
-    case StavJidla.vlozenoNaBurze:
-      try {
-        ref.read(denniNabidkaProvider(dish.datum).notifier).provedObjednavku(jidlo: dish);
-        AnalyticsService.instance.addStatistic(StatisticType.order);
-      } catch (e) {
-        showErrorSnackBar(SnackBarOrderingErrors.dishOrdering(l10n));
-      }
-      break;
-    case StavJidla.objednanoVyprsenaPlatnost:
-      showErrorSnackBar(SnackBarOrderingErrors.dishCancellationExpired(l10n));
-      break;
-
-    case StavJidla.nedostupne:
-      if (date.isBefore(DateTime.now())) {
+      case StavJidla.nedostupne:
+        if (date.isBefore(DateTime.now())) {
+          showErrorSnackBar(SnackBarOrderingErrors.dishCannotBeOrdered(l10n));
+          break;
+        }
+        final stavUctu = canteen.stavUctu;
+        final cena = dish.cena;
+        if (stavUctu == null || cena == null) {
+          showErrorSnackBar(SnackBarOrderingErrors.dishCannotBeOrdered(l10n));
+          break;
+        }
+        if (stavUctu.kredit < dish.cena!) {
+          showErrorSnackBar(SnackBarOrderingErrors.insufficientCredit(l10n));
+          break;
+        }
         showErrorSnackBar(SnackBarOrderingErrors.dishCannotBeOrdered(l10n));
         break;
-      }
-      if (canteen.stavUctu!.kredit < dish.cena!) {
-        showErrorSnackBar(SnackBarOrderingErrors.insufficientCredit(l10n));
+      case StavJidla.verejne:
         break;
-      }
-      showErrorSnackBar(SnackBarOrderingErrors.dishCannotBeOrdered(l10n));
-      break;
-    case StavJidla.verejne:
-      break;
+    }
+    await ref.read(userProvider).updateUserData();
+  } finally {
+    notifier.state = false;
   }
-  ref.read(userProvider).updateUserData();
-  notifier.state = false;
 }

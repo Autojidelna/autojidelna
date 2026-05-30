@@ -28,7 +28,7 @@ class CanteenUrlOnboarding extends ConsumerStatefulWidget implements OnboardingS
 
     if (ref.read(onboardingStepsProvider).any((step) => step.runtimeType == AccountPickerOnboarding)) {
       // Delay so that the page is removed after the page changing animation is finished
-      Future.delayed(Durations.medium1, ref.read(onboardingStepsProvider.notifier).removeLoginPages);
+      await Future.delayed(Durations.medium1, ref.read(onboardingStepsProvider.notifier).removeLoginPages);
     }
 
     return true;

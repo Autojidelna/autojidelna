@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/legacy.dart';
 // Prevent Friday <-> Monday loop jumping
 final _pageChangeLockProvider = StateProvider<bool>((ref) => false);
 
-void changeDate(DateTime newDate) async {
+Future<void> changeDate(DateTime newDate) async {
   if (!App.pageController.hasClients && !App.listController.hasClients) return;
   final container = App.globalContainer;
 
