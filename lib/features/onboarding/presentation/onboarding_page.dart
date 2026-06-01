@@ -98,6 +98,9 @@ class __OnboardingPageContentState extends ConsumerState<_OnboardingPageContent>
 
     return PopScope(
       canPop: isFirstPage,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!isFirstPage || !ref.watch(disableInteractions)) _previousPage(currentPage, isFirstPage);
+      },
       child: Scaffold(
         appBar: AppBar(forceMaterialTransparency: true, automaticallyImplyLeading: false),
         body: SingleChildScrollView(
