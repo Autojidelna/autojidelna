@@ -14,6 +14,8 @@ import 'package:flutter/services.dart';
 import 'package:icanteenlib/canteenlib.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// TODO: add all values in UzivatelskeUdaje to the page
+
 @RoutePage()
 class AccountPage extends ConsumerWidget {
   const AccountPage({super.key});
