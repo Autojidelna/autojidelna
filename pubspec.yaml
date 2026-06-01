@@ -40,6 +40,8 @@ dependencies:
   flutter_riverpod: ^3.0.3
   riverpod_annotation: ^4.0.0
 
+  http: ^1.6.0
+
   awesome_notifications_core: ^0.10.1
   awesome_notifications: ^0.11.0
 

@@ -235,6 +235,9 @@ class L10nCs extends L10n {
       'Zobrazit jednotlivé dny ve vertikálním seznamu.';
 
   @override
+  String get loadingCanteens => 'Získáváme jídelny';
+
+  @override
   String get location => 'Výdejna';
 
   @override

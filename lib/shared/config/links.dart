@@ -1,5 +1,6 @@
 class Links {
   static const String autojidelna = 'https://autojidelna.cz';
+  static const String remoteCanteenList = '$autojidelna/jidelny.json';
   static const String repo = 'https://github.com/Autojidelna/autojidelna';
 
   static const String privacyPolicy = '$autojidelna/privacy-policy/';
