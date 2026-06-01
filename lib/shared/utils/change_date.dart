@@ -5,34 +5,34 @@ import 'package:autojidelna/features/canteen/application/selected_date.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
 // Prevent Friday <-> Monday loop jumping
 final _pageChangeLockProvider = StateProvider<bool>((ref) => false);
 
-Future<void> changeDate(DateTime newDate) async {
+Future<void> changeDate(WidgetRef ref, DateTime newDate) async {
   if (!App.pageController.hasClients && !App.listController.hasClients) return;
-  final container = App.globalContainer;
 
   // If we're in the middle of a programmatic change, ignore further callbacks.
-  if (container.read(_pageChangeLockProvider)) return;
+  if (ref.read(_pageChangeLockProvider)) return;
 
-  final prevDate = container.read(selectedDateProvider);
+  final prevDate = ref.read(selectedDateProvider);
 
-  if (container.read(skipWeekendsProvider)) newDate = _jumpToWeekDay(prevDate, newDate);
+  if (ref.read(skipWeekendsProvider)) newDate = _jumpToWeekDay(prevDate, newDate);
   final bool animate = prevDate.difference(newDate).inDays.abs() <= 7;
-  container.read(selectedDateProvider.notifier).state = newDate;
+  ref.read(selectedDateProvider.notifier).state = newDate;
 
   final int dayIndex = newDate.toIndex();
-  final bool listUi = container.read(listUiProvider);
+  final bool listUi = ref.read(listUiProvider);
 
-  container.read(_pageChangeLockProvider.notifier).state = true;
+  ref.read(_pageChangeLockProvider.notifier).state = true;
 
   if (!animate) {
     listUi ? App.listController.sliverController.jumpToIndex(dayIndex, offset: -.1) : App.pageController.jumpToPage(dayIndex);
 
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      container.read(_pageChangeLockProvider.notifier).state = false;
+      ref.read(_pageChangeLockProvider.notifier).state = false;
     });
     return;
   }
@@ -41,7 +41,7 @@ Future<void> changeDate(DateTime newDate) async {
       ? await App.listController.sliverController.animateToIndex(dayIndex, offset: -.1, duration: Durations.medium1, curve: Curves.easeInOut)
       : await App.pageController.animateToPage(dayIndex, duration: Durations.medium1, curve: Curves.easeInOut);
 
-  container.read(_pageChangeLockProvider.notifier).state = false;
+  ref.read(_pageChangeLockProvider.notifier).state = false;
 }
 
 DateTime _jumpToWeekDay(DateTime prevDate, DateTime newDate) {

@@ -24,28 +24,16 @@ class DebugPage extends StatelessWidget {
           ListTile(
             title: TextField(
               onChanged: (value) async => value == 'crash' ? crashTestFunction() : null,
-              decoration: InputDecoration(
-                labelText: l10n.debugTypeCrash,
-                border: const OutlineInputBorder(),
-              ),
+              decoration: InputDecoration(labelText: l10n.debugTypeCrash, border: const OutlineInputBorder()),
             ),
           ),
-          ListTile(
-            title: const Text('Show error Snack Bar'),
-            onTap: () => showErrorSnackBar(SnackBarAuthErrors.connectionFailed(context.l10n)),
-          ),
+          ListTile(title: const Text('Show error Snack Bar'), onTap: () => showErrorSnackBar(SnackBarAuthErrors.connectionFailed(context.l10n))),
           ListTile(
             title: const Text('Show info Snack Bar'),
             onTap: () => showInfoSnackBar(Icons.wifi_off_rounded, l10n.appName, l10n.appDescription),
           ),
-          ListTile(
-            title: const Text('Onboarding guide'),
-            onTap: () async => context.router.push(OnboardingRoute()),
-          ),
-          ListTile(
-            title: const Text('Set AppState.firstTime to true'),
-            onTap: () => Hive.box(Boxes.appState).put(HiveKeys.appState.firstTime, true),
-          ),
+          ListTile(title: const Text('Onboarding guide'), onTap: () async => context.router.push(OnboardingRoute())),
+          ListTile(title: const Text('Set AppState.firstTime to true'), onTap: () => Hive.box(Boxes.appState).put(HiveKeys.appState.firstTime, true)),
           const NotificationActionButton(),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/core/notifications/notification_channel_service.dart';
@@ -53,7 +54,7 @@ class NotificationHandler {
   }
 
   static Future<void> _foodToday(String topic) async {
-    final l10n = lookupL10n(App.globalContainer.read(currentLocaleProvider));
+    final L10n l10n = lookupL10n(Locale('cs', 'cz')); // TODO: add support for multiple locales
     final now = DateTime.now();
     final limitedAccounts = await _getLimitedAccountsFromStorage();
 
@@ -108,7 +109,7 @@ class NotificationHandler {
   }
 
   static void _lowCredit(String topic) async {
-    final l10n = lookupL10n(App.globalContainer.read(currentLocaleProvider));
+    final L10n l10n = lookupL10n(Locale('cs', 'cz')); // TODO: add support for multiple locales
     final limitedAccounts = await _getLimitedAccountsFromStorage();
 
     for (var i = 0; i < limitedAccounts.length; i++) {
@@ -147,7 +148,7 @@ class NotificationHandler {
   }
 
   static void _nextWeekFoodCheck(String topic) async {
-    final l10n = lookupL10n(App.globalContainer.read(currentLocaleProvider));
+    final L10n l10n = lookupL10n(Locale('cs', 'cz')); // TODO: add support for multiple locales
     DateTime now = DateTime.now();
     final limitedAccounts = await _getLimitedAccountsFromStorage();
 

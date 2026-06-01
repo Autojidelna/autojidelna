@@ -17,7 +17,7 @@ class JumpToTodayButton extends ConsumerWidget {
           borderRadius: BorderRadius.circular(8),
           side: BorderSide(color: Theme.of(context).colorScheme.onSurfaceVariant, width: 1.75),
         ),
-        onPressed: () => changeDate(DateTime.now()),
+        onPressed: () => changeDate(ref, DateTime.now()),
         child: Text(DateTime.now().day.toString()),
       ),
     );

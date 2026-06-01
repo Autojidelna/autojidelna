@@ -33,7 +33,7 @@ class _PageViewCanteenState extends ConsumerState<PageViewCanteen> {
       controller: App.pageController,
       scrollDirection: Axis.horizontal,
       itemCount: Dates.maximalDate.difference(Dates.minimalDate).inDays,
-      onPageChanged: (index) => changeDate(index.toDateTime()),
+      onPageChanged: (index) => changeDate(ref, index.toDateTime()),
       itemBuilder: (_, index) => MenuOfTheDay(index.toDateTime()),
     );
   }

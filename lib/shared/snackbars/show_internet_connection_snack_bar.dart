@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/app/app_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -13,7 +12,7 @@ Timer? _internetCheckTimer;
 Future<bool> showInternetConnectionSnackBar() async {
   if (_isVisible) return false;
   _isVisible = true;
-  BuildContext? ctx = App.globalContainer.read(scaffoldMessengerProvider).currentContext;
+  BuildContext? ctx = App.scaffoldMessenger.currentContext;
   if (ctx == null) return false;
 
   final Completer<bool> completer = Completer<bool>();
@@ -56,24 +55,21 @@ Future<bool> showInternetConnectionSnackBar() async {
 
   // Start checking connection every 3 seconds
   _internetCheckTimer?.cancel();
-  _internetCheckTimer = Timer.periodic(
-    const Duration(seconds: 1),
-    (timer) async {
-      bool hasInternet = await InternetConnectionChecker.instance.hasConnection;
+  _internetCheckTimer = Timer.periodic(const Duration(seconds: 1), (timer) async {
+    bool hasInternet = await InternetConnectionChecker.instance.hasConnection;
 
-      if (hasInternet && !notifier.value) {
-        notifier.value = true;
+    if (hasInternet && !notifier.value) {
+      notifier.value = true;
 
-        // Wait 3 seconds before dismissing snackbar
-        await Future.delayed(const Duration(seconds: 3));
-        scaffoldMessenger.hideCurrentSnackBar();
+      // Wait 3 seconds before dismissing snackbar
+      await Future.delayed(const Duration(seconds: 3));
+      scaffoldMessenger.hideCurrentSnackBar();
 
-        _internetCheckTimer?.cancel(); // Stop checking after reconnecting
-        _isVisible = false;
-        completer.complete(true); // Resolve future and return true
-      }
-    },
-  );
+      _internetCheckTimer?.cancel(); // Stop checking after reconnecting
+      _isVisible = false;
+      completer.complete(true); // Resolve future and return true
+    }
+  });
 
   return completer.future; // This will resolve when internet reconnects
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:autojidelna/features/canteen/application/providers.dart';
 import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
@@ -70,14 +72,14 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
     });
   }
 
-  void onConfirm() {
+  void onConfirm(WidgetRef ref) {
     Navigator.of(context).pop();
-    changeDate(userFocusedDate);
+    unawaited(changeDate(ref, userFocusedDate));
   }
 
-  void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+  void onDaySelected(WidgetRef ref, DateTime selectedDay, DateTime focusedDay) {
     if (isSameDay(selectedDay, userFocusedDate)) {
-      onConfirm();
+      onConfirm(ref);
       return;
     }
     setState(() {
@@ -142,7 +144,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
             firstDay: Dates.minimalDate,
             lastDay: Dates.maximalDate,
             selectedDayPredicate: (day) => isSameDay(userFocusedDate, day),
-            onDaySelected: onDaySelected,
+            onDaySelected: (a, b) => onDaySelected(ref, a, b),
             onPageChanged: onPageChanged,
             eventLoader: eventLoader,
             calendarBuilders: CalendarBuilders(
@@ -159,7 +161,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
             ),
           ),
           const CustomDivider(height: 0, isTransparent: false),
-          _actionButtons(context, onConfirm),
+          _actionButtons(context, () => onConfirm(ref)),
         ],
       ),
     );
