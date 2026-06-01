@@ -483,6 +483,12 @@ abstract class L10n {
   /// **'Zobrazit jednotlivé dny ve vertikálním seznamu.'**
   String get listUiSubtitle;
 
+  /// No description provided for @loadingCanteens.
+  ///
+  /// In cs, this message translates to:
+  /// **'Získáváme jídelny'**
+  String get loadingCanteens;
+
   /// No description provided for @location.
   ///
   /// In cs, this message translates to:

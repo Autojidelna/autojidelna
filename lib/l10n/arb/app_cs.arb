@@ -149,6 +149,8 @@
   "@listUi": {},
   "listUiSubtitle": "Zobrazit jednotlivé dny ve vertikálním seznamu.",
   "@listUiSubtitle": {},
+  "loadingCanteens": "Získáváme jídelny",
+  "@loadingCanteens": {},
   "location": "Výdejna",
   "@location": {},
   "locationsUnknown": "Neznámá výdejna",
