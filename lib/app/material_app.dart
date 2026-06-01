@@ -1,4 +1,4 @@
-import 'package:autojidelna/app/app_providers.dart';
+import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/app/routing/app_router.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/utils/deep_link_transformer_logic.dart';
@@ -22,7 +22,7 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      scaffoldMessengerKey: ref.read(scaffoldMessengerProvider),
+      scaffoldMessengerKey: App.scaffoldMessenger,
       themeMode: themeState.themeMode,
       theme: AppThemes.theme(themeNotifier.colorSchemeLight()),
       darkTheme: AppThemes.theme(themeNotifier.colorSchemeDark(), amoledMode: themeState.amoledMode),

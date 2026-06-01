@@ -36,7 +36,7 @@ class App {
     await AppInit.awesomeNotifications();
   }
 
-  static late final bool shouldAskForNotification;
+  static final bool shouldAskForNotification = true;
 
   static const _defaultRotations = [
     DeviceOrientation.portraitUp,
@@ -45,7 +45,7 @@ class App {
     DeviceOrientation.landscapeRight,
   ];
 
-  static final globalContainer = ProviderContainer(overrides: initProviderOverrides);
+  static final GlobalKey<ScaffoldMessengerState> scaffoldMessenger = GlobalKey<ScaffoldMessengerState>();
 
   static PageController pageController = PageController();
   static FlutterListViewController listController = FlutterListViewController();

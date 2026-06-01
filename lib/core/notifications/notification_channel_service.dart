@@ -1,14 +1,13 @@
-import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/core/notifications/notification_topics.dart';
 import 'package:autojidelna/core/types/freezed/safe_account/safe_account.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/l10n/output/l10n.dart';
-import 'package:autojidelna/shared/localization/current_locale.dart';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter/material.dart';
 
 class NotificationChannelService {
-  static final L10n _l10n = lookupL10n(App.globalContainer.read(currentLocaleProvider));
+  static final L10n _l10n = lookupL10n(Locale('cs', 'cz')); // TODO: add support for multiple locales
 
   static String userIdGen(SafeAccount account) => '${Url.clean(account.url)}-${account.username}';
   static String getChannelKey(String userId, String topic) => '$userId-$topic';
