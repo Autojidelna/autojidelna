@@ -45,7 +45,7 @@ class L10nCs extends L10n {
     final intl.DateFormat yearDateFormat = intl.DateFormat.y(localeName);
     final String yearString = yearDateFormat.format(year);
 
-    return '© 2023 - $yearString Tomáš Protiva, Matěj Verhaegen a kolaborátoři\nZveřejněno pod licencí GNU GPLv3';
+    return '© 2023 - $yearString Matěj Verhaegen, Tomáš Protiva a kolaborátoři\nZveřejněno pod licencí GNU GPLv3';
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account/account.dart';
 import 'package:autojidelna/core/types/freezed/safe_account/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user/user.dart';
@@ -43,7 +44,7 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> loadUser() async {
     final user = await _authService.loginFromStorage();
-    if (user == null) return;
+    if (user == null) return Future.error(AuthErrors.accountNotFound);
     _user = user;
     _loggedSafeAccounts = await _authService.getLimitedAccounts();
     notifyListeners();
@@ -64,7 +65,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> updateUserData() async {
-    if (_user == null) return;
+    if (_user == null) return Future.error(CanteenErrors.needToLogin);
     _user = _user!.copyWith(data: await _authService.fetchUserData());
     notifyListeners();
   }
