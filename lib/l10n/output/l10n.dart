@@ -882,7 +882,7 @@ abstract class L10n {
   /// No description provided for @grant.
   ///
   /// In cs, this message translates to:
-  /// **'Udělit'**
+  /// **'Povolit'**
   String get grant;
 
   /// No description provided for @next.
