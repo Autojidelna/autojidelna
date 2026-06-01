@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 
 import 'package:flutter/material.dart';
@@ -11,40 +13,42 @@ class RequestNotificationPermission extends StatefulWidget {
   State<RequestNotificationPermission> createState() => _RequestNotificationPermissionState();
 }
 
-class _RequestNotificationPermissionState extends State<RequestNotificationPermission> {
+class _RequestNotificationPermissionState extends State<RequestNotificationPermission> with WidgetsBindingObserver {
   bool notificationsEnabled = false;
   bool notificationsRefused = false;
+  PermissionStatus? lastStatus;
 
   void checkNotificationPermissions() async {
-    final status = await Permission.notification.status;
-    if (status == PermissionStatus.provisional || status == PermissionStatus.granted) {
-      setState(() {
-        notificationsEnabled = true;
-      });
-    }
-    if (status == PermissionStatus.denied || status == PermissionStatus.permanentlyDenied) {
-      setState(() {
-        notificationsRefused = true;
-      });
-    }
+    PermissionStatus status = await Permission.notification.status;
+    if (lastStatus == status) return;
+
+    setState(() {
+      notificationsEnabled = status.isProvisional || status.isGranted;
+      notificationsRefused = status.isPermanentlyDenied;
+      lastStatus = status;
+    });
   }
 
-  void askForPermission() async {
-    checkNotificationPermissions();
-    if (notificationsEnabled) return;
-
-    if (!notificationsRefused) {
-      await AwesomeNotifications().requestPermissionToSendNotifications();
-    } else {
-      await AwesomeNotifications().showNotificationConfigPage();
-    }
-
-    checkNotificationPermissions();
+  Future<void> askForPermission() async {
+    await AwesomeNotifications().requestPermissionToSendNotifications();
   }
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    checkNotificationPermissions();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed) return;
     checkNotificationPermissions();
   }
 
@@ -59,7 +63,7 @@ class _RequestNotificationPermissionState extends State<RequestNotificationPermi
         onPressed: notificationsEnabled ? null : askForPermission,
         child: notificationsEnabled
             ? const Icon(Icons.check, size: 25)
-            : notificationsRefused
+            : notificationsRefused && (lastStatus?.isPermanentlyDenied ?? false)
             ? const Icon(Icons.settings, size: 25)
             : Text(l10n.grant),
       ),

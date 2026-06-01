@@ -456,7 +456,7 @@ class L10nCs extends L10n {
       'Pojďme nastavit nějaké věci. Později je můžete změnit v nastavení.';
 
   @override
-  String get grant => 'Udělit';
+  String get grant => 'Povolit';
 
   @override
   String get next => 'Další';
