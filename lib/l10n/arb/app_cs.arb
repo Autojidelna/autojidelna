@@ -20,7 +20,7 @@
   "@analyticsMoreInfo": {},
   "appDescription": "Aplikace pro objednávání ze systému Icanteen. Cíl této aplikace je zjednodušit, zrychlit, (případně i zautomatizovat) objednávání obědů.",
   "@appDescription": {},
-  "appLegalese": "© 2023 - {year} Tomáš Protiva, Matěj Verhaegen a kolaborátoři\nZveřejněno pod licencí GNU GPLv3",
+  "appLegalese": "© 2023 - {year} Matěj Verhaegen, Tomáš Protiva a kolaborátoři\nZveřejněno pod licencí GNU GPLv3",
   "@appLegalese": {
     "description": "appLegalese",
     "placeholders": {

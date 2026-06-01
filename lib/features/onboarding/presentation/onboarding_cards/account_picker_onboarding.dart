@@ -24,6 +24,10 @@ class _SelectedSafeAccountNotifier extends Notifier<SafeAccount> {
     }
     return accounts.first;
   }
+
+  void set(SafeAccount safeAccount) {
+    state = safeAccount;
+  }
 }
 
 final _selectedSafeAccount = NotifierProvider<_SelectedSafeAccountNotifier, SafeAccount>(_SelectedSafeAccountNotifier.new);
@@ -34,6 +38,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool disable = ref.watch(disableInteractions);
     List<SafeAccount> accounts = ref.read(userProvider).loggedInAccounts;
 
     return Padding(
@@ -47,13 +52,15 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
               itemCount: accounts.length,
               itemBuilder: (context, index) {
                 SafeAccount account = accounts[index];
+                SafeAccount selectedAccount = ref.watch(_selectedSafeAccount);
+                final selectedAccountNotifier = ref.read(_selectedSafeAccount.notifier);
 
                 return ListTile(
                   title: Text(account.username),
                   subtitle: Text(account.url),
-                  enabled: ref.watch(_selectedSafeAccount) == account || !ref.watch(disableInteractions),
-                  trailing: ref.watch(_selectedSafeAccount) == account ? const Icon(Icons.check) : null,
-                  onTap: ref.watch(disableInteractions) ? null : () => ref.read(_selectedSafeAccount.notifier).state = account,
+                  enabled: selectedAccount == account || !disable,
+                  trailing: selectedAccount == account ? const Icon(Icons.check) : null,
+                  onTap: disable ? null : () => selectedAccountNotifier.set(account),
                 );
               },
             ),
@@ -63,7 +70,7 @@ class AccountPickerOnboarding extends ConsumerWidget implements OnboardingStep {
             child: DividerWithText(text: context.l10n.or),
           ),
           ListTile(
-            enabled: !ref.watch(disableInteractions),
+            enabled: !disable,
             leading: const Icon(Icons.add),
             title: Text(context.l10n.addAccount),
             onTap: () async {

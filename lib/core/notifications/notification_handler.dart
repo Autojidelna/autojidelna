@@ -11,7 +11,6 @@ import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/features/canteen/application/helpers.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/config/secure_storage.dart';
-import 'package:autojidelna/shared/localization/current_locale.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:icanteenlib/canteenlib.dart';

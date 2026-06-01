@@ -156,7 +156,7 @@ abstract class L10n {
   /// appLegalese
   ///
   /// In cs, this message translates to:
-  /// **'© 2023 - {year} Tomáš Protiva, Matěj Verhaegen a kolaborátoři\nZveřejněno pod licencí GNU GPLv3'**
+  /// **'© 2023 - {year} Matěj Verhaegen, Tomáš Protiva a kolaborátoři\nZveřejněno pod licencí GNU GPLv3'**
   String appLegalese(DateTime year);
 
   /// No description provided for @appName.
