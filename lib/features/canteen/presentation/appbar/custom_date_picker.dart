@@ -76,9 +76,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
   @override
   void initState() {
     super.initState();
-    DateTime selectedDate = ref.read(selectedDateProvider);
-    appFocusedDate = selectedDate;
-    userFocusedDate = selectedDate;
+    userFocusedDate = appFocusedDate = ref.read(selectedDateProvider);
   }
 
   @override
