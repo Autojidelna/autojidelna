@@ -79,7 +79,7 @@ class NotificationHandler {
         }
 
         for (var k = 0; k < menu.nabidka.length; k++) {
-          if (!getPrimaryState(menu.nabidka[k].stav)) continue;
+          if (!menu.nabidka[k].stav.getPrimaryState()) continue;
           AwesomeNotifications().createNotification(
             content: NotificationContent(
               id: 1024 - i,
@@ -163,7 +163,7 @@ class NotificationHandler {
           final menu = await _getDailyMenu(canteen, now);
           if (menu == null || menu.nabidka.isEmpty) continue;
           for (var k = 0; k < menu.nabidka.length; k++) {
-            if (!getPrimaryState(menu.nabidka[k].stav)) continue;
+            if (!menu.nabidka[k].stav.getPrimaryState()) continue;
             orderedDays++;
             break;
           }
