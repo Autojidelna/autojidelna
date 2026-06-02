@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'safe_account.dart';
+part of '../safe_account.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

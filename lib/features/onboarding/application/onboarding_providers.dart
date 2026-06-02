@@ -5,7 +5,7 @@ import 'package:autojidelna/features/onboarding/domain/onboarding_step.dart';
 import 'package:flutter/widgets.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'onboarding_providers.g.dart';
+part 'generated/onboarding_providers.g.dart';
 
 enum OnboardingFormKeys { url, credentials }
 

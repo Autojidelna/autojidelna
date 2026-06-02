@@ -2,8 +2,8 @@ import 'package:autojidelna/core/utils/url.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'account.freezed.dart';
-part 'account.g.dart';
+part 'generated/account.freezed.dart';
+part 'generated/account.g.dart';
 
 @freezed
 sealed class Account with _$Account {

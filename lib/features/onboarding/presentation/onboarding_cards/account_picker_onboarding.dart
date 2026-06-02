@@ -1,6 +1,6 @@
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/errors.dart';
-import 'package:autojidelna/core/types/freezed/safe_account/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account.dart';
 import 'package:autojidelna/shared/config/errors.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';

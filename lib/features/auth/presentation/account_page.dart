@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/core/types/freezed/safe_account/safe_account.dart';
-import 'package:autojidelna/core/types/freezed/user/user.dart';
+import 'package:autojidelna/core/types/freezed/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/user.dart';
 import 'package:autojidelna/shared/providers/account.provider.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';

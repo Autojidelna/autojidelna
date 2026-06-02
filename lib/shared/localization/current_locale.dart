@@ -5,7 +5,7 @@ import 'package:autojidelna/shared/config/hive.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'current_locale.g.dart';
+part 'generated/current_locale.g.dart';
 
 @Riverpod(keepAlive: true)
 class CurrentLocale extends _$CurrentLocale {

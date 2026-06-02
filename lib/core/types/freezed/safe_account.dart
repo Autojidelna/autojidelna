@@ -1,18 +1,15 @@
-import 'package:autojidelna/core/types/freezed/account/account.dart';
+import 'package:autojidelna/core/types/freezed/account.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'safe_account.freezed.dart';
-part 'safe_account.g.dart';
+part 'generated/safe_account.freezed.dart';
+part 'generated/safe_account.g.dart';
 
 @freezed
 sealed class SafeAccount with _$SafeAccount {
   const SafeAccount._();
 
-  const factory SafeAccount({
-    @JsonKey(name: 'username') required String username,
-    @JsonKey(name: 'url') required String url,
-  }) = _SafeAccount;
+  const factory SafeAccount({@JsonKey(name: 'username') required String username, @JsonKey(name: 'url') required String url}) = _SafeAccount;
 
   factory SafeAccount.fromJson(Map<String, Object?> json) => _$SafeAccountFromJson(json);
 
