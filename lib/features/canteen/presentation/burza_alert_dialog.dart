@@ -3,17 +3,15 @@ import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/widgets/configured_alert_dialog.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';
 import 'package:autojidelna/features/canteen/application/helpers.dart';
-import 'package:autojidelna/features/canteen/application/ordering.dart';
 
 import 'package:icanteenlib/canteenlib.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_ce_flutter/adapters.dart';
 
-void burzaAlertDialog(BuildContext context, WidgetRef ref, Jidlo updatedDish) {
+void burzaAlertDialog(BuildContext context, Jidlo updatedDish) async {
   if (updatedDish.stav != StavJidla.objednanoPouzeNaBurzu ||
       Hive.box(Boxes.appState).get(HiveKeys.appState.hideBurzaAlertDialog, defaultValue: false)) {
-    pressed(context, ref, updatedDish);
+    await updatedDish.order(context);
     return;
   }
 
@@ -50,8 +48,8 @@ void burzaAlertDialog(BuildContext context, WidgetRef ref, Jidlo updatedDish) {
             visualDensity: const VisualDensity(vertical: -4),
             padding: const EdgeInsets.only(right: 16),
           ),
-          onPressed: () {
-            pressed(context, ref, updatedDish);
+          onPressed: () async {
+            updatedDish.order(context);
             Navigator.pop(context);
           },
           child: Text(updatedDish.getObedText(context)),
