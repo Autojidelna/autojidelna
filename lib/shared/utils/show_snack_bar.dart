@@ -19,11 +19,11 @@ void showErrorSnackBar(SnackBarData errorData) {
   _showSnackBar(errorSnackBar(ctx, icon: errorData.iconData, title: errorData.title, subtitle: errorData.subtitle));
 }
 
-void showInfoSnackBar(IconData icon, String title, String? subtitle) {
+void showInfoSnackBar(SnackBarData infoData) {
   BuildContext? ctx = App.scaffoldMessenger.currentContext;
   if (ctx == null) return;
 
-  _showSnackBar(infoSnackBar(ctx, icon: icon, title: title, subtitle: subtitle));
+  _showSnackBar(infoSnackBar(ctx, icon: infoData.iconData, title: infoData.title, subtitle: infoData.subtitle));
 }
 
 void showLoginSuccessSnackBar(String username) {
