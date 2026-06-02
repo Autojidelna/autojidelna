@@ -15,12 +15,19 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish) async {
     return;
   }
 
-  final L10n l10n = context.l10n;
-  ValueNotifier<bool> checkbox = ValueNotifier<bool>(false);
+  return configuredDialog(context, builder: (context) => _BurzaAlertDialog(updatedDish));
+}
 
-  return configuredDialog(
-    context,
-    builder: (context) => ConfiguredAlertDialog(
+class _BurzaAlertDialog extends StatelessWidget {
+  const _BurzaAlertDialog(this.updatedDish);
+  final Jidlo updatedDish;
+
+  @override
+  Widget build(BuildContext context) {
+    final L10n l10n = context.l10n;
+    ValueNotifier<bool> checkbox = ValueNotifier<bool>(false);
+
+    return ConfiguredAlertDialog(
       title: updatedDish.getObedText(context),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -31,6 +38,7 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish) async {
             valueListenable: checkbox,
             builder: (_, value, _) => CheckboxListTile(
               value: value,
+              tristate: false,
               onChanged: (data) async {
                 checkbox.value = data!; // Checkbox isn't tristate so it's safe
                 Hive.box(Boxes.appState).put(HiveKeys.appState.hideBurzaAlertDialog, data);
@@ -56,6 +64,6 @@ void burzaAlertDialog(BuildContext context, Jidlo updatedDish) async {
         ),
         const SizedBox(width: 8),
       ],
-    ),
-  );
+    );
+  }
 }
