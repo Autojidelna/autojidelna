@@ -1,5 +1,4 @@
 import 'package:autojidelna/shared/providers/disable_interactions_provider.dart';
-import 'package:autojidelna/features/canteen/application/get_obed_text.dart';
 import 'package:autojidelna/features/canteen/application/helpers.dart';
 import 'package:autojidelna/features/canteen/presentation/burza_alert_dialog.dart';
 
@@ -25,7 +24,7 @@ class OrderDishButton extends ConsumerWidget {
           foregroundColor: isPrimary ? colorScheme.onPrimary : colorScheme.onSecondary,
         ),
         onPressed: !enabled || !dish.stav.isButtonEnabled() ? null : () => burzaAlertDialog(context, ref, dish),
-        child: Text(getObedText(context, ref, dish)),
+        child: Text(dish.getObedText(context)),
       ),
     );
   }

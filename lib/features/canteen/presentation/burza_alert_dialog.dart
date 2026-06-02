@@ -2,7 +2,7 @@ import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/config/hive.dart';
 import 'package:autojidelna/shared/widgets/configured_alert_dialog.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';
-import 'package:autojidelna/features/canteen/application/get_obed_text.dart';
+import 'package:autojidelna/features/canteen/application/helpers.dart';
 import 'package:autojidelna/features/canteen/application/ordering.dart';
 
 import 'package:icanteenlib/canteenlib.dart';
@@ -23,7 +23,7 @@ void burzaAlertDialog(BuildContext context, WidgetRef ref, Jidlo updatedDish) {
   return configuredDialog(
     context,
     builder: (context) => ConfiguredAlertDialog(
-      title: getObedText(context, ref, updatedDish),
+      title: updatedDish.getObedText(context),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -54,7 +54,7 @@ void burzaAlertDialog(BuildContext context, WidgetRef ref, Jidlo updatedDish) {
             pressed(context, ref, updatedDish);
             Navigator.pop(context);
           },
-          child: Text(getObedText(context, ref, updatedDish)),
+          child: Text(updatedDish.getObedText(context)),
         ),
         const SizedBox(width: 8),
       ],
