@@ -74,7 +74,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
 
   void onConfirm(WidgetRef ref) {
     Navigator.of(context).pop();
-    unawaited(changeDate(ref, userFocusedDate));
+    ref.read(selectedDateProvider.notifier).changeDate(userFocusedDate, false);
   }
 
   void onDaySelected(WidgetRef ref, DateTime selectedDay, DateTime focusedDay) {

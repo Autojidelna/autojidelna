@@ -30,7 +30,7 @@ class _ListViewCanteenState extends ConsumerState<ListViewCanteen> {
     _debounceTimer = Timer(Durations.short1, () {
       final selectedDate = ref.read(selectedDateProvider);
       if (selectedDate != visibleDate) {
-        ref.read(selectedDateProvider.notifier).state = visibleDate;
+        ref.read(selectedDateProvider.notifier).setDayIndex(visibleRange.first as int);
       }
     });
   }

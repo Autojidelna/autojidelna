@@ -1,4 +1,4 @@
-import 'package:autojidelna/shared/utils/change_date.dart';
+import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,7 +17,7 @@ class JumpToTodayButton extends ConsumerWidget {
           borderRadius: BorderRadius.circular(8),
           side: BorderSide(color: Theme.of(context).colorScheme.onSurfaceVariant, width: 1.75),
         ),
-        onPressed: () => changeDate(ref, DateTime.now()),
+        onPressed: () => ref.read(selectedDateProvider.notifier).changeDate(DateTime.now(), false),
         child: Text(DateTime.now().day.toString()),
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:autojidelna/app/app.dart';
+import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/shared/config/dates.dart';
-import 'package:autojidelna/shared/utils/change_date.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:autojidelna/features/canteen/presentation/page_view/menu_of_the_day.dart';
 
@@ -33,7 +33,7 @@ class _PageViewCanteenState extends ConsumerState<PageViewCanteen> {
       controller: App.pageController,
       scrollDirection: Axis.horizontal,
       itemCount: Dates.maximalDate.difference(Dates.minimalDate).inDays,
-      onPageChanged: (index) => changeDate(ref, index.toDateTime()),
+      onPageChanged: (index) => ref.read(selectedDateProvider.notifier).changeDate(index.toDateTime()),
       itemBuilder: (_, index) => MenuOfTheDay(index.toDateTime()),
     );
   }
