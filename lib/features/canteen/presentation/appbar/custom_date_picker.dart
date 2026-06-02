@@ -1,12 +1,9 @@
-import 'dart:async';
-
 import 'package:autojidelna/features/canteen/application/providers.dart';
 import 'package:autojidelna/features/canteen/application/selected_date.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/utils/string_extension.dart';
 import 'package:autojidelna/shared/settings/providers/settings_notifiers.dart';
 import 'package:autojidelna/shared/config/dates.dart';
-import 'package:autojidelna/shared/utils/change_date.dart';
 import 'package:autojidelna/shared/widgets/custom_divider.dart';
 import 'package:autojidelna/shared/widgets/configured_dialog.dart';
 import 'package:autojidelna/features/canteen/application/helpers.dart';
@@ -27,18 +24,8 @@ class _CustomDatePicker extends ConsumerStatefulWidget {
 }
 
 class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
-  late String locale;
-
-  late bool bigMarkersEnabled;
-  late DateTime selectedDate;
-
-  late ColorScheme colorScheme;
-  late final TextStyle defaultTextStyle;
-  late final BoxDecoration defaultDecoration;
-
-  late DateTime appFocusedDate;
-  late DateTime userFocusedDate;
-  late int visibleMonth;
+  DateTime appFocusedDate = DateTime.now();
+  DateTime userFocusedDate = DateTime.now();
 
   List<DateTime> orderedFoodDays = [];
   List<DateTime> availableFoodDays = [];
@@ -47,7 +34,7 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
     Jidelnicek? menu = ref.read(denniNabidkaProvider(day)).unwrapPrevious().value;
 
     if (menu == null) return [];
-    if (!bigMarkersEnabled) return menu.nabidka;
+    if (!ref.read(bigCalendarMarkersProvider)) return menu.nabidka;
 
     /// This for loop is used for [defaultBuilder]
     for (Jidlo dish in menu.nabidka) {
@@ -67,12 +54,11 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
 
   void onPageChanged(DateTime focusedDay) {
     setState(() {
-      visibleMonth = focusedDay.month;
       appFocusedDate = focusedDay;
     });
   }
 
-  void onConfirm(WidgetRef ref) {
+  void onConfirm(WidgetRef ref) async {
     Navigator.of(context).pop();
     ref.read(selectedDateProvider.notifier).changeDate(userFocusedDate, false);
   }
@@ -90,26 +76,20 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
   @override
   void initState() {
     super.initState();
-    bigMarkersEnabled = ref.read(bigCalendarMarkersProvider);
-    selectedDate = ref.read(selectedDateProvider);
-
-    defaultDecoration = const BoxDecoration(shape: BoxShape.circle);
-
+    DateTime selectedDate = ref.read(selectedDateProvider);
     appFocusedDate = selectedDate;
     userFocusedDate = selectedDate;
-    visibleMonth = selectedDate.month;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    locale = Localizations.localeOf(context).toLanguageTag();
-    colorScheme = Theme.of(context).colorScheme;
-    defaultTextStyle = Theme.of(context).textTheme.titleMedium!;
   }
 
   @override
   Widget build(BuildContext context) {
+    final String locale = Localizations.localeOf(context).toLanguageTag();
+    final bool bigMarkersEnabled = ref.read(bigCalendarMarkersProvider);
+
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final TextStyle defaultTextStyle = Theme.of(context).textTheme.titleMedium!;
+    final BoxDecoration defaultDecoration = const BoxDecoration(shape: BoxShape.circle);
+
     return Dialog(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -120,8 +100,8 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
             headerStyle: HeaderStyle(
               titleCentered: true,
               formatButtonVisible: false,
-              leftChevronVisible: visibleMonth != Dates.minimalDate.month,
-              rightChevronVisible: visibleMonth != Dates.maximalDate.month,
+              leftChevronVisible: appFocusedDate.month != Dates.minimalDate.month,
+              rightChevronVisible: appFocusedDate.month != Dates.maximalDate.month,
               titleTextStyle: Theme.of(context).textTheme.headlineSmall!,
               decoration: BoxDecoration(color: colorScheme.surfaceContainerHighest.withAlpha(16)),
             ),
@@ -150,12 +130,12 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
             calendarBuilders: CalendarBuilders(
               headerTitleBuilder: (context, day) => _headerTitle(locale, day, context),
               singleMarkerBuilder: !bigMarkersEnabled ? (context, _, dish) => _markerTemplate(context, dish as Jidlo) : null,
-              selectedBuilder: (context, day, _) => _cellTemplate(context, userFocusedDate, state: CellState.selected),
-              todayBuilder: (context, day, _) => _cellTemplate(context, day, state: CellState.today),
+              selectedBuilder: (context, day, _) => _cellTemplate(context, userFocusedDate, state: _CellState.selected),
+              todayBuilder: (context, day, _) => _cellTemplate(context, day, state: _CellState.today),
               defaultBuilder: (context, day, _) {
                 if (!bigMarkersEnabled) return null;
-                if (orderedFoodDays.contains(day)) return _cellTemplate(context, day, state: CellState.ordered);
-                if (availableFoodDays.contains(day)) return _cellTemplate(context, day, state: CellState.available);
+                if (orderedFoodDays.contains(day)) return _cellTemplate(context, day, state: _CellState.ordered);
+                if (availableFoodDays.contains(day)) return _cellTemplate(context, day, state: _CellState.available);
                 return null;
               },
             ),
@@ -172,7 +152,7 @@ Center _headerTitle(String locale, DateTime day, BuildContext context) {
   return Center(child: Text(DateFormat(DateFormat.YEAR_MONTH, locale).format(day).capitalize(), style: Theme.of(context).textTheme.headlineSmall!));
 }
 
-Center _cellTemplate(BuildContext context, DateTime date, {CellState? state}) {
+Center _cellTemplate(BuildContext context, DateTime date, {_CellState? state}) {
   final ColorScheme colorScheme = Theme.of(context).colorScheme;
   final TextStyle textStyle = Theme.of(context).textTheme.titleMedium!;
   double size = 40;
@@ -181,18 +161,18 @@ Center _cellTemplate(BuildContext context, DateTime date, {CellState? state}) {
   Border? border;
 
   switch (state) {
-    case CellState.today:
+    case _CellState.today:
       textColor = colorScheme.onSurface;
       border = Border.all(color: colorScheme.onSurface, width: 2);
       break;
-    case CellState.selected:
+    case _CellState.selected:
       color = colorScheme.onSurface;
       break;
-    case CellState.ordered:
+    case _CellState.ordered:
       size = 35;
       color = colorScheme.primary;
       break;
-    case CellState.available:
+    case _CellState.available:
       size = 35;
       color = colorScheme.secondary;
       break;
@@ -246,4 +226,4 @@ Row _actionButtons(BuildContext context, void Function() onConfirm) {
 }
 
 /// Used by custom date picker to decide how to render a cell
-enum CellState { today, selected, ordered, available }
+enum _CellState { today, selected, ordered, available }
