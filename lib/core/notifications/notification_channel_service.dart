@@ -1,5 +1,5 @@
 import 'package:autojidelna/core/notifications/notification_topics.dart';
-import 'package:autojidelna/core/types/freezed/safe_account/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/l10n/output/l10n.dart';
 

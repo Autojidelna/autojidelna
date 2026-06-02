@@ -1,10 +1,10 @@
-import 'package:autojidelna/core/types/freezed/account/account.dart';
-import 'package:autojidelna/core/types/freezed/safe_account/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'logged_accounts.freezed.dart';
-part 'logged_accounts.g.dart';
+part 'generated/logged_accounts.freezed.dart';
+part 'generated/logged_accounts.g.dart';
 
 @unfreezed
 sealed class LoggedAccounts with _$LoggedAccounts {

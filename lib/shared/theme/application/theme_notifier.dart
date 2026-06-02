@@ -9,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_ce/hive.dart';
 
-part 'theme_notifier.g.dart';
+part 'generated/theme_notifier.g.dart';
 
 @riverpod
 class ThemeNotifier extends _$ThemeNotifier {
@@ -44,10 +44,7 @@ class ThemeNotifier extends _$ThemeNotifier {
   ColorScheme colorSchemeLight([ThemeStyle? themeStyle]) {
     ColorStyle colorStyle = AppThemes.colorStyles[themeStyle ?? state.themeStyle]!;
 
-    return AppThemes.colorSchemeLight.copyWith(
-      primary: colorStyle.primaryLight,
-      secondary: colorStyle.secondaryLight,
-    );
+    return AppThemes.colorSchemeLight.copyWith(primary: colorStyle.primaryLight, secondary: colorStyle.secondaryLight);
   }
 
   ColorScheme colorSchemeDark([ThemeStyle? themeStyle]) {

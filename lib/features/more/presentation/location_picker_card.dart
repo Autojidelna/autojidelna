@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:autojidelna/features/more/application/more_service.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/core/types/freezed/user/user.dart';
+import 'package:autojidelna/core/types/freezed/user.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/theme/app_themes.dart';
 import 'package:autojidelna/shared/config/hive.dart';

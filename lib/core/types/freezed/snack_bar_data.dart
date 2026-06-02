@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'snack_bar_data.freezed.dart';
+part 'generated/snack_bar_data.freezed.dart';
 
 @freezed
 sealed class SnackBarData with _$SnackBarData {

@@ -5,7 +5,7 @@ import 'package:autojidelna/shared/config/hive.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'settings_notifiers.g.dart';
+part 'generated/settings_notifiers.g.dart';
 
 final _box = Hive.box(Boxes.settings);
 

@@ -1,7 +1,7 @@
 import 'package:autojidelna/core/types/errors.dart';
-import 'package:autojidelna/core/types/freezed/account/account.dart';
-import 'package:autojidelna/core/types/freezed/safe_account/safe_account.dart';
-import 'package:autojidelna/core/types/freezed/user/user.dart';
+import 'package:autojidelna/core/types/freezed/account.dart';
+import 'package:autojidelna/core/types/freezed/safe_account.dart';
+import 'package:autojidelna/core/types/freezed/user.dart';
 import 'package:autojidelna/features/auth/data/auth_service.dart';
 import 'package:autojidelna/features/canteen/application/providers.dart';
 

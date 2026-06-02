@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:autojidelna/app/app.dart';
-import 'package:autojidelna/core/types/freezed/snack_bar_error_data/snack_bar_data.dart';
+import 'package:autojidelna/core/types/freezed/snack_bar_data.dart';
 import 'package:autojidelna/shared/snackbars/error_snack_bar.dart';
 import 'package:autojidelna/shared/snackbars/info_snack_bar.dart';
 import 'package:autojidelna/shared/snackbars/login_success_snack_bar.dart';

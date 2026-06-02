@@ -1,4 +1,4 @@
-import 'package:autojidelna/core/types/freezed/user/user.dart';
+import 'package:autojidelna/core/types/freezed/user.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:autojidelna/shared/widgets/lined_card.dart';

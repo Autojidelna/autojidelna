@@ -2,7 +2,7 @@ import 'package:autojidelna/shared/providers/current_canteen.dart';
 import 'package:icanteenlib/canteenlib.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'providers.g.dart';
+part 'generated/providers.g.dart';
 
 @Riverpod(keepAlive: true)
 // TODO: pridat chache/persistent storage

@@ -1,5 +1,5 @@
 import 'package:autojidelna/app/routing/app_router.gr.dart';
-import 'package:autojidelna/core/types/freezed/snack_bar_error_data/snack_bar_data.dart';
+import 'package:autojidelna/core/types/freezed/snack_bar_data.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/dev/crash_logic.dart';
 import 'package:autojidelna/dev/presentation/test_notifications.dart';
