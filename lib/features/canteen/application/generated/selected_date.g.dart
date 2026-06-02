@@ -8,12 +8,15 @@ part of '../selected_date.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// In charge of managing the currently focused date
 
 @ProviderFor(SelectedDate)
 final selectedDateProvider = SelectedDateProvider._();
 
+/// In charge of managing the currently focused date
 final class SelectedDateProvider
     extends $NotifierProvider<SelectedDate, DateTime> {
+  /// In charge of managing the currently focused date
   SelectedDateProvider._()
     : super(
         from: null,
@@ -42,6 +45,8 @@ final class SelectedDateProvider
 }
 
 String _$selectedDateHash() => r'0c30e81f2d6e15a9e825b347227f4249d5ecb51f';
+
+/// In charge of managing the currently focused date
 
 abstract class _$SelectedDate extends $Notifier<DateTime> {
   DateTime build();
