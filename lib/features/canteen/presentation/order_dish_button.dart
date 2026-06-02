@@ -23,7 +23,7 @@ class OrderDishButton extends ConsumerWidget {
           backgroundColor: isPrimary ? colorScheme.primary : colorScheme.secondary,
           foregroundColor: isPrimary ? colorScheme.onPrimary : colorScheme.onSecondary,
         ),
-        onPressed: !enabled || !dish.stav.isButtonEnabled() ? null : () => burzaAlertDialog(context, ref, dish),
+        onPressed: !enabled || !dish.stav.isButtonEnabled() ? null : () => burzaAlertDialog(context, dish),
         child: Text(dish.getObedText(context)),
       ),
     );

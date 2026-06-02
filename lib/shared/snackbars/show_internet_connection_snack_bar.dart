@@ -9,6 +9,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 bool _isVisible = false;
 Timer? _internetCheckTimer;
 
+/// Shows an error internet connection snackbar, is visible until connection is reestablished
 Future<bool> showInternetConnectionSnackBar() async {
   if (_isVisible) return false;
   _isVisible = true;

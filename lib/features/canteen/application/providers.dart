@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'generated/providers.g.dart';
 
-// TODO: Refactor and merge together with pressed method in [ordering.dart]
+// TODO: Refactor and merge? together with order method in JidloExtension in [helpers.dart]
 
 // TODO: pridat chache/persistent storage
 
