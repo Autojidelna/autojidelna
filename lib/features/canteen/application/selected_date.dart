@@ -6,6 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'generated/selected_date.g.dart';
 
+/// In charge of managing the currently focused date
 @Riverpod(keepAlive: true)
 class SelectedDate extends _$SelectedDate {
   @override
