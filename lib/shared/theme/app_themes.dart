@@ -120,6 +120,13 @@ class AppThemes {
       materialTapTargetSize: MaterialTapTargetSize.padded,
       visualDensity: VisualDensity.adaptivePlatformDensity,
 
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: <TargetPlatform, PageTransitionsBuilder>{
+          // Set the predictive back transitions for Android.
+          TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+        },
+      ),
+
       // COLOR
       colorScheme: colorScheme,
       canvasColor: colorScheme.surface,
@@ -142,10 +149,7 @@ class AppThemes {
         elevation: amoledMode ? 0 : 4,
         actionsIconTheme: IconThemeData(color: colorScheme.onSurfaceVariant),
       ),
-      bottomAppBarTheme: BottomAppBarThemeData(
-        color: amoledMode ? Colors.transparent : null,
-        elevation: amoledMode ? 0 : 4,
-      ),
+      bottomAppBarTheme: BottomAppBarThemeData(color: amoledMode ? Colors.transparent : null, elevation: amoledMode ? 0 : 4),
       cardTheme: CardThemeData(
         elevation: amoledMode ? .5 : 2,
         clipBehavior: Clip.hardEdge,
@@ -246,9 +250,7 @@ class AppThemes {
           side: WidgetStatePropertyAll(BorderSide(color: amoledMode ? colorScheme.surfaceContainerHighest : Colors.transparent, strokeAlign: 1)),
         ),
       ),
-      iconButtonTheme: const IconButtonThemeData(
-        style: ButtonStyle(splashFactory: NoSplash.splashFactory),
-      ),
+      iconButtonTheme: const IconButtonThemeData(style: ButtonStyle(splashFactory: NoSplash.splashFactory)),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           foregroundColor: WidgetStatePropertyAll(colorScheme.onSurface),
