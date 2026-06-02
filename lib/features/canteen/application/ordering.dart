@@ -18,7 +18,7 @@ Future<void> pressed(BuildContext context, WidgetRef ref, Jidlo dish) async {
   final DateTime date = dish.datum;
 
   final notifier = ref.read(disableInteractions.notifier);
-  if (notifier.state) return;
+  if (ref.read(disableInteractions)) return;
   notifier.state = true;
 
   if (!await InternetConnectionChecker.instance.hasConnection) {
@@ -43,12 +43,12 @@ Future<void> pressed(BuildContext context, WidgetRef ref, Jidlo dish) async {
         }
         break;
       case StavJidla.objednanoVyprsenaPlatnost:
-        showErrorSnackBar(SnackBarOrderingErrors.dishCancellationExpired(l10n));
+        showInfoSnackBar(SnackBarOrderingErrors.dishCancellationExpired(l10n));
         break;
 
       case StavJidla.nedostupne:
         if (date.isBefore(DateTime.now())) {
-          showErrorSnackBar(SnackBarOrderingErrors.dishCannotBeOrdered(l10n));
+          showInfoSnackBar(SnackBarOrderingErrors.dishCannotBeOrdered(l10n));
           break;
         }
         final stavUctu = canteen.stavUctu;

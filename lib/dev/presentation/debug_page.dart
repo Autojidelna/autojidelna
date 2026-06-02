@@ -1,4 +1,5 @@
 import 'package:autojidelna/app/routing/app_router.gr.dart';
+import 'package:autojidelna/core/types/freezed/snack_bar_error_data/snack_bar_data.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/dev/crash_logic.dart';
 import 'package:autojidelna/dev/presentation/test_notifications.dart';
@@ -30,7 +31,7 @@ class DebugPage extends StatelessWidget {
           ListTile(title: const Text('Show error Snack Bar'), onTap: () => showErrorSnackBar(SnackBarAuthErrors.connectionFailed(context.l10n))),
           ListTile(
             title: const Text('Show info Snack Bar'),
-            onTap: () => showInfoSnackBar(Icons.wifi_off_rounded, l10n.appName, l10n.appDescription),
+            onTap: () => showInfoSnackBar(SnackBarData(iconData: Icons.wifi_off_rounded, title: l10n.appName, subtitle: l10n.appDescription)),
           ),
           ListTile(title: const Text('Onboarding guide'), onTap: () async => context.router.push(OnboardingRoute())),
           ListTile(title: const Text('Set AppState.firstTime to true'), onTap: () => Hive.box(Boxes.appState).put(HiveKeys.appState.firstTime, true)),
