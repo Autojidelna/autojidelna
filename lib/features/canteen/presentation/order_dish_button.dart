@@ -15,7 +15,7 @@ class OrderDishButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     bool enabled = !ref.watch(disableInteractions);
-    bool isPrimary = getPrimaryState(dish.stav);
+    bool isPrimary = dish.stav.getPrimaryState();
 
     return SizedBox(
       width: MediaQuery.sizeOf(context).width,
@@ -24,7 +24,7 @@ class OrderDishButton extends ConsumerWidget {
           backgroundColor: isPrimary ? colorScheme.primary : colorScheme.secondary,
           foregroundColor: isPrimary ? colorScheme.onPrimary : colorScheme.onSecondary,
         ),
-        onPressed: !enabled || !isButtonEnabled(dish.stav) ? null : () => burzaAlertDialog(context, ref, dish),
+        onPressed: !enabled || !dish.stav.isButtonEnabled() ? null : () => burzaAlertDialog(context, ref, dish),
         child: Text(getObedText(context, ref, dish)),
       ),
     );

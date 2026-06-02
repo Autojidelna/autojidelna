@@ -39,11 +39,11 @@ class __CustomDatePickerState extends ConsumerState<_CustomDatePicker> {
     /// This for loop is used for [defaultBuilder]
     for (Jidlo dish in menu.nabidka) {
       if (orderedFoodDays.contains(day) || availableFoodDays.contains(day)) break;
-      if (getPrimaryState(dish.stav)) {
+      if (dish.stav.getPrimaryState()) {
         orderedFoodDays.add(day);
         break;
       }
-      if (isButtonEnabled(dish.stav)) {
+      if (dish.stav.isButtonEnabled()) {
         availableFoodDays.add(day);
         break;
       }
@@ -196,9 +196,9 @@ Center _cellTemplate(BuildContext context, DateTime date, {_CellState? state}) {
 Widget? _markerTemplate(BuildContext context, Jidlo dish) {
   final ColorScheme colorScheme = Theme.of(context).colorScheme;
   double size = 10;
-  final bool ordered = getPrimaryState(dish.stav);
+  final bool ordered = dish.stav.getPrimaryState();
 
-  if (!isButtonEnabled(dish.stav) && !ordered) return const SizedBox();
+  if (!dish.stav.isButtonEnabled() && !ordered) return const SizedBox();
 
   Color color = ordered ? colorScheme.primary : colorScheme.secondary;
 

@@ -46,8 +46,8 @@ class _DishListTile extends ConsumerWidget {
     ThemeData theme = Theme.of(context);
     bool ordering = ref.watch(disableInteractions);
 
-    final bool enabled = !ordering && isButtonEnabled(dish.stav);
-    final bool selected = getPrimaryState(dish.stav);
+    final bool enabled = !ordering && dish.stav.isButtonEnabled();
+    final bool selected = dish.stav.getPrimaryState();
     const onTap = burzaAlertDialog;
 
     return ListTile(
