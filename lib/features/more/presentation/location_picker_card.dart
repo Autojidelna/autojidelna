@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:autojidelna/features/more/application/more_service.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 import 'package:autojidelna/core/types/freezed/user.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
@@ -27,31 +26,12 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
   @override
   Widget build(BuildContext context) {
     final L10n l10n = context.l10n;
-    return ref
-        .watch(stavUctuProvider)
-        .maybeWhen(
-          data: (stav) {
-            final Map<int, String> locations = stav?.vydejny ?? {};
-            (int, String)? vydejna = stav?.vydejna;
-            return Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                LinedCard(
-                  title: l10n.location,
-                  footer: locations.isNotEmpty ? l10n.pickLocation : null,
-                  footerTextAlign: TextAlign.end,
-                  onPressed: locations.isEmpty ? null : () => pickerDialog(ref, stav),
-                  child: ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    visualDensity: const VisualDensity(vertical: -4),
-                    title: Text(vydejna?.$2 ?? l10n.locationsUnknown),
-                  ),
-                ),
-                if (vydejna == null) lockedCover(context),
-              ],
-            );
-          },
-          orElse: () => Stack(
+    return StreamBuilder(
+      initialData: ref.read(currentCanteen)?.stavUctu,
+      stream: ref.read(currentCanteen)?.stavUctuStream,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done && snapshot.data == null) {
+          return Stack(
             alignment: AlignmentDirectional.center,
             children: [
               LinedCard(
@@ -65,8 +45,30 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
               ),
               lockedCover(context),
             ],
-          ),
+          );
+        }
+
+        final Map<int, String> locations = snapshot.data?.vydejny ?? {};
+        (int, String)? vydejna = snapshot.data?.vydejna;
+        return Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            LinedCard(
+              title: l10n.location,
+              footer: locations.isNotEmpty ? l10n.pickLocation : null,
+              footerTextAlign: TextAlign.end,
+              onPressed: locations.isEmpty ? null : () => pickerDialog(ref, snapshot.data),
+              child: ListTile(
+                contentPadding: EdgeInsets.zero,
+                visualDensity: const VisualDensity(vertical: -4),
+                title: Text(vydejna?.$2 ?? l10n.locationsUnknown),
+              ),
+            ),
+            if (vydejna == null) lockedCover(context),
+          ],
         );
+      },
+    );
   }
 
   void pickerDialog(WidgetRef ref, StavUctu? stavUctu) {
@@ -87,7 +89,8 @@ class _LocationPickerCardState extends ConsumerState<LocationPickerCard> {
               title: Text(stavUctu.vydejny[i + 1] ?? '', maxLines: 1, overflow: TextOverflow.ellipsis),
               trailing: stavUctu.vydejna?.$1 == i + 1 ? const Icon(Icons.check) : null,
               onTap: () async {
-                ref.read(currentCanteen)!.zmenVydejnu = i;
+                ref.read(currentCanteen)!.zmenVydejnu =
+                    i; // TODO: add some kind of way to automatically refresh the foods and stuff, this doesnt do anything rn
                 await ref.read(currentCanteen)!.aktualizujStavUctu();
 
                 if (context.mounted) Navigator.of(context).popUntil((route) => route.isFirst);
