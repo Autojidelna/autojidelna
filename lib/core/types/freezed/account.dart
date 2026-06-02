@@ -1,3 +1,4 @@
+import 'package:autojidelna/core/types/freezed/safe_account.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
@@ -16,6 +17,9 @@ sealed class Account with _$Account {
   }) = _Account;
 
   factory Account.fromJson(Map<String, Object?> json) => _$AccountFromJson(json);
+
+  static Account fromSafeAccount(SafeAccount safeAccount, String password) =>
+      Account(username: safeAccount.username, url: safeAccount.url, password: password);
 
   bool isSame(Account account) => account.username == username && Url.isSame(url, account.url);
 }
