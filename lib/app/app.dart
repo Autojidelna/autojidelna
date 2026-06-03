@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:autojidelna/app/app_init.dart';
+import 'package:autojidelna/l10n/l10n_context_extension.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_list_view/flutter_list_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class App {
@@ -36,6 +39,11 @@ class App {
     await AppInit.awesomeNotifications();
   }
 
+  static Future<void> restart(BuildContext context) async {
+    Fluttertoast.showToast(msg: context.l10n.restartingAutojidelna);
+    Restart.restartApp();
+  }
+
   static final bool shouldAskForNotification = true;
 
   static const _defaultRotations = [
@@ -46,6 +54,7 @@ class App {
   ];
 
   static final GlobalKey<ScaffoldMessengerState> scaffoldMessenger = GlobalKey<ScaffoldMessengerState>();
+  static final navigatorKey = GlobalKey<NavigatorState>();
 
   static PageController pageController = PageController();
   static FlutterListViewController listController = FlutterListViewController();

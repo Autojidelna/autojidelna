@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/app/routing/app_router.gr.dart';
 import 'package:autojidelna/features/onboarding/application/onboarding_guard.dart';
 import 'package:autojidelna/features/auth/application/auth_guard.dart';
@@ -9,7 +10,7 @@ final appRouterProvider = Provider<AppRouter>((ref) => AppRouter(ref));
 
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter {
-  AppRouter(this.ref);
+  AppRouter(this.ref) : super(navigatorKey: App.navigatorKey);
   Ref ref;
 
   @override
