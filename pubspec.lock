@@ -329,6 +329,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.13"
+  device_info_plus:
+    dependency: "direct main"
+    description:
+      name: device_info_plus
+      sha256: "6a642e1daa10190af89ba6cb6386c0df7d071a3592080bfe1e44faa63ae1df65"
+      url: "https://pub.dev"
+    source: hosted
+    version: "13.1.0"
+  device_info_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: device_info_plus_platform_interface
+      sha256: "04b173a92e2d9161dfead145667037c8d834db725ce2e7b942bfe18fd2f45a46"
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.1.0"
   equatable:
     dependency: transitive
     description:
@@ -377,6 +393,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.1"
+  file_picker:
+    dependency: "direct main"
+    description:
+      name: file_picker
+      sha256: fc83774ce5bd7ce08168333b5e53dbe9090ec04eb21e7aa7cd7bac921032c934
+      url: "https://pub.dev"
+    source: hosted
+    version: "12.0.0-beta.5"
   fixnum:
     dependency: transitive
     description:
@@ -419,6 +443,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.72.0"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: "38d1c268de9097ff59cf0e844ac38759fc78f76836d37edad06fa21e182055a0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.34"
   flutter_riverpod:
     dependency: "direct main"
     description:
@@ -493,6 +525,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  fluttertoast:
+    dependency: "direct main"
+    description:
+      name: fluttertoast
+      sha256: "7903c9d5339173497bfecbc23bc4212f5a87e0edfac2e1693fb74465ea67da7e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.1.0"
   freezed:
     dependency: "direct dev"
     description:
@@ -710,6 +750,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.0"
+  logger:
+    dependency: "direct main"
+    description:
+      name: logger
+      sha256: "25aee487596a6257655a1e091ec2ae66bc30e7af663592cc3a27e6591e05035c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.0"
   logging:
     dependency: transitive
     description:
@@ -831,7 +879,7 @@ packages:
     source: hosted
     version: "1.1.0"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       sha256: "50c5dd5b6e1aaf6fb3a78b33f6aa3afca52bf903a8a5298f53101fdaee55bbcd"
@@ -982,6 +1030,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.0"
+  restart_app:
+    dependency: "direct main"
+    description:
+      name: restart_app
+      sha256: "400dd401b77b599e2defef55fd4c22af3ff80af48616a82f01c2a07070e3e368"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.8.3"
   riverpod:
     dependency: transitive
     description:
@@ -1379,6 +1435,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.3.0"
+  win32_registry:
+    dependency: transitive
+    description:
+      name: win32_registry
+      sha256: "73b1d78920a9d6e03f8b4e43e612b87bf3152a0e5c5e5150267762b7c4116904"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.3"
   xdg_directories:
     dependency: transitive
     description:
@@ -1421,4 +1485,4 @@ packages:
     version: "2.2.4"
 sdks:
   dart: ">=3.12.0 <4.0.0"
-  flutter: ">=3.38.4"
+  flutter: ">=3.41.0"

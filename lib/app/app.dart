@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:autojidelna/app/app_init.dart';
+import 'package:autojidelna/core/logging/local_logger.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
 
 import 'package:flutter/material.dart';
@@ -31,6 +32,8 @@ class App {
 
     // Get the elapsed time
     Duration elapsed = stopwatch.elapsed;
+
+    LocalLogger.logInfo(await logSystemInfo());
     debugPrint('Initialization took ${elapsed.inMilliseconds} ms');
   }
 

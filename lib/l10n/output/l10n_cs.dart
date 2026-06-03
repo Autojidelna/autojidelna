@@ -345,6 +345,43 @@ class L10nCs extends L10n {
   String get privacyPolicy => 'Zásady ochrany osobních údajů';
 
   @override
+  String get restartApp => 'Restartovat aplikaci';
+
+  @override
+  String get restartingAutojidelna => 'Autojídelna se restartuje...';
+
+  @override
+  String get appCrashed => 'Aplikace narazila na chybu :/';
+
+  @override
+  String get stackTraceNotProvided => 'Stack trace chybí';
+
+  @override
+  String get howToReport => 'Jak nahlásit chybu?';
+
+  @override
+  String get howToReport1 =>
+      '1. Zvolte nahlášení přes GitHub nebo E-mail. Aplikace Vás vybídne k uložení Crash logu. Po uložení Vás aplikace nasměruje na vybraný způsob nahlášení.';
+
+  @override
+  String get howToReport2 =>
+      '2. Přiložte stažený Crash log a napište krátký souhrn vašich akcí před pádem aplikace.';
+
+  @override
+  String get appFailedToWork =>
+      'Autojídelně se nepodařilo fungovat. Záznam o chybě byl uložen do mezipaměti zařízení.';
+
+  @override
+  String get pleaseReportError =>
+      'Nahlaste prosím chybu, abychom jí mohli opravit.';
+
+  @override
+  String get reportOnGithub => 'Nahlásit (GitHub)';
+
+  @override
+  String get reportOnEmail => 'Nahlásit (E-mail)';
+
+  @override
   String get settings => 'Nastavení';
 
   @override

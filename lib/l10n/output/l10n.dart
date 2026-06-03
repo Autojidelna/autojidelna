@@ -699,6 +699,72 @@ abstract class L10n {
   /// **'Zásady ochrany osobních údajů'**
   String get privacyPolicy;
 
+  /// No description provided for @restartApp.
+  ///
+  /// In cs, this message translates to:
+  /// **'Restartovat aplikaci'**
+  String get restartApp;
+
+  /// No description provided for @restartingAutojidelna.
+  ///
+  /// In cs, this message translates to:
+  /// **'Autojídelna se restartuje...'**
+  String get restartingAutojidelna;
+
+  /// No description provided for @appCrashed.
+  ///
+  /// In cs, this message translates to:
+  /// **'Aplikace narazila na chybu :/'**
+  String get appCrashed;
+
+  /// No description provided for @stackTraceNotProvided.
+  ///
+  /// In cs, this message translates to:
+  /// **'Stack trace chybí'**
+  String get stackTraceNotProvided;
+
+  /// No description provided for @howToReport.
+  ///
+  /// In cs, this message translates to:
+  /// **'Jak nahlásit chybu?'**
+  String get howToReport;
+
+  /// No description provided for @howToReport1.
+  ///
+  /// In cs, this message translates to:
+  /// **'1. Zvolte nahlášení přes GitHub nebo E-mail. Aplikace Vás vybídne k uložení Crash logu. Po uložení Vás aplikace nasměruje na vybraný způsob nahlášení.'**
+  String get howToReport1;
+
+  /// No description provided for @howToReport2.
+  ///
+  /// In cs, this message translates to:
+  /// **'2. Přiložte stažený Crash log a napište krátký souhrn vašich akcí před pádem aplikace.'**
+  String get howToReport2;
+
+  /// No description provided for @appFailedToWork.
+  ///
+  /// In cs, this message translates to:
+  /// **'Autojídelně se nepodařilo fungovat. Záznam o chybě byl uložen do mezipaměti zařízení.'**
+  String get appFailedToWork;
+
+  /// No description provided for @pleaseReportError.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nahlaste prosím chybu, abychom jí mohli opravit.'**
+  String get pleaseReportError;
+
+  /// No description provided for @reportOnGithub.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nahlásit (GitHub)'**
+  String get reportOnGithub;
+
+  /// No description provided for @reportOnEmail.
+  ///
+  /// In cs, this message translates to:
+  /// **'Nahlásit (E-mail)'**
+  String get reportOnEmail;
+
   /// No description provided for @settings.
   ///
   /// In cs, this message translates to:

@@ -5,4 +5,7 @@ class Links {
 
   static const String privacyPolicy = '$autojidelna/privacy-policy/';
   static const String email = 'autojidelna@pm.me';
+
+  static const String issues = '$repo/issues';
+  static const String reportEmail = 'mailto:$email?subject=[BUG REPORT]';
 }
