@@ -714,7 +714,7 @@ abstract class L10n {
   /// No description provided for @appCrashed.
   ///
   /// In cs, this message translates to:
-  /// **'Aplikace narazila na chybu :/'**
+  /// **'Aplikace narazila na chybu'**
   String get appCrashed;
 
   /// No description provided for @stackTraceNotProvided.

@@ -351,7 +351,7 @@ class L10nCs extends L10n {
   String get restartingAutojidelna => 'Autojídelna se restartuje...';
 
   @override
-  String get appCrashed => 'Aplikace narazila na chybu :/';
+  String get appCrashed => 'Aplikace narazila na chybu';
 
   @override
   String get stackTraceNotProvided => 'Stack trace chybí';

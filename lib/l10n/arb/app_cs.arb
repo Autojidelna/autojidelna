@@ -231,7 +231,7 @@
   "@restartApp": {},
   "restartingAutojidelna": "Autojídelna se restartuje...",
   "@restartingAutojidelna": {},
-  "appCrashed": "Aplikace narazila na chybu :/",
+  "appCrashed": "Aplikace narazila na chybu",
   "@appCrashed": {},
   "stackTraceNotProvided": "Stack trace chybí",
   "@stackTraceNotProvided": {},

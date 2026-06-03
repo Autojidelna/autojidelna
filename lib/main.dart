@@ -18,6 +18,8 @@ void main() async {
       WidgetsFlutterBinding.ensureInitialized();
       await LocalLogger.init();
 
+      LocalLogger.logInfo(await logSystemInfo());
+
       FlutterError.onError = (details) {
         FlutterError.presentError(details);
         LocalLogger.logError('Flutter Error', details.exception, details.stack);

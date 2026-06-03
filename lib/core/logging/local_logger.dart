@@ -8,7 +8,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
 class LocalLogger {
-  static final String _fileName = 'daisy_crash_log.txt';
+  static final String _fileName = 'autojidelna_crash_log.txt';
   static late Logger _logger;
   static late File _logFile;
   static late String _logFilePath;
@@ -17,8 +17,9 @@ class LocalLogger {
     _logFilePath = '${(await getApplicationCacheDirectory()).path}/$_fileName';
     _logFile = File(_logFilePath);
     _logger = Logger(
-      printer: PrettyPrinter(dateTimeFormat: DateTimeFormat.dateAndTime, colors: false, printEmojis: false, methodCount: 0, errorMethodCount: 8),
-      output: MultiOutput([ConsoleOutput(), FileOutput(file: _logFile)]),
+      printer: PrettyPrinter(dateTimeFormat: DateTimeFormat.dateAndTime, printEmojis: false, methodCount: 0, errorMethodCount: 8),
+      filter: ProductionFilter(),
+      output: MultiOutput([ConsoleOutput(), FileOutput(file: _logFile, overrideExisting: true)]),
     );
   }
 
@@ -82,6 +83,7 @@ App Info
 - Name: ${packageInfo.appName}
 - Package: ${packageInfo.packageName}
 - Version: ${packageInfo.version} (${packageInfo.buildNumber})
+- Installer: ${packageInfo.installerStore}
 
 $deviceDetails
 ''';
