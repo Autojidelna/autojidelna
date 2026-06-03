@@ -116,3 +116,6 @@ flutter:
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-VariableFont_slnt,wght.ttf
+    - family: Share Tech Mono
+      fonts:
+        - asset: assets/fonts/ShareTechMono-Regular.ttf
