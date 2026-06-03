@@ -14,7 +14,7 @@ class _SecureStorageKeys {
 }
 
 class SecureStorage {
-  static const AndroidOptions _androidOptions = AndroidOptions.biometric(enforceBiometrics: false);
+  static const AndroidOptions _androidOptions = AndroidOptions();
   static const IOSOptions _iosOptions = IOSOptions(accessibility: KeychainAccessibility.first_unlock);
 
   static const FlutterSecureStorage instance = FlutterSecureStorage(aOptions: _androidOptions, iOptions: _iosOptions);
@@ -44,7 +44,8 @@ class SecureStorage {
   static Future<List<SafeAccount>> readAccountList() async {
     String? val = await _read(_SecureStorageKeys.safeAccountList);
     if (val == null) throw AuthErrors.missingCredentials;
-    return jsonDecode(val);
+    final List<dynamic> decoded = jsonDecode(val);
+    return decoded.map((json) => SafeAccount.fromJson(json)).toList();
   }
 
   static Future<void> saveAccountPassword(Account account) async {
