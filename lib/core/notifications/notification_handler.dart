@@ -4,13 +4,13 @@ import 'dart:ui';
 import 'package:autojidelna/app/app.dart';
 import 'package:autojidelna/core/notifications/notification_channel_service.dart';
 import 'package:autojidelna/core/notifications/notification_topics.dart';
+import 'package:autojidelna/core/secure_storage_wrapper/secure_storage.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/logged_accounts.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/features/canteen/application/helpers.dart';
 import 'package:autojidelna/l10n/l10n_context_extension.dart';
-import 'package:autojidelna/shared/config/secure_storage.dart';
 import 'package:autojidelna/shared/utils/datetime_utils.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:icanteenlib/canteenlib.dart';
@@ -199,7 +199,7 @@ class NotificationHandler {
 
   static Future<List<SafeAccount>> _getLimitedAccountsFromStorage() async {
     const secureStorage = SecureStorage.instance;
-    final value = await secureStorage.read(key: SecureStorage.keys.loginData);
+    final value = await secureStorage.read(key: "");
     if (value == null || value.trim().isEmpty) return [];
     final data = LoggedAccounts.fromJson(jsonDecode(value));
     return data.accounts.map(SafeAccount.fromAccount).toList();
@@ -207,7 +207,7 @@ class NotificationHandler {
 
   static Future<Canteen> _loginBySafeAccount(SafeAccount safeAccount) async {
     const secureStorage = SecureStorage.instance;
-    final value = await secureStorage.read(key: SecureStorage.keys.loginData);
+    final value = await secureStorage.read(key: "");
     if (value == null || value.trim().isEmpty) throw AuthErrors.accountNotFound;
 
     final data = LoggedAccounts.fromJson(jsonDecode(value));
