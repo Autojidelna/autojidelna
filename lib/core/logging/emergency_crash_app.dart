@@ -60,6 +60,7 @@ class EmergencyCrashPage extends StatelessWidget {
     final buttonStyle = Theme.of(context).filledButtonTheme.style!.copyWith(
       backgroundColor: WidgetStatePropertyAll(Theme.of(context).colorScheme.surfaceContainerHighest),
       elevation: WidgetStatePropertyAll(2),
+      foregroundColor: WidgetStatePropertyAll(Theme.of(context).colorScheme.onSurface),
     );
 
     return PopScope(
@@ -81,6 +82,8 @@ class EmergencyCrashPage extends StatelessWidget {
             ExpansionTile(
               collapsedTextColor: Colors.amber,
               textColor: Colors.amber,
+              collapsedIconColor: Colors.grey,
+              iconColor: Colors.grey,
               title: Text(context.l10n.howToReport),
               expandedCrossAxisAlignment: CrossAxisAlignment.start,
               childrenPadding: EdgeInsets.symmetric(horizontal: 16),
@@ -129,8 +132,8 @@ class EmergencyCrashPage extends StatelessWidget {
                       child: FilledButton(
                         style: buttonStyle,
                         onPressed: () async {
-                          await LocalLogger.downloadLogFile().then((_) async => await _launchUrl(Links.reportEmail));
-                          // await _launchUrl(Links.reportEmail);
+                          await LocalLogger.downloadLogFile();
+                          await _launchUrl(Links.reportEmail);
                         },
                         child: Text(context.l10n.reportOnEmail),
                       ),
@@ -150,22 +153,20 @@ class EmergencyCrashPage extends StatelessWidget {
     );
   }
 
-  static void show(String error, StackTrace? stack) {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      BuildContext? context = App.navigatorKey.currentContext;
+  static void show(String error, StackTrace? stack) async {
+    BuildContext? context = App.navigatorKey.currentContext;
 
-      if (context == null) {
-        // Run stripped down app to display error message
-        runApp(EmergencyCrashApp(error: error, stack: stack?.toString()));
-        return;
-      }
+    if (context == null) {
+      // Run stripped down app to display error message
+      runApp(EmergencyCrashApp(error: error, stack: stack?.toString()));
+      return;
+    }
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (ctx) => EmergencyCrashPage(error: error, stack: stack.toString()),
-        ),
-      );
-    });
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (ctx) => EmergencyCrashPage(error: error, stack: stack.toString()),
+      ),
+    );
   }
 }
