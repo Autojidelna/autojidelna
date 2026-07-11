@@ -27,6 +27,10 @@ class SecureStorage {
     await instance.write(key: key.toString(), value: data);
   }
 
+  static Future<void> _remove(String key) async {
+    await instance.delete(key: key);
+  }
+
   static Future<void> saveLastLogIn(SafeAccount safeAccount) async {
     await _save(_SecureStorageKeys.lastLogIn, jsonEncode(safeAccount));
   }
@@ -37,7 +41,11 @@ class SecureStorage {
     return SafeAccount.fromJson(jsonDecode(val));
   }
 
-  static Future<void> saveAccountList(List<SafeAccount> safeAccounts) async {
+  static Future<void> removeLastLogIn() async {
+    await _remove(_SecureStorageKeys.lastLogIn);
+  }
+
+  static Future<void> saveToAccountList(List<SafeAccount> safeAccounts) async {
     await _save(_SecureStorageKeys.safeAccountList, jsonEncode(safeAccounts));
   }
 
@@ -48,6 +56,13 @@ class SecureStorage {
     return decoded.map((json) => SafeAccount.fromJson(json)).toList();
   }
 
+  static Future<bool> removeFromAccountList(SafeAccount safeAccount) async {
+    final List<SafeAccount> safeAccounts = await readAccountList();
+    final bool result = safeAccounts.remove(safeAccount);
+    await _save(_SecureStorageKeys.safeAccountList, jsonEncode(safeAccounts));
+    return result;
+  }
+
   static Future<void> saveAccountPassword(Account account) async {
     await _save(_SecureStorageKeys.accountId(SafeAccount.fromAccount(account)), jsonEncode(account.password));
   }
@@ -56,5 +71,9 @@ class SecureStorage {
     String? val = await _read(_SecureStorageKeys.accountId(account));
     if (val == null) throw AuthErrors.accountNotFound;
     return Account.fromSafeAccount(account, jsonDecode(val));
+  }
+
+  static Future<void> removeAccountPassword(SafeAccount safeAccount) async {
+    await _remove(_SecureStorageKeys.accountId(safeAccount));
   }
 }

@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:autojidelna/core/notifications/notification_channel_service.dart';
+import 'package:autojidelna/core/secure_storage_wrapper/secure_storage.dart';
 import 'package:autojidelna/core/utils/url.dart';
 import 'package:autojidelna/core/types/errors.dart';
 import 'package:autojidelna/core/types/freezed/account.dart';
 import 'package:autojidelna/core/types/freezed/logged_accounts.dart';
 import 'package:autojidelna/core/types/freezed/safe_account.dart';
 import 'package:autojidelna/core/types/freezed/user.dart';
-import 'package:autojidelna/shared/config/secure_storage.dart';
 import 'package:autojidelna/shared/providers/current_canteen.dart';
 
 import 'package:icanteenlib/canteenlib.dart';
@@ -168,7 +168,7 @@ class AuthService {
   /// Reads [LoggedAccounts] from Secure storage.
   Future<LoggedAccounts> _getDataFromStorage() async {
     const secureStorage = SecureStorage.instance;
-    String? value = await secureStorage.read(key: SecureStorage.keys.loginData);
+    String? value = await secureStorage.read(key: 'loginData');
     if (value == null || value.trim().isEmpty) return LoggedAccounts();
     return LoggedAccounts.fromJson(jsonDecode(value));
   }
@@ -176,7 +176,7 @@ class AuthService {
   /// Saves [LoggedAccounts] to Secure storage.
   Future<void> _saveDataToStorage(LoggedAccounts loginData) async {
     const secureStorage = SecureStorage.instance;
-    await secureStorage.write(key: SecureStorage.keys.loginData, value: jsonEncode(loginData.toJson()));
+    await secureStorage.write(key: 'loginData', value: jsonEncode(loginData.toJson()));
   }
 
   /// Saves an [Account] to Secure storage.
